@@ -1,0 +1,59 @@
+/* Estilos para la barra de navegación */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+/* Estilos para el logo */
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Estilos para la barra de búsqueda */
+.searchbar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchinput {
+    padding: 5px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+
+.searchbutton {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #666;
+    color: white;
+    cursor: pointer;
+}
+
+/* Estilos para el botón de inicio de sesión */
+.loginbutton {
+    margin-left: 20px;
+}
+
+.loginbtn {
+    padding: 5px 10px;
+    border: none;
+    background-color: #666666;
+    color: white;
+    cursor: pointer;
+}
+
+/* Cambiar el color del botón cuando se le pasa el cursor */
+.loginbtn:hover,
+.search-button:hover {
+    background-color: #444;
+}
