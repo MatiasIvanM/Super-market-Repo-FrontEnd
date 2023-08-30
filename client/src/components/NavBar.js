@@ -6,7 +6,7 @@ const NavBar = () => {
     return (
         <div className={style.navbar}>
             <div className="logo">
-                <Link to="/">Logo</Link>
+                {/* <Link to="/">Logo</Link> */}
             </div>
             <div className={style.searchbar}>
                 <input
