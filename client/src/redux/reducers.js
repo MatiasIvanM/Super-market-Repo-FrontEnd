@@ -12,7 +12,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_PRODUCT_BY_ID:
             return { ...state, productsId: action.payload };
         case ADD_PRODUCT:
-            return { ...state, products: [...state.products, action.payload], };
+            return { ...state, products: [...state.products, action.payload], };//..
         case MOD_PRODUCT:
             const updatedProducts = state.products.map((product) =>
                 product.id === action.payload.id ? action.payload : product
