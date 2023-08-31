@@ -58,3 +58,20 @@ export const addProduct =  (product) => {
 	   
 	};
   };
+
+  export const deleteProduct = (id) => {
+	const endpoint = PRODUCT + id;
+	return async (dispatch) => {
+		try {
+			const {data}= await axios.delete(endpoint);
+	   
+		  return dispatch({
+			 type: DEL_PRODUCT,
+			 payload: data,
+	   });
+		} catch (error) {
+			console.error('An error occurred:', error.message);
+		}
+	   
+	};
+};
