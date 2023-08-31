@@ -1,0 +1,18 @@
+.containerPrice{
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+}
+
+.rating{
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+
+.modoDark{
+    display: flex;
+}
