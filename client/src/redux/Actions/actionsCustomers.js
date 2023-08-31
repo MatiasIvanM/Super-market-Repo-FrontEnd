@@ -2,7 +2,7 @@ import axios from 'axios';
 import {CUSTOMER} from '../../utils/urlLocales'
 import{GET_CUSTOMERS,GET_CUSTOMER_BY_ID,ADD_CUSTOMER,MOD_CUSTOMER,DEL_CUSTOMER} from '../actionsType'
 
-export function getProducts() {
+export function getCustomers() {
 	return (dispatch) => {
 		axios.get(CUSTOMER)
 		.then((response) => {
@@ -14,7 +14,7 @@ export function getProducts() {
 	};
 }
 
-export function getProductById(id) {
+export function getCustomerById(id) {
 	return (dispatch) => {
 		axios.get(`${CUSTOMER}${id}`)
 		.then((response) => {
@@ -26,7 +26,7 @@ export function getProductById(id) {
 	};
 }
 
-export const addProduct =  (customer) => {
+export const addCustomer =  (customer) => {
 	return async (dispatch) => {
 		try {
 			const {data}= await axios.post(CUSTOMER, customer)
@@ -42,7 +42,7 @@ export const addProduct =  (customer) => {
 	};
 };
 
-export const modProduct =  (customer) => {
+export const modCustomer =  (customer) => {
 	return async (dispatch) => {
 		try {
 			const {data}= await axios.put(CUSTOMER, customer);

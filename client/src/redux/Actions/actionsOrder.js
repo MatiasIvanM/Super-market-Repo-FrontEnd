@@ -2,7 +2,7 @@ import axios from 'axios';
 import {ORDERS} from '../../utils/urlLocales'
 import{GET_ORDERS,GET_ORDER_BY_ID} from '../actionsType'
 
-export function getProducts() {
+export function getOrders() {
 	return (dispatch) => {
 		axios.get(ORDERS)
 		.then((response) => {
@@ -14,7 +14,7 @@ export function getProducts() {
 	};
 }
 
-export function getProductById(id) {
+export function getOrderById(id) {
 	return (dispatch) => {
 		axios.get(`${ORDERS}${id}`)
 		.then((response) => {
