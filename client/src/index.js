@@ -8,6 +8,8 @@ import { Auth0Provider } from '@auth0/auth0-react'
 import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 
