@@ -59,7 +59,7 @@ export const modProduct =  (customer) => {
 	};
 };
 
-export const deleteRecipe = (id) => {
+export const deleteCustomer = (id) => {
 	const endpoint = CUSTOMER + id;
 	return async (dispatch) => {
 		try {
