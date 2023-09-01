@@ -2,14 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { Auth0Provider } from '@auth0/auth0-react'
+import { BrowserRouter } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from "react-router-dom";
+//import {BrowserRouter} from "react-router-dom";
+const domain = process.env.REACT_APP_AUTH0_DOMAIN
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
+
 
 ReactDOM.render(
   <React.StrictMode>
+
     <BrowserRouter>
     <App />
-    </BrowserRouter>,
+    </BrowserRouter>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      authorizationParams={{
+        redirect_uri: window.location.origin
+      }}
+    >
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -14,23 +14,31 @@
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
 }
 
 /* Estilos para la barra de búsqueda */
-.searchbar {
+.search-bar {
     flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.searchinput {
+.search-input {
     padding: 5px;
     border: none;
     border-radius: 5px 0 0 5px;
 }
 
-.searchbutton {
+.search-button {
     padding: 5px 10px;
     border: none;
     border-radius: 0 5px 5px 0;
@@ -39,21 +47,28 @@
     cursor: pointer;
 }
 
+/* Estilos para el ícono de carrito */
+.cart img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
 /* Estilos para el botón de inicio de sesión */
-.loginbutton {
+.login-button {
     margin-left: 20px;
 }
 
-.loginbtn {
+.login-btn {
     padding: 5px 10px;
     border: none;
-    background-color: #666666;
+    background-color: #666;
     color: white;
     cursor: pointer;
 }
 
 /* Cambiar el color del botón cuando se le pasa el cursor */
-.loginbtn:hover,
+.login-btn:hover,
 .search-button:hover {
     background-color: #444;
 }
