@@ -1,12 +1,12 @@
 import axios from 'axios';
-import {PRODUCT} from '../../utils/urlLocales'
-import{GET_PRODUCTS,GET_PRODUCT_BY_ID,ADD_PRODUCT,MOD_PRODUCT,DEL_PRODUCT} from '../actionsType'
+import {CUSTOMER} from '../../utils/urlLocales'
+import{GET_CUSTOMERS,GET_CUSTOMER_BY_ID,ADD_CUSTOMER,MOD_CUSTOMER,DEL_CUSTOMER} from '../actionsType'
 
-export function getProducts() {
+export function getCustomers() {
 	return (dispatch) => {
-		axios.get(PRODUCT)
+		axios.get(CUSTOMER)
 		.then((response) => {
-			dispatch({ type: GET_PRODUCTS, payload: response.data });
+			dispatch({ type: GET_CUSTOMERS, payload: response.data });
 		}).catch((error) => {
 			console.error('An error has occurred:', error.message);
 			
@@ -14,11 +14,11 @@ export function getProducts() {
 	};
 }
 
-export function getProductById(id) {
+export function getCustomerById(id) {
 	return (dispatch) => {
-		axios.get(`${PRODUCT}${id}`)
+		axios.get(`${CUSTOMER}${id}`)
 		.then((response) => {
-			dispatch({ type: GET_PRODUCT_BY_ID, payload: response.data });
+			dispatch({ type: GET_CUSTOMER_BY_ID, payload: response.data });
 		}).catch((error) => {
 			console.error('An error occurred:', error.message);
 			
@@ -26,13 +26,13 @@ export function getProductById(id) {
 	};
 }
 
-export const addProduct =  (product) => {
+export const addCustomer =  (customer) => {
 	return async (dispatch) => {
 		try {
-			const {data}= await axios.post(PRODUCT, product)
+			const {data}= await axios.post(CUSTOMER, customer)
 		  
 		   return dispatch({
-			 type: ADD_PRODUCT,
+			 type: ADD_CUSTOMER,
 			 payload: data,
 		  });
 		} catch (error) {
@@ -40,15 +40,15 @@ export const addProduct =  (product) => {
 		}
 	   
 	};
-  };
+};
 
-  export const modProduct =  (product) => {
+export const modCustomer =  (customer) => {
 	return async (dispatch) => {
 		try {
-			const {data}= await axios.put(PRODUCT, product);
+			const {data}= await axios.put(CUSTOMER, customer);
 
 			return dispatch({
-				type: MOD_PRODUCT,
+				type: MOD_CUSTOMER,
 				payload: data,
 			 });
 		} catch (error) {
@@ -57,16 +57,16 @@ export const addProduct =  (product) => {
 		  
 	   
 	};
-  };
+};
 
-  export const deleteProduct = (id) => {
-	const endpoint = PRODUCT + id;
+export const deleteCustomer = (id) => {
+	const endpoint = CUSTOMER + id;
 	return async (dispatch) => {
 		try {
 			const {data}= await axios.delete(endpoint);
 	   
 		  return dispatch({
-			 type: DEL_PRODUCT,
+			 type: DEL_CUSTOMER,
 			 payload: data,
 	   });
 		} catch (error) {

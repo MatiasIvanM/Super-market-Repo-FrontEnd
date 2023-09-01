@@ -1,13 +1,12 @@
 import './App.css';
 import NavBar from './components/NavBar';
-import Home from './components/Home/Home';
+
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <Home />
+      <NavBar/>
     </div>
   );
 }
-
+//Se esta renderizando doble el footer y el navbar, por el render desde landing
 export default App;
