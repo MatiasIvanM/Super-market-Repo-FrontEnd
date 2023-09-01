@@ -1,6 +1,6 @@
 import './App.css';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';        
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import Landing from './View/Landing/Landing';
@@ -18,12 +18,12 @@ function App() {
       <Home/>
       <Footer/> */}
       <Router>
-      <Switch>
-        <Route path="/" exact component={Landing} />
-        <Route path="/home" component={Home} />
-       <Route path="/detail/:id">
-      </Switch>
-    </Router>
+        <Switch>
+          <Route path="/" exact component={Landing} />
+          <Route path="/home" component={Home} />
+          <Route path="/detail/:id" />
+        </Switch>
+      </Router>
     </div>
   );
 }
