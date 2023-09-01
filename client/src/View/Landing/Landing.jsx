@@ -1,6 +1,7 @@
 import { Container, Nav, Navbar, NavDropdown, Col, Image, Row, Modal } from 'react-bootstrap' 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Landing.css';
+import { Link } from 'react-router-dom';
 import { BsCart3 } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useState } from 'react';
@@ -16,7 +17,7 @@ function Landing(){
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto custom-nav">
-              <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link as={Link} to="/home">Home</Nav.Link>
 
               <Navbar.Brand href="#home">
                   <BsCart3 className="nav-icon me-2" onClick={() => setSmShow(true)} />
