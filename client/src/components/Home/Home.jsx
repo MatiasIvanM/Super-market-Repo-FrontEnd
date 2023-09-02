@@ -17,15 +17,20 @@ export default function Home() {
 
 			<Nav className={styles.side_bar}>
 				<Nav.Item>
-					Filtrado
+					<div>Categories</div>
 				</Nav.Item>
 				<Nav.Item>
-					Ordenamientos
+					<div>Price</div>
+					<select>
+						<option value="Min-Max">Min-Max</option>
+						<option value="Max-Min">Max-Min</option>
+					</select>
 				</Nav.Item>
 				<Nav.Item>
-					{/* <input type="number" placeholder='Min' style={{ width: '30%' }} />
-                    <span> - </span>
-                    <input type="number" placeholder='Max' style={{ width: '30%' }} /> */}
+					<div>Price Range</div>
+					<input type="number" placeholder='Min' style={{ width: '30%' }} />
+					<span> - </span>
+					<input type="number" placeholder='Max' style={{ width: '30%' }} />
 				</Nav.Item>
 			</Nav>
 

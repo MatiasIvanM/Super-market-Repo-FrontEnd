@@ -12,7 +12,8 @@
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
-    height: fit-content;
+    height: 95vh;
+    overflow-y: scroll;
     border: 0.1rem rgb(200, 200, 200) solid;
     padding: 1rem;
     border-radius: 5px;
@@ -21,15 +22,23 @@
 .side_bar {
     display: flex;
     flex-direction: column;
-    height: 87vh;
-    max-width: 15%;
+    justify-content: center;
+    height: 95vh;
+    width: 100%;
+    max-width: 200px;
     border: 0.1rem rgb(200, 200, 200) solid;
     border-radius: 5px;
+    padding: 0.5em;
 }
 
 @media (max-width:600px) {
     .container {
         flex-direction: column;
+    }
+
+    .card_container {
+        height: fit-content;
+        overflow: hidden;
     }
 
     .side_bar {
