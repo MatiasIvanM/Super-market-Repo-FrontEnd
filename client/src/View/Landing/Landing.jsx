@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { BsCart3 } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useState } from 'react';
+import {Footer} from '../../components/Footer/Footer';
 
 function Landing(){
 
@@ -76,20 +77,7 @@ function Landing(){
         </Col>
       </Row>
     </Container>
-            <Nav className="justify-content-center custom-footer" activeKey="/home">
-        <Nav.Item>
-          <Nav.Link eventKey="link-1" href='/about'>About</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-2">Preguntas frecuentes</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-3">Como comprar ?</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-4">Contactanos !</Nav.Link>
-        </Nav.Item>
-      </Nav>
+    <Footer/>
         </div>
     )
 }
