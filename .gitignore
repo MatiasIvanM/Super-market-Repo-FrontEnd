@@ -11,6 +11,9 @@ node_modules/
 # production
 /build
 
+# package-lock.json
+package-lock.json
+
 # misc
 .env
 .env.test
