@@ -20,7 +20,7 @@ const initialState = {
   customers:[],
   customerId:{},
   orderDetailId:{},
-  order:[],
+  orders:[],
   orderId:{},
 };
 
@@ -65,9 +65,9 @@ const rootReducer = (state = initialState, action) => {
         return { ...state, orderDetailId: action.payload };
     //order
     case GET_ORDERS:
-      return { ...state, products: action.payload };
+      return { ...state, orders: action.payload };
     case GET_ORDER_BY_ID:
-      return { ...state, productsId: action.payload };
+      return { ...state, orderId: action.payload };
 
     default:
       return { ...state };
