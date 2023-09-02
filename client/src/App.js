@@ -5,7 +5,7 @@ import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import Landing from './View/Landing/Landing';
 import Home from './components/Home/Home'
-import Detail from '../src/View/Detail/Detail'
+import ProductsDetail from '../src/View/Detail/Detail'
 
 
 
@@ -21,7 +21,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Landing} />
         <Route path="/home" component={Home} />
-       <Route path="/detail/:id">
+        <Route path="/detail/:id" component={ProductsDetail} />
       </Switch>
     </Router>
     </div>
