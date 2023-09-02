@@ -3,6 +3,8 @@ import styles from './Home.module.css'
 import CardProducto from '../CardProducto/CardProducto'
 import products from '../../data'
 import NavBar from '../NavBar/NavBar';
+import {Footer} from '../Footer/Footer'
+
 
 export default function Home() {
 
@@ -38,8 +40,9 @@ export default function Home() {
                     </CardProducto>
                 ))}
             </div>
-
         </div >
+        </div>
+        <Footer/>
         </div>
     )
 }

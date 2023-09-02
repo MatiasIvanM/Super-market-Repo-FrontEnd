@@ -19,13 +19,4 @@
 }
 .custom-footer{
     background-color:rgb(41, 41, 41);
-    margin-left: 5rem;
 }
-
-.custom-footer .nav-link {
-    padding: 0.5rem !important;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }

@@ -1,9 +1,12 @@
 import { Container, Nav, Col, Image, Row } from 'react-bootstrap' 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Landing.css';
+
 import  NavBar  from '../../components/NavBar/NavBar';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
+import {Footer} from '../../components/Footer/Footer';
 
 function Landing(){
     
@@ -42,20 +45,7 @@ function Landing(){
         </Col>
       </Row>
     </Container>
-            <Nav className="justify-content-center custom-footer" activeKey="/home">
-        <Nav.Item>
-          <Nav.Link eventKey="link-1" href='/about'>About</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-2">Preguntas frecuentes</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-3">Como comprar ?</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-4">Contactanos !</Nav.Link>
-        </Nav.Item>
-      </Nav>
+    <Footer/>
         </div>
     )
 }
