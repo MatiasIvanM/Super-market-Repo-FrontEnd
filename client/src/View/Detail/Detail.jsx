@@ -26,9 +26,9 @@ function ProductsDetail() {
                     (<img src={products.image} alt="not found" />)}</p>
 
                 <div >
-                    <p>{products.Description}</p>
+                    <p> {products.Description}</p>
                     <p> {products.Price}</p>
-                    <p >{products.stock}</p>
+                    <p> {products.stock}</p>
 
                 </div>
             </div>

@@ -8,6 +8,7 @@
 }
 
 .rating{
+    color: rgb(211, 181, 11);
     position: absolute;
     top: 2%;
     right: 2%;
@@ -15,4 +16,8 @@
 
 .modoDark{
     display: flex;
+}
+
+.link{
+    text-decoration: none;
 }

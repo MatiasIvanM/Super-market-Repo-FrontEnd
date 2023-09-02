@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from "react-redux";
 import './index.css';
 import App from './App';
 import { Auth0Provider } from '@auth0/auth0-react'
 import { BrowserRouter } from "react-router-dom";
+import store from './redux/store'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 //import {BrowserRouter} from "react-router-dom";
@@ -13,10 +15,13 @@ const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
 
 ReactDOM.render(
   <React.StrictMode>
+<Provider store={store}>
 
     <BrowserRouter>
     <App />
     </BrowserRouter>
+</Provider>
+    
     <Auth0Provider
       domain={domain}
       clientId={clientId}

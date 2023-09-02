@@ -1,4 +1,5 @@
-import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT } from '../actionsType'
+import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT } from './actionsType'
+import { FILTER_CATEGORY } from './actionsType';
 
 const initialState = {
     products: [],
@@ -18,7 +19,17 @@ const rootReducer = (state = initialState, action) => {
                 product.id === action.payload.id ? action.payload : product
             );
             return { ...state, products: updatedProducts };
+
+        case FILTER_CATEGORY : 
+            let categoryFiltered = 
+                action.payload === 'Todas' 
+                ? state.products 
+                : state.products.filter((producto) => producto.categories === action.payload) 
+            return { ...state, products: categoryFiltered }
+
         default:
             return { ...state };
     }
 }
+
+export default rootReducer;
