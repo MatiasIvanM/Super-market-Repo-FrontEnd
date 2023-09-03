@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landing from './View/Landing/Landing';
 import Home from './components/Home/Home'
 import ProductsDetail from '../src/View/Detail/Detail'
+import Form from "./View/FormProduct/formProduct"
 
 
 
@@ -15,7 +16,8 @@ function App() {
       <Switch>
         <Route path="/" exact component={Landing} />
         <Route path="/home" component={Home} />
-        <Route path="/product/:id" component={ProductsDetail} />
+       <Route path="/form" component ={Form}/>
+        <Route path="/product/:id" component={ProductsDetail} /> 
       </Switch>
     </Router>
     </div>
