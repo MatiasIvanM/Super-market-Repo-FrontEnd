@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import Landing from './View/Landing/Landing';
 import Home from './components/Home/Home'
 import ProductsDetail from '../src/View/Detail/Detail'
+import Form from "./View/FormProduct/formProduct"
 
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/home" component={Home} />
         <Route path="/detail/:id" component={ProductsDetail} />
        <Route path="/detail/:id"/>
+       <Route path="/form" component ={Form}/>
       </Switch>
     </Router>
     </div>
