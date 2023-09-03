@@ -41,7 +41,7 @@ export default function Home() {
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
                         <select name='category' id='category'>
-                            <option value="Bebidas">Bebidas</option>
+                            <option onClick={handleFilterByCategory} value="Bebidas">Bebidas</option>
                             <option value="Aceites y Aderezos">Aceites y Aderezos</option>
                             <option value="Arroz y Legumbres">Arroz y Legumbres</option>
                             <option value="Frutas y Verduras">Frutas y Verduras</option>
