@@ -11,9 +11,9 @@ const Form = () => {
 
 
   const onSubmit = (data) => { 
+
     dispatch(addProduct(data))
-    console.log(data)
-  };
+    };
 
   return (
     <div className="form-container">
@@ -39,43 +39,43 @@ const Form = () => {
             <label>Price</label>
             <input
               type="number"
-              {...register('Price', {
+              {...register('price', {
                 required: true,
               })}
             />
-            {errors.Price?.type === 'required' && <p>El campo Price es requerido</p>}
+            {errors.price?.type === 'required' && <p>El campo Price es requerido</p>}
           </div>
 
           <div>
             <label>Description</label>
             <input
               type="text"
-              {...register('Description', {
+              {...register('description', {
                 required: true,
               })}
             />
-            {errors.Description?.type === 'required' && <p>El campo Description es requerido</p>}
+            {errors.description?.type === 'required' && <p>El campo Description es requerido</p>}
           </div>
 
           <div>
             <label>Image</label>
             <input
               type="text"
-              {...register('Image', {
+              {...register('image', {
                 required: true,
               })}
             />
-            {errors.season?.type === 'Image' && <p>El campo Image es requerido</p>}
+            {errors.image?.type === 'required' && <p>El campo Image es requerido</p>}
           </div>
           <div>
-            <label>stock</label>
+            <label>Stock</label>
             <input
               type="number"
-              {...register('Stock', {
+              {...register('stock', {
                 required: true,
               })}
             />
-            {errors.stock?.type === 'stock' && <p>El campo stock es requerido</p>}
+            {errors.stock?.type === 'required' && <p>El campo stock es requerido</p>}
           </div>
           <div>
             <label>Brand</label>
@@ -85,7 +85,7 @@ const Form = () => {
                 required: true,
               })}
             />
-            {errors.brand?.type === 'brand' && <p>El campo brand es requerido</p>}
+            {errors.brand?.type === 'required' && <p>El campo brand es requerido</p>}
           </div>
           <div>
             <label>Expiration date</label>
@@ -95,7 +95,7 @@ const Form = () => {
                 required: true,
               })}
             />
-            {errors.expirationdate?.type === 'expirationdate' && <p>El Expiration date es requerido</p>}
+            {errors.expirationdate?.type === 'required' && <p>El Expiration date es requerido</p>}
           </div>
           <div>
             <label>Categories</label>
@@ -105,7 +105,7 @@ const Form = () => {
                 required: true,
               })}
             />
-            {errors.categories?.type === 'Categories' && <p>El campo Categories es requerido</p>}
+            {errors.categories?.type === 'required' && <p>El campo Categories es requerido</p>}
           </div>
           <button type="submit">Crear Producto</button>
         </form>

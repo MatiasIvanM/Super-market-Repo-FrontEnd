@@ -27,6 +27,7 @@ export function getProductById(id) {
 }
 
 export const addProduct =  (product) => {
+	console.log(product)
 	return async (dispatch) => {
 		try {
 			const {data}= await axios.post(PRODUCT, product)
@@ -37,6 +38,7 @@ export const addProduct =  (product) => {
 		  });
 		} catch (error) {
 			console.error('An error occurred:', error.message);
+			throw error;
 		}
 	   
 	};
