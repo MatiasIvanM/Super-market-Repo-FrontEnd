@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {PRODUCT} from '../../utils/urlLocales'
-import{GET_PRODUCTS,GET_PRODUCT_BY_ID,ADD_PRODUCT,MOD_PRODUCT,DEL_PRODUCT,} from '../actionsType'
+import{GET_PRODUCTS,GET_PRODUCT_BY_ID,ADD_PRODUCT,MOD_PRODUCT,DEL_PRODUCT,GET_PRODUCT_BY_NAME} from '../actionsType'
 
 export function getProducts() {
 	return (dispatch) => {
@@ -22,6 +22,21 @@ export function getProductById(id) {
 		}).catch((error) => {
 			console.error('An error occurred:', error.message);
 			
+		});
+	};
+}
+
+export function getProductsByName(name) {
+	return (dispatch) => {
+		axios.get(`${PRODUCT}?name=${name}`)
+		.then((response) => {
+			dispatch({ type: GET_PRODUCT_BY_NAME, payload: response.data });
+		}).catch((error) => {
+			if (error.response && error.response.status === 404) {
+				alert('Product not found.');
+			} else {
+				console.error('An error occurred:', error.message);
+			}
 		});
 	};
 }
