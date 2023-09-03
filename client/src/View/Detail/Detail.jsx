@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../redux/Actions/actionsProducts";
+// import products from '../../data'
 // import NotFound from "../../components/notFound/notFound";
 // import style from "../Detail/Detail.module.css";
 
@@ -18,8 +19,8 @@ function ProductsDetail() {
     return (
         <div >
             <div>
-                <p> {products.Product_ID} </p>
-                <p>{products.Product_name}</p>
+                <p> {products.id} </p>
+                <p>{products.name}</p>
 
                 <p>{products.hasOwnProperty("image") ?
                     (<img src={products.image} alt="not found" />) :
