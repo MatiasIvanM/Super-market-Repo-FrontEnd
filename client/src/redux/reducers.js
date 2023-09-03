@@ -20,6 +20,7 @@ import {
 
 const initialState = {
   products: [],
+  productsFiltered: [],
   productsId: {},
   customers:[],
   customerId:{},
@@ -77,7 +78,7 @@ const rootReducer = (state = initialState, action) => {
           action.payload === 'Todas' 
           ? state.products 
           : state.products.filter((producto) => producto.categories === action.payload) 
-      return { ...state, products: categoryFiltered }
+      return { ...state, productsFiltered: categoryFiltered }
 
     default:
       return { ...state };

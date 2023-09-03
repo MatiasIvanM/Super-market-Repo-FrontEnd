@@ -6,11 +6,12 @@ import NavBar from '../NavBar/NavBar';
 import { Footer } from '../Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { filterByCategory, getProducts } from '../../redux/Actions/actionsProducts';
 
 
 export default function Home() {
     const dispatch = useDispatch();
-    let products = useSelector((state) => state.products);
+    let products = useSelector((state) => state.productsFiltered);
 
     const [productsCont, setProductsCon] = useState([]);
     const [aux, setAux] = useState(false);
@@ -27,7 +28,7 @@ export default function Home() {
     }
 
     const handleFilterByCategory = (event) => {
-        // dispatch(filterByCategory(event.target.value)); //Santi esta |action no ha sido creada, pero si esta en el reducer
+        dispatch(filterByCategory(event.target.value)); //Santi esta |action no ha sido creada, pero si esta en el reducer
         if (aux) setAux(true);
         else setAux(false);
     };
@@ -40,8 +41,9 @@ export default function Home() {
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
-                        <select name='category' id='category'>
-                            <option onClick={handleFilterByCategory} value="Bebidas">Bebidas</option>
+                        <select name='category' id='category' onChange={handleFilterByCategory}>
+                            <option value="Todas">Todas</option>
+                            <option value="Bebidas">Bebidas</option>
                             <option value="Aceites y Aderezos">Aceites y Aderezos</option>
                             <option value="Arroz y Legumbres">Arroz y Legumbres</option>
                             <option value="Frutas y Verduras">Frutas y Verduras</option>
