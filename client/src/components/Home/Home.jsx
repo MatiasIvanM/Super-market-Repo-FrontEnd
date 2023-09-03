@@ -2,6 +2,9 @@ import Nav from 'react-bootstrap/Nav';
 import styles from './Home.module.css'
 import CardProducto from '../CardProducto/CardProducto'
 import products from '../../data'
+import NavBar from '../NavBar/NavBar';
+import {Footer} from '../Footer/Footer'
+
 
 import Container from 'react-bootstrap/Container';
 // import Nav from 'react-bootstrap/Nav';
@@ -26,6 +29,8 @@ export default function Home() {
       };
 
     return (
+        <div className='Home'>
+        <NavBar/>
         <div className={styles.container}>
             
             <Nav className={styles.side_bar}>
@@ -106,7 +111,8 @@ export default function Home() {
                     </CardProducto>
                 ))}
             </div>
-
-        </div >
+        </div>
+        <Footer/>
+        </div>
     )
 }
