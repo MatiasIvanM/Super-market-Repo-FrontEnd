@@ -7,6 +7,8 @@ import Modal from 'react-bootstrap/Modal';
 import Image from 'react-bootstrap/Image';
 import { useHistory } from "react-router-dom";
 import { Alert } from 'react-bootstrap';
+import NavBar from "../../components/NavBar/NavBar";
+import {Footer} from '../../components/Footer/Footer'
 
 function ProductsDetail() {
     const { id } = useParams();
@@ -46,6 +48,8 @@ function ProductsDetail() {
     }
 
     return (
+        <div>
+        <NavBar/>
         <div
             className="modal show"
             style={{ display: 'block', position: 'initial', width: "80%" }}
@@ -88,6 +92,8 @@ function ProductsDetail() {
                     ¡Producto agregado al carrito!
                 </Alert>
             </Modal.Dialog>
+        </div>
+        <Footer/>
         </div>
     )
 }

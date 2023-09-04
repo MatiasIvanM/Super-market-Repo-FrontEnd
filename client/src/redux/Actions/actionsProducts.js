@@ -28,7 +28,7 @@ export function getProductById(id) {
 
 export function getProductsByName(name) {
 	return (dispatch) => {
-		axios.get(`${PRODUCT}?name=${name}`)
+		axios.get(`${PRODUCT}name?name=${name}`)
 			.then((response) => {
 				dispatch({ type: GET_PRODUCT_BY_NAME, payload: response.data });
 			}).catch((error) => {
