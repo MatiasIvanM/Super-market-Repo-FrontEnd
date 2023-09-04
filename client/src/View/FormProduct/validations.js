@@ -1,4 +1,4 @@
-
+//Aun no esta implementado, validation basic
 export const validateName = (name) => {
     if (!name) {
       return 'El campo nombre es requerido';
