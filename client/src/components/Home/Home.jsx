@@ -6,18 +6,16 @@ import NavBar from '../NavBar/NavBar';
 import { Footer } from '../Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategory, orderPrecio, getProductsByName } from '../../redux/Actions/actionsProducts';
+import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios } from '../../redux/Actions/actionsProducts';
 
 
 export default function Home() {
     const dispatch = useDispatch();
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
+    const defaultFilters = { category: 'Todas', price: false, priceRange: { min: 0, max: 0 }, }
     const [productsMod, setProductsMod] = useState([]);
-    const [filters, setFilters] = useState({
-        category: false,
-        price: false,
-    });
+    const [filters, setFilters] = useState(defaultFilters);
 
     const searchByName = (name) => {
         if (name.length === 0) {
@@ -33,9 +31,23 @@ export default function Home() {
         setFilters({ ...filters, [property]: value })
     }
 
+    const setPriceRange = (event) => {
+        const property = event.target.name
+        let value = Number(event.target.value)
+        if (!value || value < 0) value = 0;
+        setFilters({ ...filters, priceRange: { ...filters.priceRange, [property]: value } })
+    }
+
     const applyFilters = () => {
-        filters.category && dispatch(filterByCategory(filters.category));
-        filters.price && dispatch(orderPrecio(filters.price));
+        if (filters.category) dispatch(filterByCategory(filters.category));
+        if (filters.price) dispatch(orderPrecio(filters.price));
+        if (filters.priceRange.min >= 0 && filters.priceRange.max > 0) {
+            dispatch(rangoPrecios(filters.priceRange))
+        }
+    }
+
+    const clearFilters = () => {
+        setFilters(defaultFilters)
     }
 
     useEffect(() => {
@@ -52,11 +64,11 @@ export default function Home() {
         applyFilters()
     }, [filters]);
 
-    if (products.length === 0) {
-        return <div>
-            <h2>Cargando...</h2>
-        </div>;
-    }
+    // if (products.length === 0) {
+    //     return <div>
+    //         <h2>Cargando...</h2>
+    //     </div>;
+    // }
 
     return (
 
@@ -68,7 +80,8 @@ export default function Home() {
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
-                        <select name='category' id='category' onChange={handleChange}>
+                        Categorías
+                        <select name='category' id='category' value={filters.category} onChange={handleChange}>
                             <option value="Todas">Todas</option>
                             <option value="Bebidas">Bebidas</option>
                             <option value="Aceites y Aderezos">Aceites y Aderezos</option>
@@ -78,16 +91,29 @@ export default function Home() {
                         </select>
                     </Nav.Item>
                     <Nav.Item>
-                        <select name='price' id='price' onChange={handleChange}>
+                        Ordenar por Precio
+                        <select name='price' id='price' value={filters.price} onChange={handleChange}>
                             <option value="None"></option>
-                            <option value="MIN-max">MIN-max</option>
+                            <option value="MIN-max">min-MAX</option>
                             <option value="MAX-min">MAX-min</option>
                         </select>
                     </Nav.Item>
                     <Nav.Item>
-                        {/* <input type="number" placeholder='Min' style={{ width: '30%' }} />
-                    <span> - </span>
-                    <input type="number" placeholder='Max' style={{ width: '30%' }} /> */}
+                        Rango de Precios
+                        <input
+                            onChange={setPriceRange}
+                            name='min' type="number"
+                            value={filters.priceRange.min}
+                            style={{ width: '30%' }} />
+                        <span> Hasta </span>
+                        <input
+                            onChange={setPriceRange}
+                            name='max' type="number"
+                            value={filters.priceRange.max}
+                            style={{ width: '30%' }} />
+                    </Nav.Item>
+                    <Nav.Item>
+                        <button onClick={clearFilters}>Limpiar Filtros</button>
                     </Nav.Item>
                 </Nav>
 

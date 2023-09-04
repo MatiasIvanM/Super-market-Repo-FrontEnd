@@ -15,6 +15,7 @@ import {
   GET_ORDER_BY_ID,
   FILTER_CATEGORY,
   ORDER_PRECIO,
+  RANGO_PRECIOS,
 } from "./actionsType";
 
 
@@ -84,7 +85,7 @@ const rootReducer = (state = initialState, action) => {
         action.payload === 'Todas'
           ? state.products
           : state.products.filter((producto) => producto.categories === action.payload)
-      return { ...state, productsFiltered: categoryFiltered }
+      return { ...state, productsFiltered: [...categoryFiltered] }
     case ORDER_PRECIO:
       let priceFiltered = state.productsFiltered
       if (action.payload === 'None') {
@@ -100,6 +101,13 @@ const rootReducer = (state = initialState, action) => {
         })
       }
       return { ...state, productsFiltered: [...priceFiltered] }
+    case RANGO_PRECIOS:
+      let priceRangeFiltered =
+        state.productsFiltered.filter((producto) =>
+          producto.price >= action.payload.min
+          &&
+          producto.price <= action.payload.max)
+      return { ...state, productsFiltered: [...priceRangeFiltered] }
     //default
     default:
       return { ...state };

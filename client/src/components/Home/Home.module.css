@@ -1,4 +1,4 @@
-.home{
+.home {
     display: flex;
     flex-direction: column;
 }
@@ -17,6 +17,7 @@
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
+    width: 85vw;
     height: fit-content;
     border: 0.1rem rgb(200, 200, 200) solid;
     padding: 1rem;
@@ -26,10 +27,13 @@
 .side_bar {
     display: flex;
     flex-direction: column;
-    height: 87vh;
-    max-width: 15%;
+    height: 80vh;
+    width: 200px;
+    max-width: 200px;
     border: 0.1rem rgb(200, 200, 200) solid;
     border-radius: 5px;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
 @media (max-width:600px) {
