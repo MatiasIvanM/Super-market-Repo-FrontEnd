@@ -1,12 +1,16 @@
 import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
 import styles from './Home.module.css'
 import CardProducto from '../CardProducto/CardProducto'
 import products from '../../data'
-import { Link } from 'react-router-dom';
+import NavBar from '../NavBar/NavBar';
+import {Footer} from '../Footer/Footer'
+
 
 export default function Home() {
+
     return (
+        <div className='Home'>
+        <NavBar/>
         <div className={styles.container}>
 
             <Nav className={styles.side_bar}>
@@ -21,11 +25,8 @@ export default function Home() {
                     <span> - </span>
                     <input type="number" placeholder='Max' style={{ width: '30%' }} /> */}
                 </Nav.Item>
-                <Nav.Link as={Link} to="/form">
-                    <Button variant="info">Agregar producto</Button>{' '}
-                </Nav.Link>
             </Nav>
-            
+
             <div className={styles.card_container}>
                 {products.map(p => (
                     <CardProducto
@@ -39,7 +40,8 @@ export default function Home() {
                     </CardProducto>
                 ))}
             </div>
-
-        </div >
+        </div>
+        <Footer/>
+        </div>
     )
 }
