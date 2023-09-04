@@ -41,7 +41,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_PRODUCT_BY_ID:
       return { ...state, productsId: action.payload };
     case GET_PRODUCT_BY_NAME:
-      return { ...state, productsId: action.payload };
+      return { ...state, productsByName: action.payload };
     case ADD_PRODUCT:
       return { ...state, products: [...state.products, action.payload] }; //..
     case MOD_PRODUCT:
