@@ -6,7 +6,7 @@ import NavBar from '../NavBar/NavBar';
 import { Footer } from '../Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategory, getProducts } from '../../redux/Actions/actionsProducts';
+import { filterByCategory, orderPrecio } from '../../redux/Actions/actionsProducts';
 
 
 export default function Home() {
@@ -14,12 +14,19 @@ export default function Home() {
     let products = useSelector((state) => state.productsFiltered);
 
     const [productsCont, setProductsCon] = useState([]);
-    const [aux, setAux] = useState(false);
+    const [filters, setFilters] = useState({
+        category: false,
+        price: false,
+    });
 
 
     useEffect(() => {
         setProductsCon(products);
     }, [products]);
+
+    useEffect(() => {
+        applyFilters()
+    }, [filters]);
 
     if (products.length === 0) {
         return <div>
@@ -27,11 +34,16 @@ export default function Home() {
         </div>;
     }
 
-    const handleFilterByCategory = (event) => {
-        dispatch(filterByCategory(event.target.value)); //Santi esta |action no ha sido creada, pero si esta en el reducer
-        if (aux) setAux(true);
-        else setAux(false);
-    };
+    const handleChange = (event) => {
+        const property = event.target.name
+        const value = event.target.value
+        setFilters({ ...filters, [property]: value })
+    }
+
+    const applyFilters = () => {
+        filters.category && dispatch(filterByCategory(filters.category));
+        filters.price && dispatch(orderPrecio(filters.price));
+    }
 
     return (
 
@@ -41,13 +53,20 @@ export default function Home() {
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
-                        <select name='category' id='category' onChange={handleFilterByCategory}>
+                        <select name='category' id='category' onChange={handleChange}>
                             <option value="Todas">Todas</option>
                             <option value="Bebidas">Bebidas</option>
                             <option value="Aceites y Aderezos">Aceites y Aderezos</option>
                             <option value="Arroz y Legumbres">Arroz y Legumbres</option>
                             <option value="Frutas y Verduras">Frutas y Verduras</option>
                             <option value="Panadería">Panadería</option>
+                        </select>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <select name='price' id='price' onChange={handleChange}>
+                            <option value="None"></option>
+                            <option value="MIN-max">MIN-max</option>
+                            <option value="MAX-min">MAX-min</option>
                         </select>
                     </Nav.Item>
                     <Nav.Item>

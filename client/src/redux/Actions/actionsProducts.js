@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PRODUCT } from '../../utils/urlLocales'
-import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, FILTER_CATEGORY, } from '../actionsType'
+import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, FILTER_CATEGORY, ORDER_PRECIO, } from '../actionsType'
 
 export function getProducts() {
 	return (dispatch) => {
@@ -86,6 +86,19 @@ export const filterByCategory = (category) => {
 			return dispatch({
 				type: FILTER_CATEGORY,
 				payload: category,
+			});
+		} catch (error) {
+			console.error('An error occurred:', error.message);
+		}
+	};
+};
+
+export const orderPrecio = (order) => {
+	return (dispatch) => {
+		try {
+			return dispatch({
+				type: ORDER_PRECIO,
+				payload: order,
 			});
 		} catch (error) {
 			console.error('An error occurred:', error.message);
