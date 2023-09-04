@@ -5,8 +5,14 @@ import { BsCart3 } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useState } from 'react';
 
-const NavBar = () => {
+const NavBar = (props) => {
     const [smShow, setSmShow] = useState(false);
+    const [name, setName]=useState("");
+
+   const handleChange = (event) =>{
+      setName(event.target.value);
+   }
+
     return (
         <div>
             <Navbar bg="dark" expand="lg" variant="dark">
@@ -21,10 +27,10 @@ const NavBar = () => {
 
             
             <Navbar.Brand>
-              <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+            <div class="d-flex">
+            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={handleChange} value={name}/>
+            <button className="btn btn-outline-success" onClick={()=>{props.searchByName(name)}} >Search</button>
+            </div>
               </Navbar.Brand>
 
               <Navbar.Brand href="#home">

@@ -2,6 +2,7 @@
 import {
   GET_PRODUCTS,
   GET_PRODUCT_BY_ID,
+  GET_PRODUCT_BY_NAME,
   ADD_PRODUCT,
   MOD_PRODUCT,
   DEL_PRODUCT,
@@ -21,8 +22,9 @@ import {
 
 const initialState = {
   products: [],
-  productsFiltered: [],
   productsId: {},
+  productsByName: [],
+  productsFiltered: [],
   customers: [],
   customerId: {},
   orderDetailId: {},
@@ -36,6 +38,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_PRODUCTS:
       return { ...state, products: action.payload, productsFiltered: action.payload };
     case GET_PRODUCT_BY_ID:
+      return { ...state, productsId: action.payload };
+    case GET_PRODUCT_BY_NAME:
       return { ...state, productsId: action.payload };
     case ADD_PRODUCT:
       return { ...state, products: [...state.products, action.payload] }; //..
@@ -74,13 +78,13 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, orders: action.payload };
     case GET_ORDER_BY_ID:
       return { ...state, orderId: action.payload };
+    //filters
     case FILTER_CATEGORY:
       let categoryFiltered =
         action.payload === 'Todas'
           ? state.products
           : state.products.filter((producto) => producto.categories === action.payload)
       return { ...state, productsFiltered: categoryFiltered }
-
     case ORDER_PRECIO:
       let priceFiltered = state.productsFiltered
       if (action.payload === 'None') {
@@ -96,7 +100,7 @@ const rootReducer = (state = initialState, action) => {
         })
       }
       return { ...state, productsFiltered: [...priceFiltered] }
-
+    //default
     default:
       return { ...state };
   }

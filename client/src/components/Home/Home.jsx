@@ -6,33 +6,26 @@ import NavBar from '../NavBar/NavBar';
 import { Footer } from '../Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategory, orderPrecio } from '../../redux/Actions/actionsProducts';
+import { filterByCategory, orderPrecio, getProductsByName } from '../../redux/Actions/actionsProducts';
 
 
 export default function Home() {
     const dispatch = useDispatch();
     let products = useSelector((state) => state.productsFiltered);
-
-    const [productsCont, setProductsCon] = useState([]);
+    let productsByName = useSelector((state) => state.productsByName);
+    const [productsMod, setProductsMod] = useState([]);
     const [filters, setFilters] = useState({
         category: false,
         price: false,
     });
 
-
-    useEffect(() => {
-        setProductsCon(products);
-    }, [products]);
-
-    useEffect(() => {
-        applyFilters()
-    }, [filters]);
-
-    if (products.length === 0) {
-        return <div>
-            <h2>Cargando...</h2>
-        </div>;
-    }
+    const searchByName = (name) => {
+        if (name.length === 0) {
+            setProductsMod([...products]);
+        } else {
+            dispatch(getProductsByName(name));
+        }
+    };
 
     const handleChange = (event) => {
         const property = event.target.name
@@ -45,10 +38,32 @@ export default function Home() {
         filters.price && dispatch(orderPrecio(filters.price));
     }
 
+    useEffect(() => {
+        setProductsMod(products);
+    }, [products]);
+
+    useEffect(() => {
+        if (productsByName.length > 0) {
+            setProductsMod([...productsByName]);
+        }
+    }, [productsByName]);
+
+    useEffect(() => {
+        applyFilters()
+    }, [filters]);
+
+    if (products.length === 0) {
+        return <div>
+            <h2>Cargando...</h2>
+        </div>;
+    }
+
     return (
 
-        <div className='Home'>
-            <NavBar />
+        <div className={styles.home}>
+            <NavBar
+                searchByName={searchByName}
+            />
             <div className={styles.container}>
 
                 <Nav className={styles.side_bar}>
@@ -77,8 +92,9 @@ export default function Home() {
                 </Nav>
 
                 <div className={styles.card_container}>
-                    {productsCont.map(p => (
+                    {productsMod.map(p => (
                         <CardProducto
+                            key={p.id}
                             id={p.id}
                             name={p.name}
                             image={p.image}
@@ -88,8 +104,8 @@ export default function Home() {
                         >
                         </CardProducto>
                     ))}
-                </div>
-            </div>
+                </div >
+            </div >
             <Footer />
         </div>
     )
