@@ -1,9 +1,9 @@
 import Nav from 'react-bootstrap/Nav';
 import styles from './Home.module.css'
-import CardProducto from '../CardProducto/CardProducto'
+import CardProducto from '../../components/CardProducto/CardProducto'
 //import products from '../../data'
-import NavBar from '../NavBar/NavBar';
-import { Footer } from '../Footer/Footer';
+import NavBar from '../../components/NavBar/NavBar';
+import { Footer } from '../../components/Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios } from '../../redux/Actions/actionsProducts';
