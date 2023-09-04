@@ -14,8 +14,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 // import { filterByCategory } from '../../redux/actionsType'
 
 
@@ -24,6 +22,7 @@ export default function Home() {
     let products = useSelector((state) => state.products);
 
     const [productsCont, setProductsCon] = useState([]);
+    const [aux, setAux] = useState(false);
 
     useEffect(() => {
         setProductsCon(products);
@@ -35,8 +34,7 @@ export default function Home() {
         </div>;
       }
 
-    const dispatch = useDispatch();
-    const [aux, setAux] = useState(false);
+   
 
     const handleFilterByCategory = (event) => {
         // dispatch(filterByCategory(event.target.value)); //Santi esta |action no ha sido creada, pero si esta en el reducer
