@@ -14,7 +14,7 @@ import {
   GET_ORDER_BY_ID,
   FILTER_CATEGORY,
 
-} from "../actionsType";
+} from "./actionsType";
 
 
 
