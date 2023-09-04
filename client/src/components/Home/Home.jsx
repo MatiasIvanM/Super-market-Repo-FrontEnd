@@ -6,6 +6,7 @@ import NavBar from '../NavBar/NavBar';
 import {Footer} from '../Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {getProductsByName} from '../../redux/Actions/actionsProducts'
 
 
 import Container from 'react-bootstrap/Container';
@@ -20,13 +21,32 @@ import InputGroup from 'react-bootstrap/InputGroup';
 export default function Home() {
     const dispatch = useDispatch();
     let products = useSelector((state) => state.products);
+    let productsByName=useSelector((state)=>state.productsByName);
 
+<<<<<<< HEAD
     const [productsCont, setProductsCon] = useState([]);
     const [aux, setAux] = useState(false);
+=======
+    const [productsMod, setProductsMod] = useState([]);
+
+    const searchByName = (name) => {
+        if (name.length === 0) {
+            setProductsMod([...products]);
+        } else {
+          dispatch(getProductsByName(name));
+        }
+      };
+>>>>>>> Develop
 
     useEffect(() => {
-        setProductsCon(products);
+        setProductsMod(products);
       }, [products]);
+
+      useEffect(() => {
+        if (productsByName.length > 0) {
+            setProductsMod([...productsByName]);
+        }
+      }, [productsByName]);
 
       if (products.length === 0) {
         return <div>
@@ -45,7 +65,9 @@ export default function Home() {
     return (
 
         <div className='Home'>
-        <NavBar/>
+        <NavBar
+        searchByName={searchByName}
+        />
         <div className={styles.container}>
             
             <Nav className={styles.side_bar}>
@@ -114,7 +136,7 @@ export default function Home() {
             </Nav>
 
             <div className={styles.card_container}>
-                {productsCont.map(p => (
+                {productsMod.map(p => (
                     <CardProducto
                         id = {p.id}
                         name = {p.name}
