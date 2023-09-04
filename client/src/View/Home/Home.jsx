@@ -40,6 +40,7 @@ export default function Home() {
     setCurrentPage(prevPage);
   };
 
+
     const searchByName = (name) => {
         if (name.length === 0) {
             setProductsMod([...products]);
@@ -72,9 +73,11 @@ export default function Home() {
     const clearFilters = () => {
         setFilters(defaultFilters)
     }
+
     useEffect(() => {
     setItems([...productsMod].splice(0, ITEMS_PER_PAGE));
   }, [productsMod]);
+
 
     useEffect(() => {
         setProductsMod(products);
@@ -113,6 +116,7 @@ export default function Home() {
           </div>
 
             <div className={styles.container}>             
+
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
                         Categorías
@@ -153,6 +157,7 @@ export default function Home() {
                 </Nav>
 
                 <div className={styles.card_container}>
+
                     {items.map(p => (
                         <CardProducto
                             key={p.id}
