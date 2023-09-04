@@ -14,10 +14,6 @@ import {
   GET_ORDERS,
   GET_ORDER_BY_ID,
   FILTER_CATEGORY,
-<<<<<<< HEAD
-
-=======
->>>>>>> 858b6bf767106c2520e1698beff95179d109935e
 } from "./actionsType";
 
 
