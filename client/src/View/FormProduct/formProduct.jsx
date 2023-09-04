@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch} from 'react-redux';
 import './formProduct.css';
 import {addProduct} from "../../redux/Actions/actionsProducts"
 
@@ -16,95 +16,106 @@ const Form = () => {
     };
 
   return (
-    <div className="form-container">
+    <div className="form-container" >
       <div>
         <h1>Crear Producto</h1>
       </div>
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label>Nombre</label>
-            <input
+      <div class="col-md-6" >
+        <form  onSubmit={handleSubmit(onSubmit)}>
+
+          <div class="form-floating">
+            <input 
+            id="name"
+            placeholder='Nombre del producto'
+            class="form-control"
               type="text"
               {...register('name', {
                 required: true,
                 maxLength: 10,
               })}
             />
+            <label class="form-label" for='name'>Nombre</label>
             {errors.name?.type === 'required' && <p>El campo nombre es requerido</p>}
             {errors.name?.type === 'maxLength' && <p>El campo nombre no puede tener más de 10 caracteres</p>}
           </div>
 
-          <div>
-            <label>Price</label>
-            <input
+          <div class="form-floating">
+            <input 
+            class="form-control"
               type="number"
               {...register('price', {
                 required: true,
               })}
             />
+            <label class="form-label">Price</label>
             {errors.price?.type === 'required' && <p>El campo Price es requerido</p>}
           </div>
 
-          <div>
-            <label>Description</label>
-            <input
+          <div class="form-floating">
+            <input 
+            class="form-control"
               type="text"
               {...register('description', {
                 required: true,
               })}
             />
+            <label class="form-label">Description</label>
             {errors.description?.type === 'required' && <p>El campo Description es requerido</p>}
           </div>
 
-          <div>
-            <label>Image</label>
-            <input
+          <div class="form-floating">
+            <input 
+            class="form-control"
               type="text"
               {...register('image', {
                 required: true,
               })}
             />
+            <label class="form-label">Image</label>
             {errors.image?.type === 'required' && <p>El campo Image es requerido</p>}
           </div>
-          <div>
-            <label>Stock</label>
-            <input
+          <div class="form-floating">
+            <input 
+            class="form-control"
               type="number"
               {...register('stock', {
                 required: true,
               })}
             />
+            <label class="form-label">Stock</label>
             {errors.stock?.type === 'required' && <p>El campo stock es requerido</p>}
           </div>
-          <div>
-            <label>Brand</label>
-            <input
+          <div class="form-floating">
+            <input 
+            class="form-control"
               type="text"
               {...register('brand', {
                 required: true,
               })}
             />
+            <label class="form-label">Brand</label>
             {errors.brand?.type === 'required' && <p>El campo brand es requerido</p>}
           </div>
-          <div>
-            <label>Expiration date</label>
-            <input
+          <div class="form-floating">
+            <input 
+            class="form-control"
               type="text"
               {...register('expirationdate', {
                 required: true,
               })}
             />
+            <label class="form-label">Expiration date</label>
             {errors.expirationdate?.type === 'required' && <p>El Expiration date es requerido</p>}
           </div>
-          <div>
-            <label>Categories</label>
-            <input
+          <div class="form-floating">
+            <input 
+            class="form-control"
               type="text"
               {...register('categories', {
                 required: true,
               })}
             />
+            <label class="form-label">Categories</label>
             {errors.categories?.type === 'required' && <p>El campo Categories es requerido</p>}
           </div>
           <button type="submit">Crear Producto</button>
