@@ -1,9 +1,11 @@
 import Nav from 'react-bootstrap/Nav';
 import styles from './Home.module.css'
 import CardProducto from '../CardProducto/CardProducto'
-import products from '../../data'
+//import products from '../../data'
 import NavBar from '../NavBar/NavBar';
-import {Footer} from '../Footer/Footer'
+import {Footer} from '../Footer/Footer';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 
 import Container from 'react-bootstrap/Container';
@@ -18,6 +20,20 @@ import { useState } from 'react';
 
 
 export default function Home() {
+    const dispatch = useDispatch();
+    let products = useSelector((state) => state.products);
+
+    const [productsCont, setProductsCon] = useState([]);
+
+    useEffect(() => {
+        setProductsCon(products);
+      }, [products]);
+
+      if (products.length === 0) {
+        return <div>
+           <h2>Cargando...</h2>
+        </div>;
+      }
 
     const dispatch = useDispatch();
     const [aux, setAux] = useState(false);
@@ -29,6 +45,7 @@ export default function Home() {
       };
 
     return (
+
         <div className='Home'>
         <NavBar/>
         <div className={styles.container}>
@@ -99,7 +116,7 @@ export default function Home() {
             </Nav>
 
             <div className={styles.card_container}>
-                {products.map(p => (
+                {productsCont.map(p => (
                     <CardProducto
                         id = {p.id}
                         name = {p.name}

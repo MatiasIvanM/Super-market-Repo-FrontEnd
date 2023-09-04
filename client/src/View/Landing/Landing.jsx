@@ -5,11 +5,17 @@ import './Landing.css';
 import  NavBar  from '../../components/NavBar/NavBar';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {getProducts} from '../../redux/Actions/actionsProducts'
 import { Link } from 'react-router-dom';
 import {Footer} from '../../components/Footer/Footer';
 
 function Landing(){
-    
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
     return(
     <div>
       <NavBar/>

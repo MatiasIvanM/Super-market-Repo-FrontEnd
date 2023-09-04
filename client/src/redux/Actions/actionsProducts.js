@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {PRODUCT} from '../../utils/urlLocales'
-import{GET_PRODUCTS,GET_PRODUCT_BY_ID,ADD_PRODUCT,MOD_PRODUCT,DEL_PRODUCT} from '../actionsType'
+import{GET_PRODUCTS,GET_PRODUCT_BY_ID,ADD_PRODUCT,MOD_PRODUCT,DEL_PRODUCT,} from '../actionsType'
 
 export function getProducts() {
 	return (dispatch) => {
@@ -27,6 +27,7 @@ export function getProductById(id) {
 }
 
 export const addProduct =  (product) => {
+	console.log(product)
 	return async (dispatch) => {
 		try {
 			const {data}= await axios.post(PRODUCT, product)
@@ -37,6 +38,7 @@ export const addProduct =  (product) => {
 		  });
 		} catch (error) {
 			console.error('An error occurred:', error.message);
+			throw error;
 		}
 	   
 	};
