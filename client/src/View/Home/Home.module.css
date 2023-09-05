@@ -25,19 +25,43 @@
 }
 
 .side_bar {
+    background-color: rgb(230, 230, 230);
     display: flex;
     flex-direction: column;
-    height: 80vh;
-    width: 200px;
+    height: fit-content;
+    width: 250px;
     max-width: 200px;
     border: 0.1rem rgb(200, 200, 200) solid;
     border-radius: 5px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding: 1rem;
+    gap: 3rem;
+}
 
-    input{
-        border-radius: 15px;
-    }
+.input {
+    border-radius: 0.7rem;
+    text-align: center;
+    width: 100%;
+    border: 1px solid grey;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.button {
+    border-radius: 0.7rem;
+    border: 1px solid grey;
+}
+
+.button:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+.button:active {
+    scale: 0.98;
 }
 
 @media (max-width:600px) {

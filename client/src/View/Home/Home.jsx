@@ -80,8 +80,8 @@ export default function Home() {
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
-                        Categorías
-                        <select name='category' id='category' value={filters.category} onChange={handleChange}>
+                        <label>Categorías</label>
+                        <select className={styles.input} name='category' id='category' value={filters.category} onChange={handleChange}>
                             <option value="Todas">Todas</option>
                             <option value="Bebidas">Bebidas</option>
                             <option value="Aceites y Aderezos">Aceites y Aderezos</option>
@@ -91,29 +91,31 @@ export default function Home() {
                         </select>
                     </Nav.Item>
                     <Nav.Item>
-                        Ordenar por Precio
-                        <select name='price' id='price' value={filters.price} onChange={handleChange}>
+                        <label>Ordenar por Precio</label>
+                        <select className={styles.input} name='price' id='price' value={filters.price} onChange={handleChange}>
                             <option value="None"></option>
                             <option value="MIN-max">min-MAX</option>
                             <option value="MAX-min">MAX-min</option>
                         </select>
                     </Nav.Item>
                     <Nav.Item>
-                        Rango de Precios
+                        <label>Rango de Precios</label>
                         <input
+                            className={styles.input}
                             onChange={setPriceRange}
                             name='min' type="number"
                             value={filters.priceRange.min}
                             style={{ width: '30%' }} />
                         <span> Hasta </span>
                         <input
+                            className={styles.input}
                             onChange={setPriceRange}
                             name='max' type="number"
                             value={filters.priceRange.max}
                             style={{ width: '30%' }} />
                     </Nav.Item>
                     <Nav.Item>
-                        <button onClick={clearFilters}>Limpiar Filtros</button>
+                        <button className={styles.button} onClick={clearFilters}>Limpiar Filtros</button>
                     </Nav.Item>
                 </Nav>
 
