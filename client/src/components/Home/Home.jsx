@@ -14,32 +14,32 @@ export default function Home() {
     const dispatch = useDispatch();
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
-    const ITEMS_PER_PAGE = 10;
+    const ITEMS_PER_PAGE=10;
     const defaultFilters = { category: 'Todas', price: false, priceRange: { min: 0, max: 0 }, }
     const [productsMod, setProductsMod] = useState([]);
     const [filters, setFilters] = useState(defaultFilters);
     const [currentPage, setCurrentPage] = useState(0);
     const [items, setItems] = useState([]);
 
-    const nextHandler = () => {
-        const totalElements = productsMod.length;
-        const nextPage = currentPage + 1;
-        const firstIndex = nextPage * ITEMS_PER_PAGE;
+      const nextHandler = () => {
+    const totalElements = productsMod.length;
+    const nextPage = currentPage + 1;
+    const firstIndex = nextPage * ITEMS_PER_PAGE;
 
-        if (firstIndex >= totalElements) return;
+    if (firstIndex >= totalElements) return;
 
-        setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
-        setCurrentPage(nextPage);
-    };
+    setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
+    setCurrentPage(nextPage);
+  };
 
-    const prevHandler = () => {
-        const prevPage = currentPage - 1;
-        if (prevPage < 0) return;
-        const firstIndex = prevPage * ITEMS_PER_PAGE;
+  const prevHandler = () => {
+    const prevPage = currentPage - 1;
+    if (prevPage < 0) return;
+    const firstIndex = prevPage * ITEMS_PER_PAGE;
 
-        setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
-        setCurrentPage(prevPage);
-    };
+    setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
+    setCurrentPage(prevPage);
+  };
 
 
     const searchByName = (name) => {
@@ -78,8 +78,8 @@ export default function Home() {
     }
 
     useEffect(() => {
-        setItems([...productsMod].splice(0, ITEMS_PER_PAGE));
-    }, [productsMod]);
+    setItems([...productsMod].splice(0, ITEMS_PER_PAGE));
+  }, [productsMod]);
 
 
     useEffect(() => {
@@ -109,19 +109,19 @@ export default function Home() {
                 searchByName={searchByName}
             />
             <div className={styles.pageButton}>
-                <Button variant="primary" style={{ width: '110px' }} onClick={prevHandler}> {"< Anterior"} </Button>
-                {/* <button  onClick={prevHandler}>
+            <Button variant="primary" style={{ width: '110px' }} onClick={prevHandler}> {"< Anterior"} </Button>
+            {/* <button  onClick={prevHandler}>
             {"<-Prev"}
         </button> */}
-                <br />
-                &nbsp;&nbsp;&nbsp;&nbsp;<h5>{currentPage + 1}</h5> &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button variant="primary" style={{ width: '110px' }} onClick={nextHandler}> {"Siguiente >"} </Button>
-                {/* <button  onClick={nextHandler}>
+        <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<h5>{currentPage+1}</h5> &nbsp;&nbsp;&nbsp;&nbsp;
+        <Button variant="primary" style={{ width: '110px' }} onClick={nextHandler}> {"Siguiente >"} </Button>
+          {/* <button  onClick={nextHandler}>
             {"Next->"}
           </button> */}
-            </div>
+          </div>
 
-            <div className={styles.container}>
+            <div className={styles.container}>             
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
@@ -144,7 +144,7 @@ export default function Home() {
                         </select>
                     </Nav.Item>
                     <Nav.Item>
-                        <h4>Rango de Precios </h4>
+                       <h4>Rango de Precios </h4> 
                         <input
                             onChange={setPriceRange}
                             name='min' type="number"
@@ -182,4 +182,9 @@ export default function Home() {
             <Footer />
         </div>
     )
+}
+	
+
+    )
+
 }
