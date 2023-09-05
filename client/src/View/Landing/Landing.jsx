@@ -5,12 +5,18 @@ import './Landing.css';
 import  NavBar  from '../../components/NavBar/NavBar';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getProducts} from '../../redux/Actions/actionsProducts'
-import { Link } from 'react-router-dom';
+import {getProducts,getProductsByName} from '../../redux/Actions/actionsProducts'
+import { Link, useHistory  } from 'react-router-dom';
 import {Footer} from '../../components/Footer/Footer';
 
 function Landing(){
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const searchByName = (name) => {
+    dispatch(getProductsByName(name));
+    history.push('/home');
+};
 
   useEffect(() => {
     dispatch(getProducts());
@@ -18,7 +24,9 @@ function Landing(){
 
     return(
     <div>
-      <NavBar/>
+      <NavBar
+      searchByName={searchByName}
+      />
       <Container>
       <Row className='offer-image'>
         <Col xs={6} md={4} lg={4}>
