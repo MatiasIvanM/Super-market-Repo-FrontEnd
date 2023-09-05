@@ -1,4 +1,5 @@
 import Nav from 'react-bootstrap/Nav';
+import Button from "react-bootstrap/Button";
 import styles from './Home.module.css'
 import CardProducto from '../../components/CardProducto/CardProducto'
 //import products from '../../data'
@@ -108,20 +109,23 @@ export default function Home() {
                 searchByName={searchByName}
             />
             <div className={styles.pageButton}>
-            <button  onClick={prevHandler}>
+            <Button variant="primary" style={{ width: '110px' }} onClick={prevHandler}> {"< Anterior"} </Button>
+            {/* <button  onClick={prevHandler}>
             {"<-Prev"}
-          </button>
-          <p> Page {currentPage}</p>
-          <button  onClick={nextHandler}>
+        </button> */}
+        <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<h5>{currentPage+1}</h5> &nbsp;&nbsp;&nbsp;&nbsp;
+        <Button variant="primary" style={{ width: '110px' }} onClick={nextHandler}> {"Siguiente >"} </Button>
+          {/* <button  onClick={nextHandler}>
             {"Next->"}
-          </button>
+          </button> */}
           </div>
 
             <div className={styles.container}>             
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
-                        Categorías
+                        <h4>Categorías </h4>
                         <select name='category' id='category' value={filters.category} onChange={handleChange}>
                             <option value="Todas">Todas</option>
                             <option value="Bebidas">Bebidas</option>
@@ -132,7 +136,7 @@ export default function Home() {
                         </select>
                     </Nav.Item>
                     <Nav.Item>
-                        Ordenar por Precio
+                        <h4>Ordenar por Precio </h4>
                         <select name='price' id='price' value={filters.price} onChange={handleChange}>
                             <option value="None"></option>
                             <option value="MIN-max">min-MAX</option>
@@ -140,7 +144,7 @@ export default function Home() {
                         </select>
                     </Nav.Item>
                     <Nav.Item>
-                        Rango de Precios
+                       <h4>Rango de Precios </h4> 
                         <input
                             onChange={setPriceRange}
                             name='min' type="number"
@@ -154,7 +158,8 @@ export default function Home() {
                             style={{ width: '30%' }} />
                     </Nav.Item>
                     <Nav.Item>
-                        <button onClick={clearFilters}>Limpiar Filtros</button>
+                        {/* <button onClick={clearFilters}>Limpiar Filtros</button> */}
+                        <Button variant="primary" style={{ width: '100px' }} onClick={clearFilters}> Limpiar Filtros </Button>
                     </Nav.Item>
                 </Nav>
 
