@@ -1,4 +1,5 @@
 import Nav from 'react-bootstrap/Nav';
+import Button from "react-bootstrap/Button";
 import styles from './Home.module.css'
 import CardProducto from '../CardProducto/CardProducto'
 //import products from '../../data'
