@@ -22,13 +22,13 @@ function Landing(){
       <Container>
       <Row className='offer-image'>
         <Col xs={6} md={4} lg={4}>
-          <Image src="oferta1.jpg" className='offer-image' thumbnail />
+          <Image src="OfertaSMH.jpg" className='image' thumbnail />
         </Col>
         <Col xs={6} md={4} lg={4}>
-          <Image src="oferta4.png" className='image' thumbnail />
+          <Image src="OfertaSMH.jpg" className='image' thumbnail />
         </Col>
         <Col xs={6} md={4} lg={4}>
-          <Image src="oferta5.jpeg" className='image' thumbnail />
+          <Image src="OfertaSMH.jpg" className='image' thumbnail />
         </Col>
       </Row>
       
