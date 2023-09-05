@@ -2,7 +2,7 @@ import './App.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';        
 import Landing from './View/Landing/Landing';
-import Home from './View/Home/Home'
+import Home from './View/Home/Home.jsx'
 import ProductsDetail from '../src/View/Detail/Detail'
 import Form from "./View/FormProduct/formProduct"
 

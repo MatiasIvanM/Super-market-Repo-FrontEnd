@@ -74,4 +74,12 @@ input::-webkit-inner-spin-button {
         height: auto;
         max-width: 100%;
     }
+
+}
+
+.pageButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }

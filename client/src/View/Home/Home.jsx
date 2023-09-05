@@ -13,9 +13,33 @@ export default function Home() {
     const dispatch = useDispatch();
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
+    const ITEMS_PER_PAGE=10;
     const defaultFilters = { category: 'Todas', price: false, priceRange: { min: 0, max: 0 }, }
     const [productsMod, setProductsMod] = useState([]);
     const [filters, setFilters] = useState(defaultFilters);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [items, setItems] = useState([]);
+
+      const nextHandler = () => {
+    const totalElements = productsMod.length;
+    const nextPage = currentPage + 1;
+    const firstIndex = nextPage * ITEMS_PER_PAGE;
+
+    if (firstIndex >= totalElements) return;
+
+    setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
+    setCurrentPage(nextPage);
+  };
+
+  const prevHandler = () => {
+    const prevPage = currentPage - 1;
+    if (prevPage < 0) return;
+    const firstIndex = prevPage * ITEMS_PER_PAGE;
+
+    setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
+    setCurrentPage(prevPage);
+  };
+
 
     const searchByName = (name) => {
         if (name.length === 0) {
@@ -51,6 +75,11 @@ export default function Home() {
     }
 
     useEffect(() => {
+    setItems([...productsMod].splice(0, ITEMS_PER_PAGE));
+  }, [productsMod]);
+
+
+    useEffect(() => {
         setProductsMod(products);
     }, [products]);
 
@@ -76,7 +105,17 @@ export default function Home() {
             <NavBar
                 searchByName={searchByName}
             />
-            <div className={styles.container}>
+            <div className={styles.pageButton}>
+            <button  onClick={prevHandler}>
+            {"<-Prev"}
+          </button>
+          <p> Page {currentPage}</p>
+          <button  onClick={nextHandler}>
+            {"Next->"}
+          </button>
+          </div>
+
+            <div className={styles.container}>             
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
@@ -120,7 +159,8 @@ export default function Home() {
                 </Nav>
 
                 <div className={styles.card_container}>
-                    {productsMod.map(p => (
+
+                    {items.map(p => (
                         <CardProducto
                             key={p.id}
                             id={p.id}
