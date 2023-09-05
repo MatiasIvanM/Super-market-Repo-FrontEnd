@@ -38,6 +38,13 @@
     gap: 3rem;
 }
 
+.label {
+    background-color: rgb(150, 150, 150);
+    border-radius: 0.7rem;
+    padding: 0.1rem;
+    margin-bottom: 0.5rem;
+}
+
 .input {
     border-radius: 0.7rem;
     text-align: center;
@@ -64,7 +71,7 @@ input::-webkit-inner-spin-button {
     scale: 0.98;
 }
 
-@media (max-width:600px) {
+/* @media (max-width:600px) {
     .container {
         flex-direction: column;
     }
@@ -73,11 +80,12 @@ input::-webkit-inner-spin-button {
         width: 100%;
         height: auto;
         max-width: 100%;
+        gap: 1rem;
     }
 
-}
+} */
 
-.pageButton{
+.pageButton {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -132,7 +132,7 @@ export default function Home() {
                     <Nav.Item>
                         <label>Ordenar por Precio</label>
                         <select className={styles.input} name='price' id='price' value={filters.price} onChange={handleChange}>
-                            <option value="None"></option>
+                            <option value="None">Ninguno</option>
                             <option value="MIN-max">min-MAX</option>
                             <option value="MAX-min">MAX-min</option>
                         </select>
