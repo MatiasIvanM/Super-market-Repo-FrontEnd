@@ -22,6 +22,7 @@ const NavBar = (props) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto custom-nav">
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
+            <Nav.Link as={Link} to="/form">New Product</Nav.Link>
             </Nav>
             
 

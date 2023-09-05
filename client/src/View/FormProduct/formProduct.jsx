@@ -3,12 +3,12 @@ import React from 'react';
 import { useDispatch} from 'react-redux';
 import './formProduct.css';
 import {addProduct} from "../../redux/Actions/actionsProducts"
-
+import NavBar from "../../components/NavBar/NavBar"
+import {Footer} from '../../components/Footer/Footer'
 
 const Form = () => {
   const dispatch = useDispatch();
   const { register, formState: { errors }, handleSubmit } = useForm();
-
 
   const onSubmit = (data) => { 
 
@@ -16,6 +16,8 @@ const Form = () => {
     };
 
   return (
+    <div className="form" >
+    <NavBar/>
     <div className="form-container" >
       <div>
         <h1>Crear Producto</h1>
@@ -121,6 +123,8 @@ const Form = () => {
           <button type="submit">Crear Producto</button>
         </form>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };
