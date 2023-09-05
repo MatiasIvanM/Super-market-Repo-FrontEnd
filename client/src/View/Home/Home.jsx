@@ -68,10 +68,12 @@ export default function Home() {
         if (filters.priceRange.min >= 0 && filters.priceRange.max > 0) {
             dispatch(rangoPrecios(filters.priceRange))
         }
+        setCurrentPage(0)
     }
 
     const clearFilters = () => {
         setFilters(defaultFilters)
+        setCurrentPage(0)
     }
 
     useEffect(() => {
