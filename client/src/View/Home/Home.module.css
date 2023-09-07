@@ -25,6 +25,8 @@
 }
 
 .side_bar {
+    background-color: #28242c;
+    color: white;
     display: flex;
     flex-direction: column;
     height: 80vh;

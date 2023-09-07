@@ -4,6 +4,8 @@ import { Container, Nav, Navbar, Modal } from 'react-bootstrap'
 import { BsCart3 } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useState } from 'react';
+import Button from "react-bootstrap/Button";
+
 
 const NavBar = (props) => {
     const [smShow, setSmShow] = useState(false);
@@ -21,16 +23,19 @@ const NavBar = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto custom-nav">
-            <Nav.Link as={Link} to="/home">Home</Nav.Link>
-            <Nav.Link as={Link} to="/form">New Product</Nav.Link>
+            <Nav.Link as={Link} to="/home">INICIO</Nav.Link>
+            <Nav.Link as={Link} to="/form">AGREGAR PRODUCTO</Nav.Link>
             </Nav>
             
 
             
             <Navbar.Brand>
             <div class="d-flex">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={handleChange} value={name}/>
-            <button className="btn btn-outline-success" onClick={()=>{props.searchByName(name)}} >Search</button>
+            <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" onChange={handleChange} value={name}/>
+            {/* <button className="btn btn-outline-success" onClick={()=>{props.searchByName(name)}} >Buscar</button> */}
+            <Button variant="primary" style={{ width: "100px" }} onClick={()=>{props.searchByName(name)}} >
+            Buscar
+          </Button>
             </div>
               </Navbar.Brand>
 
