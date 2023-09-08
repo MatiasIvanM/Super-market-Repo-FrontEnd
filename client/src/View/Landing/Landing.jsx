@@ -1,12 +1,12 @@
-import { Container, Nav, Col, Image, Row } from 'react-bootstrap' 
+import { Container, Col, Image, Row } from 'react-bootstrap' 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Landing.css';
 
 import  NavBar  from '../../components/NavBar/NavBar';
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {getProducts,getProductsByName} from '../../redux/Actions/actionsProducts'
-import { Link, useHistory  } from 'react-router-dom';
+import { useHistory  } from 'react-router-dom';
 import {Footer} from '../../components/Footer/Footer';
 
 function Landing(){
@@ -19,7 +19,7 @@ function Landing(){
 };
 
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProducts());// eslint-disable-next-line
   }, []);
 
     return(
