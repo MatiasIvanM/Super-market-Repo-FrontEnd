@@ -39,7 +39,7 @@ function Landing(){
           <Image src="OfertaSMH.jpg" className='image' thumbnail />
         </Col>
       </Row>
-
+      
       <Row className='offer-image'>
         <Col xs={9} lg={12}>
             <Image src="oferta3.jpg" className='image' thumbnail />

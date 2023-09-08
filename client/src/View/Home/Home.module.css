@@ -1,0 +1,59 @@
+.home {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 2vh 2vw 2vh 2vw;
+    height: fit-content;
+}
+
+.card_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    width: 85vw;
+    height: fit-content;
+    border: 0.1rem rgb(200, 200, 200) solid;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.side_bar {
+    background-color: #28242c;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    width: 200px;
+    max-width: 200px;
+    border: 0.1rem rgb(200, 200, 200) solid;
+    border-radius: 5px;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+@media (max-width:600px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .side_bar {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+    }
+
+}
+
+.pageButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
