@@ -14,7 +14,7 @@ build/
 /build
 
 # package-lock.json
-package-lock.json
+
 
 # misc
 .env
