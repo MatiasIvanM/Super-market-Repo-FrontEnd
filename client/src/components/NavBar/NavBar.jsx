@@ -58,7 +58,9 @@ const NavBar = (props) => {
 
               <Navbar.Brand>
                 <FiLogIn className="nav-icon"/>
-                <BiSolidDashboard className="nav-icon"/>
+                <Link to="/admin"> 
+                  <BiSolidDashboard className="nav-icon"/>
+                </Link>
               </Navbar.Brand>
 
               </Navbar.Collapse>
