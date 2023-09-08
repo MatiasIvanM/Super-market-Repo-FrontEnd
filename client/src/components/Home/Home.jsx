@@ -164,7 +164,7 @@ export default function Home() {
                 </Nav>
 
                 <div className={styles.card_container}>
-
+                {/* {console.log(items)} */}
                     {items.map(p => (
                         <CardProducto
                             key={p.id}
@@ -173,10 +173,12 @@ export default function Home() {
                             image={p.image}
                             description={p.description}
                             price={p.price}
+                            stock={p.stock}
                             rating='5'
                         >
                         </CardProducto>
                     ))}
+                    
                 </div >
             </div >
             <Footer />
@@ -185,6 +187,4 @@ export default function Home() {
 }
 	
 
-    )
-
-}
+    

@@ -14,6 +14,11 @@
     right: 2%;
 }
 
+.img{
+    width: 90%;
+    height: 50%;  
+}
+
 .modoDark{
     display: flex;
 }
@@ -21,3 +26,15 @@
 .link{
     text-decoration: none;
 }
+
+.container{
+    box-shadow: 40px 34px 94px 0px rgba(30, 40, 68, 0.25);
+    padding: 0%;
+  
+}
+
+.container:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  
