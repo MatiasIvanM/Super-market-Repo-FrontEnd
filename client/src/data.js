@@ -1,4 +1,4 @@
-/* const products = [
+const products = [
     {
       id: "26c981eb-3522-4955-b6bc-45c22bf181cf",
       name: "Gaseosa",
@@ -312,4 +312,4 @@
     },
   ];
 
-module.exports= products; */
+module.exports= products;

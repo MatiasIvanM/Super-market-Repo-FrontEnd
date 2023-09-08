@@ -30,7 +30,7 @@ const NavBar = (props) => {
 
             
             <Navbar.Brand>
-            <div class="d-flex">
+            <div className="d-flex">
             <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" onChange={handleChange} value={name}/>
             {/* <button className="btn btn-outline-success" onClick={()=>{props.searchByName(name)}} >Buscar</button> */}
             <Button variant="primary" style={{ width: "100px" }} onClick={()=>{props.searchByName(name)}} >
