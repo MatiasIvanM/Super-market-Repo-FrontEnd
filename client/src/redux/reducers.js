@@ -32,6 +32,7 @@ const initialState = {
   orderDetailId: {},
   orders: [],
   orderId: {},
+  
 };
 
 const rootReducer = (state = initialState, action) => {

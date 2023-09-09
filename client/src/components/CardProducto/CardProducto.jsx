@@ -72,6 +72,7 @@ function CardProduct(props) {
           id={id}
           show={showDetailModal}
           onHide={() => setShowDetailModal(false)}
+          
         />      
               
      </>

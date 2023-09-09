@@ -26,6 +26,7 @@ export function getProductById(id) {
 		  throw error; 
 		}
 	  };
+	  
 }
 
 export function getProductsByName(name) {

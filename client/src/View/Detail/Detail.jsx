@@ -4,16 +4,12 @@ import { useDispatch } from "react-redux";
 import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
 import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
-// import { useHistory } from "react-router-dom";
-// import NavBar from "../../components/NavBar/NavBar";
-// import {Footer} from '../../components/Footer/Footer'
 import style from './Detail.module.css'
 import { AiOutlineStar } from 'react-icons/ai'
 
 function ProductsDetail(props) {
     
     const { id } = props
-    // const navigate = useHistory();
     const dispatch = useDispatch();
     // const products = useSelector((state) => state.productsId);
     const [showMessage, setShowMessage] = useState(false);
