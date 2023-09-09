@@ -2,7 +2,6 @@ import Nav from 'react-bootstrap/Nav';
 import Button from "react-bootstrap/Button";
 import styles from './Home.module.css'
 import CardProducto from '../../components/CardProducto/CardProducto'
-//import products from '../../data'
 import NavBar from '../../components/NavBar/NavBar';
 import { Footer } from '../../components/Footer/Footer';
 import { useEffect, useState } from "react";
@@ -96,11 +95,6 @@ export default function Home() {
         applyFilters()
     }, [filters]);
 
-    // if (products.length === 0) {
-    //     return <div>
-    //         <h2>Cargando...</h2>
-    //     </div>;
-    // }
 
     return (
 
@@ -158,13 +152,11 @@ export default function Home() {
                             style={{ width: '30%' }} />
                     </Nav.Item>
                     <Nav.Item>
-                        {/* <button onClick={clearFilters}>Limpiar Filtros</button> */}
                         <Button variant="primary" style={{ width: '100px' }} onClick={clearFilters}> Limpiar Filtros </Button>
                     </Nav.Item>
                 </Nav>
 
                 <div className={styles.card_container}>
-                {/* {console.log(items)} */}
                     {items.map(p => (
                         <CardProducto
                             key={p.id}
@@ -174,6 +166,7 @@ export default function Home() {
                             description={p.description}
                             price={p.price}
                             stock={p.stock}
+                            brand={p.brand}                     
                             rating='5'
                         >
                         </CardProducto>

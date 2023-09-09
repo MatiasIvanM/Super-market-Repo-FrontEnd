@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PRODUCT } from '../../utils/urlLocales'
-import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, GET_PRODUCT_BY_NAME, FILTER_CATEGORY, ORDER_PRECIO, RANGO_PRECIOS, } from '../actionsType'
+import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, GET_PRODUCT_BY_NAME, FILTER_CATEGORY, ORDER_PRECIO, RANGO_PRECIOS, CLEAR_PRODUCT_DETAILS } from '../actionsType'
 
 export function getProducts() {
 	return (dispatch) => {
@@ -15,15 +15,17 @@ export function getProducts() {
 }
 
 export function getProductById(id) {
-	return (dispatch) => {
-		axios.get(`${PRODUCT}${id}`)
-			.then((response) => {
-				dispatch({ type: GET_PRODUCT_BY_ID, payload: response.data });
-			}).catch((error) => {
-				console.error('An error occurred:', error.message);
 
-			});
-	};
+	return async (dispatch) => {
+		try {
+		  const response = await axios.get(`${PRODUCT}${id}`);
+		  dispatch({ type: GET_PRODUCT_BY_ID, payload: response.data });
+		  return response.data; 
+		} catch (error) {
+		  console.error('An error occurred:', error.message);
+		  throw error; 
+		}
+	  };
 }
 
 export function getProductsByName(name) {
@@ -133,3 +135,9 @@ export const rangoPrecios = (range) => {
 		}
 	};
 };
+
+export const clearProductDetails = () => {
+	return {
+	  type: CLEAR_PRODUCT_DETAILS,
+	};
+  };
