@@ -19,7 +19,8 @@ import {
   RANGO_PRECIOS,
   GET_SC_BY_ID,
   PUT_SC,
-  POST_SC 
+  POST_SC,
+  ADD_PRODUCT_SC
 } from "./actionsType";
 
 
@@ -36,6 +37,7 @@ const initialState = {
   orders: [],
   orderId: {},
   shoppingCart:{},
+  productsSC:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -64,6 +66,8 @@ const rootReducer = (state = initialState, action) => {
         return { ...state, shoppingCart: action.payload }
     case POST_SC:
         return { ...state, shoppingCart: action.payload }
+    case ADD_PRODUCT_SC:
+        return { ...state, productsSC: [...state.productsSC, action.payload] };
         
     //customer
     case GET_CUSTOMERS:

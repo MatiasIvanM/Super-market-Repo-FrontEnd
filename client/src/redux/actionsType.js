@@ -12,6 +12,7 @@ export const CLEAR_PRODUCT_DETAILS = 'CLEAR_PRODUCT_DETAILS'
 export const GET_SC_BY_ID="GET_SC_BY_ID"
 export const PUT_SC="PUT_SC"
 export const POST_SC="POST_SC"
+export const ADD_PRODUCT_SC='ADD_PRODUCT_SC'
 
 
 //Customers

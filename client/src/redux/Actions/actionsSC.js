@@ -1,4 +1,4 @@
-import { GET_SC_BY_ID, PUT_SC, POST_SC } from '../actionsType'
+import { GET_SC_BY_ID, PUT_SC, POST_SC,ADD_PRODUCT_SC } from '../actionsType'
 import axios from "axios"
 import { SHOPPINGCART } from "../../utils/urlLocales"
 
@@ -46,5 +46,18 @@ export const postRecipe = (id) => {
 			console.error('An error occurred:', error.message);
 		}
 	   
+	};
+};
+
+export const addProductSC = (product) => {
+	return (dispatch) => {
+		try {
+			return dispatch({
+				type: ADD_PRODUCT_SC,
+				payload: product,
+			});
+		} catch (error) {
+			console.error('An error occurred:', error.message);
+		}
 	};
 };
