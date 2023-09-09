@@ -9,6 +9,10 @@ import { List, CreateButton,
 // import { EditDialog } from '@react-admin/ra-form-layout';
 
 
+<<<<<<< HEAD
+=======
+import IconEvent from '@mui/icons-material/Event';
+>>>>>>> eaa7c371dea69b70cd0f134bcbb7c24669ed72a4
 
 const ListActions = () => (
   <TopToolbar>
@@ -38,8 +42,13 @@ const ProductsList = (props) => {  //Este es el que muestra las ciudades
           <TextField source="available" />
           {/* <ImageField source="image" sx= {{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } } } /> */}
           {/* <DateField source="created_at" /> */}
+<<<<<<< HEAD
           {/* <EditButton basePath="/products" />
           <DeleteButton basePath="/products" /> */}
+=======
+          {/*<EditButton basePath="/products" />*/}
+          {/*<DeleteButton basePath="/products" />*/}
+>>>>>>> eaa7c371dea69b70cd0f134bcbb7c24669ed72a4
         </DatagridConfigurable>
     </List>
     );
