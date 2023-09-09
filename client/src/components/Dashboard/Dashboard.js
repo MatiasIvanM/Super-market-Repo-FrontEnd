@@ -1,17 +1,15 @@
 import React from 'react';
+import { Admin, Resource, defaultTheme, AppBar } from 'react-admin';
 import indigo from '@mui/material/colors/indigo';
 import pink from '@mui/material/colors/pink';
 import red from '@mui/material/colors/red';
-import { Admin, Resource, defaultTheme, AppBar } from 'react-admin';
-import UserList2 from './users2';
-import PostList from './posts';
-import {ActivitiesList, PostActivities} from './activities';
 import UserIcon from '@mui/icons-material/People';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-// export const PostIcon = BookIcon;
-
 import simpleRestProvider from 'ra-data-simple-rest';
-import { ProductList, EditProduct } from './products';
+import ProductsList from './product/ProductsList';
+import ProductCreate from './product/ProductCreate';
+import ProductEdit from './product/ProductEdit';
+
 const dataProvider = simpleRestProvider('http://localhost:3001');
 
 const myTheme = {
@@ -45,10 +43,10 @@ const Dashboard = () => {
   return (
     // <Admin dataProvider={dataProvider}>theme={myTheme} theme={lightTheme darkTheme={darkTheme}}
     //Si borras theme queda en blanco con azul
-     <Admin dataProvider={dataProvider} theme={myTheme}>
+     <Admin dataProvider={dataProvider}>
       {/* Agrega tus recursos aquí */}
-      <Resource name="users" list={ProductList} icon={UserIcon} />
-      <Resource name="product" list={ProductList} edit={EditProduct} icon={AddShoppingCartIcon} />
+      {/* <Resource name="users" list={ProductList} icon={UserIcon} /> */}
+      <Resource name="product" list={ProductsList} create={ProductCreate} edit={ProductEdit} icon={AddShoppingCartIcon} />
       {/* <Resource name="activities" list={ActivitiesList}  create={PostActivities} /> */}
 
     </Admin>

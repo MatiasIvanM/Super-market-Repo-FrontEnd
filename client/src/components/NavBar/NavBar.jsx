@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, Modal } from 'react-bootstrap' 
 import { BsCart3 } from 'react-icons/bs'
-import { FiLogIn, BiSolidDashboard } from 'react-icons/fi'
+import { FiLogIn } from 'react-icons/fi'
+import { BiSolidDashboard } from "react-icons/bi";
 import { useState } from 'react';
 import Button from "react-bootstrap/Button";
 
