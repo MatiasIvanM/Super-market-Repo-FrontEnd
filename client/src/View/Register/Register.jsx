@@ -4,10 +4,10 @@ import { InputGroup } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCustomer } from '../../redux/Actions/actionsCustomers';
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Register() {
-    const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
+    // const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
     const defaultUser = {
         name: "",
         email: "",
