@@ -41,11 +41,16 @@ export function getProductsByName(name) {
 	};
 }
 
-export const addProduct = (product) => {
-	console.log(product)
+export const addProduct = (formData) => {
+	console.log(formData)
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.post(PRODUCT, product)
+			const { data } = await axios.post(PRODUCT, formData,{
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			
+			})
 
 			return dispatch({
 				type: ADD_PRODUCT,
