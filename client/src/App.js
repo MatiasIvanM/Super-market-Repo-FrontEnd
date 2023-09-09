@@ -22,6 +22,8 @@ function App() {
         <Route path="/product/:id" component={ProductsDetail} />
         <Route path="/form" component={FormProduct} />
         <Route path="/admin" component={Dashboard} />
+
+        
       </Switch>
     </Router>
     </div>
