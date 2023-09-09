@@ -29,8 +29,7 @@ export default function Register() {
 
     async function handleSubmit(event) {
         event.preventDefault()
-        const response = await dispatch(addCustomer(user))
-        console.log(response.payload);
+        dispatch(addCustomer(user))
     }
 
     return (
@@ -66,7 +65,7 @@ export default function Register() {
                     <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
                     <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
                 </InputGroup>
-                <Button variant="primary" type="submit" onClick={loginWithRedirect}>
+                <Button variant="primary" type="submit" onClick={handleSubmit}>
                     Registrar
                 </Button>
             </Form>
