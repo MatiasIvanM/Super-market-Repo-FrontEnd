@@ -6,7 +6,7 @@ import {
   GET_PRODUCT_BY_NAME,
   ADD_PRODUCT,
   MOD_PRODUCT,
-  DEL_PRODUCT,
+  // DEL_PRODUCT,
   GET_CUSTOMERS,
   GET_CUSTOMER_BY_ID,
   ADD_CUSTOMER,
@@ -93,11 +93,13 @@ const rootReducer = (state = initialState, action) => {
       let priceFiltered = state.productsFiltered
       if (action.payload === 'None') {
       } else if (action.payload === 'MIN-max') {
+        // eslint-disable-next-line
         priceFiltered.sort(function (a, b) {
           if (a.price > b.price) { return 1 }
           if (a.price < b.price) { return -1 }
         })
       } else if (action.payload === 'MAX-min') {
+        // eslint-disable-next-line
         priceFiltered.sort(function (a, b) {
           if (a.price < b.price) { return 1 }
           if (a.price > b.price) { return -1 }
