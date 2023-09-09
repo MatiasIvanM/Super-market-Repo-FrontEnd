@@ -1,100 +1,113 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductById } from "../../redux/Actions/actionsProducts";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+// import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
+import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
-import { useHistory } from "react-router-dom";
-import { Alert } from 'react-bootstrap';
-import NavBar from "../../components/NavBar/NavBar";
-import {Footer} from '../../components/Footer/Footer'
+import style from './Detail.module.css'
+import { AiOutlineStar } from 'react-icons/ai'
 
-function ProductsDetail() {
-    const { id } = useParams();
-    const navigate = useHistory();
+function ProductsDetail(props) {
+    
+    const { id } = props
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.productsId);
-    const [showMessage, setShowMessage] = useState(false); // Estado para mostrar/ocultar el mensaje
-    const [quantity, setQuantity] = useState(1); // Estado para controlar la cantidad
+    // const products = useSelector((state) => state.productsId);
+    const [showMessage, setShowMessage] = useState(false);
+    const [quantity, setQuantity] = useState(1);
+    const [productDetails, setProductDetails] = useState(null);
 
     useEffect(() => {
-        dispatch(getProductById(id));
+      if (id) {
+        dispatch(getProductById(id))
+          .then((data) => {
+            setProductDetails(data); 
+          })
+          .catch((error) => {
+            console.error('An error occurred:', error.message);
+          });
+      }
     }, [dispatch, id]);
 
-    function handleClick() {
-        navigate.push("/home");
-    }
-
     function handleAddToCart() {
-        // Una vez que el producto se ha agregado al carrito, mostramos la alerta
         setShowMessage(true);
-        // Ocultamos la alerta después de un cierto tiempo (por ejemplo, 3 segundos)
         setTimeout(() => {
             setShowMessage(false);
-        }, 3000); // 3000 milisegundos = 3 segundos
+        }, 2000);
     }
 
     function handleIncrement() {
-        // Incrementar la cantidad
         setQuantity(quantity + 1);
     }
 
     function handleDecrement() {
-        // Decrementar la cantidad, asegurándonos de que nunca sea menor que 1
         if (quantity > 1) {
             setQuantity(quantity - 1);
         }
     }
 
+    function handleModalClose() {
+      dispatch(clearProductDetails());
+      props.onHide();
+    }
+
     return (
-        <div>
-        <NavBar/>
-        <div
-            className="modal show"
-            style={{ display: 'block', position: 'initial', width: "80%" }}
-        >
-            <Modal.Dialog>
-                <div className="row">
-                    <div className="col-4">
-                        {/* Columna izquierda para la imagen */}
-                        <Image style={{ width: "100%" }} src={products.image} rounded />
+    <>
+    {props.show && (
+      <Modal
+        show={props.show}
+        onHide={props.onHide}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Detalle del producto
+          </Modal.Title>
+        </Modal.Header>
+          {productDetails ? ( 
+        <Modal.Body>
+        <div className={style.productDetails}>
+          <div className={style.productImage}>
+            <Image src={productDetails && productDetails.image} thumbnail />
+          </div>
+          <div className={style.productInfo}>
+            <Card>
+              <Card.Body>
+                <Card.Title>{productDetails && productDetails.brand}</Card.Title>
+                <Card.Title>{productDetails && productDetails.name}</Card.Title>
+                <Card.Title>Precio: ${productDetails && productDetails.price}</Card.Title>
+
+                <Card.Title>{productDetails && productDetails.rating}<AiOutlineStar/></Card.Title>
+                <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title>
+                <Card.Text>{productDetails && productDetails.description}</Card.Text>
+                <Button variant="primary" onClick={handleAddToCart}>Agregar al carrito</Button>
+                <br />
+                     <div className="d-inline">
+                        <Button className={style.buttonStyle} variant="outline-primary" onClick={handleDecrement}>-</Button>
+                        <Button className={style.buttonStyle} variant="outline-primary" onClick={handleIncrement}>+</Button>
+                        <Card.Text>Cantidad: {quantity}</Card.Text>
                     </div>
-                    <div className="col-8">
-                        {/* Columna central para el contenido */}
-                        <Modal.Header style={{ alignSelf: "center" }}>
-                            <Modal.Title >{products.name}</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <p>{products.description}</p>
-                            Precio Normal
-                            <Modal.Title>$ {products.price}</Modal.Title>
-                            <p><strong>Marca:</strong> {products.brand}</p>
-                            <Modal.Title>Disponible: {products.stock}</Modal.Title>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClick}>Back</Button>
-                            <Button variant="primary" onClick={handleAddToCart}>Agregar al carrito</Button>
-                        </Modal.Footer>
-                    </div>
-                    <div className="col-12 col-md-4">
-                        {/* Columna derecha para los botones de cantidad */}
-                        <div className="d-flex flex-column align-items-center">
-                            <p>Cantidad: {quantity}</p>
-                            <div className="d-inline"> {/* Esta div envuelve los botones */}
-                                <Button variant="outline-primary" onClick={handleIncrement}>+</Button>
-                                <Button variant="outline-primary" onClick={handleDecrement}>-</Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <Alert show={showMessage} variant="success">
-                    ¡Producto agregado al carrito!
-                </Alert>
-            </Modal.Dialog>
+              </Card.Body>
+            </Card>
+          </div>
         </div>
-        <Footer/>
-        </div>
+
+        </Modal.Body>
+          ) : (
+            <Spinner animation="border" variant="primary" />
+            )}  
+        <Modal.Footer>
+        <Alert show={showMessage} variant="success" className={style.customAlert}>
+          <div className={style.alertContent}>
+            ¡Producto agregado al carrito!
+          </div>
+        </Alert>
+          <Button onClick={handleModalClose}>Cerrar</Button>
+        </Modal.Footer>
+      </Modal>
+    )}
+  </>
     )
 }
 
