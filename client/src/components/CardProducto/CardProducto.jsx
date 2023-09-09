@@ -16,15 +16,11 @@ function CardProduct(props) {
     price,
     rating,
     stock,
-<<<<<<< HEAD
     // Existencias,
     image,
     // brand,
     // expirationdate,
     // categories,
-=======
-    image,
->>>>>>> 0e8c718ede66db3c8253d1065d62213dd9c17007
   } = props;
 
 

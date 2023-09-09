@@ -20,3 +20,5 @@ const ProductCreate = (props) => {
 }
 
 export default ProductCreate;
+
+

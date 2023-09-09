@@ -63,6 +63,7 @@ const NavBar = (props) => {
                   <BiSolidDashboard className="nav-icon"/>
                 </Link>
               </Navbar.Brand>
+              
 
               </Navbar.Collapse>
         </Container>

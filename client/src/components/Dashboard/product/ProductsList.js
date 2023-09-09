@@ -25,6 +25,7 @@ const ListActions = () => (
   </TopToolbar>
 );
 
+
 const productFilters = [
   <TextInput label="Search" source="name" alwaysOn />,
   <TextInput label="categories" source="categories" defaultValue="" />,

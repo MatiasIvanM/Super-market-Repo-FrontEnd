@@ -93,9 +93,7 @@ export default function Home() {
     }, [productsByName]);
 
     useEffect(() => {
-        // eslint-disable-next-line 
         applyFilters()
-        // eslint-disable-next-line
     }, [filters]);
 
     // if (products.length === 0) {
@@ -174,6 +172,7 @@ export default function Home() {
                             name={p.name}
                             image={p.image}
                             description={p.description}
+                            stock= {p.stock}
                             price={p.price}
                             rating='5'
                         >

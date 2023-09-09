@@ -6,7 +6,8 @@ import Home from './View/Home/Home.jsx'
 import ProductsDetail from '../src/View/Detail/Detail'
 import FormProduct from "./View/FormProduct/formProduct"
 import MercadoPagoCheckout from "./components/MerPago/MercadoPagoCheckout"
-import Dashboard from './components/Dashboard/Dashboard';
+import Register from './View/Register/Register';
+import Dashboard from './components/Dashboard/Dashboard'
 
 
 
@@ -21,9 +22,8 @@ function App() {
         <Route path="/mercadopago" component={MercadoPagoCheckout}/>
         <Route path="/product/:id" component={ProductsDetail} />
         <Route path="/form" component={FormProduct} />
+        <Route path="/register" component={Register} />
         <Route path="/admin" component={Dashboard} />
-
-        
       </Switch>
     </Router>
     </div>
