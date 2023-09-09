@@ -17,6 +17,9 @@ import {
   FILTER_CATEGORY,
   ORDER_PRECIO,
   RANGO_PRECIOS,
+  GET_SC_BY_ID,
+  PUT_SC,
+  POST_SC 
 } from "./actionsType";
 
 
@@ -32,7 +35,7 @@ const initialState = {
   orderDetailId: {},
   orders: [],
   orderId: {},
-  
+  shoppingCart:{},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -53,6 +56,15 @@ const rootReducer = (state = initialState, action) => {
         product.id === action.payload.id ? action.payload : product
       );
       return { ...state, products: updatedProducts };
+
+    //Shopping Cart
+    case GET_SC_BY_ID:
+      return { ...state, shoppingCart: action.payload }
+    case PUT_SC:
+        return { ...state, shoppingCart: action.payload }
+    case POST_SC:
+        return { ...state, shoppingCart: action.payload }
+        
     //customer
     case GET_CUSTOMERS:
       return { ...state, customers: action.payload };

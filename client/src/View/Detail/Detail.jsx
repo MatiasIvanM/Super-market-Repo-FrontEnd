@@ -29,7 +29,7 @@ function ProductsDetail(props) {
     }, [dispatch, id]);
 
     function handleAddToCart() {
-        setShowMessage(true);
+      setShowMessage(true);
         setTimeout(() => {
             setShowMessage(false);
         }, 2000);
