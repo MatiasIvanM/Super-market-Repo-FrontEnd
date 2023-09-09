@@ -1,7 +1,7 @@
 // import CardFooter from 'react-bootstrap/CardFooter'
-import { Link } from 'react-router-dom';
+
 import { Nav } from 'react-bootstrap' 
-import { useState } from 'react';
+
 //Footer con el about, preguntas frecuentes, como comprar?  contactanos (mail),
 const Footer = () => {
   return (
