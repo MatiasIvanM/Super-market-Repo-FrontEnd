@@ -1,13 +1,14 @@
 import React from 'react'
-import { List, Datagrid, DateField, ImageField, CreateButton,
+import { List, CreateButton,
+  // DateField, ImageField, 
   DatagridConfigurable, ExportButton, FilterButton, SelectColumnsButton,
-  TopToolbar, TextInput, TextField, EmailField, EditButton, DeleteButton, 
-  SimpleForm, NumberInput, Edit, ReferenceInput, ReferenceManyInput, 
-  SimpleFormIterator, sizes, SelectInput, colors, SortButton, required  
+  TopToolbar, TextInput, TextField, 
+  // EditButton, DeleteButton, 
+   SortButton  
 } from 'react-admin';
 // import { EditDialog } from '@react-admin/ra-form-layout';
 
-import IconEvent from '@mui/icons-material/Event';
+
 
 const ListActions = () => (
   <TopToolbar>
@@ -37,8 +38,8 @@ const ProductsList = (props) => {  //Este es el que muestra las ciudades
           <TextField source="available" />
           {/* <ImageField source="image" sx= {{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } } } /> */}
           {/* <DateField source="created_at" /> */}
-          <EditButton basePath="/products" />
-          <DeleteButton basePath="/products" />
+          {/* <EditButton basePath="/products" />
+          <DeleteButton basePath="/products" /> */}
         </DatagridConfigurable>
     </List>
     );

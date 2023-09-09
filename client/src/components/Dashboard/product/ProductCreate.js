@@ -1,5 +1,5 @@
 import React from 'react'
-import { Create, TextInput, FileInput, SimpleForm, NumberInput, FileField, DateInput, required  } from 'react-admin';
+import { Create, TextInput, FileInput, SimpleForm, NumberInput, FileField, DateInput  } from 'react-admin';
  
 const ProductCreate = (props) => { 
   return (

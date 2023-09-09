@@ -8,10 +8,11 @@ import { Footer } from '../../components/Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios } from '../../redux/Actions/actionsProducts';
-
+import {getProducts} from '../../redux/Actions/actionsProducts'
 
 export default function Home() {
     const dispatch = useDispatch();
+    let allProducts = useSelector((state) => state.products);
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
     const ITEMS_PER_PAGE=10;
@@ -21,6 +22,9 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(0);
     const [items, setItems] = useState([]);
 
+    
+    // useEffect(() s
+    // console.log(allProducts);
       const nextHandler = () => {
     const totalElements = productsMod.length;
     const nextPage = currentPage + 1;
@@ -164,7 +168,7 @@ export default function Home() {
                 </Nav>
 
                 <div className={styles.card_container}>
-                {/* {console.log(items)} */}
+                {console.log(allProducts)}
                     {items.map(p => (
                         <CardProducto
                             key={p.id}

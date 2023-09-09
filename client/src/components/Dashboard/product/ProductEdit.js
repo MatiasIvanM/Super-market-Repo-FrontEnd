@@ -1,5 +1,5 @@
 import React from 'react'
-import { Edit, TextInput, FileInput, SimpleForm, NumberInput, FileField, DateInput, required, Edit  } from 'react-admin';
+import { Edit, TextInput, FileInput, SimpleForm, NumberInput, FileField, DateInput  } from 'react-admin';
 
 
 const ProductEdit = (props) => {  //Este es el que muestra las ciudades
@@ -7,11 +7,11 @@ const ProductEdit = (props) => {  //Este es el que muestra las ciudades
     <Edit {...props}  title="Edit a Product" >
        <SimpleForm>
           <TextInput disabled source="id" />
-          <TextInput source="name" />
-          <TextInput multiline source="description" />
-          <TextInput source="brand" />
+          <TextInput source="name" required />
+          <TextInput multiline source="description" required/>
+          <TextInput source="brand" required />
           <NumberInput source="stock" />
-          <NumberInput source="price" step="0.01" />
+          <NumberInput source="price" step="0.01" required />
           <DateInput source = "expirationdate" />
           <FileInput source="image" label="Image" accept="image/*">
             <FileField source="src" title="title" />

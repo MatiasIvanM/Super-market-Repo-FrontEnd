@@ -1,11 +1,15 @@
+// eslint-disable-next-line
 import { Container, Nav, Col, Image, Row } from 'react-bootstrap' 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Landing.css';
 
 import  NavBar  from '../../components/NavBar/NavBar';
+// eslint-disable-next-line 
 import { useEffect, useState } from "react";
+// eslint-disable-next-line 
 import { useDispatch, useSelector } from "react-redux";
 import {getProducts,getProductsByName} from '../../redux/Actions/actionsProducts'
+// eslint-disable-next-line 
 import { Link, useHistory  } from 'react-router-dom';
 import {Footer} from '../../components/Footer/Footer';
 
@@ -20,6 +24,7 @@ function Landing(){
 
   useEffect(() => {
     dispatch(getProducts());
+    // eslint-disable-next-line
   }, []);
 
     return(

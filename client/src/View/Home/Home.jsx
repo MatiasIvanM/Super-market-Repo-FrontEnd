@@ -93,7 +93,9 @@ export default function Home() {
     }, [productsByName]);
 
     useEffect(() => {
+        // eslint-disable-next-line 
         applyFilters()
+        // eslint-disable-next-line
     }, [filters]);
 
     // if (products.length === 0) {
