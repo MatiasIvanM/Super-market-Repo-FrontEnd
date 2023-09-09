@@ -15,15 +15,16 @@
     "react-admin": "^4.14.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.46.0",
-    "react-icons": "^4.10.1",
+    "react-hook-form": "^7.46.1",
+    "react-icons": "^4.11.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "styled-components": "^6.0.7",
     "thunk": "0.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.88.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "react-scripts": "^5.0.1"
   }
 }

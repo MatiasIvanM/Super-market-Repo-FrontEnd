@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Nav from 'react-bootstrap/Nav';
 import Button from "react-bootstrap/Button";
 import styles from './Home.module.css'
@@ -192,3 +193,5 @@ export default function Home() {
 	
 
     
+=======
+>>>>>>> 0e8c718ede66db3c8253d1065d62213dd9c17007

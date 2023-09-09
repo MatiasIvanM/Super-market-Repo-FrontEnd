@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/build
 node_modules/
 /.pnp
 .pnp.js
@@ -9,10 +10,15 @@ node_modules/
 /coverage
 
 # production
+build/
 /build
 
 # package-lock.json
+<<<<<<< HEAD
 # package-lock.json
+=======
+
+>>>>>>> 0e8c718ede66db3c8253d1065d62213dd9c17007
 
 # misc
 .env

@@ -30,7 +30,7 @@
 .container{
     box-shadow: 40px 34px 94px 0px rgba(30, 40, 68, 0.25);
     padding: 0%;
-  
+    transition: transform 0.1s ease
 }
 
 .container:hover {
