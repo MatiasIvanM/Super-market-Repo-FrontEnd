@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, Modal } from 'react-bootstrap' 
-import { BsCart3 } from 'react-icons/bs'
+import { BsCart3, BsWrenchAdjustableCircleFill } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useState } from 'react';
 import Button from "react-bootstrap/Button";
@@ -58,6 +58,11 @@ const NavBar = (props) => {
 
               <Navbar.Brand>
                 <FiLogIn className="nav-icon"/>
+              </Navbar.Brand>
+              <Navbar.Brand>
+                <Link to="/admin">
+                <BsWrenchAdjustableCircleFill className="nav-icon"/>
+                </Link>
               </Navbar.Brand>
 
               </Navbar.Collapse>
