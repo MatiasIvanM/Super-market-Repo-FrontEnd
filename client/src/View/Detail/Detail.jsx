@@ -6,6 +6,7 @@ import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import style from './Detail.module.css'
 import { AiOutlineStar } from 'react-icons/ai'
+import {addProductSC} from "../../redux/Actions/actionsSC"
 
 function ProductsDetail(props) {
     
@@ -30,6 +31,9 @@ function ProductsDetail(props) {
 
     function handleAddToCart() {
       setShowMessage(true);
+      let productSC= {productDetails,quantity}
+      console.log(productSC)
+      dispatch(addProductSC(productSC))
         setTimeout(() => {
             setShowMessage(false);
         }, 2000);
