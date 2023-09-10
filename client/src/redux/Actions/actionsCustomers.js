@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {CUSTOMER} from '../../utils/urlLocales'
-import{GET_CUSTOMERS,GET_CUSTOMER_BY_ID,ADD_CUSTOMER,MOD_CUSTOMER,DEL_CUSTOMER} from '../actionsType'
+import{GET_CUSTOMERS,GET_CUSTOMER_BY_ID,ADD_CUSTOMER,MOD_CUSTOMER,DEL_CUSTOMER,GET_CUSTOMER_BY_EMAIL} from '../actionsType'
 
 export function getCustomers() {
 	return (dispatch) => {
