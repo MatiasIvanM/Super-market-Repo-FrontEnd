@@ -12,7 +12,7 @@ import styles from './Login.module.css'
 import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
 
 export default function Register() {
-    const { loginWithPopup, isAuthenticated, user } = useAuth0()
+    const { loginWithPopup, logout, isAuthenticated, user } = useAuth0()
     const dispatch = useDispatch()
 
     const defaultCustomer = {
@@ -66,6 +66,11 @@ export default function Register() {
 
     function handleModalButton() {
         setModal({ ...modal, show: false })
+    }
+
+    function handleLogout() {
+        isAuthenticated && logout()
+        localStorage.clear()
     }
 
     function checkErrors() {
