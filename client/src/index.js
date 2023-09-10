@@ -16,7 +16,7 @@ const app = (
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App/>
+          <App />
       </BrowserRouter>
     </Provider>
     <Auth0Provider
