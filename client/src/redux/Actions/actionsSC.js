@@ -48,16 +48,10 @@ export const postRecipe = (id) => {
 	   
 	};
 };
-
 export const addProductSC = (product) => {
-	return (dispatch) => {
-		try {
-			return dispatch({
-				type: ADD_PRODUCT_SC,
-				payload: product,
-			});
-		} catch (error) {
-			console.error('An error occurred:', error.message);
-		}
+	console.log(product)
+	return {
+	  type: ADD_PRODUCT_SC,
+	  payload: product,
 	};
-};
+  };
