@@ -67,7 +67,16 @@ const rootReducer = (state = initialState, action) => {
     case POST_SC:
         return { ...state, shoppingCart: action.payload }
     case ADD_PRODUCT_SC:
-        return { ...state, productsSC: [...state.productsSC, action.payload] };
+          const existingProductIndex = state.productsSC.findIndex(
+            (product) => product.productDetails.id === action.payload.productDetails.id
+          );
+          if (existingProductIndex !== -1) {
+            const updatedProducts = [...state.productsSC];
+            updatedProducts[existingProductIndex].quantity += action.payload.quantity;
+            return { ...state, productsSC: updatedProducts };
+          } else {
+            return { ...state, productsSC: [...state.productsSC, action.payload] };
+          }
         
     //customer
     case GET_CUSTOMERS:
