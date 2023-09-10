@@ -5,6 +5,7 @@ import { BsCart3 } from 'react-icons/bs'
 import { FiLogIn } from 'react-icons/fi'
 import { useState } from 'react';
 import Button from "react-bootstrap/Button";
+import shoppingCart from "../ShoppingCart/shoppingCart"
 
 
 const NavBar = (props) => {
@@ -48,7 +49,7 @@ const NavBar = (props) => {
                     aria-labelledby="example-modal-sizes-title-sm"
                   >
                   <Modal.Header closeButton>
-                    <Modal.Title id="example-modal-sizes-title-sm">
+                    <Modal.Title id="example-modal-sizes-title-sm" onClick={shoppingCart}>
                       Carrito
                     </Modal.Title>
                   </Modal.Header>

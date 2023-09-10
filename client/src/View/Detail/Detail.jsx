@@ -12,11 +12,9 @@ function ProductsDetail(props) {
     
     const { id } = props
     const dispatch = useDispatch();
-    // const products = useSelector((state) => state.productsId);
     const [showMessage, setShowMessage] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [productDetails, setProductDetails] = useState(null);
-
     useEffect(() => {
       if (id) {
         dispatch(getProductById(id))
@@ -31,12 +29,11 @@ function ProductsDetail(props) {
 
     function handleAddToCart() {
       setShowMessage(true);
-      let productSC= {productDetails,quantity}
-      console.log(productSC)
-      dispatch(addProductSC(productSC))
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 2000);
+      dispatch(addProductSC({ productDetails, quantity }))
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
+    
     }
 
     function handleIncrement() {
