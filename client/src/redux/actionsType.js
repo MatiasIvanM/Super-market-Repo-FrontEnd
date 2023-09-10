@@ -8,6 +8,13 @@ export const DEL_PRODUCT='DEL_PRODUCT';
 export const CLEAR_PRODUCT_DETAILS = 'CLEAR_PRODUCT_DETAILS'
 
 
+//Shopping Cart
+export const GET_SC_BY_ID="GET_SC_BY_ID"
+export const PUT_SC="PUT_SC"
+export const POST_SC="POST_SC"
+export const ADD_PRODUCT_SC='ADD_PRODUCT_SC'
+
+
 //Customers
 export const GET_CUSTOMERS = 'GET_CUSTOMERS';
 export const GET_CUSTOMER_BY_ID = 'GET_CUSTOMER_BY_ID';
