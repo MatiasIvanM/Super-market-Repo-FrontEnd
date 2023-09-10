@@ -11,7 +11,6 @@ import Dashboard from './components/Dashboard/Dashboard';
 import About from './View/About/About'
 
 
-
 function App() {
   return (
     <div className="App">
