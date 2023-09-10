@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import  App  from './App';
-import { CartProvider } from 'react-use-cart';
+
 // import reportWebVitals from './reportWebVitals';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -17,9 +17,7 @@ const app = (
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-      <CartProvider> 
           <App />
-        </CartProvider>
       </BrowserRouter>
     </Provider>
     <Auth0Provider
