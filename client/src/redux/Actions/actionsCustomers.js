@@ -26,6 +26,20 @@ export function getCustomerById(id) {
 	};
 }
 
+export function getCustomerByEmail(email) {
+	return async (dispatch) =>{
+		try {
+			const {data} = await axios.get(`${CUSTOMER}email?email=${email}`)
+			return dispatch({
+				type: GET_CUSTOMER_BY_EMAIL,
+			    payload: data,
+			})
+		} catch (error) {
+			console.error('An error occurred:', error.message);
+		}
+	}
+}
+
 export const addCustomer =  (customer) => {
 	return async (dispatch) => {
 		try {
