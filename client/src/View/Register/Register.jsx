@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
+// eslint-disable-next-line
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCustomer } from '../../redux/Actions/actionsCustomers';
