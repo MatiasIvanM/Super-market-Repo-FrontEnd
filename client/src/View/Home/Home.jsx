@@ -93,7 +93,7 @@ export default function Home() {
     }, [productsByName]);
 
     useEffect(() => {
-        applyFilters()
+        applyFilters()// eslint-disable-next-line
     }, [filters]);
 
     // if (products.length === 0) {
@@ -173,6 +173,7 @@ export default function Home() {
                             image={p.image}
                             description={p.description}
                             price={p.price}
+                            stock={p.stock}
                             rating='5'
                         >
                         </CardProducto>
