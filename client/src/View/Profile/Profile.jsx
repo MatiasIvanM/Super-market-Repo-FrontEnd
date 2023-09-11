@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Modal from 'react-bootstrap/Modal';
 import { useAuth0 } from "@auth0/auth0-react"
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
@@ -13,6 +14,12 @@ export default function Profile() {
     const user = JSON.parse(localStorage.getItem('customer'))
     const [edit, setEdit] = useState(true)
     const [customer, setCustomer] = useState({ ...user })
+    const [modal, setModal] = useState({
+        show: false,
+        header: "",
+        body: "",
+        button: ""
+    })
 
     function handleLogout() {
         localStorage.clear()
@@ -34,9 +41,15 @@ export default function Profile() {
                 event.target.className = 'btn btn-secondary btn-sm btn btn-primary'
             }
         }
+        if (button === 'save' && !edit) {
+            setModal({ ...modal, show: true })
+        }
     }
 
-
+    function handleModalButton() {
+        setModal({ ...modal, show: false })
+        setEdit(true)
+    }
 
     return (
         <div style={{
@@ -76,6 +89,17 @@ export default function Profile() {
                 </Card.Footer>
             </Card>
             <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+            <Modal show={modal.show}>
+                <Modal.Header>
+                    <Modal.Title>{modal.header}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{modal.body}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant={modal.button} onClick={handleModalButton}>
+                        Ok
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div >
     )
 }
