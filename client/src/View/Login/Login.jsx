@@ -10,10 +10,12 @@ import { PiWarning } from 'react-icons/pi'
 import validate from './validations';
 import styles from './Login.module.css'
 import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
+import { useHistory } from 'react-router-dom'
 
 export default function Register() {
     const { loginWithPopup, logout, isAuthenticated, user } = useAuth0()
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const defaultCustomer = {
         name: "",
@@ -66,6 +68,9 @@ export default function Register() {
 
     function handleModalButton() {
         setModal({ ...modal, show: false })
+        if (JSON.parse(localStorage.getItem('customer'))?.email) {
+            history.push('/home')
+        }
     }
 
     function handleLogout() {
@@ -154,19 +159,14 @@ export default function Register() {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            minWidth: '335px',
-            // border: '1px grey solid',
-            borderRadius: '10px',
-            // margin: '1rem 20rem 1rem 20rem',
-            padding: '1rem 0rem 1rem 0rem',
         }}>
             <Form style={{
                 border: '0.1rem grey solid',
                 borderRadius: '10px',
-                padding: '1rem',
-                margin: '1rem 0rem 1rem 0rem'
+                padding: '0.8rem',
+                margin: '5rem 0rem 1rem 0rem'
             }}>
-                <div>LOGUEATE</div>
+
                 {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
                 <InputGroup className="mb-3" id="formBasicPassword">
                     <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
@@ -178,15 +178,15 @@ export default function Register() {
                     <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
                 </InputGroup>
                 <Button name="local" variant="primary" type="submit" onClick={handleSubmit}>
-                    Login
+                    Iniciar sesión
+                </Button>
+                <hr width='100%' />
+                <Button name="google" variant="success" type="submit" onClick={handleSubmit}>
+                    Continuar con Google
                 </Button>
             </Form>
-            <Button name="google" variant="primary" type="submit" onClick={handleSubmit}>
-                Continuar con Google
-            </Button>
-            <br />
-            <Button variant="success" type="submit" as={Link} to='/register'>
-                Registrate
+            <Button variant="alert" type="submit" as={Link} to='/register'>
+                Crear cuenta nueva
             </Button>
             <Modal show={modal.show}>
                 <Modal.Header>
