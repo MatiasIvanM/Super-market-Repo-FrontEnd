@@ -12,6 +12,7 @@ export default function Profile() {
     const history = useHistory()
     const user = JSON.parse(localStorage.getItem('customer'))
     const [edit, setEdit] = useState(true)
+    const [customer, setCustomer] = useState({ ...user })
 
     function handleLogout() {
         localStorage.clear()
@@ -23,14 +24,19 @@ export default function Profile() {
     }
 
     function handleEdit(event) {
-        if (edit) {
-            setEdit(false)
-            event.target.className = 'btn btn-success btn-sm btn btn-primary'
-        } else {
-            setEdit(true)
-            event.target.className = 'btn btn-secondary btn-sm btn btn-primary'
+        const button = event.target.name
+        if (button === 'edit') {
+            if (edit) {
+                setEdit(false)
+                event.target.className = 'btn btn-success btn-sm btn btn-primary'
+            } else {
+                setEdit(true)
+                event.target.className = 'btn btn-secondary btn-sm btn btn-primary'
+            }
         }
     }
+
+
 
     return (
         <div style={{
@@ -61,11 +67,11 @@ export default function Profile() {
                             <InputGroup.Text>Dirección</InputGroup.Text>
                             <Form.Control disabled={edit} placeholder={user.address}></Form.Control>
                         </InputGroup>
-                        <Button onClick={handleEdit} className='btn btn-secondary btn-sm btn btn-primary'>Editar</Button>
+                        <Button name='edit' onClick={handleEdit} className='btn btn-secondary btn-sm btn btn-primary'>Editar</Button>
                     </Form>
                 </Card.Body>
                 <Card.Footer>
-                    <Button style={{ margin: '0rem 1rem 0rem 0rem' }} variant='primary' onClick={console.log("Guardo los cambios")}>Guardar cambios</Button>
+                    <Button name='save' disabled={edit} style={{ margin: '0rem 1rem 0rem 0rem' }} variant='primary' onClick={handleEdit}>Guardar cambios</Button>
                     <Button style={{ width: '0rem 0rem 0rem 1rem' }} variant='success' onClick={handleLogout}>Salir</Button>
                 </Card.Footer>
             </Card>
