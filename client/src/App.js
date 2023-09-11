@@ -7,6 +7,7 @@ import ProductsDetail from '../src/View/Detail/Detail'
 import FormProduct from "./View/FormProduct/formProduct"
 import MercadoPagoCheckout from "./components/MerPago/MercadoPagoCheckout"
 import Register from './View/Register/Register';
+import CartShopping from "./components/CartShopping/CartShopping"
 
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/product/:id" component={ProductsDetail} />
         <Route path="/form" component={FormProduct} />
         <Route path="/register" component={Register} />
+        <Route path="/cartshopping" component={CartShopping} />
 
       </Switch>
     </Router>

@@ -1,12 +1,14 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function MercadoPagoCheckout() {
   const [preferenceId, setPreferenceId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+  const [isCreatingPreference, setIsCreatingPreference] = useState(false);
 
   // Esta función crea una preferencia en Mercado Pago y recibe el ID de la preferencia
   const createPreference = async () => {
+    setIsCreatingPreference(true); // Deshabilita el botón mientras se crea la preferencia
     try {
       const response = await axios.post(
         'https://api.mercadopago.com/checkout/preferences',
@@ -32,6 +34,8 @@ function MercadoPagoCheckout() {
       setSuccessMessage('Preferencia creada con éxito');
     } catch (error) {
       console.error('Error al crear la preferencia: ', error);
+    } finally {
+      setIsCreatingPreference(false); // Habilita el botón nuevamente después de la acción
     }
   };
 
@@ -43,12 +47,19 @@ function MercadoPagoCheckout() {
     console.log("preferencia::", preferenceId);
   };
 
+  // Función que llama a ambas funciones al mismo tiempo
+  const handleCreatePreferenceAndPayment = async () => {
+    await createPreference();
+    handlePayment();
+  };
+
   return (
     <div>
       <h1>Pagar Productos</h1>
       {successMessage && <p>{successMessage}</p>}
-      <button onClick={createPreference}>Crear Preferencia de Pago</button>
-      <button onClick={handlePayment}>Iniciar Pago</button>
+      <button onClick={handleCreatePreferenceAndPayment} disabled={isCreatingPreference}>
+        {isCreatingPreference ? 'Creando Preferencia...' : 'Crear Preferencia de Pago e Iniciar Pago'}
+      </button>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import React from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import style from './formProduct.module.css'
 import {addProduct} from "../../redux/Actions/actionsProducts"
 import { Button, InputGroup, Form, Alert } from 'react-bootstrap'
@@ -14,9 +14,13 @@ export default function FormProduct(){
 
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const cart = useSelector((state) => state.productsSC); //ojo !
+  console.log("FORMULARIO:",cart)
 
   const onSubmit = (data) => {
   console.log("🚀 ~ file: formProduct.jsx:19 ~ onSubmit ~ ACA ESTA LA DATA WASHO:", data)
+
+  
  
     console.log(errors);
     if (Object.keys(errors).length > 0) {

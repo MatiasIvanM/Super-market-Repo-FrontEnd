@@ -1,18 +1,18 @@
-import { Modal } from 'react-bootstrap'
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from 'react-redux';
-import style from "./shoppingCart.css"
-import { getProductById } from "../../redux/Actions/actionsProducts";
+// import { Modal } from 'react-bootstrap'
+// import React, { useEffect, useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { useSelector } from 'react-redux';
+// import style from "./shoppingCart.css"
+// import { getProductById } from "../../redux/Actions/actionsProducts";
 
 
-function ShoppingCart() {
-  const productsSC = useSelector((state) => state.productsSC)
+// function ShoppingCart() {
+//   const productsSC = useSelector((state) => state.productsSC)
 
-  return (
-    <div/>
-    )
-}
+//   return (
+//     <div/>
+//     )
+// }
 
 
-export default ShoppingCart;
+// export default ShoppingCart;

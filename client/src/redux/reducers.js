@@ -37,8 +37,9 @@ const initialState = {
   orders: [],
   orderId: {},
   shoppingCart:{},
-  productsSC:[]
+  productsSC:[],
 };
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -70,6 +71,7 @@ const rootReducer = (state = initialState, action) => {
           const existingProductIndex = state.productsSC.findIndex(
             (product) => product.productDetails.id === action.payload.productDetails.id
           );
+          console.log("asi::",state.productsSC);
           if (existingProductIndex !== -1) {
             const updatedProducts = [...state.productsSC];
             updatedProducts[existingProductIndex].quantity += action.payload.quantity;

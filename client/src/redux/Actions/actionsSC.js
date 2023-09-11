@@ -49,7 +49,7 @@ export const postRecipe = (id) => {
 	};
 };
 export const addProductSC = (product) => {
-	console.log(product)
+	console.log("jaja:",product)
 	return {
 	  type: ADD_PRODUCT_SC,
 	  payload: product,

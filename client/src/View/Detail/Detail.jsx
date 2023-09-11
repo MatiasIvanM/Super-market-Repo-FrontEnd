@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
 import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
@@ -15,6 +15,13 @@ function ProductsDetail(props) {
     const [showMessage, setShowMessage] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [productDetails, setProductDetails] = useState(null);
+    const [producto, setProducto] = useState([]);
+   const card= useSelector((state)=>state.productsSC)
+
+  useEffect(()=>{
+    setProducto(card)
+    },[])
+    console.log("DETAIL::",card)
     useEffect(() => {
       if (id) {
         dispatch(getProductById(id))
