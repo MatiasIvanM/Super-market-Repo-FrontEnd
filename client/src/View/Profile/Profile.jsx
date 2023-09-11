@@ -30,6 +30,11 @@ export default function Profile() {
         }
     }
 
+    function handleChange(event) {
+        const property = event.target.name
+        const value = event.target.value
+    }
+
     function handleEdit(event) {
         const button = event.target.name
         if (button === 'edit') {
@@ -48,7 +53,6 @@ export default function Profile() {
 
     function handleModalButton() {
         setModal({ ...modal, show: false })
-        setEdit(true)
     }
 
     return (
@@ -59,33 +63,40 @@ export default function Profile() {
             alignItems: 'center',
         }}>
             <Card style={{
-                margin: '5rem 0rem 1rem 0rem'
+                margin: '5rem 0rem 2rem 0rem'
             }}>
                 <Card.Body>
                     <Card.Title>
-                        <div>{user.name}</div>
+                        <div>{customer.name}</div>
                     </Card.Title>
                     <Card.Subtitle>
-                        <div>{user.email}</div>
+                        <div>{customer.email}</div>
                     </Card.Subtitle>
+                    <hr with='100%' />
                     <Form style={{
                         padding: '0.8rem',
-                        margin: '2rem 0rem 0rem 0rem'
+                        margin: '1rem 0rem 0rem 0rem'
                     }}>
-                        <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <InputGroup.Text>Teléfono</InputGroup.Text>
-                            <Form.Control disabled={edit} placeholder={user.phone}></Form.Control>
+                        <InputGroup size='sm' style={{ margin: '0rem 0rem 1rem 0rem' }}>
+                            <InputGroup.Text>Nombre</InputGroup.Text>
+                            <Form.Control disabled={edit} placeholder={customer.name}></Form.Control>
                         </InputGroup>
-                        <InputGroup style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
+                        <InputGroup size='sm' style={{ margin: '0rem 0rem 1rem 0rem' }}>
+                            <InputGroup.Text>Teléfono</InputGroup.Text>
+                            <Form.Control disabled={edit} placeholder={customer.phone}></Form.Control>
+                        </InputGroup>
+                        <InputGroup size='sm' style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
                             <InputGroup.Text>Dirección</InputGroup.Text>
-                            <Form.Control disabled={edit} placeholder={user.address}></Form.Control>
+                            <Form.Control disabled={edit} placeholder={customer.address}></Form.Control>
                         </InputGroup>
                         <Button name='edit' onClick={handleEdit} className='btn btn-secondary btn-sm btn btn-primary'>Editar</Button>
                     </Form>
                 </Card.Body>
                 <Card.Footer>
-                    <Button name='save' disabled={edit} style={{ margin: '0rem 1rem 0rem 0rem' }} variant='primary' onClick={handleEdit}>Guardar cambios</Button>
-                    <Button style={{ width: '0rem 0rem 0rem 1rem' }} variant='success' onClick={handleLogout}>Salir</Button>
+                    <InputGroup>
+                        <Button name='save' disabled={edit} style={{ margin: '0rem 0rem 0.3rem 0rem', width: '100%' }} variant='primary' onClick={handleEdit}>Guardar cambios</Button>
+                    </InputGroup>
+                    <Button style={{ width: '100%' }} variant='success' onClick={handleLogout}>Salir</Button>
                 </Card.Footer>
             </Card>
             <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
