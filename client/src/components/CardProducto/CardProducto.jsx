@@ -1,29 +1,23 @@
-import{ Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./CardProduct.module.css";
 import { useState } from "react";
-import Detail from '../../View/Detail/Detail'
+import Detail from "../../View/Detail/Detail";
 
 function CardProduct(props) {
-
   const [showDetailModal, setShowDetailModal] = useState(false);
 
-  let {
-    id,
-    name,
-    description,
-    price,
-    rating,
-    stock,
-    image,
-  } = props;
-
+  let { id, name, description, price, rating, stock, image } = props;
 
   return (
     <>
-    <Card onClick={() => setShowDetailModal(true)} className={style.container} style={{ width: "16rem" }} bg="white">
-      
+      <Card
+        onClick={() => setShowDetailModal(true)}
+        className={style.container}
+        style={{ width: "16rem" }}
+        bg="white"
+      >
         <Card.Img
           variant="top"
           src={image}
@@ -43,7 +37,18 @@ function CardProduct(props) {
             >
               ${price}
             </Card.Title>
-            {stock > 0 ? (
+            {stock > 0 && stock < 10 ? (
+              <Card.Text
+                style={{
+                  fontSize: "0.7rem",
+                  fontWeight: "bold",
+                  color: "pink",
+                }}
+              >
+                {" "}
+                Ultimas Existencias{" "}
+              </Card.Text>
+            ) : stock > 10 ? (
               <Card.Text
                 style={{
                   fontSize: "0.7rem",
@@ -51,12 +56,14 @@ function CardProduct(props) {
                   color: "green",
                 }}
               >
+                {" "}
                 Disponible{" "}
               </Card.Text>
             ) : (
               <Card.Text
                 style={{ fontSize: "0.7rem", fontWeight: "bold", color: "red" }}
               >
+                {" "}
                 Agotado{" "}
               </Card.Text>
             )}
@@ -65,17 +72,13 @@ function CardProduct(props) {
             Agregar
           </Button>
         </Card.Body>
-        
-        
-    </Card>
-    <Detail
-          id={id}
-          show={showDetailModal}
-          onHide={() => setShowDetailModal(false)}
-          
-        />      
-              
-     </>
+      </Card>
+      <Detail
+        id={id}
+        show={showDetailModal}
+        onHide={() => setShowDetailModal(false)}
+      />
+    </>
   );
 }
 
