@@ -6,16 +6,15 @@ import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import style from './Detail.module.css'
 import { AiOutlineStar } from 'react-icons/ai'
+import {addProductSC} from "../../redux/Actions/actionsSC"
 
 function ProductsDetail(props) {
     
     const { id } = props
     const dispatch = useDispatch();
-    // const products = useSelector((state) => state.productsId);
     const [showMessage, setShowMessage] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [productDetails, setProductDetails] = useState(null);
-
     useEffect(() => {
       if (id) {
         dispatch(getProductById(id))
@@ -29,10 +28,12 @@ function ProductsDetail(props) {
     }, [dispatch, id]);
 
     function handleAddToCart() {
-        setShowMessage(true);
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 2000);
+      setShowMessage(true);
+      dispatch(addProductSC({ productDetails, quantity }))
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
+    
     }
 
     function handleIncrement() {

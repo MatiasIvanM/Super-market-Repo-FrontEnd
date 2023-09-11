@@ -46,9 +46,31 @@ function CardProduct(props) {
                 }}
               >
                 {" "}
+<<<<<<< HEAD
                 Ultimas Existencias{" "}
               </Card.Text>
             ) : stock > 10 ? (
+=======
+                Ultimas Existencias!{" "}
+              </Card.Text>
+            ) : stock > 10 ? (
+              <Card.Text
+                style={{ fontSize: "0.7rem", fontWeight: "bold", color: "green" }}
+              >
+                {" "}
+                Disponible{" "}
+              </Card.Text>
+            ) : (
+              <Card.Text
+                style={{ fontSize: "0.7rem", fontWeight: "bold", color: "red" }}
+              >
+                {" "}
+                Agotado{" "}
+              </Card.Text>
+            )}
+
+            {/* {stock > 0 ? (
+>>>>>>> f0ea22baacf84c1a6ed29a8583a296d6360fd950
               <Card.Text
                 style={{
                   fontSize: "0.7rem",
@@ -66,7 +88,7 @@ function CardProduct(props) {
                 {" "}
                 Agotado{" "}
               </Card.Text>
-            )}
+            )} */}
           </div>
           <Button variant="primary" style={{ width: "98%" }}>
             Agregar
