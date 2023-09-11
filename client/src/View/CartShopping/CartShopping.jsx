@@ -19,8 +19,8 @@ const CartShopping = () => {
 
   return (
     <div>
-      
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={show} onHide={handleClose} centered backdrop="static">
+
         <Modal.Header >
           <Modal.Title>Detalles del carrito</Modal.Title>
         </Modal.Header>
