@@ -62,7 +62,7 @@ const NavBar = (props) => {
             </Navbar.Brand>
 
             <Navbar.Brand>
-              <Nav.Link as={Link} to={JSON.parse(localStorage.getItem('customer'))?.email ? '/profile' : '/login'}>
+              <Nav.Link as={Link} to={JSON.parse(localStorage.getItem('customer'))?.email ? '/profile' : '/register'}>
                 <FiLogIn className="nav-icon" />
               </Nav.Link>
             </Navbar.Brand>
