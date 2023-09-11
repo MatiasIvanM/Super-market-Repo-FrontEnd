@@ -9,10 +9,12 @@ import { useAuth0 } from "@auth0/auth0-react"
 
 
 
+
 const NavBar = (props) => {
   const [smShow, setSmShow] = useState(false);
   const [name, setName] = useState("");
   const { logout, isAuthenticated } = useAuth0()
+
 
   const handleChange = (event) => {
     setName(event.target.value);
