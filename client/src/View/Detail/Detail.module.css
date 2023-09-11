@@ -1,0 +1,29 @@
+.productDetails {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .productImage {
+    flex: 1;
+    padding: 10px; 
+    
+  }
+  
+.productInfo {
+    flex: 1; 
+    padding: 10px; 
+  }
+
+ .buttonStyle{
+    margin:10px;
+ } 
+
+ .customAlert {
+  height: 35px; 
+  display: flex;
+  align-items: center;
+}
+
+.alertContent {
+  margin: 0 auto;
+}

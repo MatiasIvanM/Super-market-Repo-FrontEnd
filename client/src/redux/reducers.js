@@ -2,6 +2,7 @@
 import {
   GET_PRODUCTS,
   GET_PRODUCT_BY_ID,
+  CLEAR_PRODUCT_DETAILS,
   GET_PRODUCT_BY_NAME,
   ADD_PRODUCT,
   MOD_PRODUCT,
@@ -16,6 +17,10 @@ import {
   FILTER_CATEGORY,
   ORDER_PRECIO,
   RANGO_PRECIOS,
+  GET_SC_BY_ID,
+  PUT_SC,
+  POST_SC,
+  ADD_PRODUCT_SC
 } from "./actionsType";
 
 
@@ -31,6 +36,8 @@ const initialState = {
   orderDetailId: {},
   orders: [],
   orderId: {},
+  shoppingCart:{},
+  productsSC:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -40,6 +47,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, products: action.payload, productsFiltered: action.payload };
     case GET_PRODUCT_BY_ID:
       return { ...state, productsId: action.payload };
+    case CLEAR_PRODUCT_DETAILS:
+        return {...state, productDetails: {},};
     case GET_PRODUCT_BY_NAME:
       return { ...state, productsByName: action.payload };
     case ADD_PRODUCT:
@@ -49,6 +58,26 @@ const rootReducer = (state = initialState, action) => {
         product.id === action.payload.id ? action.payload : product
       );
       return { ...state, products: updatedProducts };
+
+    //Shopping Cart
+    case GET_SC_BY_ID:
+      return { ...state, shoppingCart: action.payload }
+    case PUT_SC:
+        return { ...state, shoppingCart: action.payload }
+    case POST_SC:
+        return { ...state, shoppingCart: action.payload }
+    case ADD_PRODUCT_SC:
+          const existingProductIndex = state.productsSC.findIndex(
+            (product) => product.productDetails.id === action.payload.productDetails.id
+          );
+          if (existingProductIndex !== -1) {
+            const updatedProducts = [...state.productsSC];
+            updatedProducts[existingProductIndex].quantity += action.payload.quantity;
+            return { ...state, productsSC: updatedProducts };
+          } else {
+            return { ...state, productsSC: [...state.productsSC, action.payload] };
+          }
+        
     //customer
     case GET_CUSTOMERS:
       return { ...state, customers: action.payload };

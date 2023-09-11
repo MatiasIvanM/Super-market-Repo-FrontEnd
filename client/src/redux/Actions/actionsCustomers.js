@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {CUSTOMER} from '../../utils/urlLocales'
-import{GET_CUSTOMERS,GET_CUSTOMER_BY_ID,ADD_CUSTOMER,MOD_CUSTOMER,DEL_CUSTOMER} from '../actionsType'
+import{GET_CUSTOMERS,GET_CUSTOMER_BY_ID,ADD_CUSTOMER,MOD_CUSTOMER,DEL_CUSTOMER,GET_CUSTOMER_BY_EMAIL} from '../actionsType'
 
 export function getCustomers() {
 	return (dispatch) => {
@@ -24,6 +24,20 @@ export function getCustomerById(id) {
 			
 		});
 	};
+}
+
+export function getCustomerByEmail(email) {
+	return async (dispatch) =>{
+		try {
+			const {data} = await axios.get(`${CUSTOMER}email?email=${email}`)
+			return dispatch({
+				type: GET_CUSTOMER_BY_EMAIL,
+			    payload: data,
+			})
+		} catch (error) {
+			console.error('An error occurred:', error.message);
+		}
+	}
 }
 
 export const addCustomer =  (customer) => {
