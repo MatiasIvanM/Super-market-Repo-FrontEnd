@@ -186,6 +186,7 @@ export default function Register() {
                 </Button>
             </Form>
             <p>No tenés cuenta? <a href='/register' style={{ cursor: 'pointer', textDecoration: 'none' }}>Crear cuenta nueva</a></p>
+            <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
             <Modal show={modal.show}>
                 <Modal.Header>
                     <Modal.Title>{modal.header}</Modal.Title>

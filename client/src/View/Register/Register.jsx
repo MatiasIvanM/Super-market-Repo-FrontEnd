@@ -11,6 +11,7 @@ import validate from './validations';
 import { PiWarning } from 'react-icons/pi'
 import styles from './Register.module.css'
 import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function Register() {
     const { loginWithPopup, isAuthenticated, user } = useAuth0()
@@ -176,19 +177,20 @@ export default function Register() {
                 <Button name='google' variant="success" type="submit" onClick={handleSubmit}>
                     Usar mi cuenta de Google
                 </Button>
-                <Modal show={modal.show}>
-                    <Modal.Header>
-                        <Modal.Title>{modal.header}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{modal.body}</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant={modal.button} onClick={handleModalButton}>
-                            Ok
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
             </Form>
             <p>Ya tenés cuenta? <a href='/login' style={{ cursor: 'pointer', textDecoration: 'none' }}>Iniciar sesión</a></p>
+            <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+            <Modal show={modal.show}>
+                <Modal.Header>
+                    <Modal.Title>{modal.header}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{modal.body}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant={modal.button} onClick={handleModalButton}>
+                        Ok
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div >
     )
 }
