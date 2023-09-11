@@ -154,13 +154,19 @@ export default function Register() {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            border: '1px grey solid',
+            minWidth: '335px',
+            // border: '1px grey solid',
             borderRadius: '10px',
-            margin: '1rem 20rem 1rem 20rem',
+            // margin: '1rem 20rem 1rem 20rem',
             padding: '1rem 0rem 1rem 0rem',
         }}>
-            <Form style={{ width: '30rem' }}>
-                <h1>LOGUEATE</h1>
+            <Form style={{
+                border: '0.1rem grey solid',
+                borderRadius: '10px',
+                padding: '1rem',
+                margin: '1rem 0rem 1rem 0rem'
+            }}>
+                <div>LOGUEATE</div>
                 {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
                 <InputGroup className="mb-3" id="formBasicPassword">
                     <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
@@ -174,14 +180,13 @@ export default function Register() {
                 <Button name="local" variant="primary" type="submit" onClick={handleSubmit}>
                     Login
                 </Button>
-                <span> O </span>
-                <Button name="google" variant="primary" type="submit" onClick={handleSubmit}>
-                    Continuar con Google
-                </Button>
             </Form>
+            <Button name="google" variant="primary" type="submit" onClick={handleSubmit}>
+                Continuar con Google
+            </Button>
             <br />
             <Button variant="success" type="submit" as={Link} to='/register'>
-                Register
+                Registrate
             </Button>
             <Modal show={modal.show}>
                 <Modal.Header>
