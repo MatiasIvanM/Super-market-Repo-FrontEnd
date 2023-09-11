@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Button, Card, ListGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom/";
 
 const CartShopping = () => {
   const [show, setShow] = useState(true);
@@ -18,8 +19,9 @@ const CartShopping = () => {
 
   return (
     <div>
+      
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title>Detalles del carrito</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -51,8 +53,8 @@ const CartShopping = () => {
           <p className="mt-4"><strong>Valor Total de la Compra:</strong> ${totalValue.toFixed(2)}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerrar
+          <Button as={Link} to='/home' variant="secondary" onClick={handleClose}>
+            Seguir comprando
           </Button>
           <Button variant="primary" onClick={handlePayment}>
             Pagar
