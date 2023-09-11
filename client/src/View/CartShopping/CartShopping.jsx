@@ -1,47 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Card, ListGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom'; // Importa useHistory
+import { useHistory } from 'react-router-dom';
 
-
-
-const  CartShopping=()=> {
+const CartShopping = () => {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
-  //console.log("polo:", cart)
-  const history = useHistory(); // Obtiene la instancia de history
-  const [producto, setProducto] = useState([]);
-  const cart = useSelector((state) => {
-    // console.log(state); // Verifica el estado completo
-    return state.products; // Accede al estado específico
-  });
+  const history = useHistory();
+  const cart = useSelector((state) => state.productsSC);
 
-  useEffect(() => {
-    setProducto(cart)
-    console.log(producto)
-  }, [cart])
-
-
+  // Variable para almacenar el valor total
+  let totalValue = 0;
 
   const handlePayment = () => {
-    // Redirige al usuario a la página de pago cuando se hace clic en "Pagar"
     history.push('/mercadopago');
   };
 
   return (
     <div>
-      {/* <button onClick={handleShow}>Ver Detalle</button> */}
-
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Detalles del carrito</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p><strong>Id:</strong> 994939e39e39</p>
-          <p><strong>Nombre:</strong> Gaseosa</p>
-          <p><strong>Cantidad:</strong> 2</p>
-          <p><strong>Valor:</strong> 10.99</p>
-          <p><strong>Total:</strong> 21.98</p>
+          {cart.map((product) => {
+            // Calcula el valor total por producto
+            const productTotal = product.quantity * product.productDetails.price;
+            // Suma el valor total al valor total general
+            totalValue += productTotal;
+
+            return (
+              <Card key={product.id}>
+                <Card.Img
+                  variant="top"
+                  src={product.productDetails.image}
+                  style={{ maxWidth: "30%" }} // Establece el ancho máximo
+                />
+                <Card.Body>
+                  <Card.Title>{product.productDetails.name}</Card.Title>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item><strong>Cantidad:</strong> {product.quantity}</ListGroup.Item>
+                    <ListGroup.Item><strong>Valor:</strong> ${product.productDetails.price.toFixed(2)}</ListGroup.Item>
+                    <ListGroup.Item><strong>Valor Total Producto:</strong> ${productTotal.toFixed(2)}</ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            );
+          })}
+          {/* Muestra el valor total general */}
+          <p className="mt-4"><strong>Valor Total de la Compra:</strong> ${totalValue.toFixed(2)}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -56,4 +63,4 @@ const  CartShopping=()=> {
   );
 }
 
- export default CartShopping;
+export default CartShopping;
