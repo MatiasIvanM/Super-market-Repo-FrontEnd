@@ -9,6 +9,7 @@ import MercadoPagoCheckout from "./components/MerPago/MercadoPagoCheckout"
 import Register from './View/Register/Register';
 import Login from './View/Login/Login'
 import Profile from './View/Profile/Profile';
+import CartShopping from './View/CartShopping/CartShopping.jsx'
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
+        <Route path="/cartshopping" component={CartShopping} />
       </Switch>
     </Router>
     </div>

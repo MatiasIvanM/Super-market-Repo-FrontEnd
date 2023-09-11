@@ -7,6 +7,8 @@ import Image from 'react-bootstrap/Image';
 import style from './Detail.module.css'
 import { AiOutlineStar } from 'react-icons/ai'
 import {addProductSC} from "../../redux/Actions/actionsSC"
+import { useSelector } from "react-redux";
+
 
 function ProductsDetail(props) {
     
@@ -15,6 +17,7 @@ function ProductsDetail(props) {
     const [showMessage, setShowMessage] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [productDetails, setProductDetails] = useState(null);
+    
     useEffect(() => {
       if (id) {
         dispatch(getProductById(id))
