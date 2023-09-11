@@ -1,9 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useSelector } from "react-redux";
 
 function MercadoPagoCheckout() {
   const [preferenceId, setPreferenceId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+  const cart = useSelector((state) => {
+    console.log(state); // Verifica el estado completo
+    return state.products; // Accede al estado específico
+  });
 
   // Esta función crea una preferencia en Mercado Pago y recibe el ID de la preferencia
   const createPreference = async () => {

@@ -42,7 +42,7 @@ const NavBar = (props) => {
               </div>
             </Navbar.Brand>
 
-            <Navbar.Brand href="#home">
+            <Navbar.Brand as={Link} to="/cartshopping">
               <BsCart3 className="nav-icon me-2" onClick={() => setSmShow(true)} />
               <Modal
                 size="sm"
