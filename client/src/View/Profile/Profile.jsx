@@ -5,11 +5,13 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { useAuth0 } from "@auth0/auth0-react"
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
+import { useState } from 'react';
 
 export default function Profile() {
     const { logout, isAuthenticated } = useAuth0()
     const history = useHistory()
     const user = JSON.parse(localStorage.getItem('customer'))
+    const [edit, setEdit] = useState(true)
 
     function handleLogout() {
         localStorage.clear()
@@ -17,6 +19,16 @@ export default function Profile() {
             logout()
         } else {
             history.push('/home')
+        }
+    }
+
+    function handleEdit(event) {
+        if (edit) {
+            setEdit(false)
+            event.target.className = 'btn btn-success btn-sm btn btn-primary'
+        } else {
+            setEdit(true)
+            event.target.className = 'btn btn-secondary btn-sm btn btn-primary'
         }
     }
 
@@ -39,23 +51,21 @@ export default function Profile() {
                     </Card.Subtitle>
                     <Form style={{
                         padding: '0.8rem',
-                        margin: '3rem 0rem 0rem 0rem'
+                        margin: '2rem 0rem 0rem 0rem'
                     }}>
-                        <InputGroup>
+                        <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
                             <InputGroup.Text>Teléfono</InputGroup.Text>
-                            <Form.Control disabled={true} placeholder={user.phone}></Form.Control>
+                            <Form.Control disabled={edit} placeholder={user.phone}></Form.Control>
                         </InputGroup>
-                        <br />
-                        <InputGroup>
+                        <InputGroup style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
                             <InputGroup.Text>Dirección</InputGroup.Text>
-                            <Form.Control disabled={true} placeholder={user.address}></Form.Control>
+                            <Form.Control disabled={edit} placeholder={user.address}></Form.Control>
                         </InputGroup>
-                        <br />
-                        <Button as={Link} to='/home' variant='primary' size='sm'>Editar</Button>
+                        <Button onClick={handleEdit} className='btn btn-secondary btn-sm btn btn-primary'>Editar</Button>
                     </Form>
                 </Card.Body>
                 <Card.Footer>
-                    <Button style={{ margin: '0rem 1rem 0rem 0rem' }} variant='primary' onClick={handleLogout}>Guardar cambios</Button>
+                    <Button style={{ margin: '0rem 1rem 0rem 0rem' }} variant='primary' onClick={console.log("Guardo los cambios")}>Guardar cambios</Button>
                     <Button style={{ width: '0rem 0rem 0rem 1rem' }} variant='success' onClick={handleLogout}>Salir</Button>
                 </Card.Footer>
             </Card>
