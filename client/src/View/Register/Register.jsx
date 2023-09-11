@@ -10,10 +10,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import validate from './validations';
 import { PiWarning } from 'react-icons/pi'
 import styles from './Register.module.css'
+import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function Register() {
     const { loginWithPopup, isAuthenticated, user } = useAuth0()
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const defaultCustomer = {
         name: "",
@@ -78,6 +81,9 @@ export default function Register() {
 
     function handleModalButton() {
         setModal({ ...modal, show: false })
+        if (JSON.parse(localStorage.getItem('customer'))?.email) {
+            history.push('/home')
+        }
     }
 
     async function dispatchCustomer() {
@@ -132,59 +138,59 @@ export default function Register() {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            border: '1px grey solid',
-            borderRadius: '10px',
-            margin: '1rem 20rem 1rem 20rem',
-            padding: '1rem 0rem 1rem 0rem',
         }}>
-            <Form style={{ width: '30rem' }}>
-                <Form.Group>
-                    <h1>REGISTRATE</h1>
-                    {errors?.name && <span className={styles.errorMessage}><PiWarning /><span>{errors.name}</span></span>}
-                    <InputGroup className="mb-3" id="formBasicEmail">
-                        <InputGroup.Text id="basic-addon1">Nombre</InputGroup.Text>
-                        <Form.Control name='name' type="text" placeholder="Ingresa tu nombre" onChange={handleChange} />
-                    </InputGroup>
-                    {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
-                    <InputGroup className="mb-3" id="formBasicPassword">
-                        <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
-                        <Form.Control name='email' type="email" placeholder="Ingresa tu email" onChange={handleChange} />
-                    </InputGroup>
-                    {errors?.address && <span className={styles.errorMessage}><PiWarning /><span>{errors.address}</span></span>}
-                    <InputGroup className="mb-3" id="formBasicPassword">
-                        <InputGroup.Text id="basic-addon1">Dirección</InputGroup.Text>
-                        <Form.Control name='address' type="text" placeholder="Ingresa tu dirección" onChange={handleChange} />
-                    </InputGroup>
-                    {errors?.phone && <span className={styles.errorMessage}><PiWarning /><span>{errors.phone}</span></span>}
-                    <InputGroup className="mb-3" id="formBasicPassword">
-                        <InputGroup.Text id="basic-addon1">Teléfono</InputGroup.Text>
-                        <Form.Control name='phone' type="text" placeholder="Ingresa tu teléfono" onChange={handleChange} />
-                    </InputGroup>
-                    {errors?.password && <span className={styles.errorMessage}><PiWarning /><span>{errors.password}</span></span>}
-                    <InputGroup className="mb-3" id="formBasicPassword">
-                        <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
-                        <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
-                    </InputGroup>
-                </Form.Group>
-                <Button name='local' variant="primary" type="submit" onClick={handleSubmit}>
-                    Registrar
+            <Form style={{
+                border: '0.1rem grey solid',
+                borderRadius: '10px',
+                padding: '1rem',
+                margin: '3rem 0rem 1rem 0rem'
+            }}>
+                {errors?.name && <span className={styles.errorMessage}><PiWarning /><span>{errors.name}</span></span>}
+                <InputGroup className="mb-3" id="formBasicEmail">
+                    <InputGroup.Text id="basic-addon1">Nombre</InputGroup.Text>
+                    <Form.Control name='name' type="text" placeholder="Ingresa tu nombre" onChange={handleChange} />
+                </InputGroup>
+                {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
+                <InputGroup className="mb-3" id="formBasicPassword">
+                    <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                    <Form.Control name='email' type="email" placeholder="Ingresa tu email" onChange={handleChange} />
+                </InputGroup>
+                {errors?.address && <span className={styles.errorMessage}><PiWarning /><span>{errors.address}</span></span>}
+                <InputGroup className="mb-3" id="formBasicPassword">
+                    <InputGroup.Text id="basic-addon1">Dirección</InputGroup.Text>
+                    <Form.Control name='address' type="text" placeholder="Ingresa tu dirección" onChange={handleChange} />
+                </InputGroup>
+                {errors?.phone && <span className={styles.errorMessage}><PiWarning /><span>{errors.phone}</span></span>}
+                <InputGroup className="mb-3" id="formBasicPassword">
+                    <InputGroup.Text id="basic-addon1">Teléfono</InputGroup.Text>
+                    <Form.Control name='phone' type="text" placeholder="Ingresa tu teléfono" onChange={handleChange} />
+                </InputGroup>
+                {errors?.password && <span className={styles.errorMessage}><PiWarning /><span>{errors.password}</span></span>}
+                <InputGroup className="mb-3" id="formBasicPassword">
+                    <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
+                    <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
+                </InputGroup>
+                <Button style={{ width: '100%' }} name='local' variant="primary" type="submit" onClick={handleSubmit}>
+                    Crear cuenta nueva
                 </Button>
-                <span> O </span>
+                <hr width='100%' />
                 <Button name='google' variant="success" type="submit" onClick={handleSubmit}>
-                    Registrar con Google
+                    Usar mi cuenta de Google
                 </Button>
-                <Modal show={modal.show}>
-                    <Modal.Header>
-                        <Modal.Title>{modal.header}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{modal.body}</Modal.Body>
-                    <Modal.Footer>
-                        <Button variant={modal.button} onClick={handleModalButton}>
-                            Ok
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
             </Form>
+            <p>Ya tenés cuenta? <a href='/login' style={{ cursor: 'pointer', textDecoration: 'none' }}>Iniciar sesión</a></p>
+            <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+            <Modal show={modal.show}>
+                <Modal.Header>
+                    <Modal.Title>{modal.header}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{modal.body}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant={modal.button} onClick={handleModalButton}>
+                        Ok
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div >
     )
 }
