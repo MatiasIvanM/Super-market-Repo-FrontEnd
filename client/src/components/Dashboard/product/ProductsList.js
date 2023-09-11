@@ -29,6 +29,7 @@ const productFilters = [
 
 const ProductsList = (props) => {  //Este es el que muestra las ciudades
   return (
+    
     <List {...props}  actions={<ListActions/>} filters={productFilters}>
         <DatagridConfigurable>      
           <TextField source="id" />

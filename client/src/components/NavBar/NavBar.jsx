@@ -1,12 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 import { Container, Nav, Navbar, Modal } from 'react-bootstrap' 
 import { BsCart3, BsWrenchAdjustableCircleFill } from 'react-icons/bs'
-=======
-import { Container, Nav, Navbar, Modal } from 'react-bootstrap'
-import { BsCart3 } from 'react-icons/bs'
->>>>>>> f0ea22baacf84c1a6ed29a8583a296d6360fd950
 import { FiLogIn } from 'react-icons/fi'
 import { useState } from 'react';
 import Button from "react-bootstrap/Button";
@@ -64,7 +59,6 @@ const NavBar = (props) => {
               </Modal>
             </Navbar.Brand>
 
-<<<<<<< HEAD
               <Navbar.Brand>
                 <FiLogIn className="nav-icon"/>
               </Navbar.Brand>
@@ -73,13 +67,6 @@ const NavBar = (props) => {
                 <BsWrenchAdjustableCircleFill className="nav-icon"/>
                 </Link>
               </Navbar.Brand>
-=======
-            <Navbar.Brand>
-              <Nav.Link as={Link} to={JSON.parse(localStorage.getItem('customer'))?.email ? '/profile' : '/login'}>
-                <FiLogIn className="nav-icon" />
-              </Nav.Link>
-            </Navbar.Brand>
->>>>>>> f0ea22baacf84c1a6ed29a8583a296d6360fd950
 
           </Navbar.Collapse>
         </Container>
