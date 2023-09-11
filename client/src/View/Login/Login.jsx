@@ -177,7 +177,7 @@ export default function Register() {
                     <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
                     <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
                 </InputGroup>
-                <Button name="local" variant="primary" type="submit" onClick={handleSubmit}>
+                <Button style={{ width: '100%' }} name="local" variant="primary" type="submit" onClick={handleSubmit}>
                     Iniciar sesión
                 </Button>
                 <hr width='100%' />
@@ -185,9 +185,7 @@ export default function Register() {
                     Continuar con Google
                 </Button>
             </Form>
-            <Button variant="alert" type="submit" as={Link} to='/register'>
-                Crear cuenta nueva
-            </Button>
+            <p>No tenés cuenta? <a href='/register' style={{ cursor: 'pointer', textDecoration: 'none' }}>Crear cuenta nueva</a></p>
             <Modal show={modal.show}>
                 <Modal.Header>
                     <Modal.Title>{modal.header}</Modal.Title>
