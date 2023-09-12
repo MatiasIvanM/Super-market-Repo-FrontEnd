@@ -33,7 +33,7 @@ const Dashboard = () => {
       <Resource 
         name="customer" 
         list={UsersList} 
-        create={UserCreate} 
+        create={UserCreate}
         edit={UserEdit} 
         icon={BsFillPeopleFill}
       />

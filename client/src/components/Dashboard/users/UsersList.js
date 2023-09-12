@@ -9,11 +9,9 @@ import {
     TextInput,
     TextField,
     EmailField,
-    EditButton,
-    Create, 
+    EditButton, 
 } from 'react-admin';
 import { Link } from 'react-router-dom';
-import IconEvent from '@mui/icons-material/Event';
 
 const ListActions = () => (
     <TopToolbar>
@@ -30,17 +28,23 @@ const userFilters = [
     <TextInput label="email" source="email" defaultValue="" />,
 ];
 
-const UsersList = () => (
-    <List actions={<ListActions/>} filters={userFilters}>
+const UsersList = (props) => (
+        <List {...props} actions={<ListActions />} filters={userFilters}>
         <DatagridConfigurable>
             <TextField source="id" />
             <TextField source="name" />
             <EmailField source="email" />
             <EditButton label="Editar" />
-            {/* <Link to="/users/create">Crear Usuario</Link> */}
+            <CustomLinkField record={props.record} />
         </DatagridConfigurable>
     </List>
 );
+const CustomLinkField = ({ record }) => {
+    if (record && record.id) {
+        return <Link to={`/userDetail/${record.id}`}>Detalles</Link>;
+    }
+    return null;
+};
 
 export default UsersList
  

@@ -29,11 +29,13 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/profile" component={Profile} />
         <Route path="/login" component={Login} />
+        <Route path="/cartshopping" component={CartShopping} />
       </Switch>
     </Router>
     </div>
   );
 }
+
 //Se esta renderizando doble el footer y el navbar, por el render desde landing
 export default App;
 

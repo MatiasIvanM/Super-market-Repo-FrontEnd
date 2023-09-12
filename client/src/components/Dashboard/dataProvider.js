@@ -11,6 +11,7 @@ const httpClient = axios.create({
   },
 });
 
+
 const dataProvider = {
     //Trae la lista de registros de un recurso. Falta la paginacion
   getList: (resource, params) => {
@@ -57,7 +58,7 @@ const dataProvider = {
 
   update: (resource, params) => {
     return httpClient
-      .put(`${resource}/${params.id}`, params.data)
+      .put(`${resource}`, params.data)
       .then(({ data }) => ({
         data: data,
       }));
