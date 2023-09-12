@@ -59,7 +59,7 @@ function MercadoPagoCheckout() {
 
   const handlePayment = () => {
     if (preferenceId) {
-      window.open(`https://www.mercadopago.com/mco/checkout/start?pref_id=${preferenceId}`);
+      window.location.href =(`https://www.mercadopago.com/mco/checkout/start?pref_id=${preferenceId}`);
     }
   };
 

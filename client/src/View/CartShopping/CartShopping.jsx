@@ -14,14 +14,13 @@ const CartShopping = () => {
   let totalValue = 0;
 
   const handlePayment = () => {
-    history.push('/mercadopago');
+    history.push('/mercadopago'); // Redirige en la misma página
   };
 
   return (
     <div>
       <Modal show={show} onHide={handleClose} centered backdrop="static">
-
-        <Modal.Header >
+        <Modal.Header>
           <Modal.Title>Detalles del carrito</Modal.Title>
         </Modal.Header>
         <Modal.Body>
