@@ -18,7 +18,6 @@ import CartShopping from './View/CartShopping/CartShopping.jsx'
 >>>>>>> 84366fe34374b9e14fc37f42a26b87ed3c83c8c3
 
 
-
 function App() {
   return (
     <div className="App">
