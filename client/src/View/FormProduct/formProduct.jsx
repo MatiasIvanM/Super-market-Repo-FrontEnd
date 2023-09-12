@@ -52,7 +52,7 @@ export default function FormProduct(){
           type="text"
               {...register('name', {
                 required: true,
-                maxLength: 10,
+                maxLength: 249,
               })}
         />
       </InputGroup>
