@@ -17,19 +17,29 @@ const dataProvider = {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const query = {
-      ...params.filter,
+      _page: page,
+      _limit: perPage,
       _sort: field,
       _order: order,
-      _start: ( 1) * 10,
-    //   _start: (page - 1) * perPage,
-      _end: 5 * 10,
-    //   _end: page * perPage,
+      ...params.filter,
+      // ...params.filter,
+      // _sort: field,
+      // _order: order,
+      // _start: ( 1) * 10,
+      // _start: (page - 1) * perPage,
+      // _end: 5 * 10,
+      // _end: page * perPage,
+
     };
     const url = `${resource}?${stringify(query)}`;
 
-    return httpClient.get(url).then(({ data }) => ({
+    // return httpClient.get(url).then(({ data }) => ({
+    //   data: data,
+    //   total: parseInt(data.length, 10),
+    // }));
+    return httpClient.get(url).then(({ data, headers }) => ({
       data: data,
-      total: parseInt(data.length, 10),
+      total: parseInt(headers['x-total-count'], 10),
     }));
   },
 

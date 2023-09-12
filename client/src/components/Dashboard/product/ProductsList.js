@@ -4,7 +4,7 @@ import { List, CreateButton,
   DatagridConfigurable, ExportButton, FilterButton, SelectColumnsButton,
   TopToolbar, TextInput, TextField, 
   // EditButton, DeleteButton, 
-   SortButton  
+   SortButton,EditButton
 } from 'react-admin';
 // import { EditDialog } from '@react-admin/ra-form-layout';
 
@@ -38,6 +38,7 @@ const ProductsList = (props) => {  //Este es el que muestra las ciudades
           {/* <TextField source="description" /> */}
           <TextField source="price" />
           <TextField source="available" />
+          <EditButton label="Editar" />
           {/* <ImageField source="image" sx= {{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } } } /> */}
           {/* <DateField source="created_at" /> */}
           {/* <EditButton basePath="/products" />

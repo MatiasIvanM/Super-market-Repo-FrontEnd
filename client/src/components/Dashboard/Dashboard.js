@@ -1,8 +1,5 @@
 import React from 'react';
-import { Admin, Resource, 
-  // defaultTheme, 
-  // AppBar 
-} from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 
 import { BsFillPeopleFill, BsReceiptCutoff, BsBoxSeamFill } from "react-icons/bs";
 import authProvider from './authProvider';
@@ -17,39 +14,35 @@ import OrderList from './orders/OrderList';
 
 import dataProvider from './dataProvider';
 
-// const myTheme = {
-//   ...defaultTheme,
-//   palette: {
-//       mode: "dark",
-//       primary: indigo,
-//       secondary: pink,
-//       error: red,
-//   },
-//   typography: {
-//       // Use the system font instead of the default Roboto font.
-//       fontFamily: ["-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Arial", "sans-serif"].join(","),
-//   },
-//   components: {
-//       ...defaultTheme.components,
-//       MuiTextField: {
-//           defaultProps: {
-//               variant: "outlined",
-//           },
-//       },
-//       MuiFormControl: {
-//           defaultProps: {
-//               variant: "outlined",
-//           },
-//       },
-//   },
-// };
+//? Users
+import UsersList from './users/UsersList';
+import UserEdit from './users/UserEdit';
+import UserCreate from './users/UserCreate';
+
 
 const Dashboard = () => {
   return (
      <Admin dashboard={PanelAdmin} dataProvider={dataProvider} authProvider={authProvider} >
-      <Resource name="product" list={ProductsList} icon={BsBoxSeamFill} />
-      <Resource name="users"  icon={BsFillPeopleFill} />
-      <Resource name="orders"  list={OrderList} icon={BsReceiptCutoff} />
+      <Resource 
+        name="product" 
+        list={ProductsList} 
+        edit={ProductEdit} 
+        create={ProductCreate}
+        icon={BsBoxSeamFill}
+      />
+      <Resource 
+        name="customer" 
+        list={UsersList} 
+        create={UserCreate} 
+        edit={UserEdit} 
+        icon={BsFillPeopleFill}
+      />
+      {/* <Resource name="users"  list={UsersList} create={UserCreate} edit={UserEdit} icon={BsFillPeopleFill} /> */}
+      <Resource 
+        name="orders"  
+        list={OrderList} 
+        icon={BsReceiptCutoff} 
+      />
     </Admin>
   );
 };
