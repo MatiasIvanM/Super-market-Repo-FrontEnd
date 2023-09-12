@@ -7,12 +7,11 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addCustomer } from '../../redux/Actions/actionsCustomers';
 import { useAuth0 } from "@auth0/auth0-react";
-import validate from './validations';
+import * as validate from './validations';
 import { PiWarning } from 'react-icons/pi'
 import styles from './Register.module.css'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom';
-import { Footer } from '../../components/Footer/Footer';
 import Overlay from '../../components/Overlay/Overlay';
 
 export default function Register() {
@@ -48,7 +47,7 @@ export default function Register() {
         const property = event.target.name
         const value = event.target.value
         setCustomer({ ...customer, [property]: value })
-        setErrors(validate({ ...customer, [property]: value }))
+        setErrors(validate[property](value))
     }
 
     function checkErrors() {
@@ -63,9 +62,8 @@ export default function Register() {
     async function handleSubmit(event) {
         event.preventDefault()
         const provider = event.target.name
-        setErrors(validate({ ...customer }))
         if (provider === 'local') {
-            if (checkErrors()) {
+            if (!Object.values(customer).every(d => d === '') && checkErrors()) {
                 setModal({
                     show: true,
                     header: 'Ups!',
@@ -92,7 +90,7 @@ export default function Register() {
         if (customer.name && customer.email) {
             const response = await dispatch(addCustomer(customer))
             if (response?.payload) {
-                localStorage.setItem('customer', JSON.stringify(response.payload))
+                localStorage.setItem('customer', JSON.stringify({ email: response.payload.email }))
                 setModal({
                     show: true,
                     header: 'Usuario Registrado',
@@ -131,7 +129,7 @@ export default function Register() {
     }, [customer.provider])
 
     useEffect(() => {
-        setErrors(validate({ ...customer }))
+        localStorage.getItem('customer') && history.push('/home')
     }, [])
 
     return (

@@ -1,19 +1,38 @@
-export default function validate(data) {
-    let errors = {}
+// export default function validate(data) {
+//     let errors = {}
 
-    const email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{3})+$/
+//     if (data.email.length < 1) {
+//         errors = { ...errors, email: 'El campo no puede estar vacío' }
+//     } else {
+//         errors = { ...errors, email: "" }
+//     }
 
-    if (!email.test(data.email) || data.email.length < 1) {
-        errors = { ...errors, email: 'Mail inválido' }
+//     if (data.password.length < 1) {
+//         errors = { ...errors, password: 'El campo no puede estar vacío' }
+//     } else {
+//         errors = { ...errors, password: "" }
+//     }
+
+//     return errors
+// }
+
+let errors = {}
+
+
+export function email(email) {
+    if (email.length < 1) {
+        errors = { ...errors, email: 'El campo no puede estar vacío' }
     } else {
         errors = { ...errors, email: "" }
     }
+    return errors
+}
 
-    if (data.password.length < 1) {
-        errors = { ...errors, password: 'Casilla vacía' }
+export function password(password) {
+    if (password.length < 1) {
+        errors = { ...errors, password: 'El campo no puede estar vacío' }
     } else {
         errors = { ...errors, password: "" }
     }
-
     return errors
 }
