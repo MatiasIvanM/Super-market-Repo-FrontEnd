@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./About.module.css";
 import {Card, Button, Modal, Col, Row} from 'react-bootstrap';
+import NavBar from '../../components/NavBar/NavBar'
 
 const discipulosHenry = [
   {   id: 1,
@@ -83,6 +84,7 @@ const About = () => {
   
   return (
     <div className={style.container}>
+      <NavBar />
         <h1>Conócenos</h1>
         
          <Row xs={2} md={4} className="g-4" style={{ alignContent:'center' }}>
