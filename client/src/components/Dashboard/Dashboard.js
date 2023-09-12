@@ -1,13 +1,16 @@
 import React from 'react';
 import { Admin, Resource } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 
 import { BsFillPeopleFill, BsReceiptCutoff, BsBoxSeamFill } from "react-icons/bs";
 import authProvider from './authProvider';
 import PanelAdmin from './PanelAdmin';
 //? Products
 import {ProductsList, DetailShow} from './product/ProductsList';
-// import ProductCreate from './product/ProductCreate';
+// // import ProductCreate from './product/ProductCreate';
 import ProductEdit from './product/ProductEdit';
+import formProduct from '../../View/FormProduct/formProduct';
+// import Detail from '../../View/Detail/Detail';
 import formProduct from '../../View/FormProduct/formProduct';
 
 //? Orders

@@ -13,4 +13,4 @@ const SHOPPINGCART="http://localhost:3001/shoppingCart"
 // const ORDERS=`${server}/orders/`;
 // const SHOPPINGCART=`${server}/shoppingCart`;
 
-export {PRODUCT,CUSTOMER,ORDER_DETAIL,ORDERS,SHOPPINGCART};
+export {PRODUCT,CUSTOMER,ORDER_DETAIL,ORDERS,SHOPPINGCART, server};
