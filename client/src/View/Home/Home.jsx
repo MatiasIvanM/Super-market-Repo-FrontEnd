@@ -8,9 +8,8 @@ import { Footer } from '../../components/Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProducts } from '../../redux/Actions/actionsProducts';
-import { Col, Container, Dropdown, DropdownButton, Form, FormControl, NavDropdown, Navbar, Row } from 'react-bootstrap';
+import { Container, Dropdown, DropdownButton, FormControl, Navbar, } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
-
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -100,7 +99,7 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(getProducts());// eslint-disable-next-line
-      }, []);
+    }, []);
 
     // if (products.length === 0) {
     //     return <div>
@@ -129,45 +128,57 @@ export default function Home() {
 
             <div className={styles.container}>
 
-                <Nav className={styles.side_bar}>
-                    <Nav.Item>
-                        <h4>Categorías </h4>
-                        <select name='category' id='category' value={filters.category} onChange={handleChange}>
-                            <option value="Todas">Todas</option>
-                            <option value="Bebidas">Bebidas</option>
-                            <option value="Aceites y Aderezos">Aceites y Aderezos</option>
-                            <option value="Arroz y Legumbres">Arroz y Legumbres</option>
-                            <option value="Frutas y Verduras">Frutas y Verduras</option>
-                            <option value="Panadería">Panadería</option>
-                        </select>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <h4>Ordenar por Precio </h4>
-                        <select name='price' id='price' value={filters.price} onChange={handleChange}>
-                            <option value="None"></option>
-                            <option value="MIN-max">min-MAX</option>
-                            <option value="MAX-min">MAX-min</option>
-                        </select>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <h4>Rango de Precios </h4>
-                        <input
-                            onChange={setPriceRange}
-                            name='min' type="number"
-                            value={filters.priceRange.min}
-                            style={{ width: '30%' }} />
-                        <span> Hasta </span>
-                        <input
-                            onChange={setPriceRange}
-                            name='max' type="number"
-                            value={filters.priceRange.max}
-                            style={{ width: '30%' }} />
-                    </Nav.Item>
-                    <Nav.Item>
-                        {/* <button onClick={clearFilters}>Limpiar Filtros</button> */}
-                        <Button variant="primary" style={{ width: '100px' }} onClick={clearFilters}> Limpiar Filtros </Button>
-                    </Nav.Item>
-                </Nav>
+                <Navbar bg='white' className='h-100 rounded-1 d-flex flex-column gap-2' style={{ maxWidth: '20rem' }}>
+                    <Container>
+                        <Dropdown>
+                            <DropdownButton variant='outline-secondary' title={`Categorías`} onSelect={handleChange}>
+                                <Dropdown.Item eventKey="category-Todas">Todas las Categorías</Dropdown.Item>
+                                <Dropdown.Divider></Dropdown.Divider>
+                                <Dropdown.Item eventKey="category-Bebidas">Bebidas</Dropdown.Item>
+                                <Dropdown.Item eventKey="category-Aceites y Aderezos">Aceites y Aderezos</Dropdown.Item>
+                                <Dropdown.Item eventKey="category-Arroz y Legumbres">Arroz y Legumbres</Dropdown.Item>
+                                <Dropdown.Item eventKey="category-Frutas y Verduras">Frutas y  Verduras</Dropdown.Item>
+                                <Dropdown.Item eventKey="category-Panadería">Panadería</Dropdown.Item>
+                            </DropdownButton>
+                        </Dropdown>
+                    </Container>
+                    <Container>
+                        <Dropdown>
+                            <DropdownButton variant='outline-secondary' title={`Ordenar por precios`} onSelect={handleChange}>
+                                <Dropdown.Item eventKey="price-Ninguno">Ninguno</Dropdown.Item>
+                                <Dropdown.Divider></Dropdown.Divider>
+                                <Dropdown.Item eventKey="price-Menor Precio">Menor precio</Dropdown.Item>
+                                <Dropdown.Item eventKey="price-Mayor Precio">Mayor precio</Dropdown.Item>
+                            </DropdownButton>
+                        </Dropdown>
+                    </Container>
+                    <Container>
+                        <InputGroup>
+                            <InputGroup.Text className='text-secondary'>$</InputGroup.Text>
+                            <FormControl
+                                className=''
+                                value={filters.priceRange.min}
+                                name='min'
+                                onChange={setPriceRange}
+                                style={{ maxWidth: '3rem', }}
+                                size='sm'
+                                placeholder='min'
+                            />
+                            <FormControl
+                                value={filters.priceRange.max}
+                                name='max'
+                                onChange={setPriceRange}
+                                style={{ maxWidth: '3rem', }}
+                                size='sm'
+                                placeholder='max'
+                            />
+                            <Button variant='outline-secondary'>{'>'}</Button>
+                        </InputGroup>
+                    </Container>
+                    <Container>
+                        <Button variant='outline-secondary' size='sm' onClick={clearFilters}>Limpiar Filtros</Button>
+                    </Container>
+                </Navbar>
 
                 <div className={styles.card_container}>
 
