@@ -4,7 +4,7 @@
 // const ORDERS='http://localhost:3001/orders/'
 // const SHOPPINGCART="http://localhost:3001/shoppingCart"
 
-//backend
+// backend
 const server = 'https://super-market-shop-preview.up.railway.app';
 
 const PRODUCT=`${server}/product/`;
