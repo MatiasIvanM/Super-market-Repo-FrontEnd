@@ -8,6 +8,8 @@ import { Footer } from '../../components/Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProducts } from '../../redux/Actions/actionsProducts';
+import { Col, Container, Dropdown, DropdownButton, Form, FormControl, NavDropdown, Navbar, Row } from 'react-bootstrap';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 
 export default function Home() {
