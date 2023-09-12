@@ -9,7 +9,6 @@ import PanelAdmin from './PanelAdmin';
 import {ProductsList, DetailShow} from './product/ProductsList';
 // // import ProductCreate from './product/ProductCreate';
 import ProductEdit from './product/ProductEdit';
-import formProduct from '../../View/FormProduct/formProduct';
 // import Detail from '../../View/Detail/Detail';
 import formProduct from '../../View/FormProduct/formProduct';
 
