@@ -42,15 +42,15 @@ const CartShopping = () => {
                   <Card.Title>{product.productDetails.name}</Card.Title>
                   <ListGroup variant="flush">
                     <ListGroup.Item><strong>Cantidad:</strong> {product.quantity}</ListGroup.Item>
-                    <ListGroup.Item><strong>Valor:</strong> ${product.productDetails.price.toFixed(2)}</ListGroup.Item>
-                    <ListGroup.Item><strong>Valor Total Producto:</strong> ${productTotal.toFixed(2)}</ListGroup.Item>
+                    <ListGroup.Item><strong>Valor:</strong> $ {product.productDetails.price.toFixed(0)}</ListGroup.Item>
+                    <ListGroup.Item><strong>Valor Total Producto:</strong> $ {productTotal.toFixed(0)}</ListGroup.Item>
                   </ListGroup>
                 </Card.Body>
               </Card>
             );
           })}
           {/* Muestra el valor total general */}
-          <p className="mt-4"><strong>Valor Total de la Compra:</strong> ${totalValue.toFixed(2)}</p>
+          <p className="mt-4"><strong>Valor Total de la Compra:</strong> $ {totalValue.toFixed(0)}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button as={Link} to='/home' variant="secondary" onClick={handleClose}>
