@@ -9,17 +9,17 @@ import {ProductsList, DetailShow} from './product/ProductsList';
 // import ProductCreate from './product/ProductCreate';
 import ProductEdit from './product/ProductEdit';
 import formProduct from '../../View/FormProduct/formProduct';
-import Detail from '../../View/Detail/Detail';
+// import Detail from '../../View/Detail/Detail';
 
 //? Orders
 import OrderList from './orders/OrderList';
 
 import dataProvider from './dataProvider';
 
-//? Users
-import UsersList from './users/UsersList';
-import UserEdit from './users/UserEdit';
-import UserCreate from './users/UserCreate';
+// //? Users
+// import UsersList from './users/UsersList';
+// import UserEdit from './users/UserEdit';
+// import UserCreate from './users/UserCreate';
 
 
 const Dashboard = () => {
@@ -34,13 +34,13 @@ const Dashboard = () => {
         icon={BsBoxSeamFill}
         show={DetailShow} 
       />
-      <Resource 
-        name="customer" 
-        list={UsersList} 
-        create={UserCreate} 
-        edit={UserEdit} 
-        icon={BsFillPeopleFill}
-      />
+      // <Resource 
+      //   name="customer" 
+      //   list={UsersList} 
+      //   create={UserCreate} 
+      //   edit={UserEdit} 
+      //   icon={BsFillPeopleFill}
+      // />
       {/* <Resource name="users"  list={UsersList} create={UserCreate} edit={UserEdit} icon={BsFillPeopleFill} /> */}
       <Resource 
         name="orders"  
