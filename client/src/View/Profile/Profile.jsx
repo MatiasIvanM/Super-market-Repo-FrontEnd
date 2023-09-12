@@ -15,7 +15,6 @@ export default function Profile() {
     const { logout, isAuthenticated } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
-    // const user = getCustomerById(JSON.parse(localStorage.getItem('customer').id))
     const [edit, setEdit] = useState(true)
     const [customer, setCustomer] = useState()
     const [modal, setModal] = useState({
@@ -99,7 +98,7 @@ export default function Profile() {
             }}>
                 <Card.Body>
                     <Card.Title>
-                        <div>{customer?.name}</div>
+                        <div style={{ color: '#0d6efd', fontSize: '2rem' }}>{customer?.name}</div>
                     </Card.Title>
                     <Card.Subtitle>
                         <div>{customer?.email}</div>
