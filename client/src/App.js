@@ -9,7 +9,9 @@ import MercadoPagoCheckout from "./components/MerPago/MercadoPagoCheckout"
 import Register from './View/Register/Register';
 import Dashboard from './components/Dashboard/Dashboard';
 import About from './View/About/About'
-
+import CartShopping from './View/CartShopping/CartShopping.jsx'
+import Profile from './View/Profile/Profile';
+import Login from './View/Login/Login'
 
 function App() {
   return (
@@ -25,7 +27,8 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/admin" component={Dashboard} />
         <Route path="/about" component={About} />
-
+        <Route path="/profile" component={Profile} />
+        <Route path="/login" component={Login} />
       </Switch>
     </Router>
     </div>
@@ -33,3 +36,4 @@ function App() {
 }
 //Se esta renderizando doble el footer y el navbar, por el render desde landing
 export default App;
+
