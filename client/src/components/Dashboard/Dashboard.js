@@ -17,9 +17,9 @@ import OrderList from './orders/OrderList';
 import dataProvider from './dataProvider';
 
 //? Users
-// import UsersList from './users/UsersList';
-// import UserEdit from './users/UserEdit';
-// import UserCreate from './users/UserCreate';
+import UsersList from './users/UsersList';
+import UserEdit from './users/UserEdit';
+import UserCreate from './users/UserCreate';
 
 
 const Dashboard = () => {

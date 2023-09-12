@@ -31,7 +31,6 @@ const DetailShow = (props) => (
         <h3> Detalle de Producto:  </h3>
       <div className={style.container}>  
         <div style={{ margin: '1em'}} className={style.containerDetalles}>
-          {/* {props} */}
           <h6>ID: <TextField source="id" style={{ fontSize: '1.1rem' }}/> </h6>
           <h6>MARCA: <TextField source="brand"  style={{ fontSize: '2rem' }}/></h6>
           <h6>NOMBRE: <TextField source="name" style={{ fontSize: '1.8rem' }}/></h6>

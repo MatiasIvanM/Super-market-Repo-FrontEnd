@@ -14,15 +14,12 @@
 }
 
 .customCard {
-    /* Estilos para la tarjeta */
     /* background-color: aqua; */
-
     filter: grayscale(100%);
   }
   
   .customCard:hover {
     scale: 1.1;
-    /* Estilos para el efecto hover */
   }
   
   .customCard:hover {

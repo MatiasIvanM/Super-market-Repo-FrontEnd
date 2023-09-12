@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./About.module.css";
 import { Card, Button, Modal, Col, Row } from "react-bootstrap";
-import NavBar from "../../components/NavBar/NavBar";
 import {Footer} from "../../components/Footer/Footer";
+import NavBar from "../../components/NavBar/NavBar";
 
 const discipulosHenry = [
   {
