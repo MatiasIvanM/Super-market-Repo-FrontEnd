@@ -29,6 +29,7 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/profile" component={Profile} />
         <Route path="/login" component={Login} />
+        <Route path="/cartshopping" component={CartShopping} />
       </Switch>
     </Router>
     </div>
