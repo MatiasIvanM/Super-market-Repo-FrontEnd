@@ -7,16 +7,19 @@
     margin: 0rem 0rem 0.1rem 5rem;
 }
 
-.customCard {
-    /* Estilos para la tarjeta */
-    /* background-color: aqua; */
+.container2{
+  background-color:rgb(41, 41, 41);
+  display: flex;
+  flex-direction: row;
+}
 
+.customCard {
+    /* background-color: aqua; */
     filter: grayscale(100%);
   }
   
   .customCard:hover {
     scale: 1.1;
-    /* Estilos para el efecto hover */
   }
   
   .customCard:hover {

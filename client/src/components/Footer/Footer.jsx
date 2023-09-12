@@ -21,7 +21,7 @@ const Footer = () => {
         </Nav.Item>
       </Nav>
       <div>
-        © 2023 Copyright: PF-SuperMarket-Shop
+        <p>© 2023 Copyright: PF-SuperMarket-Shop</p> 
       </div>
     </div>
   )
