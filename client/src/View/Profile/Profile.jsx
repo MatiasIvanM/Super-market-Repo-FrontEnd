@@ -25,10 +25,13 @@ export default function Profile() {
     function handleLogout() {
         localStorage.clear()
         if (isAuthenticated) {
-            logout()
-        } else {
-            history.push('/')
+            logout({ logoutParams: { returnTo: window.location.origin } })
         }
+        // else
+        // {
+        //     history.push('/')
+        // }
+        // history.push('/')
     }
 
     function handleChange(event) {

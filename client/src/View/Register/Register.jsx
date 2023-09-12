@@ -189,7 +189,7 @@ export default function Register() {
                 <Button style={{ width: 'fit-content', alignSelf: 'center' }} as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
             </div>
             <br />
-            <Footer />
+            {/* <Footer /> */}
             <Modal show={modal.show}>
                 <Modal.Header>
                     <Modal.Title>{modal.header}</Modal.Title>

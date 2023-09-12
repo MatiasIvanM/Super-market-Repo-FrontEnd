@@ -198,7 +198,7 @@ export default function Register() {
             </div>
 
             <br />
-            <Footer />
+            {/* <Footer /> */}
             <Modal show={modal.show}>
                 <Modal.Header>
                     <Modal.Title>{modal.header}</Modal.Title>
