@@ -7,6 +7,12 @@
     margin: 0rem 0rem 0.1rem 5rem;
 }
 
+.container2{
+  background-color:rgb(41, 41, 41);
+  display: flex;
+  flex-direction: row;
+}
+
 .customCard {
     /* Estilos para la tarjeta */
     /* background-color: aqua; */
