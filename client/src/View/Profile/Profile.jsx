@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react"
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react';
+import Overlay from '../../components/Overlay/Overlay';
 
 export default function Profile() {
     const { logout, isAuthenticated } = useAuth0()
@@ -64,7 +65,9 @@ export default function Profile() {
             alignItems: 'center',
         }}>
             <Card style={{
-                margin: '5rem 0rem 2rem 0rem'
+                margin: '5rem 0rem 2rem 0rem',
+                background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))',
+                boxShadow: '4px 4px 8px 1px grey',
             }}>
                 <Card.Body>
                     <Card.Title>
@@ -112,6 +115,7 @@ export default function Profile() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <Overlay />
         </div >
     )
 }

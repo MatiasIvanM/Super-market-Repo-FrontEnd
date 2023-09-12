@@ -11,6 +11,8 @@ import validate from './validations';
 import styles from './Login.module.css'
 import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
+import Overlay from '../../components/Overlay/Overlay';
+import { Footer } from '../../components/Footer/Footer';
 
 export default function Register() {
     const { loginWithPopup, logout, isAuthenticated, user } = useAuth0()
@@ -96,7 +98,7 @@ export default function Register() {
                         localStorage.setItem('customer', JSON.stringify(response.payload[0]))
                         setModal({
                             show: true,
-                            header: 'Usuario Logueado',
+                            header: 'Sesión iniciada',
                             body: 'Bienvenido',
                             button: 'success',
                         })
@@ -113,7 +115,7 @@ export default function Register() {
                     localStorage.setItem('customer', JSON.stringify(response.payload[0]))
                     setModal({
                         show: true,
-                        header: 'Usuario Logueado',
+                        header: 'Sesión iniciada',
                         body: 'Bienvenido',
                         button: 'success',
                     })
@@ -157,37 +159,46 @@ export default function Register() {
         <div style={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
+            height: '100vh',
+            justifyContent: 'space-between'
         }}>
-            <Form style={{
-                border: '0.1rem grey solid',
-                borderRadius: '10px',
-                padding: '0.8rem',
-                margin: '5rem 0rem 1rem 0rem',
-                boxShadow: '4px 4px 8px 1px grey',
-            }}>
+            <div style={{ alignSelf: 'center' }}>
+                <Form style={{
+                    width: 'fit-content',
+                    alignSelf: 'center',
+                    border: '0.1rem grey solid',
+                    borderRadius: '10px',
+                    padding: '0.8rem',
+                    margin: '5rem 0rem 1rem 0rem',
+                    boxShadow: '4px 4px 8px 1px grey',
+                    backgroundColor: 'white',
+                    background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))'
+                }}>
 
-                {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
-                <InputGroup className="mb-3" id="formBasicPassword">
-                    <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
-                    <Form.Control name='email' type="email" placeholder="Ingresa tu email" onChange={handleChange} />
-                </InputGroup>
-                {errors?.password && <span className={styles.errorMessage}><PiWarning /><span>{errors.password}</span></span>}
-                <InputGroup className="mb-3" id="formBasicPassword">
-                    <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
-                    <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
-                </InputGroup>
-                <Button style={{ width: '100%' }} name="local" variant="primary" type="submit" onClick={handleSubmit}>
-                    Iniciar sesión
-                </Button>
-                <hr width='100%' />
-                <Button name="google" variant="success" type="submit" onClick={handleSubmit}>
-                    Continuar con Google
-                </Button>
-            </Form>
-            <p>No tenés cuenta? <a href='/register' style={{ cursor: 'pointer', textDecoration: 'none' }}>Crear cuenta nueva</a></p>
-            <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+                    {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
+                    <InputGroup className="mb-3" id="formBasicPassword">
+                        <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                        <Form.Control name='email' type="email" placeholder="Ingresa tu email" onChange={handleChange} />
+                    </InputGroup>
+                    {errors?.password && <span className={styles.errorMessage}><PiWarning /><span>{errors.password}</span></span>}
+                    <InputGroup className="mb-3" id="formBasicPassword">
+                        <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
+                        <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
+                    </InputGroup>
+                    <Button style={{ width: '100%' }} name="local" variant="primary" type="submit" onClick={handleSubmit}>
+                        Iniciar sesión
+                    </Button>
+                    <hr width='100%' />
+                    <Button name="google" variant="success" type="submit" onClick={handleSubmit}>
+                        Continuar con Google
+                    </Button>
+                </Form>
+                <p>No tenés cuenta? <a href='/register' style={{ cursor: 'pointer', textDecoration: 'none' }}>Crear cuenta nueva</a></p>
+                <Button style={{ width: 'fit-content', alignSelf: 'center' }} as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+            </div>
+
+            <br />
+            <Footer />
             <Modal show={modal.show}>
                 <Modal.Header>
                     <Modal.Title>{modal.header}</Modal.Title>
@@ -195,10 +206,11 @@ export default function Register() {
                 <Modal.Body>{modal.body}</Modal.Body>
                 <Modal.Footer>
                     <Button variant={modal.button} onClick={handleModalButton}>
-                        Ok
+                        Aceptar
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <Overlay />
         </div>
     )
 }

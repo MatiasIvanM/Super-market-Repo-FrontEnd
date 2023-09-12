@@ -13,6 +13,7 @@ import styles from './Register.module.css'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { Footer } from '../../components/Footer/Footer';
+import Overlay from '../../components/Overlay/Overlay';
 
 export default function Register() {
     const { loginWithPopup, isAuthenticated, user } = useAuth0()
@@ -137,54 +138,58 @@ export default function Register() {
         <div style={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
+            height: '100vh',
+            justifyContent: 'space-between'
         }}>
-            <Form style={{
-                border: '0.1rem grey solid',
-                borderRadius: '10px',
-                padding: '1rem',
-                margin: '2rem 0rem 1rem 0rem',
-                boxShadow: '4px 4px 8px 1px grey',
-                backgroundColor: 'white'
-            }}>
-                {errors?.name && <span className={styles.errorMessage}><PiWarning /><span>{errors.name}</span></span>}
-                <InputGroup className="mb-3" id="formBasicEmail">
-                    <InputGroup.Text id="basic-addon1">Nombre</InputGroup.Text>
-                    <Form.Control name='name' type="text" placeholder="Ingresa tu nombre" onChange={handleChange} />
-                </InputGroup>
-                {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
-                <InputGroup className="mb-3" id="formBasicPassword">
-                    <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
-                    <Form.Control name='email' type="email" placeholder="Ingresa tu email" onChange={handleChange} />
-                </InputGroup>
-                {errors?.address && <span className={styles.errorMessage}><PiWarning /><span>{errors.address}</span></span>}
-                <InputGroup className="mb-3" id="formBasicPassword">
-                    <InputGroup.Text id="basic-addon1">Dirección</InputGroup.Text>
-                    <Form.Control name='address' type="text" placeholder="Ingresa tu dirección" onChange={handleChange} />
-                </InputGroup>
-                {errors?.phone && <span className={styles.errorMessage}><PiWarning /><span>{errors.phone}</span></span>}
-                <InputGroup className="mb-3" id="formBasicPassword">
-                    <InputGroup.Text id="basic-addon1">Teléfono</InputGroup.Text>
-                    <Form.Control name='phone' type="text" placeholder="Ingresa tu teléfono" onChange={handleChange} />
-                </InputGroup>
-                {errors?.password && <span className={styles.errorMessage}><PiWarning /><span>{errors.password}</span></span>}
-                <InputGroup className="mb-3" id="formBasicPassword">
-                    <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
-                    <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
-                </InputGroup>
-                <Button style={{ width: '100%' }} name='local' variant="primary" type="submit" onClick={handleSubmit}>
-                    Crear cuenta nueva
-                </Button>
-                <hr width='100%' />
-                <Button name='google' variant="success" type="submit" onClick={handleSubmit}>
-                    Usar mi cuenta de Google
-                </Button>
-            </Form>
-            <p>Ya tenés cuenta? <a href='/login' style={{ cursor: 'pointer', textDecoration: 'none' }}>Iniciar sesión</a></p>
-            <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+            <div style={{ alignSelf: 'center' }}>
+                <Form style={{
+                    width: 'fit-content',
+                    alignSelf: 'center',
+                    border: '0.1rem grey solid',
+                    borderRadius: '10px',
+                    padding: '1rem',
+                    margin: '2rem 0rem 1rem 0rem',
+                    boxShadow: '4px 4px 8px 1px grey',
+                    background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))'
+                }}>
+                    {errors?.name && <span className={styles.errorMessage}><PiWarning /><span>{errors.name}</span></span>}
+                    <InputGroup className="mb-3" id="formBasicEmail">
+                        <InputGroup.Text id="basic-addon1">Nombre</InputGroup.Text>
+                        <Form.Control name='name' type="text" placeholder="Ingresa tu nombre" onChange={handleChange} />
+                    </InputGroup>
+                    {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
+                    <InputGroup className="mb-3" id="formBasicPassword">
+                        <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                        <Form.Control name='email' type="email" placeholder="Ingresa tu email" onChange={handleChange} />
+                    </InputGroup>
+                    {errors?.address && <span className={styles.errorMessage}><PiWarning /><span>{errors.address}</span></span>}
+                    <InputGroup className="mb-3" id="formBasicPassword">
+                        <InputGroup.Text id="basic-addon1">Dirección</InputGroup.Text>
+                        <Form.Control name='address' type="text" placeholder="Ingresa tu dirección" onChange={handleChange} />
+                    </InputGroup>
+                    {errors?.phone && <span className={styles.errorMessage}><PiWarning /><span>{errors.phone}</span></span>}
+                    <InputGroup className="mb-3" id="formBasicPassword">
+                        <InputGroup.Text id="basic-addon1">Teléfono</InputGroup.Text>
+                        <Form.Control name='phone' type="text" placeholder="Ingresa tu teléfono" onChange={handleChange} />
+                    </InputGroup>
+                    {errors?.password && <span className={styles.errorMessage}><PiWarning /><span>{errors.password}</span></span>}
+                    <InputGroup className="mb-3" id="formBasicPassword">
+                        <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
+                        <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
+                    </InputGroup>
+                    <Button style={{ width: '100%' }} name='local' variant="primary" type="submit" onClick={handleSubmit}>
+                        Crear cuenta nueva
+                    </Button>
+                    <hr width='100%' />
+                    <Button name='google' variant="success" type="submit" onClick={handleSubmit}>
+                        Usar mi cuenta de Google
+                    </Button>
+                </Form>
+                <p>Ya tenés cuenta? <a href='/login' style={{ cursor: 'pointer', textDecoration: 'none' }}>Iniciar sesión</a></p>
+                <Button style={{ width: 'fit-content', alignSelf: 'center' }} as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+            </div>
             <br />
-            {/* <Footer /> */}
+            <Footer />
             <Modal show={modal.show}>
                 <Modal.Header>
                     <Modal.Title>{modal.header}</Modal.Title>
@@ -192,28 +197,11 @@ export default function Register() {
                 <Modal.Body>{modal.body}</Modal.Body>
                 <Modal.Footer>
                     <Button variant={modal.button} onClick={handleModalButton}>
-                        Ok
+                        Volver
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <svg style={{
-                position: 'absolute',
-                top: '0',
-                left: '0',
-                fill: '#0d6efd',
-                zIndex: '-3',
-            }}>
-                <path d="M 0 0 L 900 0 L 0 900 "/>
-            </svg>
-            <svg style={{
-                position: 'absolute',
-                top: '0',
-                right: '0',
-                fill: '#0d6efd',
-                zIndex: '-3'
-            }}>
-                <path d='M0 1000 L300 0 L1200 0 Z' />
-            </svg>
-        </div >
+            <Overlay />
+        </div>
     )
 }
