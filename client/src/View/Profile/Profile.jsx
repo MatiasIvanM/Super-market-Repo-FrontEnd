@@ -100,17 +100,14 @@ export default function Profile() {
                         padding: '0.8rem',
                         margin: '1rem 0rem 0rem 0rem'
                     }}>
-                        <InputGroup size='sm' style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <InputGroup.Text>Nombre</InputGroup.Text>
-                            <Form.Control disabled={edit} placeholder={customer?.name}></Form.Control>
+                        <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
+                            <Form.Control className='text-center' disabled={edit} value={customer?.name}></Form.Control>
                         </InputGroup>
-                        <InputGroup size='sm' style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <InputGroup.Text>Teléfono</InputGroup.Text>
-                            <Form.Control disabled={edit} placeholder={customer?.phone}></Form.Control>
+                        <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
+                            <Form.Control className='text-center' disabled={edit} value={customer?.phone}></Form.Control>
                         </InputGroup>
-                        <InputGroup size='sm' style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
-                            <InputGroup.Text>Dirección</InputGroup.Text>
-                            <Form.Control disabled={edit} placeholder={customer?.address}></Form.Control>
+                        <InputGroup style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
+                            <Form.Control className='text-center' disabled={edit} value={customer?.address}></Form.Control>
                         </InputGroup>
                         <Button name='edit' onClick={handleEdit} className='btn btn-secondary btn-sm btn btn-primary'>Editar</Button>
                     </Form>
