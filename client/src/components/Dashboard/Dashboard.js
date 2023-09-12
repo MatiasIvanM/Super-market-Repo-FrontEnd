@@ -5,8 +5,6 @@ import { Admin, Resource,
 } from 'react-admin';
 
 import { BsFillPeopleFill, BsReceiptCutoff, BsBoxSeamFill } from "react-icons/bs";
-
-import simpleRestProvider from 'ra-data-simple-rest';
 import authProvider from './authProvider';
 import PanelAdmin from './PanelAdmin';
 //? Products
