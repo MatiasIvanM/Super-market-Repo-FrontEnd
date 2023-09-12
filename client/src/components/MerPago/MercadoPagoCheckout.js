@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-
+import {  useSelector } from "react-redux";
 function MercadoPagoCheckout() {
   const [preferenceId, setPreferenceId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
@@ -35,6 +35,8 @@ function MercadoPagoCheckout() {
     }
   };
 
+const card= useSelector((state)=>state.productsSC)
+  console.log("MERCADOpago",card)
   // Función para iniciar el proceso de pago
   const handlePayment = () => {
     if (preferenceId) {

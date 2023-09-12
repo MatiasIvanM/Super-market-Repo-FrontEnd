@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import React from 'react';
 import { useDispatch} from 'react-redux';
 import style from './formProduct.module.css'
@@ -7,11 +7,17 @@ import {addProduct} from "../../redux/Actions/actionsProducts"
 import { Button, InputGroup, Form, Alert } from 'react-bootstrap'
 import { PiWarning } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
+import {  useSelector } from "react-redux";
 
 export default function FormProduct(){
   const dispatch = useDispatch();
   const { register, formState: { errors }, handleSubmit, reset } = useForm();
-
+  const [producto, setProducto] = useState([]);
+  const card= useSelector((state)=>state.productsSC)
+ useEffect(()=>{
+   setProducto(card)
+   },[])
+   console.log("FOOOOOOOORM",card)
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
