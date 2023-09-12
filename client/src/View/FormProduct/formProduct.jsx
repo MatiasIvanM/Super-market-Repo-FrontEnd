@@ -98,9 +98,9 @@ export default function FormProduct(){
               <span className={style.errorMessage}><PiWarning/> {errors.stock?.type === 'required' && <span>El campo stock es requerido</span>}</span>
             )}
           <InputGroup className={`mb-3 ${errors.stock && style.error}`}>
-            <InputGroup.Text id="basic-addon1">Stock </InputGroup.Text>
+            <InputGroup.Text id="basic-addon1">Inventario </InputGroup.Text>
             <Form.Control
-              placeholder="Escribe la cantidad en stock del producto"
+              placeholder="Escribe la cantidad en inventario del producto"
               aria-label="Stock"
               aria-describedby="basic-addon1"
               name='stock'
@@ -181,7 +181,7 @@ export default function FormProduct(){
         
           <div className={style.buttonContainer}>
             <Button className={style.styleButton} variant="success" type='submit'>Agregar producto</Button>
-            <Button className={style.styleButton} as={Link}to='/home' variant="primary">Volver a home</Button>
+            <Button className={style.styleButton} as={Link}to='/home' variant="primary">Volver al inicio</Button>
           </div>
           <Alert key='success' variant='success' show={showSuccessMessage}>
             El producto se ha agregado correctamente.
