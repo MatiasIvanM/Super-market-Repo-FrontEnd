@@ -6,7 +6,7 @@ import { List, CreateButton, ImageField, Show, ShowButton, DateField,
 } from 'react-admin';
 // import { EditDialog } from '@react-admin/ra-form-layout';
 import style from './ProductsList.module.css';
-import style from './ProductsList.module.css';
+
 
 
 const ListActions = () => (
