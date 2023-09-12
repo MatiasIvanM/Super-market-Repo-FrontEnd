@@ -1,6 +1,6 @@
 import React from 'react';
 import { Admin, Resource } from 'react-admin';
-import { Admin, Resource } from 'react-admin';
+
 
 import { BsFillPeopleFill, BsReceiptCutoff, BsBoxSeamFill } from "react-icons/bs";
 import authProvider from './authProvider';
