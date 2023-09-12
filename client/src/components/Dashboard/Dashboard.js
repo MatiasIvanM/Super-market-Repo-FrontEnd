@@ -34,13 +34,13 @@ const Dashboard = () => {
         icon={BsBoxSeamFill}
         show={DetailShow} 
       />
-      {/* <Resource 
+      <Resource 
         name="customer" 
         list={UsersList} 
         create={UserCreate} 
         edit={UserEdit} 
         icon={BsFillPeopleFill}
-      /> */}
+      />
       {/* <Resource name="users"  list={UsersList} create={UserCreate} edit={UserEdit} icon={BsFillPeopleFill} /> */}
       <Resource 
         name="orders"  
