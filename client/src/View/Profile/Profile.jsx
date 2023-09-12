@@ -64,7 +64,12 @@ export default function Profile() {
             }
         }
         if (button === 'save' && !edit) {
-            setModal({ ...modal, show: true })
+            setModal({
+                show: true,
+                header: "Guardo la nueva info del usuario",
+                body: "*No implementado*",
+                button: "success"
+            })
         }
     }
 
@@ -73,7 +78,11 @@ export default function Profile() {
     }
 
     useEffect(() => {
-        getCustomer()
+        localStorage.getItem('customer') && getCustomer()
+    }, [])
+
+    useEffect(() => {
+        !localStorage.getItem('customer') && history.push('/home')
     }, [])
 
     return (
@@ -86,7 +95,7 @@ export default function Profile() {
             <Card style={{
                 margin: '5rem 0rem 2rem 0rem',
                 background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))',
-                boxShadow: '4px 4px 8px 1px grey',
+                boxShadow: '4px 4px 8px 1px grey'
             }}>
                 <Card.Body>
                     <Card.Title>
@@ -100,12 +109,15 @@ export default function Profile() {
                         padding: '0.8rem',
                         margin: '1rem 0rem 0rem 0rem'
                     }}>
+                        <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Nombre</p>
                         <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
                             <Form.Control className='text-center' disabled={edit} value={customer?.name}></Form.Control>
                         </InputGroup>
+                        <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Teléfono</p>
                         <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
                             <Form.Control className='text-center' disabled={edit} value={customer?.phone}></Form.Control>
                         </InputGroup>
+                        <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Dirección</p>
                         <InputGroup style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
                             <Form.Control className='text-center' disabled={edit} value={customer?.address}></Form.Control>
                         </InputGroup>
@@ -127,7 +139,7 @@ export default function Profile() {
                 <Modal.Body>{modal.body}</Modal.Body>
                 <Modal.Footer>
                     <Button variant={modal.button} onClick={handleModalButton}>
-                        Ok
+                        Aceptar
                     </Button>
                 </Modal.Footer>
             </Modal>
