@@ -114,7 +114,7 @@ export default function Profile() {
                 <Modal.Body>{modal.body}</Modal.Body>
                 <Modal.Footer>
                     <Button variant={modal.button} onClick={handleModalButton}>
-                        Ok
+                        Aceptar
                     </Button>
                 </Modal.Footer>
             </Modal>
