@@ -36,3 +36,4 @@ function App() {
 }
 //Se esta renderizando doble el footer y el navbar, por el render desde landing
 export default App;
+
