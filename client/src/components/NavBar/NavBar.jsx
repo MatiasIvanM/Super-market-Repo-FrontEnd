@@ -27,12 +27,13 @@ const NavBar = (props) => {
     <div>
       <Navbar bg="dark" expand="lg" variant="dark">
         <Container>
+          <Link to='/'>
           <img src="logo.png" alt="Logo" height="45px" className='custom-nav' />
+          </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto custom-nav">
               <Nav.Link as={Link} to="/home">INICIO</Nav.Link>
-              <Nav.Link as={Link} to="/form">AGREGAR PRODUCTO</Nav.Link>
               
             </Nav>
 
