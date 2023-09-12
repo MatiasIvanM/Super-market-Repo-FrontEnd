@@ -26,13 +26,14 @@ export default function Profile() {
         if (isAuthenticated) {
             logout()
         } else {
-            history.push('/home')
+            history.push('/')
         }
     }
 
     function handleChange(event) {
         const property = event.target.name
         const value = event.target.value
+        setCustomer({ ...customer, [property]: value })
     }
 
     function handleEdit(event) {

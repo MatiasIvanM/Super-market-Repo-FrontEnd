@@ -164,7 +164,8 @@ export default function Register() {
                 border: '0.1rem grey solid',
                 borderRadius: '10px',
                 padding: '0.8rem',
-                margin: '5rem 0rem 1rem 0rem'
+                margin: '5rem 0rem 1rem 0rem',
+                boxShadow: '4px 4px 8px 1px grey',
             }}>
 
                 {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}

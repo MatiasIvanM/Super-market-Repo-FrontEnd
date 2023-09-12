@@ -12,6 +12,7 @@ import { PiWarning } from 'react-icons/pi'
 import styles from './Register.module.css'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom';
+import { Footer } from '../../components/Footer/Footer';
 
 export default function Register() {
     const { loginWithPopup, isAuthenticated, user } = useAuth0()
@@ -143,7 +144,9 @@ export default function Register() {
                 border: '0.1rem grey solid',
                 borderRadius: '10px',
                 padding: '1rem',
-                margin: '3rem 0rem 1rem 0rem'
+                margin: '2rem 0rem 1rem 0rem',
+                boxShadow: '4px 4px 8px 1px grey',
+                backgroundColor: 'white'
             }}>
                 {errors?.name && <span className={styles.errorMessage}><PiWarning /><span>{errors.name}</span></span>}
                 <InputGroup className="mb-3" id="formBasicEmail">
@@ -180,6 +183,8 @@ export default function Register() {
             </Form>
             <p>Ya tenés cuenta? <a href='/login' style={{ cursor: 'pointer', textDecoration: 'none' }}>Iniciar sesión</a></p>
             <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+            <br />
+            {/* <Footer /> */}
             <Modal show={modal.show}>
                 <Modal.Header>
                     <Modal.Title>{modal.header}</Modal.Title>
@@ -191,6 +196,24 @@ export default function Register() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <svg style={{
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                fill: '#0d6efd',
+                zIndex: '-3',
+            }}>
+                <path d="M 0 0 L 900 0 L 0 900 "/>
+            </svg>
+            <svg style={{
+                position: 'absolute',
+                top: '0',
+                right: '0',
+                fill: '#0d6efd',
+                zIndex: '-3'
+            }}>
+                <path d='M0 1000 L300 0 L1200 0 Z' />
+            </svg>
         </div >
     )
 }
