@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { stringify } from 'query-string';
+import { server } from '../../utils/urlLocales';
 
-const url = 'http://localhost:3001'; 
+const url = server; 
 
 const httpClient = axios.create({
   baseURL: url,
@@ -11,36 +12,25 @@ const httpClient = axios.create({
   },
 });
 
-
 const dataProvider = {
     //Trae la lista de registros de un recurso. Falta la paginacion
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const query = {
-      _page: page,
-      _limit: perPage,
+      ...params.filter,
       _sort: field,
       _order: order,
-      ...params.filter,
-      // ...params.filter,
-      // _sort: field,
-      // _order: order,
-      // _start: ( 1) * 10,
-      // _start: (page - 1) * perPage,
-      // _end: 5 * 10,
-      // _end: page * perPage,
-
+      _start: ( 1) * 10,
+    //   _start: (page - 1) * perPage,
+      _end: 5 * 10,
+    //   _end: page * perPage,
     };
     const url = `${resource}?${stringify(query)}`;
 
-    // return httpClient.get(url).then(({ data }) => ({
-    //   data: data,
-    //   total: parseInt(data.length, 10),
-    // }));
-    return httpClient.get(url).then(({ data, headers }) => ({
+    return httpClient.get(url).then(({ data }) => ({
       data: data,
-      total: parseInt(headers['x-total-count'], 10),
+      total: parseInt(data.length, 10),
     }));
   },
 
@@ -58,7 +48,7 @@ const dataProvider = {
 
   update: (resource, params) => {
     return httpClient
-      .put(`${resource}`, params.data)
+      .put(`${resource}/${params.id}`, params.data)
       .then(({ data }) => ({
         data: data,
       }));
@@ -70,7 +60,7 @@ const dataProvider = {
     }));
   },
 
-  // Otros métodos como getMany, updateMany, deleteMany, etc.
+  
 };
 
 export default dataProvider;
