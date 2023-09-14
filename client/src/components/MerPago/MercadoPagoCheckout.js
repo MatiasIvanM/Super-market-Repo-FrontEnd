@@ -52,17 +52,11 @@ function MercadoPagoCheckout() {
     }
   };
 
-<<<<<<< HEAD
-const card= useSelector((state)=>state.productsSC)
-  console.log("MERCADOpago",card)
-  // Función para iniciar el proceso de pago
-=======
   useEffect(() => {
     // Llamar a createPreference solo una vez cuando el componente se monta
     createPreference();// eslint-disable-next-line
   }, []); // Asegurarse de que esto se ejecute solo una vez
 
->>>>>>> 5ede5fc2ee06fa52e41a2ca927404d7bad787a23
   const handlePayment = () => {
     if (preferenceId) {
       window.location.href =(`https://www.mercadopago.com/mco/checkout/start?pref_id=${preferenceId}`);
