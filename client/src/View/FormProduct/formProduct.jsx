@@ -22,6 +22,7 @@ export default function FormProduct(){
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const onSubmit = (data) => {
+  console.log("🚀 ~ file: formProduct.jsx:19 ~ onSubmit ~ ACA ESTA LA DATA WASHO:", data)
  
     console.log(errors);
     if (Object.keys(errors).length > 0) {
@@ -39,7 +40,7 @@ export default function FormProduct(){
     <div className={style.container} >
       <div className={style.formContainer} >
         <h1>Crear Producto</h1>
-      <form  onSubmit={handleSubmit(onSubmit)}>
+        <form encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
           
        {errors.name && (
           <span className={style.errorMessage}>
@@ -175,8 +176,8 @@ export default function FormProduct(){
           <Form.Control 
             aria-label="Image" 
             placeholder='Agrega una imagen del producto'
-            name='image'
-            type="text"
+            name="image"
+            type="file"
               {...register('image', {
                 required: true,
                 maxLength:249

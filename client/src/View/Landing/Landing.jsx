@@ -12,6 +12,7 @@ import {Footer} from '../../components/Footer/Footer';
 function Landing(){
   const dispatch = useDispatch();
   const history = useHistory();
+  
 
   const searchByName = (name) => {
     dispatch(getProductsByName(name));

@@ -18,6 +18,7 @@ export const ADD_PRODUCT_SC='ADD_PRODUCT_SC'
 //Customers
 export const GET_CUSTOMERS = 'GET_CUSTOMERS';
 export const GET_CUSTOMER_BY_ID = 'GET_CUSTOMER_BY_ID';
+export const GET_CUSTOMER_BY_EMAIL = 'GET_CUSTOMER_BY_ID';
 export const ADD_CUSTOMER='ADD_CUSTOMER';
 export const MOD_CUSTOMER='MOD_CUSTOMER';
 export const DEL_CUSTOMER='DEL_CUSTOMER';

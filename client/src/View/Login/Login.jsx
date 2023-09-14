@@ -1,22 +1,21 @@
-import Button from 'react-bootstrap/Button';
-import { InputGroup, Alert } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import { InputGroup } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
-// eslint-disable-next-line
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { addCustomer } from '../../redux/Actions/actionsCustomers';
-import { useAuth0 } from "@auth0/auth0-react";
-import validate from './validations';
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useAuth0 } from "@auth0/auth0-react"
+import { Link } from 'react-router-dom'
 import { PiWarning } from 'react-icons/pi'
-import styles from './Register.module.css'
+import validate from './validations';
+import styles from './Login.module.css'
+import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
-import { Link } from 'react-router-dom';
-import { Footer } from '../../components/Footer/Footer';
 import Overlay from '../../components/Overlay/Overlay';
+import { Footer } from '../../components/Footer/Footer';
 
 export default function Register() {
-    const { loginWithPopup, isAuthenticated, user } = useAuth0()
+    const { loginWithPopup, logout, isAuthenticated, user } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -31,10 +30,7 @@ export default function Register() {
     }
     const [customer, setCustomer] = useState(defaultCustomer)
     const [errors, setErrors] = useState({
-        name: "",
         email: "",
-        address: "",
-        phone: "",
         password: "",
     })
     const [modal, setModal] = useState({
@@ -51,20 +47,11 @@ export default function Register() {
         setErrors(validate({ ...customer, [property]: value }))
     }
 
-    function checkErrors() {
-        for (const err in errors) {
-            if (errors[err] !== '') {
-                return true
-            }
-        }
-        return false
-    }
-
     async function handleSubmit(event) {
         event.preventDefault()
         const provider = event.target.name
         setErrors(validate({ ...customer }))
-        if (provider === 'local') {
+        if (provider === "local") {
             if (checkErrors()) {
                 setModal({
                     show: true,
@@ -88,17 +75,51 @@ export default function Register() {
         }
     }
 
+    function handleLogout() {
+        isAuthenticated && logout()
+        localStorage.clear()
+    }
+
+    function checkErrors() {
+        for (const err in errors) {
+            if (errors[err] !== '') {
+                return true
+            }
+        }
+        return false
+    }
+
     async function dispatchCustomer() {
-        if (customer.name && customer.email) {
-            const response = await dispatch(addCustomer(customer))
+        if (customer.email) {
+            const response = await dispatch(getCustomerByEmail(customer.email))
             if (response?.payload) {
-                localStorage.setItem('customer', JSON.stringify(response.payload))
-                setModal({
-                    show: true,
-                    header: 'Usuario Registrado',
-                    body: 'Bienvenido',
-                    button: 'success',
-                })
+                if (response.payload[0].provider === 'local') {
+                    if (response.payload[0].password === customer.password) {
+                        localStorage.setItem('customer', JSON.stringify(response.payload[0]))
+                        setModal({
+                            show: true,
+                            header: 'Sesión iniciada',
+                            body: 'Bienvenido',
+                            button: 'success',
+                        })
+                    } else {
+                        setModal({
+                            show: true,
+                            header: 'Ups!',
+                            body: 'Usuario o contraseña incorrectas',
+                            button: 'danger',
+                        })
+                    }
+                }
+                if (response.payload[0].provider === 'google') {
+                    localStorage.setItem('customer', JSON.stringify(response.payload[0]))
+                    setModal({
+                        show: true,
+                        header: 'Sesión iniciada',
+                        body: 'Bienvenido',
+                        button: 'success',
+                    })
+                }
             } else {
                 setModal({
                     show: true,
@@ -147,47 +168,35 @@ export default function Register() {
                     alignSelf: 'center',
                     border: '0.1rem grey solid',
                     borderRadius: '10px',
-                    padding: '1rem',
-                    margin: '2rem 0rem 1rem 0rem',
+                    padding: '0.8rem',
+                    margin: '5rem 0rem 1rem 0rem',
                     boxShadow: '4px 4px 8px 1px grey',
+                    backgroundColor: 'white',
                     background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))'
                 }}>
-                    {errors?.name && <span className={styles.errorMessage}><PiWarning /><span>{errors.name}</span></span>}
-                    <InputGroup className="mb-3" id="formBasicEmail">
-                        <InputGroup.Text id="basic-addon1">Nombre</InputGroup.Text>
-                        <Form.Control name='name' type="text" placeholder="Ingresa tu nombre" onChange={handleChange} />
-                    </InputGroup>
+
                     {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
                     <InputGroup className="mb-3" id="formBasicPassword">
                         <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
                         <Form.Control name='email' type="email" placeholder="Ingresa tu email" onChange={handleChange} />
-                    </InputGroup>
-                    {errors?.address && <span className={styles.errorMessage}><PiWarning /><span>{errors.address}</span></span>}
-                    <InputGroup className="mb-3" id="formBasicPassword">
-                        <InputGroup.Text id="basic-addon1">Dirección</InputGroup.Text>
-                        <Form.Control name='address' type="text" placeholder="Ingresa tu dirección" onChange={handleChange} />
-                    </InputGroup>
-                    {errors?.phone && <span className={styles.errorMessage}><PiWarning /><span>{errors.phone}</span></span>}
-                    <InputGroup className="mb-3" id="formBasicPassword">
-                        <InputGroup.Text id="basic-addon1">Teléfono</InputGroup.Text>
-                        <Form.Control name='phone' type="text" placeholder="Ingresa tu teléfono" onChange={handleChange} />
                     </InputGroup>
                     {errors?.password && <span className={styles.errorMessage}><PiWarning /><span>{errors.password}</span></span>}
                     <InputGroup className="mb-3" id="formBasicPassword">
                         <InputGroup.Text id="basic-addon1">Contraseña</InputGroup.Text>
                         <Form.Control name='password' type="password" placeholder="Ingresa tu contraseña" onChange={handleChange} />
                     </InputGroup>
-                    <Button style={{ width: '100%' }} name='local' variant="primary" type="submit" onClick={handleSubmit}>
-                        Crear cuenta nueva
+                    <Button style={{ width: '100%' }} name="local" variant="primary" type="submit" onClick={handleSubmit}>
+                        Iniciar sesión
                     </Button>
                     <hr width='100%' />
-                    <Button name='google' variant="success" type="submit" onClick={handleSubmit}>
-                        Usar mi cuenta de Google
+                    <Button name="google" variant="success" type="submit" onClick={handleSubmit}>
+                        Continuar con Google
                     </Button>
                 </Form>
-                <p>Ya tenés cuenta? <a href='/login' style={{ cursor: 'pointer', textDecoration: 'none' }}>Iniciar sesión</a></p>
+                <p>No tenés cuenta? <a href='/register' style={{ cursor: 'pointer', textDecoration: 'none' }}>Crear cuenta nueva</a></p>
                 <Button style={{ width: 'fit-content', alignSelf: 'center' }} as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
             </div>
+
             <br />
             {/* <Footer /> */}
             <Modal show={modal.show}>
@@ -197,7 +206,7 @@ export default function Register() {
                 <Modal.Body>{modal.body}</Modal.Body>
                 <Modal.Footer>
                     <Button variant={modal.button} onClick={handleModalButton}>
-                        Volver
+                        Aceptar
                     </Button>
                 </Modal.Footer>
             </Modal>

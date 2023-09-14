@@ -7,7 +7,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import { Footer } from '../../components/Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios } from '../../redux/Actions/actionsProducts';
+import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProducts } from '../../redux/Actions/actionsProducts';
 
 
 export default function Home() {
@@ -93,8 +93,12 @@ export default function Home() {
     }, [productsByName]);
 
     useEffect(() => {
-        applyFilters()
+        applyFilters()// eslint-disable-next-line
     }, [filters]);
+
+    useEffect(() => {
+        dispatch(getProducts());// eslint-disable-next-line
+      }, []);
 
     // if (products.length === 0) {
     //     return <div>
@@ -173,6 +177,7 @@ export default function Home() {
                             image={p.image}
                             description={p.description}
                             price={p.price}
+                            stock={p.stock}
                             rating='5'
                         >
                         </CardProducto>

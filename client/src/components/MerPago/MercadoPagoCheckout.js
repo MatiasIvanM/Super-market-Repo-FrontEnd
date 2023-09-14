@@ -1,11 +1,20 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
+
 function MercadoPagoCheckout() {
   const [preferenceId, setPreferenceId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+  const history = useHistory();
+
+  const cart = useSelector((state) => state.productsSC);
 
   // Esta función crea una preferencia en Mercado Pago y recibe el ID de la preferencia
+  const totalCartPrice = cart.reduce((total, product) => {
+    return total + product.productDetails.price * product.quantity;
+  }, 0);
+
   const createPreference = async () => {
     try {
       const response = await axios.post(
@@ -13,8 +22,8 @@ function MercadoPagoCheckout() {
         {
           items: [
             {
-              title: 'Producto de ejemplo',
-              unit_price: 1000, // El precio en centavos
+              title: 'Pago Supermarket shop',
+              unit_price: totalCartPrice, // El precio en centavos
               quantity: 1,
             },
           ],
@@ -27,7 +36,6 @@ function MercadoPagoCheckout() {
         }
       );
       
-      console.log("ID:::", response.data.id);
       setPreferenceId(response.data.id);
       setSuccessMessage('Preferencia creada con éxito');
     } catch (error) {
@@ -42,15 +50,21 @@ const card= useSelector((state)=>state.productsSC)
     if (preferenceId) {
       window.open(`https://www.mercadopago.com/mla/checkout/start?pref_id=${preferenceId}`);
     }
-    console.log("preferencia::", preferenceId);
+  };
+
+  // Función para cancelar y regresar al home
+  const handleCancel = () => {
+    history.push('/home');
   };
 
   return (
-    <div>
-      <h1>Pagar Productos</h1>
-      {successMessage && <p>{successMessage}</p>}
-      <button onClick={createPreference}>Crear Preferencia de Pago</button>
-      <button onClick={handlePayment}>Iniciar Pago</button>
+    <div className="container mt-5">
+      <h2 className="mb-4">Pagar Productos</h2>
+      <p className="fs-5"><strong>Valor a pagar:</strong> <span className="text-success">${totalCartPrice.toFixed(2)}</span></p>
+      {successMessage && <p className="alert alert-success">{successMessage}</p>}
+      <button className="btn btn-danger" onClick={handleCancel}>Cancelar</button>
+      <button className="btn btn-primary ms-2" onClick={createPreference}>Crear referencia de Pago</button>
+      <button className="btn btn-success ms-2" onClick={handlePayment}>Iniciar Pago</button>
     </div>
   );
 }
