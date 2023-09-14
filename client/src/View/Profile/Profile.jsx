@@ -6,15 +6,17 @@ import Modal from 'react-bootstrap/Modal';
 import { useAuth0 } from "@auth0/auth0-react"
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
 import Overlay from '../../components/Overlay/Overlay';
+import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
 
 export default function Profile() {
     const { logout, isAuthenticated } = useAuth0()
+    const dispatch = useDispatch()
     const history = useHistory()
-    const user = JSON.parse(localStorage.getItem('customer'))
     const [edit, setEdit] = useState(true)
-    const [customer, setCustomer] = useState({ ...user })
+    const [customer, setCustomer] = useState()
     const [modal, setModal] = useState({
         show: false,
         header: "",
@@ -22,16 +24,25 @@ export default function Profile() {
         button: ""
     })
 
+    async function getCustomer() {
+        const email = JSON.parse(localStorage.getItem('customer')).email
+        const user = await dispatch(getCustomerByEmail(email))
+        setCustomer({
+            name: user.payload[0].name,
+            email: user.payload[0].email,
+            phone: user.payload[0].phone,
+            address: user.payload[0].address,
+        })
+    }
+
     function handleLogout() {
         localStorage.clear()
         if (isAuthenticated) {
             logout({ logoutParams: { returnTo: window.location.origin } })
         }
-        // else
-        // {
-        //     history.push('/')
-        // }
-        // history.push('/')
+        else {
+            history.push('/')
+        }
     }
 
     function handleChange(event) {
@@ -52,13 +63,26 @@ export default function Profile() {
             }
         }
         if (button === 'save' && !edit) {
-            setModal({ ...modal, show: true })
+            setModal({
+                show: true,
+                header: "Guardo la nueva info del usuario",
+                body: "*No implementado*",
+                button: "success"
+            })
         }
     }
 
     function handleModalButton() {
         setModal({ ...modal, show: false })
     }
+
+    useEffect(() => {
+        localStorage.getItem('customer') && getCustomer()
+    }, [])
+
+    useEffect(() => {
+        !localStorage.getItem('customer') && history.push('/home')
+    }, [])
 
     return (
         <div style={{
@@ -70,31 +94,31 @@ export default function Profile() {
             <Card style={{
                 margin: '5rem 0rem 2rem 0rem',
                 background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))',
-                boxShadow: '4px 4px 8px 1px grey',
+                boxShadow: '4px 4px 8px 1px grey'
             }}>
                 <Card.Body>
                     <Card.Title>
-                        <div>{customer.name}</div>
+                        <div style={{ color: '#0d6efd', fontSize: '2rem' }}>{customer?.name}</div>
                     </Card.Title>
                     <Card.Subtitle>
-                        <div>{customer.email}</div>
+                        <div>{customer?.email}</div>
                     </Card.Subtitle>
                     <hr with='100%' />
                     <Form style={{
                         padding: '0.8rem',
                         margin: '1rem 0rem 0rem 0rem'
                     }}>
-                        <InputGroup size='sm' style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <InputGroup.Text>Nombre</InputGroup.Text>
-                            <Form.Control disabled={edit} placeholder={customer.name}></Form.Control>
+                        <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Nombre</p>
+                        <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
+                            <Form.Control className='text-center' disabled={edit} value={customer?.name}></Form.Control>
                         </InputGroup>
-                        <InputGroup size='sm' style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <InputGroup.Text>Teléfono</InputGroup.Text>
-                            <Form.Control disabled={edit} placeholder={customer.phone}></Form.Control>
+                        <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Teléfono</p>
+                        <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
+                            <Form.Control className='text-center' disabled={edit} value={customer?.phone}></Form.Control>
                         </InputGroup>
-                        <InputGroup size='sm' style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
-                            <InputGroup.Text>Dirección</InputGroup.Text>
-                            <Form.Control disabled={edit} placeholder={customer.address}></Form.Control>
+                        <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Dirección</p>
+                        <InputGroup style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
+                            <Form.Control className='text-center' disabled={edit} value={customer?.address}></Form.Control>
                         </InputGroup>
                         <Button name='edit' onClick={handleEdit} className='btn btn-secondary btn-sm btn btn-primary'>Editar</Button>
                     </Form>
@@ -114,7 +138,7 @@ export default function Profile() {
                 <Modal.Body>{modal.body}</Modal.Body>
                 <Modal.Footer>
                     <Button variant={modal.button} onClick={handleModalButton}>
-                        Ok
+                        Aceptar
                     </Button>
                 </Modal.Footer>
             </Modal>

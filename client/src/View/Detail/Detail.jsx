@@ -14,6 +14,7 @@ function ProductsDetail(props) {
     const { id } = props
     const dispatch = useDispatch();
     const [showMessage, setShowMessage] = useState(false);
+    const [showMessageWarning, setShowMessageWarning] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [productDetails, setProductDetails] = useState(null);
     
@@ -30,11 +31,18 @@ function ProductsDetail(props) {
     }, [dispatch, id]);
 
     function handleAddToCart() {
+      if(productDetails.stock<quantity){
+        setShowMessageWarning(true)
+        setTimeout(() => {
+          setShowMessageWarning(false);
+        }, 2000);
+      }else{
       setShowMessage(true);
       dispatch(addProductSC({ productDetails, quantity }))
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);
+      }
     
     }
 
@@ -104,6 +112,11 @@ function ProductsDetail(props) {
         <Alert show={showMessage} variant="success" className={style.customAlert}>
           <div className={style.alertContent}>
             ¡Producto agregado al carrito!
+          </div>
+        </Alert>
+        <Alert show={showMessageWarning} variant="warning" className={style.customAlert}>
+          <div className={style.alertContent}>
+            ¡No hay suficiente inventario!
           </div>
         </Alert>
           <Button onClick={handleModalClose}>Cerrar</Button>

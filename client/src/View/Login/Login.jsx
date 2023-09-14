@@ -7,12 +7,11 @@ import { useDispatch } from 'react-redux'
 import { useAuth0 } from "@auth0/auth0-react"
 import { Link } from 'react-router-dom'
 import { PiWarning } from 'react-icons/pi'
-import validate from './validations';
+import * as validate from './validations';
 import styles from './Login.module.css'
 import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
-import { Footer } from '../../components/Footer/Footer';
 
 export default function Register() {
     const { loginWithPopup, logout, isAuthenticated, user } = useAuth0()
@@ -44,15 +43,16 @@ export default function Register() {
         const property = event.target.name
         const value = event.target.value
         setCustomer({ ...customer, [property]: value })
-        setErrors(validate({ ...customer, [property]: value }))
+        setErrors(validate[property](value))
     }
 
     async function handleSubmit(event) {
         event.preventDefault()
         const provider = event.target.name
-        setErrors(validate({ ...customer }))
+        setErrors(validate['email'](customer.email))
+        setErrors(validate['password'](customer.password))
         if (provider === "local") {
-            if (checkErrors()) {
+            if (customer.email === '' || customer.password === '' || checkErrors()) {
                 setModal({
                     show: true,
                     header: 'Ups!',
@@ -95,7 +95,7 @@ export default function Register() {
             if (response?.payload) {
                 if (response.payload[0].provider === 'local') {
                     if (response.payload[0].password === customer.password) {
-                        localStorage.setItem('customer', JSON.stringify(response.payload[0]))
+                        localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
                         setModal({
                             show: true,
                             header: 'Sesión iniciada',
@@ -112,7 +112,7 @@ export default function Register() {
                     }
                 }
                 if (response.payload[0].provider === 'google') {
-                    localStorage.setItem('customer', JSON.stringify(response.payload[0]))
+                    localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
                     setModal({
                         show: true,
                         header: 'Sesión iniciada',
@@ -152,7 +152,7 @@ export default function Register() {
     }, [customer.provider])
 
     useEffect(() => {
-        setErrors(validate({ ...customer }))
+        localStorage.getItem('customer') && history.push('/home')
     }, [])
 
     return (

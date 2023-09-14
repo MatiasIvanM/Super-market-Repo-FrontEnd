@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { stringify } from 'query-string';
+import { server } from '../../utils/urlLocales';
 
-const url = 'http://localhost:3001'; 
+const url = server; 
 
 const httpClient = axios.create({
   baseURL: url,
@@ -59,7 +60,7 @@ const dataProvider = {
     }));
   },
 
-  // Otros métodos como getMany, updateMany, deleteMany, etc.
+  
 };
 
 export default dataProvider;
