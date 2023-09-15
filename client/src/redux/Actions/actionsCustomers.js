@@ -15,16 +15,19 @@ export function getCustomers() {
 }
 
 export function getCustomerById(id) {
-	return (dispatch) => {
-		axios.get(`${CUSTOMER}${id}`)
-		.then((response) => {
-			dispatch({ type: GET_CUSTOMER_BY_ID, payload: response.data });
-		}).catch((error) => {
+	return async (dispatch) =>{
+		try {
+			const {data} = await axios.get(`${CUSTOMER}${id}`)
+			return dispatch({
+				type: GET_CUSTOMER_BY_ID,
+			    payload: data,
+			})
+		} catch (error) {
 			console.error('An error occurred:', error.message);
-			
-		});
-	};
+		}
+	}
 }
+
 
 export function getCustomerByEmail(email) {
 	return async (dispatch) =>{

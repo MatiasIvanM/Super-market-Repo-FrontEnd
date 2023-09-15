@@ -90,46 +90,49 @@ export default function Register() {
     }
 
     async function dispatchCustomer() {
-        if (customer.email) {
-            const response = await dispatch(getCustomerByEmail(customer.email))
-            if (response?.payload) {
-                if (response.payload[0].provider === 'local') {
-                    if (response.payload[0].password === customer.password) {
-                        localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
-                        dispatch(getCustomerById(response.payload[0].id))
-                        setModal({
-                            show: true,
-                            header: 'Sesión iniciada',
-                            body: 'Bienvenido',
-                            button: 'success',
-                        })
-                    } else {
-                        setModal({
-                            show: true,
-                            header: 'Ups!',
-                            body: 'Usuario o contraseña incorrectas',
-                            button: 'danger',
-                        })
-                    }
-                }
-                if (response.payload[0].provider === 'google') {
-                    localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
-                    setModal({
-                        show: true,
-                        header: 'Sesión iniciada',
-                        body: 'Bienvenido',
-                        button: 'success',
-                    })
-                }
-            } else {
-                setModal({
-                    show: true,
-                    header: 'Error!',
-                    body: 'Algo salió mal',
-                    button: 'danger',
-                })
-            }
-        }
+        const response = await dispatch(login({ email: customer.email, password: customer.password }))
+        console.log(response);
+
+        // if (customer.email) {
+        //     const response = await dispatch(getCustomerByEmail(customer.email))
+        //     if (response?.payload) {
+        //         if (response.payload[0].provider === 'local') {
+        //             if (response.payload[0].password === customer.password) {
+        //                 localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
+        //                 dispatch(getCustomerById(response.payload[0].id))
+        //                 setModal({
+        //                     show: true,
+        //                     header: 'Sesión iniciada',
+        //                     body: 'Bienvenido',
+        //                     button: 'success',
+        //                 })
+        //             } else {
+        //                 setModal({
+        //                     show: true,
+        //                     header: 'Ups!',
+        //                     body: 'Usuario o contraseña incorrectas',
+        //                     button: 'danger',
+        //                 })
+        //             }
+        //         }
+        //         if (response.payload[0].provider === 'google') {
+        //             localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
+        //             setModal({
+        //                 show: true,
+        //                 header: 'Sesión iniciada',
+        //                 body: 'Bienvenido',
+        //                 button: 'success',
+        //             })
+        //         }
+        //     } else {
+        //         setModal({
+        //             show: true,
+        //             header: 'Error!',
+        //             body: 'Algo salió mal',
+        //             button: 'danger',
+        //         })
+        //     }
+        // }
     }
 
     useEffect(() => {
