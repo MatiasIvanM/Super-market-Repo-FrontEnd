@@ -48,7 +48,7 @@ const dataProvider = {
 
   update: (resource, params) => {
     return httpClient
-      .put(`${resource}/${params.id}`, params.data)
+      .put(`${resource}`, params.data) /* /${params.id} */
       .then(({ data }) => ({
         data: data,
       }));

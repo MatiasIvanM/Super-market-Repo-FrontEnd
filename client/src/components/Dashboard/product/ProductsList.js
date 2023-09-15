@@ -8,6 +8,7 @@ import { List, CreateButton, ImageField, Show, ShowButton, DateField,
 import style from './ProductsList.module.css';
 
 
+
 const ListActions = () => (
   <TopToolbar>
       <SelectColumnsButton />
@@ -80,8 +81,8 @@ const ProductsList = (props) => {  //Este es el que muestra las ciudades
           <TextField source="available" />
           <ImageField source="image" sx= {{ '& img': { maxWidth: 40, maxHeight: 40, objectFit: 'contain' } } } />
           {/* <DateField source="created_at" /> */}
-          <EditButton  basePath="/products"/>
-          <ShowButton  basePath="/products" />
+          <EditButton  basepath="/products"/>
+          <ShowButton  basepath="/products" />
           {/* <DeleteButton basePath="/products" />  */}
         </DatagridConfigurable>
     </List>

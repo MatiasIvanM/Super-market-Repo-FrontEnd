@@ -8,10 +8,11 @@ import { Footer } from '../../components/Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProducts } from '../../redux/Actions/actionsProducts';
-
+import { selectCategory } from '../../redux/Actions/actionsCategory';
 
 export default function Home() {
     const dispatch = useDispatch();
+    dispatch(selectCategory());
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
     const ITEMS_PER_PAGE = 10;
@@ -20,7 +21,13 @@ export default function Home() {
     const [filters, setFilters] = useState(defaultFilters);
     const [currentPage, setCurrentPage] = useState(0);
     const [items, setItems] = useState([]);
-
+    const [customer, setCustomer] = useState({});
+    let customerById = useSelector((state)=>state.customerId)
+    
+    useEffect(() => {
+        setCustomer(customerById)
+        console.log(customer,"customer")
+    }, [customerById]);
     const nextHandler = () => {
         const totalElements = productsMod.length;
         const nextPage = currentPage + 1;
