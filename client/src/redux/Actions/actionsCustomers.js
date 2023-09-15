@@ -46,7 +46,7 @@ export function getCustomerByEmail(email) {
 export function loginCustomer(customer) {
 	return async (dispatch) =>{
 		try {
-			const {data} = await axios.get(`${CUSTOMER}login`,customer)
+			const {data} = await axios.post(`${CUSTOMER}login`,customer)
 			return dispatch({
 				type: LOGIN_CUSTOMER,
 			    payload: data,

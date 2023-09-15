@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import { PiWarning } from 'react-icons/pi'
 import * as validate from './validations';
 import styles from './Login.module.css'
-import { getCustomerByEmail, getCustomerById, login } from '../../redux/Actions/actionsCustomers';
+import { getCustomerByEmail, getCustomerById, loginCustomer } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
 
