@@ -10,8 +10,37 @@ function ShoppingCart() {
   const productsSC = useSelector((state) => state.productsSC)
 
   return (
-    <div/>
-    )
+    <>
+    <Modal
+    size="sm"
+    aria-labelledby="example-modal-sizes-title-sm"
+  >
+    <Modal.Header closeButton>
+      <Modal.Title id="example-modal-sizes-title-sm">
+        Small Modal
+      </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>...</Modal.Body>
+  </Modal>
+  <Modal
+    size="lg"
+    onHide={() => (false)}
+    aria-labelledby="example-modal-sizes-title-lg"
+  >
+    <Modal.Header closeButton>
+      <Modal.Title id="example-modal-sizes-title-lg">
+        Large Modal
+      </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>...</Modal.Body>
+  </Modal>
+</>
+);
+
+  
+
+
+
 }
 
 

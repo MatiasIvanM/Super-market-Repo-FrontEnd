@@ -7,7 +7,6 @@ import Image from 'react-bootstrap/Image';
 import style from './Detail.module.css'
 import { AiOutlineStar } from 'react-icons/ai'
 import {addProductSC} from "../../redux/Actions/actionsSC"
-import { useSelector } from "react-redux";
 
 
 function ProductsDetail(props) {
