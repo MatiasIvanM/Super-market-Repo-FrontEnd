@@ -11,7 +11,7 @@ const Footer = () => {
           <Nav.Link eventKey="link-1" href='/about'>Sobre Nosotros</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2" href='/'>Preguntas frecuentes</Nav.Link>
+          <Nav.Link eventKey="link-2" href='/FaQ'>Preguntas frecuentes</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link eventKey="link-3" href='/'>Cómo comprar?</Nav.Link>
