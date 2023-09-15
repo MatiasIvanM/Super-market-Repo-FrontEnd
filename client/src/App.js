@@ -12,13 +12,15 @@ import About from './View/About/About'
 import CartShopping from './View/CartShopping/CartShopping.jsx'
 import Profile from './View/Profile/Profile';
 import Login from './View/Login/Login'
-
 import { useEffect } from 'react';
-import { getCustomerByEmail, getCustomerById } from './redux/Actions/actionsCustomers';
+import { useDispatch } from 'react-redux';
+import { getCustomerById } from './redux/Actions/actionsCustomers';
 
 function App() {
+  const dispatch = useDispatch()
   async function reloadId() {
-    
+    const customer = JSON.parse(localStorage.getItem('customer'))
+    if (customer) await dispatch(getCustomerById(customer.id))
   }
   useEffect(() => {
     reloadId()
