@@ -13,6 +13,7 @@ import { getCustomerByEmail, getCustomerById, loginCustomer } from '../../redux/
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
 
+
 export default function Register() {
     const { loginWithPopup, logout, isAuthenticated, user } = useAuth0()
     const dispatch = useDispatch()
@@ -91,36 +92,47 @@ export default function Register() {
 
     async function dispatchCustomer() {
         if (customer.email) {
-            const response = await dispatch(getCustomerByEmail(customer.email))
+            // const response = await dispatch(getCustomerByEmail(customer.email))
+            const response = await dispatch(loginCustomer({ email: customer.email, password: customer.password }))
             if (response?.payload) {
-                if (response.payload[0].provider === 'local') {
-                    if (response.payload[0].password === customer.password) {
-                        localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
-                        dispatch(getCustomerById(response.payload[0].id))
-                        setModal({
-                            show: true,
-                            header: 'Sesión iniciada',
-                            body: 'Bienvenido',
-                            button: 'success',
-                        })
-                    } else {
-                        setModal({
-                            show: true,
-                            header: 'Ups!',
-                            body: 'Usuario o contraseña incorrectas',
-                            button: 'danger',
-                        })
-                    }
-                }
-                if (response.payload[0].provider === 'google') {
-                    localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
-                    setModal({
-                        show: true,
-                        header: 'Sesión iniciada',
-                        body: 'Bienvenido',
-                        button: 'success',
-                    })
-                }
+                // const verifyToken = () => {
+                //     const token = jwt.verify(token, process.env.API_SECRET, (err)=>{
+                //         if(err) return 'Token inválido'
+                //     })
+                // }
+                // console.log(verifyToken);
+
+
+
+
+                // if (response.payload[0].provider === 'local') {
+                //     if (response.payload[0].password === customer.password) {
+                //         localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
+                //         dispatch(getCustomerById(response.payload[0].id))
+                //         setModal({
+                //             show: true,
+                //             header: 'Sesión iniciada',
+                //             body: 'Bienvenido',
+                //             button: 'success',
+                //         })
+                //     } else {
+                //         setModal({
+                //             show: true,
+                //             header: 'Ups!',
+                //             body: 'Usuario o contraseña incorrectas',
+                //             button: 'danger',
+                //         })
+                //     }
+                // }
+                // if (response.payload[0].provider === 'google') {
+                //     localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
+                //     setModal({
+                //         show: true,
+                //         header: 'Sesión iniciada',
+                //         body: 'Bienvenido',
+                //         button: 'success',
+                //     })
+                // }
             } else {
                 setModal({
                     show: true,
