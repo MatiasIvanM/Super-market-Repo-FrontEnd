@@ -128,9 +128,9 @@ export default function Register() {
         }
     }, [customer.provider])
 
-    useEffect(() => {
-        localStorage.getItem('customer') && history.push('/home')
-    }, [])
+    // useEffect(() => {
+    //     localStorage.getItem('customer') && history.push('/home')
+    // }, [])
 
     return (
         <div style={{
