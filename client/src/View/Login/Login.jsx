@@ -118,7 +118,7 @@ export default function Register() {
         if (customer.provider === 'google') {
             const claims = await getIdTokenClaims()
             const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
-            localStorage.setItem('customer', JSON.stringify(dbCustomer.payload[0]))
+            localStorage.setItem('customer', JSON.stringify({ ...dbCustomer.payload[0], token: claims.__raw }))
             await dispatch(getCustomerById(dbCustomer.payload[0].id))
             setModal({
                 show: true,
