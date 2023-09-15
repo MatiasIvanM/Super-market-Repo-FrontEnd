@@ -107,7 +107,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_CUSTOMERS:
       return { ...state, customers: action.payload };
     case GET_CUSTOMER_BY_ID:
-      return { ...state, customerId: action.payload };
+      return { ...state, customerId: action.payload.id };
     case ADD_CUSTOMER:
       return { ...state, customerId: action.payload };
     case MOD_CUSTOMER:

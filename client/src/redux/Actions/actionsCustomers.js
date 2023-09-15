@@ -43,7 +43,7 @@ export function getCustomerByEmail(email) {
 	}
 }
 
-export function login(customer) {
+export function loginCustomer(customer) {
 	return async (dispatch) =>{
 		try {
 			const {data} = await axios.get(`${CUSTOMER}login`,customer)
