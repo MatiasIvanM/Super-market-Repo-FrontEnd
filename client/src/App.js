@@ -43,6 +43,7 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Route path="/login" component={Login} />
         <Route path="/cartshopping" component={CartShopping} />
+        <Route path='/FaQ' component={FaQuestions}/>
       </Switch>
     </Router>
     </div>
