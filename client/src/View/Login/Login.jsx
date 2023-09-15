@@ -3,13 +3,13 @@ import Form from 'react-bootstrap/Form'
 import { InputGroup } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from "@auth0/auth0-react"
 import { Link } from 'react-router-dom'
 import { PiWarning } from 'react-icons/pi'
 import * as validate from './validations';
 import styles from './Login.module.css'
-import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
+import { getCustomerByEmail, login } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
 
