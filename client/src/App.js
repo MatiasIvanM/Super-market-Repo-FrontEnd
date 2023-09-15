@@ -14,6 +14,7 @@ import Profile from './View/Profile/Profile';
 import Login from './View/Login/Login'
 import FaQuestions from './View/FaQuestions/FaQuestions';
 
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCustomerById } from './redux/Actions/actionsCustomers';
 
