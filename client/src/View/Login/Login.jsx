@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import { PiWarning } from 'react-icons/pi'
 import * as validate from './validations';
 import styles from './Login.module.css'
-import { getCustomerByEmail, login } from '../../redux/Actions/actionsCustomers';
+import { getCustomerByEmail, getCustomerById, login } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
 
@@ -96,6 +96,7 @@ export default function Register() {
                 if (response.payload[0].provider === 'local') {
                     if (response.payload[0].password === customer.password) {
                         localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
+                        dispatch(getCustomerById(response.payload[0].id))
                         setModal({
                             show: true,
                             header: 'Sesión iniciada',
