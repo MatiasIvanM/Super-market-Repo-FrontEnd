@@ -21,6 +21,7 @@ import {
   PUT_SC,
   POST_SC,
   ADD_PRODUCT_SC,
+  GET_CATEGORY,
   CLEAR_SC,
   REMOVE_PRODUCT_SC,
   UPDATE_PRODUCT_QUANTITY_SC
@@ -40,7 +41,8 @@ const initialState = {
   orders: [],
   orderId: {},
   shoppingCart:{},
-  productsSC:[]
+  productsSC:[],
+  category:[],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -131,6 +133,11 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, orders: action.payload };
     case GET_ORDER_BY_ID:
       return { ...state, orderId: action.payload };
+
+    // CATEGORY 
+    case GET_CATEGORY:
+      return { ...state, category: action.payload };
+
     //filters
     case FILTER_CATEGORY:
       let categoryFiltered =

@@ -8,11 +8,13 @@ import { useDispatch } from "react-redux";
 import {getProducts,getProductsByName} from '../../redux/Actions/actionsProducts'
 import { useHistory  } from 'react-router-dom';
 import {Footer} from '../../components/Footer/Footer';
+import { selectCategory } from '../../redux/Actions/actionsCategory';
+
 
 function Landing(){
   const dispatch = useDispatch();
   const history = useHistory();
-  
+  dispatch(selectCategory());
 
   const searchByName = (name) => {
     dispatch(getProductsByName(name));

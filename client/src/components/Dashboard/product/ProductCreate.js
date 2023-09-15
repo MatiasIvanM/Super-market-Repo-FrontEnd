@@ -11,6 +11,7 @@ const ProductCreate = (props) => {
           <NumberInput source="stock"  required/>
           <NumberInput source="price" step="0.01"  required/>
           <DateInput source = "expirationdate"  required/>
+          <TextInput source='category' required/>'
           <FileInput source="image" label="Image" accept="image/*">
             <FileField source="src" title="title" required />
           </FileInput>
