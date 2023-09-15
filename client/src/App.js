@@ -12,6 +12,10 @@ import About from './View/About/About'
 import CartShopping from './View/CartShopping/CartShopping.jsx'
 import Profile from './View/Profile/Profile';
 import Login from './View/Login/Login'
+import FaQuestions from './View/FaQuestions/FaQuestions';
+
+import { useDispatch } from 'react-redux';
+import { getCustomerById } from './redux/Actions/actionsCustomers';
 
 function App() {
   const dispatch = useDispatch()
