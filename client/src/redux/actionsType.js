@@ -36,3 +36,6 @@ export const GET_ORDER_BY_ID = 'GET_ORDER_BY_ID';
 export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 export const RANGO_PRECIOS = 'RANGO_PRECIOS';
 export const ORDER_PRECIO = 'ORDER_PRECIO';
+
+// CATEGORY
+export const GET_CATEGORY = 'GET_CATEGORY';

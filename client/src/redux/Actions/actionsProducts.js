@@ -54,18 +54,23 @@ export const addProduct = (formData) => {
 				}
 			
 			})
+			console.log("🚀 ~ file: actionsProducts.js:57 ~ return ~ data:", data)
 
 			return dispatch({
 				type: ADD_PRODUCT,
 				payload: data,
 			});
 		} catch (error) {
-			console.error('An error occurred:', error.message);
+			console.error('Error en la solicitud POST:', error);
+			if (error.response) {
+			  // El servidor respondió con un estado de error
+			  console.error('Estado de respuesta del servidor:', error.response);
+			  console.error('Mensaje del servidor:', error.response);
+			}
 			throw error;
-		}
-
-	};
-};
+		  }
+		};
+	  };
 
 export const modProduct = (product) => {
 	return async (dispatch) => {
