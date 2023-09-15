@@ -22,6 +22,9 @@ import {
   POST_SC,
   ADD_PRODUCT_SC,
   GET_CATEGORY,
+  CLEAR_SC,
+  REMOVE_PRODUCT_SC,
+  UPDATE_PRODUCT_QUANTITY_SC
 } from "./actionsType";
 
 
@@ -79,14 +82,34 @@ const rootReducer = (state = initialState, action) => {
           } else {
             return { ...state, productsSC: [...state.productsSC, action.payload] };
           }
-        
+      case CLEAR_SC: return {...state, productsSC:action.payload}
+      case REMOVE_PRODUCT_SC:
+        const modifiProducts = state.productsSC.filter(
+          (product) => product.productDetails.id !== action.payload
+        );
+            return { ...state, productsSC: modifiProducts };
+      case UPDATE_PRODUCT_QUANTITY_SC:
+      const { productId, quantityChange } = action.payload;
+
+      // Encuentra el producto en el carrito por su ID
+      const productChange = state.productsSC.map((product) => {
+        if (product.productDetails.id === productId) {
+          // Actualiza la cantidad sumando o restando la cantidadChange
+          return {
+            ...product,
+            quantity: product.quantity + quantityChange,
+          };
+        }
+        return product;
+      });
+      return { ...state, productsSC: productChange };
     //customer
     case GET_CUSTOMERS:
       return { ...state, customers: action.payload };
     case GET_CUSTOMER_BY_ID:
       return { ...state, customerId: action.payload };
     case ADD_CUSTOMER:
-      return { ...state, customers: [...state.customers, action.payload] };
+      return { ...state, customerId: action.payload };
     case MOD_CUSTOMER:
       const { id } = action.payload;
       const updatedCustomers = state.customers.map(costumer => {

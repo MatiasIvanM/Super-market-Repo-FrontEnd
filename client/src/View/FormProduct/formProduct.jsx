@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './formProduct.module.css'
@@ -9,18 +9,22 @@ import { PiWarning } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 import { selectCategory } from '../../redux/Actions/actionsCategory'
 
-
 export default function FormProduct() {
   const dispatch = useDispatch();
   const { register, formState: { errors }, handleSubmit, reset } = useForm();
   const selectedCategory = useSelector((state) => state.category);
-  console.log("🚀 ~ file: formProduct.jsx:17 ~ FormProduct ~ selectedCategory:", selectedCategory)
 
+
+  const [producto, setProducto] = useState([]);
+  const card= useSelector((state)=>state.productsSC)
+ useEffect(()=>{
+   setProducto(card)
+   },[])
+   
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const onSubmit = (data) => {
-    console.log("🚀 ~ file: formProduct.jsx:19 ~ onSubmit ~ ACA ESTA LA DATA WASHO:", data)
     // const isCategoryValid = !!data.category;
     console.log(errors);
     if (Object.keys(errors).length > 0) {
@@ -37,7 +41,7 @@ export default function FormProduct() {
   const handleCategoryChange = (e) => {
     const selectedValue = e.target.value;
     dispatch(selectCategory(selectedValue)); // Dispara la acción para seleccionar una categoría
-    console.log("🚀 ~ file: formProduct.jsx:25 ~ handleCategoryChange ~ selectedValue:", selectedValue)
+    
   };
 
   return (
@@ -180,7 +184,7 @@ export default function FormProduct() {
             >
               <option value="">Selecciona una categoría</option>
               {selectedCategory.map((category, index) => (
-                <option key={index} value={category.name}>
+                <option key={index} value={category.id}>
                   {category.name}
                 </option>
               ))}

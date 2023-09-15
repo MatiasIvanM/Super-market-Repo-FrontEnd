@@ -21,7 +21,13 @@ export default function Home() {
     const [filters, setFilters] = useState(defaultFilters);
     const [currentPage, setCurrentPage] = useState(0);
     const [items, setItems] = useState([]);
-
+    const [customer, setCustomer] = useState({});
+    let customerById = useSelector((state)=>state.customerId)
+    
+    useEffect(() => {
+        setCustomer(customerById)
+        console.log(customer,"customer")
+    }, [customerById]);
     const nextHandler = () => {
         const totalElements = productsMod.length;
         const nextPage = currentPage + 1;
