@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 // eslint-disable-next-line
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCustomer } from '../../redux/Actions/actionsCustomers';
+import { getCustomerByEmail, getCustomerById, loginCustomer, addCustomer } from '../../redux/Actions/actionsCustomers';
 import { useAuth0 } from "@auth0/auth0-react";
 import * as validate from './validations';
 import { PiWarning } from 'react-icons/pi'
@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import Overlay from '../../components/Overlay/Overlay';
 
 export default function Register() {
-    const { loginWithPopup, isAuthenticated, user } = useAuth0()
+    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -81,7 +81,7 @@ export default function Register() {
 
     function handleModalButton() {
         setModal({ ...modal, show: false })
-        if (JSON.parse(localStorage.getItem('customer'))?.email) {
+        if (JSON.parse(localStorage.getItem('customer'))) {
             history.push('/home')
         }
     }
@@ -90,13 +90,49 @@ export default function Register() {
         if (customer.name && customer.email) {
             const response = await dispatch(addCustomer(customer))
             if (response?.payload) {
-                localStorage.setItem('customer', JSON.stringify({ email: response.payload.email }))
-                setModal({
-                    show: true,
-                    header: 'Usuario Registrado',
-                    body: 'Bienvenido',
-                    button: 'success',
-                })
+                if (response.payload.error) {
+                    setModal({
+                        show: true,
+                        header: 'Ups!',
+                        body: 'El email ya está registrado',
+                        button: 'danger',
+                    })
+                } else {
+                    if (customer.provider === 'local') {
+                        const loggedCustomer = await dispatch(loginCustomer({ email: customer.email, password: customer.password }))
+                        if (loggedCustomer?.payload) {
+                            if (loggedCustomer.payload.error) {
+                                setModal({
+                                    show: true,
+                                    header: 'Ups!',
+                                    body: 'Email o contraseña incorrecta',
+                                    button: 'danger',
+                                })
+                            } else {
+                                localStorage.setItem('customer', JSON.stringify(loggedCustomer.payload))
+                                await dispatch(getCustomerById(loggedCustomer.id))
+                                setModal({
+                                    show: true,
+                                    header: 'Usuario Registrado',
+                                    body: 'Bienvenido',
+                                    button: 'success',
+                                })
+                            }
+                        }
+                    }
+                    if (customer.provider === 'google') {
+                        const claims = await getIdTokenClaims()
+                        const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
+                        localStorage.setItem('customer', JSON.stringify(dbCustomer.payload[0]))
+                        await dispatch(getCustomerById(dbCustomer.payload[0].id))
+                        setModal({
+                            show: true,
+                            header: 'Usuario Registrado',
+                            body: 'Bienvenido',
+                            button: 'success',
+                        })
+                    }
+                }
             } else {
                 setModal({
                     show: true,
@@ -128,9 +164,9 @@ export default function Register() {
         }
     }, [customer.provider])
 
-    // useEffect(() => {
-    //     localStorage.getItem('customer') && history.push('/home')
-    // }, [])
+    useEffect(() => {
+        localStorage.getItem('customer') && history.push('/home')
+    }, [])
 
     return (
         <div style={{

@@ -12,11 +12,10 @@ import styles from './Login.module.css'
 import { getCustomerByEmail, getCustomerById, loginCustomer } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
-import { decodeToken } from 'react-jwt'
 
 
 export default function Register() {
-    const { loginWithPopup, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0()
+    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -72,14 +71,9 @@ export default function Register() {
 
     function handleModalButton() {
         setModal({ ...modal, show: false })
-        if (JSON.parse(localStorage.getItem('customer'))?.email) {
+        if (JSON.parse(localStorage.getItem('customer'))) {
             history.push('/home')
         }
-    }
-
-    function handleLogout() {
-        isAuthenticated && logout()
-        localStorage.clear()
     }
 
     function checkErrors() {
@@ -104,8 +98,7 @@ export default function Register() {
                     })
                 } else {
                     localStorage.setItem('customer', JSON.stringify(response.payload))
-                    const token = decodeToken(response.payload)
-                    dispatch(getCustomerById(token.id))
+                    await dispatch(getCustomerById(response.payload.id))
                     setModal({
                         show: true,
                         header: 'Sesión iniciada',
@@ -123,50 +116,17 @@ export default function Register() {
             }
         }
         if (customer.provider === 'google') {
-            const token = getAccessTokenSilently()
-            localStorage.setItem('customer', JSON.stringify(token))
+            const claims = await getIdTokenClaims()
+            const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
+            localStorage.setItem('customer', JSON.stringify(dbCustomer.payload[0]))
+            await dispatch(getCustomerById(dbCustomer.payload[0].id))
+            setModal({
+                show: true,
+                header: 'Sesión iniciada',
+                body: 'Bienvenido',
+                button: 'success',
+            })
         }
-
-
-        //     if (customer.provider === 'local') {
-        //         localStorage.setItem('customer', JSON.stringify(response.payload))
-
-
-        //         if (response.payload[0].password === customer.password) {
-        //             localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
-        //             dispatch(getCustomerById(response.payload[0].id))
-        //             setModal({
-        //                 show: true,
-        //                 header: 'Sesión iniciada',
-        //                 body: 'Bienvenido',
-        //                 button: 'success',
-        //             })
-        //         } else {
-        //             setModal({
-        //                 show: true,
-        //                 header: 'Ups!',
-        //                 body: 'Usuario o contraseña incorrecta',
-        //                 button: 'danger',
-        //             })
-        //         }
-        //     }
-        //     if (response.payload[0].provider === 'google') {
-        //         localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
-        //         setModal({
-        //             show: true,
-        //             header: 'Sesión iniciada',
-        //             body: 'Bienvenido',
-        //             button: 'success',
-        //         })
-        //     }
-        // } else {
-        //     setModal({
-        //         show: true,
-        //         header: 'Error!',
-        //         body: 'Algo salió mal',
-        //         button: 'danger',
-        //     })
-
     }
 
     useEffect(() => {
@@ -189,9 +149,9 @@ export default function Register() {
         }
     }, [customer.provider])
 
-    // useEffect(() => {
-    //     localStorage.getItem('customer') && history.push('/home')
-    // }, [])
+    useEffect(() => {
+        localStorage.getItem('customer') && history.push('/home')
+    }, [])
 
     return (
         <div style={{

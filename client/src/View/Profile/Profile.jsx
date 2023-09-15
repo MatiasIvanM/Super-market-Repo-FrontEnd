@@ -7,9 +7,9 @@ import { useAuth0 } from "@auth0/auth0-react"
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Overlay from '../../components/Overlay/Overlay';
-import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
+import { getCustomerByEmail, getCustomerById } from '../../redux/Actions/actionsCustomers';
 
 export default function Profile() {
     const { logout, isAuthenticated } = useAuth0()
@@ -23,15 +23,15 @@ export default function Profile() {
         body: "",
         button: ""
     })
+    const customerId = useSelector(state => state.customerId)
 
     async function getCustomer() {
-        const email = JSON.parse(localStorage.getItem('customer')).email
-        const user = await dispatch(getCustomerByEmail(email))
+        const user = await dispatch(getCustomerById(customerId))
         setCustomer({
-            name: user.payload[0].name,
-            email: user.payload[0].email,
-            phone: user.payload[0].phone,
-            address: user.payload[0].address,
+            name: user.payload.name,
+            email: user.payload.email,
+            phone: user.payload.phone,
+            address: user.payload.address,
         })
     }
 
