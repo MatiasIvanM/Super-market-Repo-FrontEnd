@@ -47,11 +47,13 @@ const dataProvider = {
   },
 
   update: (resource, params) => {
+    console.log("🚀 ~ file: dataProvider.js:50 ~ params:", params.data)
+  
     return httpClient
-      .put(`${resource}`, params.data) /* /${params.id} */
-      .then(({ data }) => ({
-        data: data,
-      }));
+    .put(`${resource}/${params.id}`, params.data) /* /${params.id} */
+    .then(({ data }) => ({
+      data: data,
+    }));
   },
 
   delete: (resource, params) => {
