@@ -6,10 +6,10 @@ const url = server;
 
 const httpClient = axios.create({
   baseURL: url,
-  headers: {
+ /*  headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-  },
+  }, */
 });
 
 const dataProvider = {
@@ -46,13 +46,10 @@ const dataProvider = {
     }));
   },
 
-  update: (resource, params) => {
-    console.log("🚀 ~ file: dataProvider.js:50 ~ params:", params.data)
-  
-    return httpClient
-    .put(`${resource}/${params.id}`, params.data) /* /${params.id} */
-    .then(({ data }) => ({
-      data: data,
+  update: (resource, params) => {  
+     console.log("🚀 ~ file: dataProvider.js:55 ~ params.data:", params.data)
+    return httpClient.put(`${resource}/${params.id}`, params.data).then(({ data }) =>({
+      data: data
     }));
   },
 
