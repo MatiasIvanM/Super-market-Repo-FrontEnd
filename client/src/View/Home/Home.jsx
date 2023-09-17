@@ -9,10 +9,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProducts } from '../../redux/Actions/actionsProducts';
 import { selectCategory } from '../../redux/Actions/actionsCategory';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function Home() {
     const dispatch = useDispatch();
-    dispatch(selectCategory());
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
     const ITEMS_PER_PAGE = 10;
@@ -23,10 +23,10 @@ export default function Home() {
     const [items, setItems] = useState([]);
     const [customer, setCustomer] = useState({});
     let customerById = useSelector((state)=>state.customerId)
+    let categories=useSelector((state)=>state.category)
     
     useEffect(() => {
         setCustomer(customerById)
-        console.log(customer,"customer")
     }, [customerById]);
     const nextHandler = () => {
         const totalElements = productsMod.length;
@@ -35,7 +35,7 @@ export default function Home() {
 
         if (firstIndex >= totalElements) return;
 
-        setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
+        setItems(items.concat([...productsMod].splice(firstIndex, ITEMS_PER_PAGE)));
         setCurrentPage(nextPage);
     };
 
@@ -84,6 +84,7 @@ export default function Home() {
         setCurrentPage(0)
     }
 
+
     useEffect(() => {
         setItems([...productsMod].splice(0, ITEMS_PER_PAGE));
     }, [productsMod]);
@@ -106,6 +107,10 @@ export default function Home() {
     useEffect(() => {
         dispatch(getProducts());// eslint-disable-next-line
       }, []);
+    
+    useEffect(() => {
+        dispatch(selectCategory());// eslint-disable-next-line
+      }, []);
 
     // if (products.length === 0) {
     //     return <div>
@@ -119,32 +124,26 @@ export default function Home() {
             <NavBar
                 searchByName={searchByName}
             />
-            <div className={styles.pageButton}>
+            {/* <div className={styles.pageButton}>
                 <Button variant="primary" style={{ width: '110px' }} onClick={prevHandler}> {"< Anterior"} </Button>
-                {/* <button  onClick={prevHandler}>
-            {"<-Prev"}
-        </button> */}
                 <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;<h5>{currentPage + 1}</h5> &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant="primary" style={{ width: '110px' }} onClick={nextHandler}> {"Siguiente >"} </Button>
-                {/* <button  onClick={nextHandler}>
-            {"Next->"}
-          </button> */}
-            </div>
+            </div> */}
 
             <div className={styles.container}>
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
                         <h4>Categorías </h4>
-                        <select name='category' id='category' value={filters.category} onChange={handleChange}>
-                            <option value="Todas">Todas</option>
-                            <option value="Bebidas">Bebidas</option>
-                            <option value="Aceites y Aderezos">Aceites y Aderezos</option>
-                            <option value="Arroz y Legumbres">Arroz y Legumbres</option>
-                            <option value="Frutas y Verduras">Frutas y Verduras</option>
-                            <option value="Panadería">Panadería</option>
-                        </select>
+                        <select name='category' onChange={handleChange}>
+                        <option value="Todas">Todas</option>
+        {categories.map((category, index) => (
+          <option key={index} value={category.name}>
+            {category.name}
+          </option>
+        ))}
+      </select>
                     </Nav.Item>
                     <Nav.Item>
                         <h4>Ordenar por Precio </h4>
@@ -176,7 +175,14 @@ export default function Home() {
 
                 <div className={styles.card_container}>
 
-                    {items.map(p => (
+                <InfiniteScroll
+      dataLength={items.length} // Tamaño actual de la lista de productos
+      next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
+      hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
+      loader={<h4>Cargando...</h4>}
+      className={styles.card_container}
+    >
+                     {items.map(p => (
                         <CardProducto
                             key={p.id}
                             id={p.id}
@@ -189,6 +195,7 @@ export default function Home() {
                         >
                         </CardProducto>
                     ))}
+                </InfiniteScroll>
                 </div >
             </div >
             <Footer />

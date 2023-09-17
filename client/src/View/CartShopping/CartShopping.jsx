@@ -66,9 +66,9 @@ const CartShopping = () => {
 
             return (
               <Card key={product.id}>
-                <button onClick={() => handleRemoveProduct(product.productDetails.id)}>
+                <Button variant="outline-danger" onClick={() => handleRemoveProduct(product.productDetails.id)}>
                   Eliminar {product.productDetails.name}
-                </button>
+                </Button>
                 <Card.Img
                   variant="top"
                   src={product.productDetails.image}
@@ -80,8 +80,8 @@ const CartShopping = () => {
                     <ListGroup.Item>
                       <strong>Cantidad:</strong>
                       {product.quantity}
-                      <Button onClick={() => handleDecrementQuantity(product.productDetails.id, product)}>-</Button>
-                      <Button onClick={() => handleIncrementQuantity(product.productDetails.id)}>+</Button>
+                      <Button variant="outline-primary" onClick={() => handleDecrementQuantity(product.productDetails.id, product)}>-</Button>
+                      <Button variant="outline-primary" onClick={() => handleIncrementQuantity(product.productDetails.id)}>+</Button>
                     </ListGroup.Item>
                     <ListGroup.Item>
                       <strong>Valor:</strong> $ {product.productDetails.price.toFixed(0)}
