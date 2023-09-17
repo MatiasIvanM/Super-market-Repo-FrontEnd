@@ -231,7 +231,7 @@ export default function Register() {
                 <Modal.Body>{modal.body}</Modal.Body>
                 <Modal.Footer>
                     <Button variant={modal.button} onClick={handleModalButton}>
-                        Volver
+                        Aceptar
                     </Button>
                 </Modal.Footer>
             </Modal>

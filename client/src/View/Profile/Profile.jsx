@@ -94,7 +94,9 @@ export default function Profile() {
             <Card style={{
                 margin: '5rem 0rem 2rem 0rem',
                 background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))',
-                boxShadow: '4px 4px 8px 1px grey'
+                boxShadow: '4px 4px 8px 1px grey',
+                width: '30vw',
+                minWidth: '370px',
             }}>
                 <Card.Body>
                     <Card.Title>
@@ -127,7 +129,7 @@ export default function Profile() {
                     <InputGroup>
                         <Button name='save' disabled={edit} style={{ margin: '0rem 0rem 0.3rem 0rem', width: '100%' }} variant='primary' onClick={handleEdit}>Guardar cambios</Button>
                     </InputGroup>
-                    <Button style={{ width: '100%' }} variant='success' onClick={handleLogout}>Salir</Button>
+                    <Button style={{ width: '100%' }} variant='success' onClick={handleLogout}>Cerrar Sesión</Button>
                 </Card.Footer>
             </Card>
             <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
