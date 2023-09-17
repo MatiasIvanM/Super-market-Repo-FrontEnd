@@ -27,6 +27,7 @@ export default function Home() {
     
     useEffect(() => {
         setCustomer(customerById)
+
     }, [customerById]);
     const nextHandler = () => {
         const totalElements = productsMod.length;
