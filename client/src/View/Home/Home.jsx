@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProducts } from '../../redux/Actions/actionsProducts';
 import { selectCategory } from '../../redux/Actions/actionsCategory';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import LoadGif from '../../components/Loading/shopping-cart-shopping.gif'
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -22,32 +23,40 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(0);
     const [items, setItems] = useState([]);
     const [customer, setCustomer] = useState({});
+    const [showLoader, setShowLoader] = useState(false);
     let customerById = useSelector((state)=>state.customerId)
     let categories=useSelector((state)=>state.category)
     
     useEffect(() => {
         setCustomer(customerById)
-
     }, [customerById]);
     const nextHandler = () => {
-        const totalElements = productsMod.length;
-        const nextPage = currentPage + 1;
-        const firstIndex = nextPage * ITEMS_PER_PAGE;
+        setShowLoader(true);
 
-        if (firstIndex >= totalElements) return;
-
-        setItems(items.concat([...productsMod].splice(firstIndex, ITEMS_PER_PAGE)));
-        setCurrentPage(nextPage);
+        setTimeout(() => {
+            const totalElements = productsMod.length;
+            const nextPage = currentPage + 1;
+            const firstIndex = nextPage * ITEMS_PER_PAGE;
+    
+            if (firstIndex >= totalElements) {
+                setShowLoader(false);
+                return;
+            }
+    
+            setItems(items.concat([...productsMod].splice(firstIndex, ITEMS_PER_PAGE)));
+            setCurrentPage(nextPage);
+            setShowLoader(false);
+        }, 2000);
     };
 
-    const prevHandler = () => {
-        const prevPage = currentPage - 1;
-        if (prevPage < 0) return;
-        const firstIndex = prevPage * ITEMS_PER_PAGE;
+    // const prevHandler = () => {
+    //     const prevPage = currentPage - 1;
+    //     if (prevPage < 0) return;
+    //     const firstIndex = prevPage * ITEMS_PER_PAGE;
 
-        setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
-        setCurrentPage(prevPage);
-    };
+    //     setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
+    //     setCurrentPage(prevPage);
+    // };
 
 
     const searchByName = (name) => {
@@ -180,7 +189,7 @@ export default function Home() {
       dataLength={items.length} // Tamaño actual de la lista de productos
       next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
       hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
-      loader={<h4>Cargando...</h4>}
+      loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." />: null}
       className={styles.card_container}
     >
                      {items.map(p => (
