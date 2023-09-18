@@ -6,7 +6,7 @@ import { useRecordContext, Button, useDataProvider } from "react-admin";
 const ToggleAvailableButton = () => {
   const dataProvider = useDataProvider(); //useDataProvider para obtener dataProvider
   const record = useRecordContext();
-//   console.log("🚀 ~ file: ToggleAvailableButton.js:9 ~ ToggleAvailableButton ~ record:", record)
+  //   console.log("🚀 ~ file: ToggleAvailableButton.js:9 ~ ToggleAvailableButton ~ record:", record)
 
   if (!record) {
     return null; // Evita errores si record es indefinido
@@ -20,20 +20,19 @@ const ToggleAvailableButton = () => {
         currentValue
       );
 
-      await dataProvider.update("products", {
-          id: record.id,
-        data: { available: !currentValue,
-            name: record.name,
-            price: record.price,
-            description: record.description,
-            image: record.image,
-            stock: record.stock, 
-            brand:  record.brand,
-            expirationdate: record.expirationdate,
+      await dataProvider.update("product", {
+        id: record.id,
+        data: {
+          available: !currentValue,
+          name: record.name,
+          price: record.price,
+          description: record.description,
+          image: record.image,
+          stock: record.stock,
+          brand: record.brand,
+          expirationdate: record.expirationdate,
         },
-        
-    });
-
+      });
 
       console.log("ToggleAvailableButton - Toggled successfully");
     } catch (error) {
@@ -45,6 +44,10 @@ const ToggleAvailableButton = () => {
     <Button
       label={record.available ? "Disponible" : "Sin existencias"}
       onClick={handleToggleAvailable}
+      style={{
+        color: record.available ? "green" : "red",
+        fontWeight: "bold",
+      }}
     />
   );
 };
