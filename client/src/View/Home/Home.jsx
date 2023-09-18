@@ -29,6 +29,7 @@ export default function Home() {
     
     useEffect(() => {
         setCustomer(customerById)
+
     }, [customerById]);
     const nextHandler = () => {
         setShowLoader(true);

@@ -3,18 +3,19 @@ import Form from 'react-bootstrap/Form'
 import { InputGroup } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from "@auth0/auth0-react"
 import { Link } from 'react-router-dom'
 import { PiWarning } from 'react-icons/pi'
 import * as validate from './validations';
 import styles from './Login.module.css'
-import { getCustomerByEmail } from '../../redux/Actions/actionsCustomers';
+import { getCustomerByEmail, getCustomerById, loginCustomer } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
 
+
 export default function Register() {
-    const { loginWithPopup, logout, isAuthenticated, user } = useAuth0()
+    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -70,14 +71,9 @@ export default function Register() {
 
     function handleModalButton() {
         setModal({ ...modal, show: false })
-        if (JSON.parse(localStorage.getItem('customer'))?.email) {
+        if (JSON.parse(localStorage.getItem('customer'))) {
             history.push('/home')
         }
-    }
-
-    function handleLogout() {
-        isAuthenticated && logout()
-        localStorage.clear()
     }
 
     function checkErrors() {
@@ -90,29 +86,19 @@ export default function Register() {
     }
 
     async function dispatchCustomer() {
-        if (customer.email) {
-            const response = await dispatch(getCustomerByEmail(customer.email))
+        if (customer.provider === 'local') {
+            const response = await dispatch(loginCustomer({ email: customer.email, password: customer.password }))
             if (response?.payload) {
-                if (response.payload[0].provider === 'local') {
-                    if (response.payload[0].password === customer.password) {
-                        localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
-                        setModal({
-                            show: true,
-                            header: 'Sesión iniciada',
-                            body: 'Bienvenido',
-                            button: 'success',
-                        })
-                    } else {
-                        setModal({
-                            show: true,
-                            header: 'Ups!',
-                            body: 'Usuario o contraseña incorrectas',
-                            button: 'danger',
-                        })
-                    }
-                }
-                if (response.payload[0].provider === 'google') {
-                    localStorage.setItem('customer', JSON.stringify({ email: response.payload[0].email }))
+                if (response.payload.error) {
+                    setModal({
+                        show: true,
+                        header: 'Ups!',
+                        body: 'Email o contraseña incorrecta',
+                        button: 'danger',
+                    })
+                } else {
+                    localStorage.setItem('customer', JSON.stringify(response.payload))
+                    await dispatch(getCustomerById(response.payload.id))
                     setModal({
                         show: true,
                         header: 'Sesión iniciada',
@@ -128,6 +114,18 @@ export default function Register() {
                     button: 'danger',
                 })
             }
+        }
+        if (customer.provider === 'google') {
+            const claims = await getIdTokenClaims()
+            const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
+            localStorage.setItem('customer', JSON.stringify({ ...dbCustomer.payload[0], token: claims.__raw }))
+            await dispatch(getCustomerById(dbCustomer.payload[0].id))
+            setModal({
+                show: true,
+                header: 'Sesión iniciada',
+                body: 'Bienvenido',
+                button: 'success',
+            })
         }
     }
 
