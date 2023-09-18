@@ -111,6 +111,7 @@ export const deleteProduct = (id) => {
 export const filterByCategory = (category) => {
 	return (dispatch) => {
 		try {
+			
 			return dispatch({
 				type: FILTER_CATEGORY,
 				payload: category,
