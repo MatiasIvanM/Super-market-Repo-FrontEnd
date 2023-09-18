@@ -143,7 +143,9 @@ const rootReducer = (state = initialState, action) => {
       let categoryFiltered =
         action.payload === 'Todas'
           ? state.products
-          : state.products.filter((producto) => producto.categories === action.payload)
+          : state.products.filter((producto) => {
+            return producto.Categories.some(category => category.name === action.payload);
+          });
       return { ...state, productsFiltered: [...categoryFiltered] }
     case ORDER_PRECIO:
       let priceFiltered = state.productsFiltered
