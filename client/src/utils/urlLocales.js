@@ -15,6 +15,7 @@
  const server = 'https://super-market-shop-preview.up.railway.app';
 // const server = 'http://localhost:3001';
 
+
   const PRODUCT=`${server}/product/`;
   const CUSTOMER=`${server}/customer/`;
   const ORDER_DETAIL=`${server}/orderDetail/`;

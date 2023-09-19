@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
 
 
-export default function Register() {
+export default function Login() {
     const { loginWithPopup, isAuthenticated, user, getIdTokenClaims, logout } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
@@ -101,6 +101,7 @@ export default function Register() {
                     })
                 } else {
                     localStorage.setItem('customer', JSON.stringify({
+                        id: response.payload.id,
                         name: response.payload.name,
                         email: response.payload.email,
                         role: response.payload.role,
@@ -129,6 +130,7 @@ export default function Register() {
             const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
             if (dbCustomer) {
                 localStorage.setItem('customer', JSON.stringify({
+                    id: dbCustomer.payload[0].id,
                     name: dbCustomer.payload[0].name,
                     email: dbCustomer.payload[0].email,
                     role: dbCustomer.payload[0].role,
