@@ -46,12 +46,28 @@ const dataProvider = {
     }));
   },
 
-  update: (resource, params) => {  
-     console.log("🚀 ~ file: dataProvider.js:55 ~ params.data:", params.data)
-    return httpClient.put(`${resource}/${params.id}`, params.data).then(({ data }) =>({
-      data: data
-    }));
-  },
+  update: (resource, params) => {
+    if (resource === 'product'){
+    return httpClient
+    .put(`${resource}/${params.id}`, params.data)
+    .then(({ data }) => ({
+      data: data,
+    }))
+    } else{
+      return httpClient
+     .put(`${resource}`, params.data)
+     .then(({ data }) => ({
+       data: data,
+     }));
+    }
+},
+
+  // update: (resource, params) => {  
+  //    console.log("🚀 ~ file: dataProvider.js:55 ~ params.data:", params.data)
+  //   return httpClient.put(`${resource}/${params.id}`, params.data).then(({ data }) =>({
+  //     data: data
+  //   }));
+  // },
 
   delete: (resource, params) => {
     return httpClient.delete(`${resource}/${params.id}`).then(({ data }) => ({
