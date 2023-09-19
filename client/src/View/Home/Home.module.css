@@ -1,6 +1,7 @@
 .home {
     display: flex;
     flex-direction: column;
+    margin-top: 70px;
 }
 
 .container {
@@ -9,6 +10,7 @@
     gap: 1rem;
     padding: 2vh 2vw 2vh 2vw;
     height: fit-content;
+    
 }
 
 .card_container {
@@ -17,10 +19,11 @@
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
-    width: 85vw;
+    width: 82vw;
     height: fit-content;
-    border: 0.1rem rgb(200, 200, 200) solid;
-    padding: 1rem;
+    /* border: 0.1rem rgb(200, 200, 200) solid; */
+    padding-left: 13rem;
+    /* padding-top: 0.5rem; */
     border-radius: 5px;
 }
 
@@ -36,6 +39,7 @@
     border-radius: 5px;
     justify-content: space-between;
     padding: 1rem;
+    position: fixed;
 }
 
 @media (max-width:600px) {
