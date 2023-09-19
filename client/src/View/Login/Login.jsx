@@ -15,7 +15,7 @@ import Overlay from '../../components/Overlay/Overlay';
 
 
 export default function Register() {
-    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims } = useAuth0()
+    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims, getAccessTokenSilently } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -117,7 +117,9 @@ export default function Register() {
         }
         if (customer.provider === 'google') {
             const claims = await getIdTokenClaims()
+            localStorage.setItem('customer', JSON.stringify({ token: claims.__raw }))
             const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
+            console.log(dbCustomer);
             localStorage.setItem('customer', JSON.stringify({ ...dbCustomer.payload[0], token: claims.__raw }))
             await dispatch(getCustomerById(dbCustomer.payload[0].id))
             setModal({

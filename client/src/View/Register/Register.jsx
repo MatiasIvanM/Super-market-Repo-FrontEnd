@@ -6,7 +6,6 @@ import Modal from 'react-bootstrap/Modal';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCustomerByEmail, getCustomerById, loginCustomer, addCustomer } from '../../redux/Actions/actionsCustomers';
-import { POST_SC } from '../../redux/actionsType';
 import { useAuth0 } from "@auth0/auth0-react";
 import * as validate from './validations';
 import { PiWarning } from 'react-icons/pi'
@@ -123,6 +122,7 @@ export default function Register() {
                     }
                     if (customer.provider === 'google') {
                         const claims = await getIdTokenClaims()
+                        localStorage.setItem('customer', JSON.stringify({ token: claims.__raw }))
                         const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
                         localStorage.setItem('customer', JSON.stringify({ ...dbCustomer.payload[0], token: claims.__raw }))
                         await dispatch(getCustomerById(dbCustomer.payload[0].id))
@@ -134,7 +134,6 @@ export default function Register() {
                         })
                     }
                 }
-                
             } else {
                 setModal({
                     show: true,

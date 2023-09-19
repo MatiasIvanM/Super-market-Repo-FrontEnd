@@ -30,9 +30,10 @@ export function getCustomerById(id) {
 
 
 export function getCustomerByEmail(email) {
+	const customer = JSON.parse(localStorage.getItem('customer'))
 	return async (dispatch) =>{
 		try {
-			const {data} = await axios.get(`${CUSTOMER}email?email=${email}`)
+			const {data} = await axios.get(`${CUSTOMER}email?email=${email}`,{headers:{'Authorization': `Bearer ${customer.token}`}})
 			return dispatch({
 				type: GET_CUSTOMER_BY_EMAIL,
 			    payload: data,

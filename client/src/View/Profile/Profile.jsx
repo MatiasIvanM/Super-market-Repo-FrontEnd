@@ -23,15 +23,16 @@ export default function Profile() {
         body: "",
         button: ""
     })
-    const customerId = useSelector(state => state.customerId)
 
     async function getCustomer() {
-        const user = JSON.parse(localStorage.getItem('customer'))
+        // const user = JSON.parse(localStorage.getItem('customer'))
+        const lsCustomer = JSON.parse(localStorage.getItem('customer'))
+        const user = await dispatch(getCustomerByEmail(lsCustomer.email))
         setCustomer({
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            address: user.address,
+            name: user.payload[0].name,
+            email: user.payload[0].email,
+            phone: user.payload[0].phone,
+            address: user.payload[0].address,
         })
     }
 
