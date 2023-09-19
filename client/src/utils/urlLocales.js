@@ -10,8 +10,7 @@
 
 
 // backend
-//  const server = 'https://super-market-shop-preview.up.railway.app';
- const server = 'http://localhost:3001';
+ const server = 'https://super-market-shop-preview.up.railway.app';
 
   const PRODUCT=`${server}/product/`;
   const CUSTOMER=`${server}/customer/`;
