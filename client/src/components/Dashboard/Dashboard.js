@@ -22,7 +22,7 @@ import dataProvider from './dataProvider';
 import UserEdit from './users/UserEdit';
 import UserCreate from './users/UserCreate';
 
-import ShoppingOrders from './suppliers/ShoppingOrders';
+// import ShoppingOrders from './suppliers/ShoppingOrders';
 import formCarrousel from './carrousel/formCarrousel';
 // ? Settings
 const Setting = React.lazy(() => import('./Setting'));

@@ -21,7 +21,12 @@ const NavBar = (props) => {
   const handleChange = (event) => {
     setName(event.target.value);
   }
-  let usuario;
+  const usuario = JSON.parse(localStorage.getItem('customer'));
+  let role=null;
+
+  if (usuario){
+    role = usuario.role
+  }
 
   return (
     <div>
@@ -85,9 +90,16 @@ const NavBar = (props) => {
                 <FiLogIn className="nav-icon" />
               </Nav.Link>
             </Navbar.Brand>
-             {console.log( JSON.parse(localStorage.getItem('customer'))?.email)}
-             {localStorage.getItem('customer')?.role==='admin' 
-             ? console.log("Entro")
+            {/* //  console.log( JSON.parse(localStorage.getItem('customer'))?.email) */}
+            
+            {/* { console.log("role "+role)}
+            { console.log(role)} */}
+             {JSON.parse(localStorage.getItem('customer')) && role==='admin' 
+             ? (<Navbar.Brand>
+              <Link to='/admin'>
+                <BsWrenchAdjustable className="nav-icon" />
+              </Link>
+              </Navbar.Brand>)
              : console.log("NOOO Entro")}
 
             {/*{ 
@@ -95,11 +107,7 @@ const NavBar = (props) => {
             
             usuario.role === 'admin' 
             ? (  */}
-            <Navbar.Brand>
-                  <Link to='/admin'>
-                    <BsWrenchAdjustable className="nav-icon" />
-                  </Link>
-                  </Navbar.Brand>
+            
               {/* )
             : console.log("NOOO Entro")
            } */}
