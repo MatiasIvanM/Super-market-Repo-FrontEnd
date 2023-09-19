@@ -9,10 +9,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProducts } from '../../redux/Actions/actionsProducts';
 import { selectCategory } from '../../redux/Actions/actionsCategory';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import LoadGif from '../../components/Loading/shopping-cart-shopping.gif'
 
 export default function Home() {
     const dispatch = useDispatch();
-    dispatch(selectCategory());
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
     const ITEMS_PER_PAGE = 10;
@@ -22,31 +23,40 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(0);
     const [items, setItems] = useState([]);
     const [customer, setCustomer] = useState({});
+    const [showLoader, setShowLoader] = useState(false);
     let customerById = useSelector((state)=>state.customerId)
+    let categories=useSelector((state)=>state.category)
     
     useEffect(() => {
         setCustomer(customerById)
-        console.log(customer,"customer")
     }, [customerById]);
     const nextHandler = () => {
-        const totalElements = productsMod.length;
-        const nextPage = currentPage + 1;
-        const firstIndex = nextPage * ITEMS_PER_PAGE;
+        setShowLoader(true);
 
-        if (firstIndex >= totalElements) return;
-
-        setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
-        setCurrentPage(nextPage);
+        setTimeout(() => {
+            const totalElements = productsMod.length;
+            const nextPage = currentPage + 1;
+            const firstIndex = nextPage * ITEMS_PER_PAGE;
+    
+            if (firstIndex >= totalElements) {
+                setShowLoader(false);
+                return;
+            }
+    
+            setItems(items.concat([...productsMod].splice(firstIndex, ITEMS_PER_PAGE)));
+            setCurrentPage(nextPage);
+            setShowLoader(false);
+        }, 2000);
     };
 
-    const prevHandler = () => {
-        const prevPage = currentPage - 1;
-        if (prevPage < 0) return;
-        const firstIndex = prevPage * ITEMS_PER_PAGE;
+    // const prevHandler = () => {
+    //     const prevPage = currentPage - 1;
+    //     if (prevPage < 0) return;
+    //     const firstIndex = prevPage * ITEMS_PER_PAGE;
 
-        setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
-        setCurrentPage(prevPage);
-    };
+    //     setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
+    //     setCurrentPage(prevPage);
+    // };
 
 
     const searchByName = (name) => {
@@ -84,6 +94,7 @@ export default function Home() {
         setCurrentPage(0)
     }
 
+
     useEffect(() => {
         setItems([...productsMod].splice(0, ITEMS_PER_PAGE));
     }, [productsMod]);
@@ -106,6 +117,10 @@ export default function Home() {
     useEffect(() => {
         dispatch(getProducts());// eslint-disable-next-line
       }, []);
+    
+    useEffect(() => {
+        dispatch(selectCategory());// eslint-disable-next-line
+      }, []);
 
     // if (products.length === 0) {
     //     return <div>
@@ -119,32 +134,26 @@ export default function Home() {
             <NavBar
                 searchByName={searchByName}
             />
-            <div className={styles.pageButton}>
+            {/* <div className={styles.pageButton}>
                 <Button variant="primary" style={{ width: '110px' }} onClick={prevHandler}> {"< Anterior"} </Button>
-                {/* <button  onClick={prevHandler}>
-            {"<-Prev"}
-        </button> */}
                 <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;<h5>{currentPage + 1}</h5> &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant="primary" style={{ width: '110px' }} onClick={nextHandler}> {"Siguiente >"} </Button>
-                {/* <button  onClick={nextHandler}>
-            {"Next->"}
-          </button> */}
-            </div>
+            </div> */}
 
             <div className={styles.container}>
 
                 <Nav className={styles.side_bar}>
                     <Nav.Item>
                         <h4>Categorías </h4>
-                        <select name='category' id='category' value={filters.category} onChange={handleChange}>
-                            <option value="Todas">Todas</option>
-                            <option value="Bebidas">Bebidas</option>
-                            <option value="Aceites y Aderezos">Aceites y Aderezos</option>
-                            <option value="Arroz y Legumbres">Arroz y Legumbres</option>
-                            <option value="Frutas y Verduras">Frutas y Verduras</option>
-                            <option value="Panadería">Panadería</option>
-                        </select>
+                        <select name='category' onChange={handleChange}>
+                        <option value="Todas">Todas</option>
+        {categories.map((category, index) => (
+          <option key={index} value={category.name}>
+            {category.name}
+          </option>
+        ))}
+      </select>
                     </Nav.Item>
                     <Nav.Item>
                         <h4>Ordenar por Precio </h4>
@@ -176,7 +185,14 @@ export default function Home() {
 
                 <div className={styles.card_container}>
 
-                    {items.map(p => (
+                <InfiniteScroll
+      dataLength={items.length} // Tamaño actual de la lista de productos
+      next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
+      hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
+      loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." />: null}
+      className={styles.card_container}
+    >
+                     {items.map(p => (
                         <CardProducto
                             key={p.id}
                             id={p.id}
@@ -189,6 +205,7 @@ export default function Home() {
                         >
                         </CardProducto>
                     ))}
+                </InfiniteScroll>
                 </div >
             </div >
             <Footer />

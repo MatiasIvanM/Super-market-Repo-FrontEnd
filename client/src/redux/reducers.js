@@ -107,7 +107,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_CUSTOMERS:
       return { ...state, customers: action.payload };
     case GET_CUSTOMER_BY_ID:
-      return { ...state, customerId: action.payload };
+      return { ...state, customerId: action.payload.id };
     case ADD_CUSTOMER:
       return { ...state, customerId: action.payload };
     case MOD_CUSTOMER:
@@ -143,7 +143,9 @@ const rootReducer = (state = initialState, action) => {
       let categoryFiltered =
         action.payload === 'Todas'
           ? state.products
-          : state.products.filter((producto) => producto.categories === action.payload)
+          : state.products.filter((producto) => {
+            return producto.Categories.some(category => category.name === action.payload);
+          });
       return { ...state, productsFiltered: [...categoryFiltered] }
     case ORDER_PRECIO:
       let priceFiltered = state.productsFiltered

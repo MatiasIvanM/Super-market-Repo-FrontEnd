@@ -21,9 +21,9 @@ function Landing(){
     history.push('/home');
 };
 
-  useEffect(() => {
-    dispatch(getProducts());// eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getProducts());// eslint-disable-next-line
+  // }, []);
 
     return(
     <div>
