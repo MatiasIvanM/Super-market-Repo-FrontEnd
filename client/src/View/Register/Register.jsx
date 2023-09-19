@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import Overlay from '../../components/Overlay/Overlay';
 
 export default function Register() {
-    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims } = useAuth0()
+    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims, logout } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -83,6 +83,9 @@ export default function Register() {
         setModal({ ...modal, show: false })
         if (JSON.parse(localStorage.getItem('customer'))) {
             history.push('/home')
+        } else {
+            localStorage.clear()
+            if (isAuthenticated) logout({ logoutParams: { returnTo: window.location } })
         }
     }
 
@@ -109,7 +112,12 @@ export default function Register() {
                                     button: 'danger',
                                 })
                             } else {
-                                localStorage.setItem('customer', JSON.stringify(loggedCustomer.payload))
+                                localStorage.setItem('customer', JSON.stringify({
+                                    name: loggedCustomer.payload.name,
+                                    email: loggedCustomer.payload.email,
+                                    role: loggedCustomer.payload.role,
+                                }))
+                                localStorage.setItem('token', JSON.stringify(loggedCustomer.payload.token))
                                 await dispatch(getCustomerById(loggedCustomer.id))
                                 setModal({
                                     show: true,
@@ -122,16 +130,29 @@ export default function Register() {
                     }
                     if (customer.provider === 'google') {
                         const claims = await getIdTokenClaims()
-                        localStorage.setItem('customer', JSON.stringify({ token: claims.__raw }))
+                        localStorage.setItem('token', JSON.stringify(claims.__raw))
                         const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
-                        localStorage.setItem('customer', JSON.stringify({ ...dbCustomer.payload[0], token: claims.__raw }))
-                        await dispatch(getCustomerById(dbCustomer.payload[0].id))
-                        setModal({
-                            show: true,
-                            header: 'Usuario Registrado',
-                            body: 'Bienvenido',
-                            button: 'success',
-                        })
+                        if (dbCustomer) {
+                            localStorage.setItem('customer', JSON.stringify({
+                                name: dbCustomer.payload[0].name,
+                                email: dbCustomer.payload[0].email,
+                                role: dbCustomer.payload[0].role,
+                            }))
+                            await dispatch(getCustomerById(dbCustomer.payload[0].id))
+                            setModal({
+                                show: true,
+                                header: 'Usuario Registrado',
+                                body: 'Bienvenido',
+                                button: 'success',
+                            })
+                        } else {
+                            setModal({
+                                show: true,
+                                header: 'Error!',
+                                body: 'Algo salió mal',
+                                button: 'danger',
+                            })
+                        }
                     }
                 }
             } else {
