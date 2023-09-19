@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
 
 
-export default function Register() {
+export default function Login() {
     const { loginWithPopup, isAuthenticated, user, getIdTokenClaims, logout } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
