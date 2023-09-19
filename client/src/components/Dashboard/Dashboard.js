@@ -9,10 +9,6 @@ import PanelAdmin from './PanelAdmin';
 import {ProductsList, DetailShow} from './product/ProductsList';
 // // import ProductCreate from './product/ProductCreate';
 import ProductEdit from './product/ProductEdit';
-<<<<<<< HEAD
-=======
-// import Detail from '../../View/Detail/Detail';
->>>>>>> 60de00ed5ce3dcb742d1e706e0a41433b3bc7904
 import formProduct from '../../View/FormProduct/formProduct';
 
 //? Orders
@@ -21,10 +17,17 @@ import OrderList from './orders/OrderList';
 import dataProvider from './dataProvider';
 
 // //? Users
-import UsersList from './users/UsersList';
+// import UsersList from './users/UsersList';
+
 import UserEdit from './users/UserEdit';
 import UserCreate from './users/UserCreate';
 
+import ShoppingOrders from './suppliers/ShoppingOrders';
+import formCarrousel from './carrousel/formCarrousel';
+// ? Settings
+const Setting = React.lazy(() => import('./Setting'));
+// import Setting from './Setting';
+const UsersList = React.lazy(() => import('./users/UsersList'));
 
 const Dashboard = () => {
   return (
@@ -53,6 +56,15 @@ const Dashboard = () => {
         list={OrderList} 
         icon={BsReceiptCutoff} 
       />
+
+      <Resource 
+        name="settings"  
+        list={Setting} 
+        create={formCarrousel}
+        icon={BsReceiptCutoff} 
+      />
+      <Resource name="home"  />
+
     </Admin>
   );
 };

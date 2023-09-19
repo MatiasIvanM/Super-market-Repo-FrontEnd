@@ -5,23 +5,32 @@ import { List, CreateButton, ImageField, Show, ShowButton, DateField,
    DeleteButton, SortButton , FilterButton,
 } from 'react-admin';
 
-const shoppingOrders = (ordersList) => {
+const ListActions = () => (
+  <TopToolbar>
+      <SelectColumnsButton />
+      {/* <FilterButton/>
+      <CreateButton/>
+      <ExportButton/> */}
+  </TopToolbar>
+);
+
+const ShoppingOrders = (props) => {
   return (
-    <List {...props}  actions={<ListActions/>} filters={productFilters}  >
+    <List {...props} actions={<ListActions/>}>
         <DatagridConfigurable>      
             <TextField source="id" />
             <TextField source="brand" />
             <TextField source="name" />
             <TextField source="available" />
             <TextField source="stock" />
-            <SelectButton basePath= "/products"/>    
-        {/* <DateField source="created_at" /> */}
-            <EditButton  basePath="/products"/>
-            <ShowButton  basePath="/products" />
-            {/* <DeleteButton basePath="/products" />  */}
-          </DatagridConfigurable>
+            {/* <SelectButton basePath= "/products"/>     */}
+        </DatagridConfigurable>
       </List>
   )
 }
 
-export default shoppingOrders
+const AddButton =(props) =>{
+  
+}
+
+export default ShoppingOrders
