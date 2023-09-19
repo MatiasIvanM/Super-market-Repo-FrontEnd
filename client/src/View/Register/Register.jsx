@@ -63,7 +63,7 @@ export default function Register() {
         event.preventDefault()
         const provider = event.target.name
         if (provider === 'local') {
-            if (!Object.values(customer).every(d => d === '') && checkErrors()) {
+            if (Object.values(customer).every(d => d !== '') === false && checkErrors() === false) {
                 setModal({
                     show: true,
                     header: 'Ups!',
