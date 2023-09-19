@@ -6,12 +6,14 @@
 // const ORDERS='http://localhost:3001/orders/'
 // const SHOPPINGCART="http://localhost:3001/shoppingCart"
 // const CATEGORY='http://localhost:3001/category'
+// const COMMENT='http://localhost:3001/comment'
 // const server ='http://localhost:3001/'
 
 
+
 // backend
-//  const server = 'https://super-market-shop-preview.up.railway.app';
- const server = 'http://localhost:3001';
+ const server = 'https://super-market-shop-preview.up.railway.app';
+// const server = 'http://localhost:3001';
 
   const PRODUCT=`${server}/product/`;
   const CUSTOMER=`${server}/customer/`;
@@ -19,6 +21,7 @@
   const ORDERS=`${server}/orders/`;
   const SHOPPINGCART=`${server}/shoppingCart`;
   const CATEGORY=`${server}/category/`;
+  const COMMENT=`${server}/comment/`
 
 
-export {PRODUCT,CUSTOMER,ORDER_DETAIL,ORDERS,SHOPPINGCART,CATEGORY, server};
+export {PRODUCT,CUSTOMER,ORDER_DETAIL,ORDERS,SHOPPINGCART,CATEGORY, COMMENT, server};
