@@ -23,15 +23,16 @@ export default function Profile() {
         body: "",
         button: ""
     })
-    const customerId = useSelector(state => state.customerId)
 
     async function getCustomer() {
-        const user = JSON.parse(localStorage.getItem('customer'))
+        // const user = JSON.parse(localStorage.getItem('customer'))
+        const lsCustomer = JSON.parse(localStorage.getItem('customer'))
+        const user = await dispatch(getCustomerByEmail(lsCustomer.email))
         setCustomer({
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            address: user.address,
+            name: user.payload[0].name,
+            email: user.payload[0].email,
+            phone: user.payload[0].phone,
+            address: user.payload[0].address,
         })
     }
 
@@ -94,7 +95,9 @@ export default function Profile() {
             <Card style={{
                 margin: '5rem 0rem 2rem 0rem',
                 background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))',
-                boxShadow: '4px 4px 8px 1px grey'
+                boxShadow: '4px 4px 8px 1px grey',
+                width: '30vw',
+                minWidth: '370px',
             }}>
                 <Card.Body>
                     <Card.Title>
@@ -127,7 +130,7 @@ export default function Profile() {
                     <InputGroup>
                         <Button name='save' disabled={edit} style={{ margin: '0rem 0rem 0.3rem 0rem', width: '100%' }} variant='primary' onClick={handleEdit}>Guardar cambios</Button>
                     </InputGroup>
-                    <Button style={{ width: '100%' }} variant='success' onClick={handleLogout}>Salir</Button>
+                    <Button style={{ width: '100%' }} variant='success' onClick={handleLogout}>Cerrar Sesión</Button>
                 </Card.Footer>
             </Card>
             <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
