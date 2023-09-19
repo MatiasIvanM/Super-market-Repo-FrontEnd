@@ -23,17 +23,19 @@ export default function Profile() {
         body: "",
         button: ""
     })
+    let defaultCustomer = null
 
     async function getCustomer() {
-        // const user = JSON.parse(localStorage.getItem('customer'))
         const lsCustomer = JSON.parse(localStorage.getItem('customer'))
         const user = await dispatch(getCustomerByEmail(lsCustomer.email))
-        setCustomer({
+        defaultCustomer = {
             name: user.payload[0].name,
             email: user.payload[0].email,
             phone: user.payload[0].phone,
             address: user.payload[0].address,
-        })
+        }
+        console.log(defaultCustomer);
+        setCustomer(defaultCustomer)
     }
 
     function handleLogout() {
@@ -59,11 +61,13 @@ export default function Profile() {
                 setEdit(false)
                 event.target.className = 'btn btn-success btn-sm btn btn-primary'
             } else {
+                setCustomer(defaultCustomer)
                 setEdit(true)
                 event.target.className = 'btn btn-secondary btn-sm btn btn-primary'
             }
         }
         if (button === 'save' && !edit) {
+            console.log(customer);
             setModal({
                 show: true,
                 header: "Guardo la nueva info del usuario",
@@ -110,18 +114,20 @@ export default function Profile() {
                     <Form style={{
                         padding: '0.8rem',
                         margin: '1rem 0rem 0rem 0rem'
-                    }}>
+                    }}
+                        onChange={handleChange}
+                    >
                         <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Nombre</p>
                         <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <Form.Control className='text-center' disabled={edit} value={customer?.name}></Form.Control>
+                            <Form.Control name='name' className='text-center' disabled={edit} placeholder={customer?.name}></Form.Control>
                         </InputGroup>
                         <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Teléfono</p>
                         <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <Form.Control className='text-center' disabled={edit} value={customer?.phone}></Form.Control>
+                            <Form.Control name='phone' className='text-center' disabled={edit} placeholder={customer?.phone}></Form.Control>
                         </InputGroup>
                         <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Dirección</p>
                         <InputGroup style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
-                            <Form.Control className='text-center' disabled={edit} value={customer?.address}></Form.Control>
+                            <Form.Control name='address' className='text-center' disabled={edit} placeholder={customer?.address}></Form.Control>
                         </InputGroup>
                         <Button name='edit' onClick={handleEdit} className='btn btn-secondary btn-sm btn btn-primary'>Editar</Button>
                     </Form>
