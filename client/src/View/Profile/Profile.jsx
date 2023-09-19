@@ -58,7 +58,7 @@ export default function Profile() {
                 setEdit(false)
                 event.target.className = 'btn btn-success btn-sm btn btn-primary'
             } else {
-                
+
                 setEdit(true)
                 event.target.className = 'btn btn-secondary btn-sm btn btn-primary'
             }
