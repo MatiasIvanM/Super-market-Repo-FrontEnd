@@ -23,19 +23,16 @@ export default function Profile() {
         body: "",
         button: ""
     })
-    let defaultCustomer = null
 
     async function getCustomer() {
         const lsCustomer = JSON.parse(localStorage.getItem('customer'))
         const user = await dispatch(getCustomerByEmail(lsCustomer.email))
-        defaultCustomer = {
+        setCustomer({
             name: user.payload[0].name,
             email: user.payload[0].email,
             phone: user.payload[0].phone,
             address: user.payload[0].address,
-        }
-        console.log(defaultCustomer);
-        setCustomer(defaultCustomer)
+        })
     }
 
     function handleLogout() {
@@ -61,7 +58,7 @@ export default function Profile() {
                 setEdit(false)
                 event.target.className = 'btn btn-success btn-sm btn btn-primary'
             } else {
-                setCustomer(defaultCustomer)
+                
                 setEdit(true)
                 event.target.className = 'btn btn-secondary btn-sm btn btn-primary'
             }
