@@ -60,7 +60,6 @@ export default function Profile() {
         }
         if (button === 'save' && !edit) {
             const response = await dispatch(modCustomer(customer))
-            console.log(response.payload)
             if (response?.payload) {
                 setModal({
                     show: true,
