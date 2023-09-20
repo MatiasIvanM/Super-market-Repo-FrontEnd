@@ -5,6 +5,7 @@ const PanelAdmin = () => (
     <Card>
         <CardHeader title="Bienvenido al Panel de Administración" />
         <CardContent>Super Market</CardContent>
+        {/* <img src="" alt="logo"> */}
     </Card>
 );
 

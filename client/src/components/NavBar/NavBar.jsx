@@ -21,7 +21,12 @@ const NavBar = (props) => {
   const handleChange = (event) => {
     setName(event.target.value);
   }
+  const usuario = JSON.parse(localStorage.getItem('customer'));
+  let role=null;
 
+  if (usuario){
+    role = usuario.role
+  }
 
   return (
     <div>
@@ -92,11 +97,14 @@ const NavBar = (props) => {
                 </Nav.Link>
               }
             </Navbar.Brand>
-            <Navbar.Brand>
+
+             {JSON.parse(localStorage.getItem('customer')) && role==='admin' 
+             ? (<Navbar.Brand>
               <Link to='/admin'>
                 <BsWrenchAdjustable className="nav-icon" />
               </Link>
-            </Navbar.Brand>
+              </Navbar.Brand>)
+             : console.log("NOOO Entro")}
 
           </Navbar.Collapse>
         </Container>
