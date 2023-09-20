@@ -75,6 +75,19 @@ const dataProvider = {
     }));
   },
 
+
+  // getMany: (resource, params) => {
+  //   const { ids } = params;
+  //   const query = {
+  //     id: ids.join(','),
+  //   };
+  //   const url = `${resource}/name${stringify(query)}`;
+
+  //   return httpClient.get(url).then(({ data }) => ({
+  //     data: data,
+  //   }));
+  // },
+
   
 };
 
