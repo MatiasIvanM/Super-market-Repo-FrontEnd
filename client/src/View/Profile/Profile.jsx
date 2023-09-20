@@ -133,7 +133,7 @@ export default function Profile() {
             alignItems: 'center',
         }}>
             <Card style={{
-                margin: '5rem 0rem 2rem 0rem',
+                margin: '3rem 0rem 2rem 0rem',
                 background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))',
                 boxShadow: '4px 4px 8px 1px grey',
                 width: '30vw',
@@ -141,7 +141,7 @@ export default function Profile() {
             }}>
                 <Card.Body>
                     <Card.Title>
-                        <div style={{ color: '#0d6efd', fontSize: '2rem' }}>{customer?.name}</div>
+                        <div className={styles.name}>{customer?.name}</div>
                     </Card.Title>
                     <Card.Subtitle>
                         <div>{customer?.email}</div>
@@ -179,16 +179,19 @@ export default function Profile() {
                 </Card.Footer>
             </Card>
             <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
+            <br />
             <Modal show={modal.show}>
-                <Modal.Header>
-                    <Modal.Title>{modal.header}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{modal.body}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant={modal.button} onClick={handleModalButton}>
-                        Aceptar
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body className={styles.modal}>
+                    <Modal.Header>
+                        <Modal.Title style={{fontSize:'50px'}}>{modal.header}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{modal.body}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant={modal.button} onClick={handleModalButton}>
+                            Aceptar
+                        </Button>
+                    </Modal.Footer>
+                </Modal.Body>
             </Modal>
             <Overlay />
         </div >
