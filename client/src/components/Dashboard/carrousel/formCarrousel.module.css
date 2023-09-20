@@ -2,11 +2,13 @@
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    /* align-items: center; */
+    height: 50vh;
+    margin: 2rem;
   }
 
   .formContainer {
+    background-color: white;
     border: 2px solid black;
     width: 70%;
     padding: 20px;
@@ -37,4 +39,8 @@
   .styleButton{
     padding:0.5rem;
     margin:1rem
+  }
+
+  .h4{
+    color: black;
   }

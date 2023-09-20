@@ -1,72 +1,73 @@
-import React from 'react';
-import { Admin, Resource } from 'react-admin';
+import React from "react";
+import { Admin, Resource, Layout } from "react-admin";
+import {
+  BsFillPeopleFill,
+  BsReceiptCutoff,
+  BsBoxSeamFill,
+  BsFillGearFill
+} from "react-icons/bs";
+import Bar from "./Bar";
 
-
-import { BsFillPeopleFill, BsReceiptCutoff, BsBoxSeamFill } from "react-icons/bs";
-import authProvider from './authProvider';
-import PanelAdmin from './PanelAdmin';
+import PanelAdmin from "./PanelAdmin";
 //? Products
-import {ProductsList, DetailShow} from './product/ProductsList';
-// // import ProductCreate from './product/ProductCreate';
-import ProductEdit from './product/ProductEdit';
-import formProduct from '../../View/FormProduct/formProduct';
+import { ProductsList, DetailShow } from "./product/ProductsList";
+import ProductEdit from "./product/ProductEdit";
+import formProduct from "../../View/FormProduct/formProduct";
 
 //? Orders
-import OrderList from './orders/OrderList';
+import OrderList from "./orders/OrderList";
 
-import dataProvider from './dataProvider';
+import dataProvider from "./dataProvider";
+// import i18nProvider from "./i18nProvider";
 
 // //? Users
 // import UsersList from './users/UsersList';
+import UserEdit from "./users/UserEdit";
+import UserCreate from "./users/UserCreate";
 
-import UserEdit from './users/UserEdit';
-import UserCreate from './users/UserCreate';
+import formCarrousel from "./carrousel/formCarrousel";
 
-// import ShoppingOrders from './suppliers/ShoppingOrders';
-import formCarrousel from './carrousel/formCarrousel';
 // ? Settings
-const Setting = React.lazy(() => import('./Setting'));
-// import Setting from './Setting';
-const UsersList = React.lazy(() => import('./users/UsersList'));
+const Setting = React.lazy(() => import("./Setting"));
+const UsersList = React.lazy(() => import("./users/UsersList"));
+
+const MyLayout = (props) => <Layout {...props} appBar={Bar} />;
 
 const Dashboard = () => {
   return (
-     <Admin dashboard={PanelAdmin} dataProvider={dataProvider} authProvider={authProvider} >
-      <Resource 
-        name="product" 
-        list={ProductsList} 
-        edit={ProductEdit} 
+    <Admin
+      dashboard={PanelAdmin}
+      dataProvider={dataProvider}
+      layout={MyLayout}
+      darkTheme={{ palette: { mode: "dark" } }}
+      // i18nProvider={i18nProvider}
+    >
+      <Resource
+        name="product"
+        list={ProductsList}
+        edit={ProductEdit}
         // create={ProductCreate}
         create={formProduct}
         icon={BsBoxSeamFill}
-        show={DetailShow} 
+        show={DetailShow}
       />
-       <Resource 
-        name="customer" 
-        list={UsersList} 
-        create={UserCreate} 
-        edit={UserEdit} 
+      <Resource
+        name="customer"
+        list={UsersList}
+        create={UserCreate}
+        edit={UserEdit}
         icon={BsFillPeopleFill}
       />
 
-       {/* <Resource name="users"  list={UsersList} create={UserCreate} edit={UserEdit} icon={BsFillPeopleFill} />  */}
+      <Resource name="orders" list={OrderList} icon={BsReceiptCutoff} />
 
-      <Resource 
-        name="orders"  
-        list={OrderList} 
-        icon={BsReceiptCutoff} 
+      <Resource
+        name="settings"
+        list={Setting}
+        icon={BsFillGearFill}
       />
-
-      <Resource 
-        name="settings"  
-        list={Setting} 
-        create={formCarrousel}
-        icon={BsReceiptCutoff} 
-      />
-      <Resource name="home"  />
-
     </Admin>
   );
 };
 
-export default Dashboard
+export default Dashboard;

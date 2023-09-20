@@ -97,10 +97,7 @@ const NavBar = (props) => {
                 </Nav.Link>
               }
             </Navbar.Brand>
-            {/* //  console.log( JSON.parse(localStorage.getItem('customer'))?.email) */}
-            
-            {/* { console.log("role "+role)}
-            { console.log(role)} */}
+
              {JSON.parse(localStorage.getItem('customer')) && role==='admin' 
              ? (<Navbar.Brand>
               <Link to='/admin'>
@@ -109,15 +106,6 @@ const NavBar = (props) => {
               </Navbar.Brand>)
              : console.log("NOOO Entro")}
 
-            {/*{ 
-
-            
-            usuario.role === 'admin' 
-            ? (  */}
-            
-              {/* )
-            : console.log("NOOO Entro")
-           } */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
