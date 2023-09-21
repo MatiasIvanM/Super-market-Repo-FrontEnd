@@ -119,6 +119,7 @@ export default function Register() {
                                     role: loggedCustomer.payload.role,
                                 }))
                                 localStorage.setItem('token', JSON.stringify(loggedCustomer.payload.token))
+                                console.log(loggedCustomer);
                                 await dispatch(getCustomerById(loggedCustomer.id))
                                 setModal({
                                     show: true,
