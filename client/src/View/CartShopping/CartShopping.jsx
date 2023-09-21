@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Modal, Button, Card, ListGroup } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Modal, Button, Card, ListGroup,Alert } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom/";
@@ -9,9 +9,15 @@ import { useDispatch } from "react-redux";
 const CartShopping = () => {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
+  const [errors,setErrors]=useState([])
+  const [showMessageWarning, setShowMessageWarning] = useState(false);
   const history = useHistory();
   const cart = useSelector((state) => state.productsSC);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(cart)
+  }, [cart]);
 
   const clearCart = () => {
     const shouldClear = window.confirm("¿Estás seguro de que deseas limpiar el carrito?");
@@ -27,7 +33,12 @@ const CartShopping = () => {
   };
 
   const handleIncrementQuantity = (productId) => {
+    const productFind = cart.find(product => product.productDetails.id === productId);
+    if(productFind.quantity+1>productFind.productDetails.stock){
+      return
+    }else{
     dispatch(updateProductQuantitySC(productId, 1)); // Incrementa la cantidad en 1
+    }
   };
 
   const handleDecrementQuantity = (productId, product) => {
@@ -45,7 +56,22 @@ const CartShopping = () => {
   let totalValue = 0;
 
   const handlePayment = () => {
+    const errorsL=[];
+    for (let i = 0; i < cart.length; i++) {
+      if(cart[i].productDetails.stock<cart[i].quantity){
+        const err=`El producto: ${cart[i].productDetails.name} no tiene suficiennte stock`;
+        errorsL.push(err);
+      }
+    }
+    setErrors(errorsL);
+    if(errorsL.length!==0){
+      setShowMessageWarning(true)
+      setTimeout(() => {
+        setShowMessageWarning(false);
+      }, 5000);
+    }else{
     history.push('/mercadopago'); // Redirige en la misma página
+    }
   };
 
   return (
@@ -98,6 +124,14 @@ const CartShopping = () => {
           <p className="mt-4">
             <strong>Valor Total de la Compra:</strong> $ {totalValue.toFixed(0)}
           </p>
+          <Alert show={showMessageWarning} variant="warning" >
+          <div>
+            Verificar:
+            {errors.map(e=>(
+              <p>{e}</p>
+            ))}
+          </div>
+        </Alert>
         </Modal.Body>
         <Modal.Footer>
           <Button as={Link} to="/home" variant="secondary" onClick={handleClose}>
