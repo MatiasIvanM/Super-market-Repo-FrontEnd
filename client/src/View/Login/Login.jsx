@@ -59,7 +59,7 @@ export default function Login() {
                 setModal({
                     show: true,
                     header: 'Ups!',
-                    body: 'Datos Incorrectos',
+                    body: 'Datos incorrectos',
                     button: 'danger',
                 })
             } else {
@@ -112,8 +112,8 @@ export default function Login() {
                     await dispatch(getCustomerById(response.payload.id))
                     setModal({
                         show: true,
-                        header: 'Sesión iniciada',
-                        body: 'Bienvenido',
+                        header: 'Bienvenido',
+                        body: 'Sesión iniciada',
                         button: 'success',
                     })
                 }
@@ -140,8 +140,8 @@ export default function Login() {
                 await dispatch(getCustomerById(dbCustomer.payload[0].id))
                 setModal({
                     show: true,
-                    header: 'Sesión iniciada',
-                    body: 'Bienvenido',
+                    header: 'Bienvenido',
+                    body: 'Sesión iniciada',
                     button: 'success',
                 })
             } else {
@@ -228,15 +228,29 @@ export default function Login() {
             <br />
             {/* <Footer /> */}
             <Modal show={modal.show}>
-                <Modal.Header>
-                    <Modal.Title>{modal.header}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{modal.body}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant={modal.button} onClick={handleModalButton}>
-                        Aceptar
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body className={styles.modal}>
+                    <Modal.Header>
+                        <Modal.Title style={{
+                            color: modal.button === 'danger'
+                            ?
+                            '#dc3545'
+                            :
+                            '#198754'
+                            ,
+                            fontSize: '4rem',
+                            fontStyle: 'italic'
+                            }}
+                            >
+                            {modal.header}
+                            </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{modal.body}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant={modal.button} onClick={handleModalButton}>
+                            Aceptar
+                        </Button>
+                    </Modal.Footer>
+                </Modal.Body>
             </Modal>
             <Overlay />
         </div>

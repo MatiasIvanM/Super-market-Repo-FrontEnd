@@ -1,5 +1,18 @@
+.name {
+  color: #0d6efd;
+  font-size: 2.3rem;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 .errorMessage {
-    padding: 0;
-    color: red;
-    font-size: 15px;
-  }
+  padding: 0;
+  color: red;
+  font-size: 15px;
+}
+
+.modal {
+  margin: '5rem 0rem 2rem 0rem';
+  background: linear-gradient(60deg, rgb(200, 200, 200), rgb(255, 255, 255));
+  border-radius: 15px;
+}

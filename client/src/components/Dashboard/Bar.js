@@ -10,7 +10,7 @@ const Bar = () => (
       <>
         {/* <LocalesMenuButton /> */}
         <Link to="/">
-            <button> Ir a Home </button> 
+            <button> Vista de Usuario </button> 
         </Link>
         <ToggleThemeButton />
         <RefreshIconButton />

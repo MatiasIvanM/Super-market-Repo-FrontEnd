@@ -17,7 +17,7 @@ export default function Home() {
     const dispatch = useDispatch();
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
-    const ITEMS_PER_PAGE = 10;
+    const ITEMS_PER_PAGE = 15;
     const defaultFilters = { category: 'Todas', price: false, priceRange: { min: 0, max: 0 }, }
     const [productsMod, setProductsMod] = useState([]);
     const [filters, setFilters] = useState(defaultFilters);
@@ -25,9 +25,9 @@ export default function Home() {
     const [items, setItems] = useState([]);
     const [customer, setCustomer] = useState({});
     const [showLoader, setShowLoader] = useState(false);
-    let customerById = useSelector((state)=>state.customerId)
-    let categories=useSelector((state)=>state.category)
-    
+    let customerById = useSelector((state) => state.customerId)
+    let categories = useSelector((state) => state.category)
+
     useEffect(() => {
         setCustomer(customerById)
     }, [customer]);
@@ -41,12 +41,12 @@ export default function Home() {
             const totalElements = productsMod.length;
             const nextPage = currentPage + 1;
             const firstIndex = nextPage * ITEMS_PER_PAGE;
-    
+
             if (firstIndex >= totalElements) {
                 setShowLoader(false);
                 return;
             }
-    
+
             setItems(items.concat([...productsMod].splice(firstIndex, ITEMS_PER_PAGE)));
             setCurrentPage(nextPage);
             setShowLoader(false);
@@ -120,11 +120,11 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(getProducts());// eslint-disable-next-line
-      }, []);
-    
+    }, []);
+
     useEffect(() => {
         dispatch(selectCategory());// eslint-disable-next-line
-      }, []);
+    }, []);
 
     // if (products.length === 0) {
     //     return <div>
@@ -151,13 +151,13 @@ export default function Home() {
                     <Nav.Item>
                         <h4>Categorías </h4>
                         <select name='category' onChange={handleChange}>
-                        <option value="Todas">Todas</option>
-        {categories.map((category, index) => (
-          <option key={index} value={category.name}>
-            {category.name}
-          </option>
-        ))}
-      </select>
+                            <option value="Todas">Todas</option>
+                            {categories.map((category, index) => (
+                                <option key={index} value={category.name}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
                     </Nav.Item>
                     <Nav.Item>
                         <h4>Ordenar por Precio </h4>
@@ -187,30 +187,30 @@ export default function Home() {
                     </Nav.Item>
                 </Nav>
 
-                <div className={styles.card_container}>
+                {/*<div className={styles.card_container}>
+</div >*/}
 
-                <InfiniteScroll
-      dataLength={items.length} // Tamaño actual de la lista de productos
-      next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
-      hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
-      loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." />: null}
-      className={styles.card_container}
-    >
-                     {items.map(p => (
-                        <CardProducto
-                            key={p.id}
-                            id={p.id}
-                            name={p.name}
-                            image={p.image}
-                            description={p.description}
-                            price={p.price}
-                            stock={p.stock}
-                            rating='5'
-                        >
-                        </CardProducto>
-                    ))}
-                </InfiniteScroll>
-                </div >
+                    <InfiniteScroll
+                        dataLength={items.length} // Tamaño actual de la lista de productos
+                        next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
+                        hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
+                        loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." /> : null}
+                        className={styles.card_container}
+                    >
+                        {items.map(p => (
+                            <CardProducto
+                                key={p.id}
+                                id={p.id}
+                                name={p.name}
+                                image={p.image}
+                                description={p.description}
+                                price={p.price}
+                                stock={p.stock}
+                                rating='5'
+                            >
+                            </CardProducto>
+                        ))}
+                    </InfiniteScroll> 
             </div >
             <Footer />
         </div>

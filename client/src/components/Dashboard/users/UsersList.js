@@ -34,6 +34,7 @@ const UsersList = (props) => (
             <TextField source="id" />
             <TextField source="name" />
             <EmailField source="email" />
+            <TextField source = "role" />
             <EditButton label="Editar" />
             <CustomLinkField record={props.record} />
         </DatagridConfigurable>
