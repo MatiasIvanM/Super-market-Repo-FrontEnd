@@ -9,6 +9,7 @@ import {
 } from 'react-admin';
 
 const UserDetails = ({ record }) => {
+
     return (
         <div>
             <h2>Detalles del Usuario</h2>
@@ -37,6 +38,7 @@ const UserEdit = (props) => {
                 source="role"
                 label="Rol"
                 choices={[
+                    { id : 'BAN', name: 'Restringir Usuario'},
                     { id: 'user', name: 'Usuario' },
                     { id: 'admin', name: 'Administrador' },
                 ]}
