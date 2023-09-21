@@ -183,7 +183,19 @@ export default function Profile() {
             <Modal show={modal.show}>
                 <Modal.Body className={styles.modal}>
                     <Modal.Header>
-                        <Modal.Title style={{fontSize:'50px'}}>{modal.header}</Modal.Title>
+                    <Modal.Title style={{
+                            color: modal.button === 'danger'
+                            ?
+                            '#dc3545'
+                            :
+                            '#198754'
+                            ,
+                            fontSize: '4rem',
+                            fontStyle: 'italic'
+                            }}
+                            >
+                            {modal.header}
+                            </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>{modal.body}</Modal.Body>
                     <Modal.Footer>
