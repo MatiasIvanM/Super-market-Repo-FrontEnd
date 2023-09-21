@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 // import { useAuth0 } from "@auth0/auth0-react"
 
 import { useSelector } from 'react-redux'
+import BarBanned from "./BarBanned";
 
 
 const NavBar = (props) => {
@@ -109,6 +110,10 @@ const NavBar = (props) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {JSON.parse(localStorage.getItem('customer')) && role==='BAN' 
+             ? <BarBanned />
+             : null}
+        
     </div>
   );
 };

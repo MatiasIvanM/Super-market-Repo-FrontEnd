@@ -75,3 +75,21 @@
 .search-button:hover {
     background-color: #444;
 }
+
+
+/* Estilo para la Barra de Banneado */
+.barBanned {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dd0f0f;
+    color: white;
+    font-size: small;
+    text-decoration: none;
+    
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}
