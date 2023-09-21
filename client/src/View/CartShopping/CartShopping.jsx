@@ -15,9 +15,6 @@ const CartShopping = () => {
   const cart = useSelector((state) => state.productsSC);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(cart)
-  }, [cart]);
 
   const clearCart = () => {
     const shouldClear = window.confirm("¿Estás seguro de que deseas limpiar el carrito?");
