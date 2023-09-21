@@ -122,8 +122,8 @@ export default function Register() {
                                 await dispatch(getCustomerById(loggedCustomer.id))
                                 setModal({
                                     show: true,
-                                    header: 'Usuario Registrado',
-                                    body: 'Bienvenido',
+                                    header: 'Bienvenido',
+                                    body: 'Usuario Registrado',
                                     button: 'success',
                                 })
                             }
@@ -143,8 +143,8 @@ export default function Register() {
                             await dispatch(getCustomerById(dbCustomer.payload[0].id))
                             setModal({
                                 show: true,
-                                header: 'Usuario Registrado',
-                                body: 'Bienvenido',
+                                header: 'Bienvenido',
+                                body: 'Usuario Registrado',
                                 button: 'success',
                             })
                         } else {
@@ -249,15 +249,29 @@ export default function Register() {
             <br />
             {/* <Footer /> */}
             <Modal show={modal.show}>
-                <Modal.Header>
-                    <Modal.Title>{modal.header}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{modal.body}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant={modal.button} onClick={handleModalButton}>
-                        Aceptar
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body className={styles.modal}>
+                    <Modal.Header>
+                    <Modal.Title style={{
+                            color: modal.button === 'danger'
+                            ?
+                            '#dc3545'
+                            :
+                            '#198754'
+                            ,
+                            fontSize: '4rem',
+                            fontStyle: 'italic'
+                            }}
+                            >
+                            {modal.header}
+                            </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{modal.body}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant={modal.button} onClick={handleModalButton}>
+                            Aceptar
+                        </Button>
+                    </Modal.Footer>
+                </Modal.Body>
             </Modal>
             <Overlay />
         </div>
