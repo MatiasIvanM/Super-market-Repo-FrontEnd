@@ -7,7 +7,7 @@ import { getProductById } from "../../redux/Actions/actionsProducts";
 
 
 function ShoppingCart() {
-  const productsSC = useSelector((state) => state.productsSC)
+  const productsSC = useSelector((state) => state.shoppingCart)
 
   return (
     <>

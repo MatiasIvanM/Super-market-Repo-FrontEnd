@@ -3,7 +3,7 @@ import axios from "axios"
 import { SHOPPINGCART } from "../../utils/urlLocales"
 
 
-export const postRecipe = (id) => {
+export const getSC = (id) => {
     return async (dispatch)=> {
       try {
         let response = await axios.get(`${SHOPPINGCART}${id}`)

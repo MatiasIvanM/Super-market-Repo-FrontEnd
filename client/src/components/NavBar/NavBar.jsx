@@ -15,7 +15,7 @@ const NavBar = (props) => {
   const [name, setName] = useState("");
   // const { logout, isAuthenticated } = useAuth0()
 
-  const cart = useSelector((state) => state.productsSC);
+  const cart = useSelector((state) => state.shoppingCart);
   const [showEmptyCartAlert, setShowEmptyCartAlert] = useState(false);
 
   const handleChange = (event) => {

@@ -9,7 +9,7 @@ function MercadoPagoCheckout() {
   const [isPreferenceGenerated, setIsPreferenceGenerated] = useState(false);
   const history = useHistory();
 
-  const cart = useSelector((state) => state.productsSC);
+  const cart = useSelector((state) => state.shoppingCart);
 
   const totalCartPrice = cart.reduce((total, product) => {
     return total + product.productDetails.price * product.quantity;

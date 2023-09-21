@@ -10,7 +10,7 @@ const CartShopping = () => {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   const history = useHistory();
-  const cart = useSelector((state) => state.productsSC);
+  const cart = useSelector((state) => state.shoppingCart);
   const dispatch = useDispatch();
 
   const clearCart = () => {

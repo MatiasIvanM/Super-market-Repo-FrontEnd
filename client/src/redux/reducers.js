@@ -40,8 +40,7 @@ const initialState = {
   orderDetailId: {},
   orders: [],
   orderId: {},
-  shoppingCart:{},
-  productsSC:[],
+  shoppingCart:[],
   category:[],
 };
 
@@ -72,27 +71,27 @@ const rootReducer = (state = initialState, action) => {
     case POST_SC:
         return { ...state, shoppingCart: action.payload }
     case ADD_PRODUCT_SC:
-          const existingProductIndex = state.productsSC.findIndex(
+          const existingProductIndex = state.shoppingCart.findIndex(
             (product) => product.productDetails.id === action.payload.productDetails.id
           );
           if (existingProductIndex !== -1) {
-            const updatedProducts = [...state.productsSC];
+            const updatedProducts = [...state.shoppingCart];
             updatedProducts[existingProductIndex].quantity += action.payload.quantity;
-            return { ...state, productsSC: updatedProducts };
+            return { ...state, shoppingCart: updatedProducts };
           } else {
-            return { ...state, productsSC: [...state.productsSC, action.payload] };
+            return { ...state, shoppingCart: [...state.shoppingCart, action.payload] };
           }
-      case CLEAR_SC: return {...state, productsSC:action.payload}
+      case CLEAR_SC: return {...state, shoppingCart:action.payload}
       case REMOVE_PRODUCT_SC:
-        const modifiProducts = state.productsSC.filter(
+        const modifiProducts = state.shoppingCart.filter(
           (product) => product.productDetails.id !== action.payload
         );
-            return { ...state, productsSC: modifiProducts };
+            return { ...state, shoppingCart: modifiProducts };
       case UPDATE_PRODUCT_QUANTITY_SC:
       const { productId, quantityChange } = action.payload;
 
       // Encuentra el producto en el carrito por su ID
-      const productChange = state.productsSC.map((product) => {
+      const productChange = state.shoppingCart.map((product) => {
         if (product.productDetails.id === productId) {
           // Actualiza la cantidad sumando o restando la cantidadChange
           return {
@@ -102,7 +101,7 @@ const rootReducer = (state = initialState, action) => {
         }
         return product;
       });
-      return { ...state, productsSC: productChange };
+      return { ...state, shoppingCart: productChange };
     //customer
     case GET_CUSTOMERS:
       return { ...state, customers: action.payload };

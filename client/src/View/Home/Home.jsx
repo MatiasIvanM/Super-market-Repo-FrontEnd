@@ -27,8 +27,10 @@ export default function Home() {
     
     useEffect(() => {
         setCustomer(customerById)
-
-    }, [customerById]);
+    }, [customer]);
+    useEffect(() => {
+        console.log(customer, "Customer22222");
+      }, [customer]);
     const nextHandler = () => {
         const totalElements = productsMod.length;
         const nextPage = currentPage + 1;
