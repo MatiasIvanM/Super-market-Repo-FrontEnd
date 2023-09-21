@@ -24,7 +24,9 @@ import {
   GET_CATEGORY,
   CLEAR_SC,
   REMOVE_PRODUCT_SC,
-  UPDATE_PRODUCT_QUANTITY_SC
+  UPDATE_PRODUCT_QUANTITY_SC,
+  POST_COMMENT,
+  GET_ALL_COMMENTS
 } from "./actionsType";
 
 
@@ -42,6 +44,7 @@ const initialState = {
   orderId: {},
   shoppingCart:[],
   category:[],
+  comments:[],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -170,6 +173,12 @@ const rootReducer = (state = initialState, action) => {
           &&
           producto.price <= action.payload.max)
       return { ...state, productsFiltered: [...priceRangeFiltered] }
+    //comments
+    case GET_ALL_COMMENTS:
+      return { ...state, comments: action.payload };
+    case POST_COMMENT:
+        return { ...state, comments: action.payload };
+    
     //default
     default:
       return { ...state };

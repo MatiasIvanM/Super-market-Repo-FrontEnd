@@ -84,24 +84,6 @@ const DetailShow = (props) => (
   </Show>
 );
 
-// const Aside = () => {
-//   const record = useRecordContext();
-//   return (
-//       <div style={{ width: 200, margin: '1em' }}>
-//         <h1> DEtal </h1>
-
-//           {/* <Typography variant="h6">Post details</Typography> */}
-//           {record && (
-//               // <Typography variant="body2">
-//                 <>
-//                   Creation date: {record.createdAt}
-//                 </>
-//               // </Typography>
-//           )}
-//       </div>
-//   );
-// };
-
 const ProductsList = (props) => {
   // console.log("🚀 ~ file: ProductsList.js:131 ~ ProductsList ~ props:", props.data)
   //Este es el que muestra las ciudades

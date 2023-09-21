@@ -22,6 +22,7 @@ export const getSC = (id) => {
   export const addShoppingCart =  (data) => {
 	return async (dispatch) => {
 		try {
+      console.log(data)
 			let response = await axios.post(SHOPPINGCART,data)
             return dispatch({
                 type: POST_SC,

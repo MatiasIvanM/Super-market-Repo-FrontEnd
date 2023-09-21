@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 // eslint-disable-next-line
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { getCustomerByEmail, getCustomerById, loginCustomer, addCustomer } from '../../redux/Actions/actionsCustomers';
 import { addShoppingCart } from '../../redux/Actions/actionsSC';
 import { useAuth0 } from "@auth0/auth0-react";
@@ -16,9 +16,10 @@ import { Link } from 'react-router-dom';
 import Overlay from '../../components/Overlay/Overlay';
 
 export default function Register() {
-    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims } = useAuth0()
+    const { loginWithPopup, isAuthenticated, user, getIdTokenClaims, logout } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
+    let customerById = useSelector((state)=>state.customerId)
 
     const defaultCustomer = {
         name: "",
@@ -64,7 +65,7 @@ export default function Register() {
         event.preventDefault()
         const provider = event.target.name
         if (provider === 'local') {
-            if (!Object.values(customer).every(d => d === '') && checkErrors()) {
+            if (Object.values(customer).every(d => d !== '') === false && checkErrors() === false) {
                 setModal({
                     show: true,
                     header: 'Ups!',
@@ -84,6 +85,9 @@ export default function Register() {
         setModal({ ...modal, show: false })
         if (JSON.parse(localStorage.getItem('customer'))) {
             history.push('/home')
+        } else {
+            localStorage.clear()
+            if (isAuthenticated) logout({ logoutParams: { returnTo: window.location } })
         }
     }
 
@@ -111,35 +115,59 @@ export default function Register() {
                                     button: 'danger',
                                 })
                             } else {
-                                localStorage.setItem('customer', JSON.stringify(loggedCustomer.payload))
-                                await dispatch(getCustomerById(loggedCustomer.id))
+                                localStorage.setItem('customer', JSON.stringify({
+                                    id: response.payload.id,
+                                    name: loggedCustomer.payload.name,
+                                    email: loggedCustomer.payload.email,
+                                    role: loggedCustomer.payload.role,
+                                }))
+                                localStorage.setItem('token', JSON.stringify(loggedCustomer.payload.token))
+                                await dispatch(getCustomerById(response.payload.id))
                                 setModal({
                                     show: true,
                                     header: 'Usuario Registrado',
                                     body: 'Bienvenido',
                                     button: 'success',
                                 })
+                                dispatch(addShoppingCart({
+                                    ProductName: [],  
+                                    CustomerId:response.payload.id,
+                                    PriceTotal:0,
+                                    
+                                }))
                             }
                         }
                     }
                     if (customer.provider === 'google') {
                         const claims = await getIdTokenClaims()
+                        localStorage.setItem('token', JSON.stringify(claims.__raw))
                         const dbCustomer = await dispatch(getCustomerByEmail(claims.email))
-                        localStorage.setItem('customer', JSON.stringify({ ...dbCustomer.payload[0], token: claims.__raw }))
-                        await dispatch(getCustomerById(dbCustomer.payload[0].id))
-                        setModal({
-                            show: true,
-                            header: 'Usuario Registrado',
-                            body: 'Bienvenido',
-                            button: 'success',
-                        })
+                        if (dbCustomer) {
+                            localStorage.setItem('customer', JSON.stringify({
+                                id: dbCustomer.payload[0].id,
+                                name: dbCustomer.payload[0].name,
+                                email: dbCustomer.payload[0].email,
+                                role: dbCustomer.payload[0].role,
+                            }))
+                            await dispatch(getCustomerById(dbCustomer.payload[0].id))
+                            setModal({
+                                show: true,
+                                header: 'Usuario Registrado',
+                                body: 'Bienvenido',
+                                button: 'success',
+                            })
+                        } else {
+                            setModal({
+                                show: true,
+                                header: 'Error!',
+                                body: 'Algo salió mal',
+                                button: 'danger',
+                            })
+                        }
                     }
                     //creacion del carrito 
+                    console.log(customerById)
                     console.log(response)
-                    await dispatch(addShoppingCart({
-                        ProductName: [],  
-                        customerId:response.payload.id
-                    }))
                     
                 }
             } else {
@@ -240,7 +268,7 @@ export default function Register() {
                 <Modal.Body>{modal.body}</Modal.Body>
                 <Modal.Footer>
                     <Button variant={modal.button} onClick={handleModalButton}>
-                        Volver
+                        Aceptar
                     </Button>
                 </Modal.Footer>
             </Modal>

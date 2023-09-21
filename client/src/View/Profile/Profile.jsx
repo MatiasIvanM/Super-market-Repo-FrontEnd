@@ -9,7 +9,10 @@ import { useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import Overlay from '../../components/Overlay/Overlay';
-import { getCustomerByEmail, getCustomerById } from '../../redux/Actions/actionsCustomers';
+import { getCustomerByEmail, getCustomerById, modCustomer } from '../../redux/Actions/actionsCustomers';
+import * as validate from '../Register/validations'
+import { PiWarning } from 'react-icons/pi'
+import styles from './Profile.module.css'
 
 export default function Profile() {
     const { logout, isAuthenticated } = useAuth0()
@@ -23,16 +26,22 @@ export default function Profile() {
         body: "",
         button: ""
     })
-    const customerId = useSelector(state => state.customerId)
+    const [errors, setErrors] = useState({
+        name: "",
+        address: "",
+        phone: "",
+    })
 
     async function getCustomer() {
-        const user = JSON.parse(localStorage.getItem('customer'))
-        setCustomer({
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            address: user.address,
-        })
+        const lsCustomer = JSON.parse(localStorage.getItem('customer'))
+        const user = await dispatch(getCustomerByEmail(lsCustomer.email))
+        localStorage.setItem('customer', JSON.stringify({
+            id: user.payload[0].id,
+            name: user.payload[0].name,
+            email: user.payload[0].email,
+            role: user.payload[0].role,
+        }))
+        setCustomer({ ...user.payload[0] })
     }
 
     function handleLogout() {
@@ -49,26 +58,58 @@ export default function Profile() {
         const property = event.target.name
         const value = event.target.value
         setCustomer({ ...customer, [property]: value })
+        setErrors(validate[property](value))
     }
 
-    function handleEdit(event) {
+    function checkErrors() {
+        for (const err in errors) {
+            if (errors[err] !== '') {
+                return true
+            }
+        }
+        return false
+    }
+
+    async function handleEdit(event) {
         const button = event.target.name
         if (button === 'edit') {
             if (edit) {
                 setEdit(false)
                 event.target.className = 'btn btn-success btn-sm btn btn-primary'
             } else {
+                getCustomer()
+                setErrors({})
                 setEdit(true)
                 event.target.className = 'btn btn-secondary btn-sm btn btn-primary'
             }
         }
         if (button === 'save' && !edit) {
-            setModal({
-                show: true,
-                header: "Guardo la nueva info del usuario",
-                body: "*No implementado*",
-                button: "success"
-            })
+            if (checkErrors()) {
+                setModal({
+                    show: true,
+                    header: 'Ups!',
+                    body: 'Datos Incorrectos',
+                    button: 'danger',
+                })
+            } else {
+                const response = await dispatch(modCustomer(customer))
+                if (response?.payload) {
+                    getCustomer()
+                    setModal({
+                        show: true,
+                        header: "Guardado",
+                        body: "La información se guardó correctamente",
+                        button: "success"
+                    })
+                } else {
+                    setModal({
+                        show: true,
+                        header: 'Error!',
+                        body: 'Algo salió mal',
+                        button: 'danger',
+                    })
+                }
+            }
         }
     }
 
@@ -94,7 +135,9 @@ export default function Profile() {
             <Card style={{
                 margin: '5rem 0rem 2rem 0rem',
                 background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))',
-                boxShadow: '4px 4px 8px 1px grey'
+                boxShadow: '4px 4px 8px 1px grey',
+                width: '30vw',
+                minWidth: '370px',
             }}>
                 <Card.Body>
                     <Card.Title>
@@ -107,18 +150,23 @@ export default function Profile() {
                     <Form style={{
                         padding: '0.8rem',
                         margin: '1rem 0rem 0rem 0rem'
-                    }}>
+                    }}
+                        onChange={handleChange}
+                    >
+                        {errors?.name && !edit ? <span className={styles.errorMessage}><PiWarning /><span>{errors.name}</span></span> : <></>}
                         <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Nombre</p>
                         <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <Form.Control className='text-center' disabled={edit} value={customer?.name}></Form.Control>
+                            <Form.Control name='name' className='text-center' disabled={edit} value={customer?.name}></Form.Control>
                         </InputGroup>
+                        {errors?.phone && !edit ? <span className={styles.errorMessage}><PiWarning /><span>{errors.phone}</span></span> : <></>}
                         <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Teléfono</p>
                         <InputGroup style={{ margin: '0rem 0rem 1rem 0rem' }}>
-                            <Form.Control className='text-center' disabled={edit} value={customer?.phone}></Form.Control>
+                            <Form.Control name='phone' className='text-center' disabled={edit} value={customer?.phone}></Form.Control>
                         </InputGroup>
+                        {errors?.address && !edit ? <span className={styles.errorMessage}><PiWarning /><span>{errors.address}</span></span> : <></>}
                         <p style={{ fontWeight: 'bold', fontSize: '0.8rem', margin: '0' }}>Dirección</p>
                         <InputGroup style={{ margin: '0rem 0rem 0.5rem 0rem' }}>
-                            <Form.Control className='text-center' disabled={edit} value={customer?.address}></Form.Control>
+                            <Form.Control name='address' className='text-center' disabled={edit} value={customer?.address}></Form.Control>
                         </InputGroup>
                         <Button name='edit' onClick={handleEdit} className='btn btn-secondary btn-sm btn btn-primary'>Editar</Button>
                     </Form>
@@ -127,7 +175,7 @@ export default function Profile() {
                     <InputGroup>
                         <Button name='save' disabled={edit} style={{ margin: '0rem 0rem 0.3rem 0rem', width: '100%' }} variant='primary' onClick={handleEdit}>Guardar cambios</Button>
                     </InputGroup>
-                    <Button style={{ width: '100%' }} variant='success' onClick={handleLogout}>Salir</Button>
+                    <Button style={{ width: '100%' }} variant='success' onClick={handleLogout}>Cerrar Sesión</Button>
                 </Card.Footer>
             </Card>
             <Button as={Link} to='/home' variant='secondary' size='sm'>Volver al inicio</Button>
