@@ -34,7 +34,6 @@ import { useHistory } from 'react-router-dom';
               failure: "https://supermarket-git-producarrito-matiasivanm.vercel.app/home",
               pending: ""
             },
-            // notification_url: "https://df89-181-235-106-146.ngrok-free.app/mercadoPago/webhook",
             notification_url: "https://super-market-shop-preview.up.railway.app/mercadoPago/webhook",
             auto_return: "approved",
           },
@@ -61,7 +60,7 @@ import { useHistory } from 'react-router-dom';
 
     const handlePayment = () => {
       if (preferenceId) {
-        window.location.href =(`  `);
+        window.location.href =(`https://www.mercadopago.com/mco/checkout/start?pref_id=${preferenceId}`);
       }
     };
 
