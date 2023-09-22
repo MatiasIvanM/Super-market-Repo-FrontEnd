@@ -20,64 +20,84 @@ import {
   SortButton,
   FilterButton,
   BooleanInput,
-  BooleanField
+  BooleanField,
+  SearchInput,
 } from "react-admin";
 // import { EditDialog } from '@react-admin/ra-form-layout';
 import ToggleAvailableButton from "./ToggleAvailableButton";
 import style from "./ProductsList.module.css";
+import { Chip } from "@mui/material";
+import { useTranslate } from "react-admin";
 
 const ListActions = () => (
   <TopToolbar>
     <SelectColumnsButton />
-    <FilterButton/>
-    {/* <SortButton fields={['price']} /> */}
+    <FilterButton />
+    <SortButton fields={['price']} />
     <CreateButton />
     <ExportButton />
   </TopToolbar>
 );
 
+const QuickFilter = ({ label }) => {
+  const translate = useTranslate();
+  return <Chip sx={{ marginBottom: 1 }} label={translate(label)} />;
+};
+
 const productFilters = [
-  <TextInput label="Search" source="name" alwaysOn />,
-  <TextInput label="categories" source="categories" defaultValue="" />,
+  <SearchInput source="name" alwaysOn />,
+  <QuickFilter
+    source="Disponibilidad"
+    label="Disponibilidad"
+    defaultValue="Disponible"
+  />,
+  <QuickFilter source="Categoria" label="Categoria" defaultValue="Bebidas" />,
+  // <QuickFilter source="tags" label="Tagged Code" defaultValue={[3]} />,
 ];
 
+// const productFilters = [
+//   <SearchInput source="name" alwaysOn />,
+//   // <TextInput label="Search" source="name" alwaysOn />,
+//   <TextInput label="categories" source="categories" defaultValue="" />,
+// ];
 
 const DetailShow = (props) => (
-  <Show {...props}>
+  <Show {...props} title="Detalle de Producto:">
+    {console.log(props.data)}
     <SimpleShowLayout>
-      <h3> Detalle de Producto: </h3>
-      <div className={style.container}>
-        <div style={{ margin: "1em" }} className={style.containerDetalles}>
-          <h6>ID: <TextField source="id" style={{ fontSize: '1.1rem' }}/> </h6>
-          <h6>
-            MARCA: <TextField source="brand" style={{ fontSize: "2rem" }} />
-          </h6>
-          <h6>
-            NOMBRE: <TextField source="name" style={{ fontSize: "1.8rem" }} />
-          </h6>
-          <h6>
-            DESCRIPCIÓN: <TextField source="description" />
-          </h6>
-          <h6>
-            PRECIO: <TextField source="price" style={{ fontSize: "1.8rem" }} />
-          </h6>
-          <h6>
-            ESTATUS:{" "}
-            <TextField source="available" style={{ fontSize: "1.8rem" }}/>
-          </h6>
-          <h6>
-            FECHA EXP:{" "}
-            <DateField source="created_at" style={{ fontSize: "1.8rem" }} />
-          </h6>
-        </div>
+      {/* <h3>  </h3> */}
+        <div className={style.container}>
+          <div  className={style.containerDetalles}>
+            <span className={style.h6} > ID: </span>
+            <span className={style.textF}> <TextField source="id" style={{ fontSize: "1rem" }} /> </span> 
 
-        <div className={style.containerI}>
-          <ImageField
-            source="image"
+            <span className={style.h6} > MARCA:</span> 
+            <span className={style.textF}><TextField source="brand" style={{ fontSize: "1rem" }} /> </span>
+            
+            <span className={style.h6} > NOMBRE: </span>
+            <span className={style.textF}><TextField source="name" style={{ fontSize: "1rem" }} /> </span>
+
+            <span className={style.h6} > PRECIO: </span>
+            <span className={style.textF}><TextField source="price" style={{ fontSize: "1rem" }} /> </span>
+
+            <span className={style.h6} > ESTATUS: </span> 
+            <span className={style.textF}><TextField source="available" style={{ fontSize: "1rem" }} /></span>
+            
+            <span className={style.h6} > FECHA EXP: </span> 
+            <span className={style.textF}><DateField source="expirationdate" style={{ fontSize: "1rem" }} /></span>
+            
+            <span className={style.h6} > DESCRIPCIÓN: </span>
+            <span className={style.textF}><TextField source="description" /> </span>
+          </div>
+          
+          <div className={style.containerI}>
+            
+            <ImageField
+            source="image" className={style.img}
             sx={{
-              "& img": { maxWidth: 200, maxHeight: 200, objectFit: "contain" },
+              "& img": { maxWidth: '100%', maxHeight: '100%', objectFit: "contain" },
             }}
-          />
+            />
         </div>
       </div>
     </SimpleShowLayout>
@@ -92,10 +112,10 @@ const ProductsList = (props) => {
       <DatagridConfigurable>
         <TextField source="id" />
         <TextField source="brand" />
-        <TextField source="name" />
+        <TextField source="name" sortByOrder="DESC" />
         {/* <TextField source="description" /> */}
         <TextField source="price" />
-        <ToggleAvailableButton  source ="Disponibilidad"/>
+        <ToggleAvailableButton source="Disponibilidad" />
         <ImageField
           source="image"
           sx={{
