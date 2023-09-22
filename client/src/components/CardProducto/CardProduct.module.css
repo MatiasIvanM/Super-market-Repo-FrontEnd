@@ -28,7 +28,6 @@
 }
 
 .container{
-    /* box-shadow: 40px 34px 94px 0px rgba(30, 40, 68, 0.25); */
     box-shadow: 5px  5px 9px/* 10px 10px 10px */ rgba(30, 40, 68, 0.25);
     padding: 0%;
     transition: transform 0.1s ease
@@ -38,4 +37,3 @@
     transform: scale(1.05);
     cursor: pointer;
   }
-  

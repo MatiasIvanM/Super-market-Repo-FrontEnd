@@ -1,14 +1,10 @@
 .navBarContainer{
-    /* position: absolute; */
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    margin-bottom: 100px;
     z-index: 100;
 }
-
-
 
 /* Estilos para la barra de navegación */
 .navbar {

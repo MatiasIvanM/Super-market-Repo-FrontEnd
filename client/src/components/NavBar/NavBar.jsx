@@ -32,7 +32,7 @@ const NavBar = (props) => {
 
   return (
     <div className={style.navBarContainer}>
-      <Navbar bg="dark" expand="lg" variant="dark">
+      <Navbar bg="dark" expand="lg" variant="dark" className={style.contentWithMargin}>
         <Container>
           <Link to='/'>
             <img src="logo.png" alt="Logo" height="45px" className='custom-nav' />
