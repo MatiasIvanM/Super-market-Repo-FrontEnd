@@ -29,11 +29,11 @@ export default function Home() {
     let categories = useSelector((state) => state.category)
 
     useEffect(() => {
-        setCustomer(customerById)
+        setCustomer(customerById.id)
     }, [customer]);
-    useEffect(() => {
-        console.log(customer, "Customer22222");
-      }, [customer]);
+    // useEffect(() => {
+    //     console.log(customer, "Customer22222");
+    //   }, [customer]);
     const nextHandler = () => {
         setShowLoader(true);
 

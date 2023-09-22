@@ -19,6 +19,20 @@ export const getSC = (id) => {
   };
 
 
+  export const putShoppingCart =  (data) => {
+  return async (dispatch) => {
+    try {
+      let response = await axios.put(SHOPPINGCART,data)
+            return dispatch({
+                type: PUT_SC,
+                payload: response.data,
+              });
+    } catch (error) {
+      console.error('An error occurred:', error.message);
+    }
+     
+  };
+  };
   export const addShoppingCart =  (data) => {
 	return async (dispatch) => {
 		try {
@@ -35,20 +49,6 @@ export const getSC = (id) => {
 	};
 };
 
-  export const putShoppingCart =  (data) => {
-	return async (dispatch) => {
-		try {
-			let response = await axios.post(SHOPPINGCART,data)
-            return dispatch({
-                type: PUT_SC,
-                payload: response.data,
-              });
-		} catch (error) {
-			console.error('An error occurred:', error.message);
-		}
-	   
-	};
-};
 export const addProductSC = (product) => {
 	console.log(product)
 	return {

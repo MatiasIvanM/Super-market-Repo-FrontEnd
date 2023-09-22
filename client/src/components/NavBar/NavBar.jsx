@@ -17,7 +17,7 @@ const NavBar = (props) => {
   const [name, setName] = useState("");
   // const { logout, isAuthenticated } = useAuth0()
 
-  const cart = useSelector((state) => state.shoppingCart);
+  const cart = useSelector((state) => state.productsSC);
   const [showEmptyCartAlert, setShowEmptyCartAlert] = useState(false);
 
   const handleChange = (event) => {
@@ -31,8 +31,8 @@ const NavBar = (props) => {
   }
 
   return (
-    <div>
-      <Navbar bg="dark" expand="lg" variant="dark">
+    <div className={style.navBarContainer}>
+      <Navbar bg="dark" expand="lg" variant="dark" className={style.contentWithMargin}>
         <Container>
           <Link to='/'>
             <img src="logo.png" alt="Logo" height="45px" className='custom-nav' />
