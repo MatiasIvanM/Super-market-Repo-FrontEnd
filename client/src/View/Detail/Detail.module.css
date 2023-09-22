@@ -27,3 +27,19 @@
 .alertContent {
   margin: 0 auto;
 }
+
+.newPrice{
+  font-size: 1.3rem;
+  color: rgb(13, 170, 39);
+  /* text-align: left; */
+  margin-left: 5px;
+
+}
+
+.oldPrice{
+  font-size: 1.3rem;
+  color: rgba(143, 143, 143, 0.7);
+  /* text-align: left; */
+  text-decoration: line-through;
+  margin-left: 5px;
+}

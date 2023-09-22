@@ -1,5 +1,5 @@
+
 .containerPrice{
-    /* background-color: aqua; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -36,4 +36,25 @@
 .container:hover {
     transform: scale(1.05);
     cursor: pointer;
+  }
+
+  .priceStyle{
+    font-size:1.3rem;
+    color: blue;
+    text-align: left;
+  }
+
+  .newPrice{
+    font-size: 1.3rem;
+    color: rgb(13, 170, 39);
+    /* text-align: left; */
+    margin-left: 5px;
+
+  }
+
+  .oldPrice{
+    font-size: 1.3rem;
+    color: rgba(143, 143, 143, 0.7);
+    /* text-align: left; */
+    text-decoration: line-through;
   }
