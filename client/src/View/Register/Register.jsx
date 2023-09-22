@@ -119,11 +119,16 @@ export default function Register() {
                                     email: loggedCustomer.payload.email,
                                     role: loggedCustomer.payload.role,
                                 }))
+
                                 ////Crea Carrito////
                                 await dispatch(getCustomerById(response.payload.id))
-                                await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0, customerId: response.payload.id }))
+                                console.log(response.payload.id);
+                                const carrito = await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0, customerId: response.payload.id }))
+                                console.log(carrito);
+                                ///////////////////
+
                                 localStorage.setItem('token', JSON.stringify(loggedCustomer.payload.token))
-                                await dispatch(getCustomerById(loggedCustomer.payload.id))
+                                await dispatch(getCustomerById(response.payload.id))
                                 setModal({
                                     show: true,
                                     header: 'Bienvenido',
@@ -144,9 +149,12 @@ export default function Register() {
                                 email: dbCustomer.payload[0].email,
                                 role: dbCustomer.payload[0].role,
                             }))
+
                             ////Crea Carrito////
                             await dispatch(getCustomerById(dbCustomer.payload[0].id))
                             await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0, customerId: dbCustomer.payload[0].id }))
+                            ///////////////////
+
                             setModal({
                                 show: true,
                                 header: 'Bienvenido',
