@@ -6,6 +6,7 @@ export const ADD_PRODUCT='ADD_PRODUCT';
 export const MOD_PRODUCT='MOD_PRODUCT';
 export const DEL_PRODUCT='DEL_PRODUCT';
 export const CLEAR_PRODUCT_DETAILS = 'CLEAR_PRODUCT_DETAILS'
+export const MOD_QUANTITY_LOCAL = 'MOD_QUANTITY_LOCAL'
 
 
 //Shopping Cart

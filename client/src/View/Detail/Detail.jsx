@@ -32,6 +32,8 @@ function ProductsDetail(props) {
 
     function handleAddToCart() {
       if(productDetails.stock<quantity){
+        const newStock=productDetails.stock-quantity
+
         setShowMessageWarning(true)
         setTimeout(() => {
           setShowMessageWarning(false);
@@ -90,7 +92,7 @@ function ProductsDetail(props) {
                 <Card.Title>Precio: ${productDetails && productDetails.price}</Card.Title>
 
                 <Card.Title>{productDetails && productDetails.rating}<AiOutlineStar/></Card.Title>
-                <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title>
+                {/* <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title> */}
                 <Card.Text>{productDetails && productDetails.description}</Card.Text>
                 <Button variant="primary" onClick={handleAddToCart}>Agregar al carrito</Button>
                 <br />

@@ -26,7 +26,8 @@ import {
   REMOVE_PRODUCT_SC,
   UPDATE_PRODUCT_QUANTITY_SC,
   POST_COMMENT,
-  GET_ALL_COMMENTS
+  GET_ALL_COMMENTS,
+  MOD_QUANTITY_LOCAL
 } from "./actionsType";
 
 
@@ -128,6 +129,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         customers: updatedCustomers,
       };
+      case MOD_QUANTITY_LOCAL:
+      const productsCopy=[...state.products];
+      const productFind = productsCopy.find(product => product.id === action.payload.id);
+      productFind.stock=action.payload.stock;
+      return { ...state, products: productsCopy };
     //order detail
     case GET_ORDER_DETAIL_BY_ID:
       return { ...state, orderDetailId: action.payload };

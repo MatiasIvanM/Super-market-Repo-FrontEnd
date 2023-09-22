@@ -13,16 +13,16 @@ const Footer = () => {
         <Nav.Item>
           <Nav.Link eventKey="link-2" href='/FaQ'>Preguntas frecuentes</Nav.Link>
         </Nav.Item>
-        <Nav.Item>
+        {/* <Nav.Item>
           <Nav.Link eventKey="link-3" href='/'>Cómo comprar?</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
+        </Nav.Item> */}
+        {/* <Nav.Item>
           <Nav.Link eventKey="link-4" href='/'>Contactanos!</Nav.Link>
-        </Nav.Item>
+        </Nav.Item> */}
       </Nav>
-      <div>
+        <div>
         <p>© 2023 Copyright: PF-SuperMarket-Shop</p> 
-      </div>
+        </div>
     </div>
   )
 }
