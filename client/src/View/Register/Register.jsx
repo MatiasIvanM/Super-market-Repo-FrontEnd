@@ -122,7 +122,6 @@ export default function Register() {
 
                                 ////Crea Carrito////
                                 await dispatch(getCustomerById(response.payload.id))
-                                console.log(response.payload.id);
                                 const carrito = await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0.0, customerId: response.payload.id }))
                                 console.log(carrito);
                                 ///////////////////
