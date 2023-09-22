@@ -8,7 +8,8 @@ import Button from "react-bootstrap/Button";
 // import { useAuth0 } from "@auth0/auth0-react"
 
 import { useSelector } from 'react-redux'
-import BarBanned from "./BarBanned";
+import Banned from "../../View/Login/Banned";
+import style from './NavBar.module.css';
 
 
 const NavBar = (props) => {
@@ -62,11 +63,13 @@ const NavBar = (props) => {
                 if (cart.length === 0) {
                   setShowEmptyCartAlert(true);
                 } else {
+                  console.log("Productos: ",cart.length);
                   setSmShow(true);
                 }
               }}
             >
               <BsCart3 className="nav-icon me-2" onClick={() => setSmShow(true)} />
+              <span className={style.circulo} >{cart.length}</span>
               <Modal
                 show={smShow}
                 onHide={() => setSmShow(false)}
@@ -105,13 +108,13 @@ const NavBar = (props) => {
                 <BsWrenchAdjustable className="nav-icon" />
               </Link>
               </Navbar.Brand>)
-             : console.log("NOOO Entro")}
+             : null}
 
           </Navbar.Collapse>
         </Container>
       </Navbar>
       {JSON.parse(localStorage.getItem('customer')) && role==='BAN' 
-             ? <BarBanned />
+             ? <Banned />
              : null}
         
     </div>

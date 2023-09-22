@@ -33,7 +33,7 @@ const ListActions = () => (
   <TopToolbar>
     <SelectColumnsButton />
     <FilterButton />
-    {/* <SortButton fields={['price']} /> */}
+    <SortButton fields={['price']} />
     <CreateButton />
     <ExportButton />
   </TopToolbar>

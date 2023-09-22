@@ -76,7 +76,6 @@
     background-color: #444;
 }
 
-
 /* Estilo para la Barra de Banneado */
 .barBanned {
     display: flex;
@@ -93,3 +92,11 @@
     text-decoration: none;
     color: white;
 }
+
+.circulo{
+    /* background-color: blue;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; */
+    font-size: x-small;
+    }
