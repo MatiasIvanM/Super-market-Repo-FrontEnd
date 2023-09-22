@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PRODUCT } from '../../utils/urlLocales'
-import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, GET_PRODUCT_BY_NAME, FILTER_CATEGORY, ORDER_PRECIO, RANGO_PRECIOS, CLEAR_PRODUCT_DETAILS } from '../actionsType'
+import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, GET_PRODUCT_BY_NAME, FILTER_CATEGORY, ORDER_PRECIO, RANGO_PRECIOS, CLEAR_PRODUCT_DETAILS, MOD_QUANTITY_LOCAL } from '../actionsType'
 
 export function getProducts() {
 	return (dispatch) => {
@@ -153,3 +153,16 @@ export const clearProductDetails = () => {
 	  type: CLEAR_PRODUCT_DETAILS,
 	};
   };
+
+  export const modQuantityLocal = (product) => {
+	return (dispatch) => {
+		try {
+			return dispatch({
+				type: MOD_QUANTITY_LOCAL,
+				payload: product,
+			});
+		} catch (error) {
+			console.error('An error occurred:', error.message);
+		}
+	};
+};
