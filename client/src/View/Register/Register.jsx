@@ -119,10 +119,9 @@ export default function Register() {
                                     email: loggedCustomer.payload.email,
                                     role: loggedCustomer.payload.role,
                                 }))
-
+                                ////Crea Carrito////
                                 await dispatch(getCustomerById(response.payload.id))
-                                await dispatch(addShoppingCart({ProductName:[],PriceTotal:1.5,customerId:response.payload.id}))
-
+                                await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0, customerId: response.payload.id }))
                                 localStorage.setItem('token', JSON.stringify(loggedCustomer.payload.token))
                                 await dispatch(getCustomerById(loggedCustomer.payload.id))
                                 setModal({
@@ -145,12 +144,9 @@ export default function Register() {
                                 email: dbCustomer.payload[0].email,
                                 role: dbCustomer.payload[0].role,
                             }))
-
+                            ////Crea Carrito////
                             await dispatch(getCustomerById(dbCustomer.payload[0].id))
-                            const carrito = await dispatch(addShoppingCart({ProductName:[],PriceTotal:1.5,customerId:dbCustomer.payload[0].id}))
-                            console.log(carrito);
-
-
+                            const carrito = await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0, customerId: dbCustomer.payload[0].id }))
                             setModal({
                                 show: true,
                                 header: 'Bienvenido',
@@ -261,19 +257,19 @@ export default function Register() {
             <Modal show={modal.show}>
                 <Modal.Body className={styles.modal}>
                     <Modal.Header>
-                    <Modal.Title style={{
+                        <Modal.Title style={{
                             color: modal.button === 'danger'
-                            ?
-                            '#dc3545'
-                            :
-                            '#198754'
+                                ?
+                                '#dc3545'
+                                :
+                                '#198754'
                             ,
                             fontSize: '4rem',
                             fontStyle: 'italic'
-                            }}
-                            >
+                        }}
+                        >
                             {modal.header}
-                            </Modal.Title>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>{modal.body}</Modal.Body>
                     <Modal.Footer>
