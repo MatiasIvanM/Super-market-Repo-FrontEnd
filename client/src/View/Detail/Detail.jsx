@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
 import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import style from './Detail.module.css'
 import { AiOutlineStar } from 'react-icons/ai'
 import {addProductSC} from "../../redux/Actions/actionsSC"
-import { addShoppingCart } from '../../redux/Actions/actionsSC';
+
 
 function ProductsDetail(props) {
     
@@ -17,7 +17,7 @@ function ProductsDetail(props) {
     const [showMessageWarning, setShowMessageWarning] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [productDetails, setProductDetails] = useState(null);
-    let customerById = useSelector((state)=>state.customerId)
+    
     useEffect(() => {
       if (id) {
         dispatch(getProductById(id))
@@ -39,11 +39,6 @@ function ProductsDetail(props) {
       }else{
       setShowMessage(true);
       dispatch(addProductSC({ productDetails, quantity }))
-      dispatch(addShoppingCart({
-        ProductName: [],  
-        CustomerId:customerById,
-        PriceTotal:0,
-    }))
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);
