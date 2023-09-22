@@ -146,7 +146,7 @@ export default function Register() {
                             }))
                             ////Crea Carrito////
                             await dispatch(getCustomerById(dbCustomer.payload[0].id))
-                            const carrito = await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0, customerId: dbCustomer.payload[0].id }))
+                            await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0, customerId: dbCustomer.payload[0].id }))
                             setModal({
                                 show: true,
                                 header: 'Bienvenido',
