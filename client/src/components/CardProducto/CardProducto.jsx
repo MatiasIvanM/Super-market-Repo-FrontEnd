@@ -23,6 +23,7 @@ function CardProduct(props) {
       return price;
     }
   };
+  
   useEffect(() => {
     const newDiscountPrice = calculateDiscountPrice();
     setDiscountPrice(newDiscountPrice);

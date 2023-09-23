@@ -182,7 +182,6 @@ export default function Home() {
                         <Button variant="primary" style={{ width: '100px' }} onClick={clearFilters}> Limpiar Filtros </Button>
                     </Nav.Item>
                 </Nav>
-
                 {/*<div className={styles.card_container}>
 </div >*/}
 

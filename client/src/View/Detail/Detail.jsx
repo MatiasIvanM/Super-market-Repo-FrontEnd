@@ -108,7 +108,6 @@ function ProductsDetail(props) {
                   </>
                 )}
                 
-
                 <Card.Title>{productDetails && productDetails.rating}<AiOutlineStar/></Card.Title>
                 {/* <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title> */}
                 <Card.Text>{productDetails && productDetails.description}</Card.Text>

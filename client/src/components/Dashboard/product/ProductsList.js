@@ -98,7 +98,7 @@ const DetailShow = (props) => (
 
             <span className={style.h6} > DESCUENTO: </span>
             <span className={style.textF}><TextField source="discount" /> </span>
-            {/* <Button onClick={test}> test</Button> */}
+            {/* <Button onClick={test}> test</Button> */} 
           </div>
           
           <div className={style.containerI}>

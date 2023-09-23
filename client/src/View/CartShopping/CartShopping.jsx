@@ -131,7 +131,7 @@ const CartShopping = () => {
                         </>
                       ) : (
                         <>
-                        <strong>Precio:</strong> ${product.productDetails.price.toFixed(0)}                    
+                          <strong>Precio:</strong> ${product.productDetails.price.toFixed(0)}                    
                         </>
                       )}
                     </ListGroup.Item>
