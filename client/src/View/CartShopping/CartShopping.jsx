@@ -143,6 +143,7 @@ const CartShopping = () => {
               </Card>
             );
           })}
+          
           {/* Muestra el valor total general */}
           <p className="mt-4">
             <strong>Valor Total de la Compra:</strong> $ {totalValue.toFixed(0)}

@@ -28,7 +28,7 @@
 }
 
 .container{
-    box-shadow: 5px  5px 9px/* 10px 10px 10px */ rgba(30, 40, 68, 0.25);
+    box-shadow: 5px  5px 9px rgba(30, 40, 68, 0.25);
     padding: 0%;
     transition: transform 0.1s ease
 }
@@ -55,3 +55,4 @@
     color: rgba(143, 143, 143, 0.7);
     text-decoration: line-through;
   }
+  
