@@ -1,6 +1,10 @@
-.custom-footer{
+.custom_footer{
+    margin-top: 50px;
     background-color:rgb(41, 41, 41);
     justify-content: space-evenly !important;
+}
+.subFooter{
+    background-color: rgb(199, 199, 199);
 }
 
 /* .container */
@@ -10,5 +14,5 @@
     margin-left: 5rem;
     margin-right: 5rem;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
   }
