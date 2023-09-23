@@ -32,7 +32,6 @@ function MercadoPagoCheckout() {
         quantity: item.quantity,
         currency_id: 'COP',
       }));
-
       const response = await axios.post(
         'https://api.mercadopago.com/checkout/preferences',
         {
