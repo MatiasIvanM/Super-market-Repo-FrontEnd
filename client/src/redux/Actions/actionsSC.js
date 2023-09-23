@@ -3,7 +3,7 @@ import axios from "axios"
 import { SHOPPINGCART } from "../../utils/urlLocales"
 
 
-export const postRecipe = (id) => {
+export const getSC = (id) => {
     return async (dispatch)=> {
       try {
         let response = await axios.get(`${SHOPPINGCART}${id}`)
@@ -19,9 +19,24 @@ export const postRecipe = (id) => {
   };
 
 
+  export const putShoppingCart =  (data) => {
+  return async (dispatch) => {
+    try {
+      let response = await axios.put(SHOPPINGCART,data)
+            return dispatch({
+                type: PUT_SC,
+                payload: response.data,
+              });
+    } catch (error) {
+      console.error('An error occurred:', error.message);
+    }
+     
+  };
+  };
   export const addShoppingCart =  (data) => {
 	return async (dispatch) => {
 		try {
+      console.log(data)
 			let response = await axios.post(SHOPPINGCART,data)
             return dispatch({
                 type: POST_SC,
@@ -34,20 +49,6 @@ export const postRecipe = (id) => {
 	};
 };
 
-  export const putShoppingCart =  (data) => {
-	return async (dispatch) => {
-		try {
-			let response = await axios.post(SHOPPINGCART,data)
-            return dispatch({
-                type: PUT_SC,
-                payload: response.data,
-              });
-		} catch (error) {
-			console.error('An error occurred:', error.message);
-		}
-	   
-	};
-};
 export const addProductSC = (product) => {
 	console.log(product)
 	return {

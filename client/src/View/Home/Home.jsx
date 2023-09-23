@@ -12,6 +12,7 @@ import { selectCategory } from '../../redux/Actions/actionsCategory';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LoadGif from '../../components/Loading/shopping-cart-shopping.gif'
 
+
 export default function Home() {
     const dispatch = useDispatch();
     let products = useSelector((state) => state.productsFiltered);
@@ -28,8 +29,11 @@ export default function Home() {
     let categories = useSelector((state) => state.category)
 
     useEffect(() => {
-        setCustomer(customerById)
-    }, [customerById]);
+        setCustomer(customerById.id)
+    }, [customer]);
+    // useEffect(() => {
+    //     console.log(customer, "Customer22222");
+    //   }, [customer]);
     const nextHandler = () => {
         setShowLoader(true);
 
