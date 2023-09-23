@@ -12,12 +12,14 @@ import styles from './Login.module.css'
 import { getCustomerByEmail, getCustomerById, loginCustomer } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
+import {getSC} from "../../redux/Actions/actionsSC"
 
 
 export default function Login() {
     const { loginWithPopup, isAuthenticated, user, getIdTokenClaims, logout } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
+    let customerById = useSelector((state)=>state.customerId)
 
     const defaultCustomer = {
         name: "",
@@ -150,6 +152,10 @@ export default function Login() {
                     button: 'danger',
                 })
             }
+        }
+        // get del carrito
+        if(customerById){
+            dispatch(getSC(customerById))
         }
     }
 

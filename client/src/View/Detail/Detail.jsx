@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
 import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import style from './Detail.module.css'
 import { AiOutlineStar } from 'react-icons/ai'
-import {addProductSC} from "../../redux/Actions/actionsSC"
+import {addProductSC,putShoppingCart} from "../../redux/Actions/actionsSC"
 
 
 function ProductsDetail(props) {
@@ -17,6 +17,12 @@ function ProductsDetail(props) {
     const [showMessageWarning, setShowMessageWarning] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [productDetails, setProductDetails] = useState(null);
+    const [product, setProduct] = useState([])
+    let ProductName = useSelector((state) => state.productsSC)
+
+    useEffect(() => {
+      setProduct(ProductName)
+  }, [ProductName]);
     
     useEffect(() => {
       if (id) {
@@ -30,6 +36,8 @@ function ProductsDetail(props) {
       }
     }, [dispatch, id]);
 
+   
+    
     function handleAddToCart() {
       if(productDetails.stock<quantity){
         const newStock=productDetails.stock-quantity

@@ -16,7 +16,7 @@ export default function FormProduct() {
 
 
   const [producto, setProducto] = useState([]);
-  const card= useSelector((state)=>state.productsSC)
+  const card= useSelector((state)=>state.shoppingCart)
  useEffect(()=>{
    setProducto(card)
    },[])

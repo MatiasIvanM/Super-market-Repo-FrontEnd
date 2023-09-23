@@ -4,8 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 // eslint-disable-next-line
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { getCustomerByEmail, getCustomerById, loginCustomer, addCustomer } from '../../redux/Actions/actionsCustomers';
+import { addShoppingCart } from '../../redux/Actions/actionsSC';
 import { useAuth0 } from "@auth0/auth0-react";
 import * as validate from './validations';
 import { PiWarning } from 'react-icons/pi'
@@ -13,12 +14,13 @@ import styles from './Register.module.css'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import Overlay from '../../components/Overlay/Overlay';
-import { addShoppingCart } from '../../redux/Actions/actionsSC';
+
 
 export default function Register() {
     const { loginWithPopup, isAuthenticated, user, getIdTokenClaims, logout } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
+    let customerById = useSelector((state)=>state.customerId)
 
     const defaultCustomer = {
         name: "",
@@ -94,6 +96,7 @@ export default function Register() {
         if (customer.name && customer.email) {
             const response = await dispatch(addCustomer(customer))
             if (response?.payload) {
+                
                 if (response.payload.error) {
                     setModal({
                         show: true,
@@ -134,6 +137,12 @@ export default function Register() {
                                     body: 'Usuario Registrado',
                                     button: 'success',
                                 })
+                                await dispatch(addShoppingCart({
+                                    ProductName: [],  
+                                    customerId:response.payload.id,
+                                    PriceTotal:0,
+                                    
+                                }))
                             }
                         }
                     }
@@ -170,6 +179,10 @@ export default function Register() {
                             })
                         }
                     }
+                    //creacion del carrito 
+                    console.log(customerById)
+                    console.log(response)
+                    
                 }
             } else {
                 setModal({
