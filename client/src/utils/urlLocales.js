@@ -17,7 +17,7 @@
   const CUSTOMER=`${server}/customer/`;
   const ORDER_DETAIL=`${server}/orderDetail/`;
   const ORDERS=`${server}/orders/`;
-  const SHOPPINGCART=`${server}/shoppingCart`;
+  const SHOPPINGCART=`${server}/shoppingCart/`;
   const CATEGORY=`${server}/category/`;
   const COMMENT=`${server}/comment/`
 
