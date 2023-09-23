@@ -55,9 +55,15 @@ const productFilters = [
 //   <TextInput label="categories" source="categories" defaultValue="" />,
 // ];
 
+// const test=()=>{
+//       console.log(props);
+// }
+
 const DetailShow = (props) => (
+ 
+
   <Show {...props} title="Detalle de Producto:">
-    {console.log(props.data)}
+    {console.log(props)}
     <SimpleShowLayout>
       {/* <h3>  </h3> */}
       <div className={style.container}>

@@ -87,6 +87,7 @@ const CartShopping = () => {
     }
   };
 
+
   return (
     <div>
       <Modal show={show} onHide={handleClose} centered backdrop="static">
@@ -98,15 +99,17 @@ const CartShopping = () => {
         </Modal.Header>
         <Modal.Body>
           {cart.map((product) => {
-            // Calcula el valor total por producto
-            const productTotal = product.quantity * product.productDetails.price;
-            // Suma el valor total al valor total general
-            totalValue += productTotal;
-            
+            // Calcula el valor total por producto   
+            const productTotal = product.quantity * (product.discountPrice || product.productDetails.price);
+              totalValue += productTotal;
+
 
             return (
               <Card key={product.id}>
-                <Button variant="outline-danger" onClick={() => handleRemoveProduct(product.productDetails.id)}>
+                <Button 
+                  key={`remove-button-${product.id}`}
+                  variant="outline-danger" 
+                  onClick={() => handleRemoveProduct(product.productDetails.id)}>
                   Eliminar {product.productDetails.name}
                 </Button>
                 <Card.Img
@@ -118,13 +121,36 @@ const CartShopping = () => {
                   <Card.Title>{product.productDetails.name}</Card.Title>
                   <ListGroup variant="flush">
                     <ListGroup.Item>
-                      <strong>Cantidad:</strong>
+                      <strong>Cantidad: </strong>
                       {product.quantity}
                       <Button variant="outline-primary" onClick={() => handleDecrementQuantity(product.productDetails.id, product)}>-</Button>
                       <Button variant="outline-primary" onClick={() => handleIncrementQuantity(product.productDetails.id)}>+</Button>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <strong>Valor:</strong> $ {product.productDetails.price.toFixed(0)}
+                      {product.discountPrice !== product.productDetails.price ? (
+                        <>
+                          <strong>Precio:</strong> 
+                          <span style={{
+                                  marginLeft: '5px',
+                                  color: "gray",
+                                  textAlign: "left",
+                                  textDecoration: "line-through", 
+                                }}>
+                            ${product.productDetails.price.toFixed(0)}
+                          </span>
+                          <span style={{
+                                  marginLeft: '7px',
+                                  textAlign: "left",
+                                  fontWeight:'bold'
+                                }}>
+                            ${product.discountPrice}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <strong>Precio:</strong> ${product.productDetails.price.toFixed(0)}                    
+                        </>
+                      )}
                     </ListGroup.Item>
                     <ListGroup.Item>
                       <strong>Valor Total Producto:</strong> $ {productTotal.toFixed(0)}
@@ -134,6 +160,7 @@ const CartShopping = () => {
               </Card>
             );
           })}
+          
           {/* Muestra el valor total general */}
           <p className="mt-4">
             <strong>Valor Total de la Compra:</strong> $ {totalValue.toFixed(0)}

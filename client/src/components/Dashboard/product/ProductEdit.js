@@ -26,6 +26,7 @@ const ProductEdit = (props) => {
         <TextInput source="brand" label="Marca" required />
         <NumberInput source="stock" label="Invetnario" required />
         <NumberInput source="price" step="0.01" label="Precio" required />
+        <NumberInput source="discount" step="0.01" label="DESCUENTO" required />
         <DateInput source="expirationdate" label="Ingreso a Deposito" />
         <SelectInput
           source="available"

@@ -11,7 +11,7 @@ import {addProductSC,putShoppingCart} from "../../redux/Actions/actionsSC"
 
 function ProductsDetail(props) {
     
-    const { id } = props
+    const { id, discountPrice } = props
     const dispatch = useDispatch();
     const [showMessage, setShowMessage] = useState(false);
     const [showMessageWarning, setShowMessageWarning] = useState(false);
@@ -48,7 +48,7 @@ function ProductsDetail(props) {
         }, 2000);
       }else{
       setShowMessage(true);
-      dispatch(addProductSC({ productDetails, quantity }))
+      dispatch(addProductSC({ productDetails, quantity, discountPrice }))
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);
@@ -97,13 +97,28 @@ function ProductsDetail(props) {
               <Card.Body>
                 <Card.Title>{productDetails && productDetails.brand}</Card.Title>
                 <Card.Title>{productDetails && productDetails.name}</Card.Title>
-                <Card.Title>Precio: ${productDetails && productDetails.price}</Card.Title>
-
+                {discountPrice !== productDetails.price ?(
+                  <>
+                    <Card.Title>Antes: 
+                      <span className={style.oldPrice}>
+                        ${productDetails && productDetails.price}
+                      </span>
+                    </Card.Title>      
+                    <Card.Title>Ahora: 
+                      <span className={style.newPrice}>
+                        ${discountPrice}
+                      </span>
+                    </Card.Title>
+                  </>
+                ) :(
+                  <>
+                    <Card.Title>Precio: ${productDetails && productDetails.price}</Card.Title>
+                  </>
+                )}
                 <Card.Title>{productDetails && productDetails.rating}<AiOutlineStar/></Card.Title>
                 {/* <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title> */}
                 <Card.Text>{productDetails && productDetails.description}</Card.Text>
                 <Button variant="primary" onClick={handleAddToCart}>Agregar al carrito</Button>
-                <br />
                      <div className="d-inline">
                         <Button className={style.buttonStyle} variant="outline-primary" onClick={handleDecrement}>-</Button>
                         <Button className={style.buttonStyle} variant="outline-primary" onClick={handleIncrement}>+</Button>
