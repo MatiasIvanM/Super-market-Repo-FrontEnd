@@ -19,6 +19,7 @@ import {
   GET_SC_BY_ID,
   PUT_SC,
   POST_SC,
+  UPDATE_TOTAL,
   ADD_PRODUCT_SC,
   GET_CATEGORY,
   CLEAR_SC,
@@ -46,6 +47,7 @@ const initialState = {
   productsSC:[],
   category:[],
   comments:[],
+  cartTotal:0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -69,9 +71,11 @@ const rootReducer = (state = initialState, action) => {
 
     //Shopping Cart
     case GET_SC_BY_ID:
-      return { ...state, shoppingCart: action.payload }
+      return { ...state, shoppingCart: action.payload, productsSC:action.payload.ProductName }
     case PUT_SC:
         return { ...state, shoppingCart: action.payload }
+    case UPDATE_TOTAL:
+      return { ...state, cartTotal: action.payload }
     case POST_SC:
         return { ...state, shoppingCart: action.payload }
     case ADD_PRODUCT_SC:

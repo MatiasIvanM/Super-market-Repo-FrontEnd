@@ -1,4 +1,4 @@
-import { GET_SC_BY_ID, PUT_SC, POST_SC,ADD_PRODUCT_SC,CLEAR_SC,REMOVE_PRODUCT_SC,UPDATE_PRODUCT_QUANTITY_SC } from '../actionsType'
+import { GET_SC_BY_ID, PUT_SC, POST_SC,ADD_PRODUCT_SC,CLEAR_SC,REMOVE_PRODUCT_SC,UPDATE_PRODUCT_QUANTITY_SC,UPDATE_TOTAL } from '../actionsType'
 import axios from "axios"
 import { SHOPPINGCART } from "../../utils/urlLocales"
 
@@ -33,6 +33,15 @@ export const getSC = (id) => {
      
   };
   };
+
+  export const updateTotal = (total) => {
+    console.log(total)
+    return {
+      type: UPDATE_TOTAL,
+      payload: total,
+    };
+    };
+
   export const addShoppingCart =  (data) => {
 	return async (dispatch) => {
 		try {

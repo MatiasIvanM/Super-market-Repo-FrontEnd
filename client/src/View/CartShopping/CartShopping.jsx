@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom/";
 import { clearSC, removeProductSC, updateProductQuantitySC } from "../../redux/Actions/actionsSC"
 import { useDispatch } from "react-redux";
-import { getSC,putShoppingCart} from "../../redux/Actions/actionsSC";
+import { putShoppingCart,updateTotal} from "../../redux/Actions/actionsSC";
 
 const CartShopping = () => {
   const dispatch = useDispatch();
@@ -15,27 +15,30 @@ const CartShopping = () => {
   const [errors,setErrors]=useState([])
   const [show, setShow] = useState(true);
   const [total,setTotal] = useState(0)
-  const customerById = useSelector((state) => state.customerId)
   const cart = useSelector((state) => state.productsSC);
+  const cartTotal = useSelector((state) => state.cartTotal);
   const shoppingCart = useSelector((state) => state.shoppingCart)
 
 
 
   let totalValue = 0;
+  
+  useEffect(() => {
+    console.log("EJECUTANDO UPDATE")
+    dispatch(updateTotal(total))
+  },[totalValue]);
   useEffect(() => {
     setTotal(totalValue)
   },[totalValue]);
   useEffect(() => {
-    dispatch(getSC(customerById))
-  },[]);
-  useEffect(() => {
+    console.log("EJECUTANDO PUTT CART")
       dispatch(putShoppingCart({shoppinId: shoppingCart.id, ProductName: cart, PriceTotal: total}));
-  }, [total]);
+  }, [totalValue]);
 
   const clearCart = () => {
     const shouldClear = window.confirm("¿Estás seguro de que deseas limpiar el carrito?");
     if (shouldClear) {
-      dispatch(clearSC());
+        dispatch(clearSC());
     }
   }
   const handleRemoveProduct = (productId) => {
@@ -101,7 +104,7 @@ const CartShopping = () => {
           {cart.map((product) => {
             // Calcula el valor total por producto   
             const productTotal = product.quantity * (product.discountPrice || product.productDetails.price);
-              totalValue += productTotal;
+            totalValue += productTotal
 
 
             return (
