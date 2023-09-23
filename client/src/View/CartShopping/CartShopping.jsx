@@ -26,7 +26,7 @@ const CartShopping = () => {
     setTotal(totalValue)
   },[totalValue]);
   useEffect(() => {
-    dispatch(getSC(customerById))
+    dispatch(getSC(customerById.id))
   },[]);
   useEffect(() => {
       dispatch(putShoppingCart({shoppinId: shoppingCart.id, ProductName: cart, PriceTotal: total}));
