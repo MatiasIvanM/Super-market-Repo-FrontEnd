@@ -1,6 +1,7 @@
 .home {
     display: flex;
     flex-direction: column;
+    /* margin-top: 70px; */
 }
 
 .container {
@@ -9,6 +10,7 @@
     gap: 1rem;
     padding: 2vh 2vw 2vh 2vw;
     height: fit-content;
+    /* width: 90vw; */
 }
 
 .card_container {
@@ -17,11 +19,15 @@
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
-    width: 85vw;
-    height: fit-content;
-    border: 0.1rem rgb(200, 200, 200) solid;
-    padding: 1rem;
+    width: 90vw;
+    /* height:auto; */
+    padding-left: 13rem;
     border-radius: 5px;
+    /* overflow:auto; */
+    
+    /* border: 0.1rem rgb(200, 200, 200) solid; */
+    padding-top: 0.9rem;
+    padding-left: 16rem;
 }
 
 .side_bar {
@@ -30,12 +36,15 @@
     display: flex;
     flex-direction: column;
     height: 80vh;
-    width: 200px;
-    max-width: 200px;
+    width: 300px;
+    max-width: 400px;
     border: 0.1rem rgb(200, 200, 200) solid;
     border-radius: 5px;
     justify-content: space-between;
     padding: 1rem;
+    position: fixed;
+    /* position:-webkit-sticky; */
+    margin-top: 15px;
 }
 
 @media (max-width:600px) {

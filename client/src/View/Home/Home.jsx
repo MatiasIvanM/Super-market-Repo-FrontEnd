@@ -190,28 +190,28 @@ export default function Home() {
                 {/*<div className={styles.card_container}>
 </div >*/}
 
-                    <InfiniteScroll
-                        dataLength={items.length} // Tamaño actual de la lista de productos
-                        next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
-                        hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
-                        loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." /> : null}
-                        className={styles.card_container}
-                    >
-                        {items.map(p => (
-                            <CardProducto
-                                key={p.id}
-                                id={p.id}
-                                name={p.name}
-                                image={p.image}
-                                description={p.description}
-                                price={p.price}
-                                stock={p.stock}
-                                rating='5'
-                            >
-                            </CardProducto>
-                        ))}
-                    </InfiniteScroll> 
-            </div >
+                <InfiniteScroll
+                    dataLength={items.length} // Tamaño actual de la lista de productos
+                    next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
+                    hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
+                    loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." />: null}
+                    className={styles.card_container}
+                >
+                     {items.map(p => (
+                        <CardProducto
+                            key={p.id}
+                            id={p.id}
+                            name={p.name}
+                            image={p.image}
+                            description={p.description}
+                            price={p.price}
+                            stock={p.stock}
+                            rating='5'
+                        >
+                        </CardProducto>
+                    ))}
+                </InfiniteScroll>
+                </div >
             <Footer />
         </div>
     )

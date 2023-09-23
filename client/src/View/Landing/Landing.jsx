@@ -26,7 +26,7 @@ function Landing(){
   // }, []);
 
     return(
-    <div>
+    <div className='landing'>
       <NavBar
       searchByName={searchByName}
       />
