@@ -110,6 +110,11 @@ export default function Login() {
                     }))
                     localStorage.setItem('token', JSON.stringify(response.payload.token))
                     await dispatch(getCustomerById(response.payload.id))
+                    if(response){
+                        console.log(response.payload, "RESPONSE") 
+                        const cart = await dispatch(getSC(response.payload.id))
+                        console.log(cart,"CARRITOO")
+                    }
                     setModal({
                         show: true,
                         header: 'Bienvenido',
@@ -154,9 +159,7 @@ export default function Login() {
             }
         }
         // get del carrito
-        if(customerById){
-            dispatch(getSC(customerById))
-        }
+      
     }
 
     useEffect(() => {
