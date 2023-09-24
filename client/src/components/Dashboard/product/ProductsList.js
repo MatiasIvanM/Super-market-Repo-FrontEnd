@@ -22,6 +22,7 @@ import ToggleAvailableButton from "./ToggleAvailableButton";
 import style from "./ProductsList.module.css";
 import { Chip } from "@mui/material";
 import { useTranslate } from "react-admin";
+import { Card, ListGroup } from 'react-bootstrap'
 
 const ListActions = () => (
   <TopToolbar>
@@ -60,64 +61,41 @@ const productFilters = [
 // }
 
 const DetailShow = (props) => (
- 
-
   <Show {...props} title="Detalle de Producto:">
     {console.log(props)}
     <SimpleShowLayout>
       {/* <h3>  </h3> */}
-      <div className={style.container}>
-        <div className={style.containerDetalles}>
-          <span className={style.h6}> ID: </span>
-          <span className={style.textF}>
-            {" "}
-            <TextField source="id" style={{ fontSize: "1rem" }} />{" "}
-          </span>
-
-          <span className={style.h6}> MARCA:</span>
-          <span className={style.textF}>
-            <TextField source="brand" style={{ fontSize: "1rem" }} />{" "}
-          </span>
-
-          <span className={style.h6}> NOMBRE: </span>
-          <span className={style.textF}>
-            <TextField source="name" style={{ fontSize: "1rem" }} />{" "}
-          </span>
-
-          <span className={style.h6}> PRECIO: </span>
-          <span className={style.textF}>
-            <TextField source="price" style={{ fontSize: "1rem" }} />{" "}
-          </span>
-
-          <span className={style.h6}> ESTATUS: </span>
-          <span className={style.textF}>
-            <TextField source="available" style={{ fontSize: "1rem" }} />
-          </span>
-
-          <span className={style.h6}> FECHA EXP: </span>
-          <span className={style.textF}>
-            <DateField source="expirationdate" style={{ fontSize: "1rem" }} />
-          </span>
-
-          <span className={style.h6}> DESCRIPCIÓN: </span>
-          <span className={style.textF}>
-            <TextField source="description" />{" "}
-          </span>
-        </div>
-
-        <div className={style.containerI}>
-          <ImageField
-            source="image"
-            className={style.img}
-            sx={{
-              "& img": {
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-              },
-            }}
-          />
-        </div>
+      <div className={style.titleContainer}> 
+              <h1>Detalle del producto</h1>
+            </div>
+        <div className={style.container}> 
+          <Card className={style.detailContainer}>
+          <hr/>
+          <Card.Title className={style.productImage}>
+            <ImageField className={style.image}
+              source="image"
+              // sx={{
+              // "& img": { maxWidth: '100%', maxHeight: '100%', objectFit: "contain" },
+              // }}
+            />
+          </Card.Title>
+        </Card>
+          <Card className={style.productInfoContainer}>
+          {/* <div > */}
+            <Card.Body className={style.productInfo}>
+            <ListGroup className="list-group-flush">
+              <ListGroup.Item><span>ID: </span><TextField source="id" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>MARCA:</span><TextField source="brand" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>NOMBRE: </span><TextField source="name" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>PRECIO: </span> <TextField source="price" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>ESTATUS: </span><TextField source="available" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>FECHA EXP: </span> <DateField source="expirationdate" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>DESCRIPCIÓN: </span><TextField source="description" /></ListGroup.Item>
+              <ListGroup.Item><span>DESCUENTO: </span><TextField source="discount" /></ListGroup.Item>
+            </ListGroup>
+            </Card.Body>
+          {/* </div> */}
+        </Card> 
       </div>
     </SimpleShowLayout>
   </Show>
