@@ -19,6 +19,9 @@ function ProductsDetail(props) {
     const [productDetails, setProductDetails] = useState(null);
     const [product, setProduct] = useState([])
     let ProductName = useSelector((state) => state.productsSC)
+    const shoppingCart = useSelector((state) => state.shoppingCart)
+
+
 
     useEffect(() => {
       setProduct(ProductName)
@@ -41,7 +44,6 @@ function ProductsDetail(props) {
     function handleAddToCart() {
       if(productDetails.stock<quantity){
         const newStock=productDetails.stock-quantity
-
         setShowMessageWarning(true)
         setTimeout(() => {
           setShowMessageWarning(false);
@@ -49,6 +51,8 @@ function ProductsDetail(props) {
       }else{
       setShowMessage(true);
       dispatch(addProductSC({ productDetails, quantity, discountPrice }))
+      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity }];
+      dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);

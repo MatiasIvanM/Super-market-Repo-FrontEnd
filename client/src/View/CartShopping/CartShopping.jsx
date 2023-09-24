@@ -16,29 +16,33 @@ const CartShopping = () => {
   const [show, setShow] = useState(true);
   const [total,setTotal] = useState(0)
   const cart = useSelector((state) => state.productsSC);
-  const cartTotal = useSelector((state) => state.cartTotal);
   const shoppingCart = useSelector((state) => state.shoppingCart)
 
 
 
-  let totalValue = 0;
+  useEffect(() => {
+    // Calcula el total antes de renderizar los elementos mapeados
+    let newTotalValue = 0;
+    cart.forEach((product) => {
+      const productTotal = product.quantity * (product.discountPrice || product.productDetails.price);
+      newTotalValue += productTotal;
+    });
+    // Actualiza el estado total con el nuevo valor
+    setTotal(newTotalValue);
+    dispatch(updateTotal(newTotalValue));
+  }, [cart]); // Observa cambios en el carrito
+
+
   
   useEffect(() => {
-    console.log("EJECUTANDO UPDATE")
-    dispatch(updateTotal(total))
-  },[totalValue]);
-  useEffect(() => {
-    setTotal(totalValue)
-  },[totalValue]);
-  useEffect(() => {
-    console.log("EJECUTANDO PUTT CART")
-      dispatch(putShoppingCart({shoppinId: shoppingCart.id, ProductName: cart, PriceTotal: total}));
-  }, [totalValue]);
+    console.log("EJECUTANDO PUT CART", shoppingCart.id)
+    dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: cart, PriceTotal: total }));
+  }, [total]);
 
   const clearCart = () => {
     const shouldClear = window.confirm("¿Estás seguro de que deseas limpiar el carrito?");
     if (shouldClear) {
-        dispatch(clearSC());
+      dispatch(clearSC());
     }
   }
   const handleRemoveProduct = (productId) => {
@@ -102,11 +106,7 @@ const CartShopping = () => {
         </Modal.Header>
         <Modal.Body>
           {cart.map((product) => {
-            // Calcula el valor total por producto   
             const productTotal = product.quantity * (product.discountPrice || product.productDetails.price);
-            totalValue += productTotal
-
-
             return (
               <Card key={product.id}>
                 <Button 
@@ -166,8 +166,7 @@ const CartShopping = () => {
           
           {/* Muestra el valor total general */}
           <p className="mt-4">
-            <strong>Valor Total de la Compra:</strong> $ {totalValue.toFixed(0)}
-            
+            <strong>Valor Total de la Compra:</strong> $ {total.toFixed(0)}
           </p>
           <Alert show={showMessageWarning} variant="warning" >
           <div>

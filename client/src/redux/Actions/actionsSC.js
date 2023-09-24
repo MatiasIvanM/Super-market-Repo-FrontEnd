@@ -22,6 +22,7 @@ export const getSC = (id) => {
   export const putShoppingCart =  (data) => {
   return async (dispatch) => {
     try {
+      console.log(data,"PUT SHOPPINGCART")
       let response = await axios.put(SHOPPINGCART,data)
             return dispatch({
                 type: PUT_SC,
@@ -35,7 +36,6 @@ export const getSC = (id) => {
   };
 
   export const updateTotal = (total) => {
-    console.log(total)
     return {
       type: UPDATE_TOTAL,
       payload: total,
