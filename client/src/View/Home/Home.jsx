@@ -210,6 +210,7 @@ export default function Home() {
                             stock={p.stock}
                             discount={p.discount}
                             rating='5'
+                            available={p.available}
                         >
                         </CardProducto>
                     ))}
