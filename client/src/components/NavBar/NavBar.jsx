@@ -50,7 +50,7 @@ const NavBar = (props) => {
               <div className="d-flex">
                 <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" onChange={handleChange} value={name} />
                 {/* <button className="btn btn-outline-success" onClick={()=>{props.searchByName(name)}} >Buscar</button> */}
-                <Button variant="primary" style={{ width: "100px" }} onClick={() => { props.searchByName(name) }} >
+                <Button variant="primary" className={style.search_button} onClick={() => { props.searchByName(name) }} >
                   Buscar
                 </Button>
               </div>
@@ -68,7 +68,7 @@ const NavBar = (props) => {
                 }
               }}
             >
-              <BsCart3 className="nav-icon me-2" onClick={() => setSmShow(true)} />
+              <BsCart3 style={{marginRight:'0.5rem'}} onClick={() => setSmShow(true)} />
               <span className={style.circulo} >{cart.length}</span>
               <Modal
                 show={smShow}
