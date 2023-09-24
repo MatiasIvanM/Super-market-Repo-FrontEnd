@@ -28,10 +28,10 @@ export default function Home() {
     const [showLoader, setShowLoader] = useState(false);
     let customerById = useSelector((state) => state.customerId)
     let categories = useSelector((state) => state.category)
-
     useEffect(() => {
         setCustomer(customerById.id)
     }, [customer]);
+
     // useEffect(() => {
     //     console.log(customer, "Customer22222");
     //   }, [customer]);

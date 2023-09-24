@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom/";
 import { clearSC, removeProductSC, updateProductQuantitySC } from "../../redux/Actions/actionsSC"
 import { useDispatch } from "react-redux";
-import { getSC,putShoppingCart} from "../../redux/Actions/actionsSC";
+import { putShoppingCart,updateTotal} from "../../redux/Actions/actionsSC";
 
 const CartShopping = () => {
   const dispatch = useDispatch();
@@ -15,21 +15,28 @@ const CartShopping = () => {
   const [errors,setErrors]=useState([])
   const [show, setShow] = useState(true);
   const [total,setTotal] = useState(0)
-  const customerById = useSelector((state) => state.customerId)
   const cart = useSelector((state) => state.productsSC);
   const shoppingCart = useSelector((state) => state.shoppingCart)
 
 
 
-  let totalValue = 0;
   useEffect(() => {
-    setTotal(totalValue)
-  },[totalValue]);
+    // Calcula el total antes de renderizar los elementos mapeados
+    let newTotalValue = 0;
+    cart.forEach((product) => {
+      const productTotal = product.quantity * (product.discountPrice || product.productDetails.price);
+      newTotalValue += productTotal;
+    });
+    // Actualiza el estado total con el nuevo valor
+    setTotal(newTotalValue);
+    dispatch(updateTotal(newTotalValue));
+  }, [cart]); // Observa cambios en el carrito
+
+
+  
   useEffect(() => {
-    dispatch(getSC(customerById.id))
-  },[]);
-  useEffect(() => {
-      dispatch(putShoppingCart({shoppinId: shoppingCart.id, ProductName: cart, PriceTotal: total}));
+    console.log("EJECUTANDO PUT CART", shoppingCart.id)
+    dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: cart, PriceTotal: total }));
   }, [total]);
 
   const clearCart = () => {
@@ -99,11 +106,7 @@ const CartShopping = () => {
         </Modal.Header>
         <Modal.Body>
           {cart.map((product) => {
-            // Calcula el valor total por producto   
             const productTotal = product.quantity * (product.discountPrice || product.productDetails.price);
-              totalValue += productTotal;
-
-
             return (
               <Card key={product.id}>
                 <Button 
@@ -163,8 +166,7 @@ const CartShopping = () => {
           
           {/* Muestra el valor total general */}
           <p className="mt-4">
-            <strong>Valor Total de la Compra:</strong> $ {totalValue.toFixed(0)}
-            
+            <strong>Valor Total de la Compra:</strong> $ {total.toFixed(0)}
           </p>
           <Alert show={showMessageWarning} variant="warning" >
           <div>
