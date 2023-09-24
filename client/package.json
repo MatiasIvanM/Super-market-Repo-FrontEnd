@@ -9,9 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.0",
     "bootstrap": "^5.3.1",
-
     "prop-types": "^15.8.1",
-    
     "react": "^18.2.0",
     "react-admin": "^4.14.0",
     "react-bootstrap": "^2.8.0",
@@ -19,7 +17,7 @@
     
     "react-hook-form": "^7.46.1",
     "react-icons": "^4.11.0",
-
+    "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "redux": "^4.2.1",

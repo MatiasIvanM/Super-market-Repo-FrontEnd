@@ -14,11 +14,7 @@ build/
 /build
 
 # package-lock.json
-<<<<<<< HEAD
-# package-lock.json
-=======
-
->>>>>>> 0e8c718ede66db3c8253d1065d62213dd9c17007
+package-lock.json
 
 # misc
 .env

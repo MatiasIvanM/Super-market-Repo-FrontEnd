@@ -1,60 +1,73 @@
-import React from 'react';
-import { Admin, Resource, 
-  // defaultTheme, 
-  // AppBar 
-} from 'react-admin';
-// import indigo from '@mui/material/colors/indigo';
-// import pink from '@mui/material/colors/pink';
-// import red from '@mui/material/colors/red';
-// import UserIcon from '@mui/icons-material/People';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import simpleRestProvider from 'ra-data-simple-rest';
-import ProductsList from './product/ProductsList';
-import ProductCreate from './product/ProductCreate';
-import ProductEdit from './product/ProductEdit';
+import React from "react";
+import { Admin, Resource, Layout } from "react-admin";
+import {
+  BsFillPeopleFill,
+  BsReceiptCutoff,
+  BsBoxSeamFill,
+  BsFillGearFill
+} from "react-icons/bs";
+import Bar from "./Bar";
 
-const dataProvider = simpleRestProvider('http://localhost:3001');
+import PanelAdmin from "./PanelAdmin";
+//? Products
+import { ProductsList, DetailShow } from "./product/ProductsList";
+import ProductEdit from "./product/ProductEdit";
+import formProduct from "../../View/FormProduct/formProduct";
 
-// const myTheme = {
-//   ...defaultTheme,
-//   palette: {
-//       mode: "dark",
-//       primary: indigo,
-//       secondary: pink,
-//       error: red,
-//   },
-//   typography: {
-//       // Use the system font instead of the default Roboto font.
-//       fontFamily: ["-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Arial", "sans-serif"].join(","),
-//   },
-//   components: {
-//       ...defaultTheme.components,
-//       MuiTextField: {
-//           defaultProps: {
-//               variant: "outlined",
-//           },
-//       },
-//       MuiFormControl: {
-//           defaultProps: {
-//               variant: "outlined",
-//           },
-//       },
-//   },
-// };
+//? Orders
+import OrderList from "./orders/OrderList";
+
+import dataProvider from "./dataProvider";
+// import i18nProvider from "./i18nProvider";
+
+// //? Users
+// import UsersList from './users/UsersList';
+import UserEdit from "./users/UserEdit";
+import UserCreate from "./users/UserCreate";
+
+import formCarrousel from "./carrousel/formCarrousel";
+
+// ? Settings
+const Setting = React.lazy(() => import("./Setting"));
+const UsersList = React.lazy(() => import("./users/UsersList"));
+
+const MyLayout = (props) => <Layout {...props} appBar={Bar} />;
 
 const Dashboard = () => {
   return (
-    // <Admin dataProvider={dataProvider}>theme={myTheme} theme={lightTheme darkTheme={darkTheme}}
-    //Si borras theme queda en blanco con azul
-     <Admin dataProvider={dataProvider}>
-      {/* Agrega tus recursos aquí */}
-      {/* <Resource name="users" list={ProductList} icon={UserIcon} /> */}
-      <Resource name="product" list={ProductsList} create={ProductCreate} edit={ProductEdit} icon={AddShoppingCartIcon} />
-      {/* <Resource name="activities" list={ActivitiesList}  create={PostActivities} /> */}
+    <Admin
+      dashboard={PanelAdmin}
+      dataProvider={dataProvider}
+      layout={MyLayout}
+      darkTheme={{ palette: { mode: "dark" } }}
+      // i18nProvider={i18nProvider}
+    >
+      <Resource
+        name="product"
+        list={ProductsList}
+        edit={ProductEdit}
+        // create={ProductCreate}
+        create={formProduct}
+        icon={BsBoxSeamFill}
+        show={DetailShow}
+      />
+      <Resource
+        name="customer"
+        list={UsersList}
+        create={UserCreate}
+        edit={UserEdit}
+        icon={BsFillPeopleFill}
+      />
 
+      <Resource name="orders" list={OrderList} icon={BsReceiptCutoff} />
+
+      <Resource
+        name="settings"
+        list={Setting}
+        icon={BsFillGearFill}
+      />
     </Admin>
-    
   );
 };
 
-export default Dashboard
+export default Dashboard;

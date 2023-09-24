@@ -1,3 +1,11 @@
+.navBarContainer{
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
 /* Estilos para la barra de navegación */
 .navbar {
     display: flex;
@@ -6,6 +14,9 @@
     background-color: #333;
     color: white;
     padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
 }
 
 /* Estilos para el logo */
@@ -72,3 +83,28 @@
 .search-button:hover {
     background-color: #444;
 }
+
+/* Estilo para la Barra de Banneado */
+.barBanned {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dd0f0f;
+    color: white;
+    font-size: small;
+    text-decoration: none;
+    
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}
+
+.circulo{
+    /* background-color: blue;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; */
+    font-size: x-small;
+    }

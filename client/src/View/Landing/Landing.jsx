@@ -23,16 +23,20 @@ import {getProducts,getProductsByName} from '../../redux/Actions/actionsProducts
 import { useHistory  } from 'react-router-dom';
 >>>>>>> 0e8c718ede66db3c8253d1065d62213dd9c17007
 import {Footer} from '../../components/Footer/Footer';
+import { selectCategory } from '../../redux/Actions/actionsCategory';
+
 
 function Landing(){
   const dispatch = useDispatch();
   const history = useHistory();
+  dispatch(selectCategory());
 
   const searchByName = (name) => {
     dispatch(getProductsByName(name));
     history.push('/home');
 };
 
+<<<<<<< HEAD
   useEffect(() => {
 <<<<<<< HEAD
     dispatch(getProducts());
@@ -41,9 +45,14 @@ function Landing(){
     dispatch(getProducts());// eslint-disable-next-line
 >>>>>>> 0e8c718ede66db3c8253d1065d62213dd9c17007
   }, []);
+=======
+  // useEffect(() => {
+  //   dispatch(getProducts());// eslint-disable-next-line
+  // }, []);
+>>>>>>> 31f2d69718a257250885598e10595e6ca7e6f995
 
     return(
-    <div>
+    <div className='landing'>
       <NavBar
       searchByName={searchByName}
       />

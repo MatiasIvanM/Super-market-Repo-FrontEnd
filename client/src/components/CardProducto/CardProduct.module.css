@@ -1,5 +1,5 @@
+
 .containerPrice{
-    /* background-color: aqua; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -28,7 +28,8 @@
 }
 
 .container{
-    box-shadow: 40px 34px 94px 0px rgba(30, 40, 68, 0.25);
+
+    box-shadow: 5px  5px 9px rgba(30, 40, 68, 0.25);
     padding: 0%;
     transition: transform 0.1s ease
 }
@@ -37,4 +38,22 @@
     transform: scale(1.05);
     cursor: pointer;
   }
-  
+
+  .priceStyle{
+    font-size:1.3rem;
+    color: blue;
+    text-align: left;
+  }
+
+  .newPrice{
+    font-size: 1.3rem;
+    color: rgb(13, 170, 39);
+    margin-left: 5px;
+  }
+
+  .oldPrice{
+    font-size: 1.3rem;
+    color: rgba(143, 143, 143, 0.7);
+    text-decoration: line-through;
+  }
+

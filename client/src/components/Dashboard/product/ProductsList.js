@@ -1,58 +1,153 @@
-import React from 'react'
-import { List, CreateButton,
-  // DateField, ImageField, 
-  DatagridConfigurable, ExportButton, FilterButton, SelectColumnsButton,
-  TopToolbar, TextInput, TextField, 
-  // EditButton, DeleteButton, 
-   SortButton  
-} from 'react-admin';
+import React from "react";
+import {
+  List,
+  CreateButton,
+  ImageField,
+  Show,
+  ShowButton,
+  DateField,
+  DatagridConfigurable,
+  ExportButton,
+  SelectColumnsButton,
+  SimpleShowLayout,
+  TopToolbar,
+  TextField,
+  EditButton,
+  SortButton,
+  FilterButton,
+  SearchInput,
+} from "react-admin";
 // import { EditDialog } from '@react-admin/ra-form-layout';
-
-
-<<<<<<< HEAD
-=======
-import IconEvent from '@mui/icons-material/Event';
->>>>>>> eaa7c371dea69b70cd0f134bcbb7c24669ed72a4
+import ToggleAvailableButton from "./ToggleAvailableButton";
+import style from "./ProductsList.module.css";
+import { Chip } from "@mui/material";
+import { useTranslate } from "react-admin";
 
 const ListActions = () => (
   <TopToolbar>
-      <SelectColumnsButton />
-      <FilterButton/>
-      <SortButton fields={['price']} />
-      <CreateButton/>
-      <ExportButton/>
-
+    <SelectColumnsButton />
+    <FilterButton />
+    <SortButton fields={["price"]} />
+    <CreateButton />
+    <ExportButton />
   </TopToolbar>
 );
 
+const QuickFilter = ({ label }) => {
+  const translate = useTranslate();
+  return <Chip sx={{ marginBottom: 1 }} label={translate(label)} />;
+};
 
 const productFilters = [
-  <TextInput label="Search" source="name" alwaysOn />,
-  <TextInput label="categories" source="categories" defaultValue="" />,
+  <SearchInput source="name" alwaysOn />,
+  <QuickFilter
+    source="Disponibilidad"
+    label="Disponibilidad"
+    defaultValue="Disponible"
+  />,
+  <QuickFilter source="Categoria" label="Categoria" defaultValue="Bebidas" />,
+  // <QuickFilter source="tags" label="Tagged Code" defaultValue={[3]} />,
 ];
 
-const ProductsList = (props) => {  //Este es el que muestra las ciudades
-  return (
-    <List {...props}  actions={<ListActions/>} filters={productFilters}>
-        <DatagridConfigurable>      
-          <TextField source="id" />
-          <TextField source="brand" />
-          <TextField source="name" />
-          {/* <TextField source="description" /> */}
-          <TextField source="price" />
-          <TextField source="available" />
-          {/* <ImageField source="image" sx= {{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } } } /> */}
-          {/* <DateField source="created_at" /> */}
-<<<<<<< HEAD
-          {/* <EditButton basePath="/products" />
-          <DeleteButton basePath="/products" /> */}
-=======
-          {/*<EditButton basePath="/products" />*/}
-          {/*<DeleteButton basePath="/products" />*/}
->>>>>>> eaa7c371dea69b70cd0f134bcbb7c24669ed72a4
-        </DatagridConfigurable>
-    </List>
-    );
-}
+// const productFilters = [
+//   <SearchInput source="name" alwaysOn />,
+//   // <TextInput label="Search" source="name" alwaysOn />,
+//   <TextInput label="categories" source="categories" defaultValue="" />,
+// ];
 
-export default  ProductsList
+// const test=()=>{
+//       console.log(props);
+// }
+
+const DetailShow = (props) => (
+ 
+
+  <Show {...props} title="Detalle de Producto:">
+    {console.log(props)}
+    <SimpleShowLayout>
+      {/* <h3>  </h3> */}
+      <div className={style.container}>
+        <div className={style.containerDetalles}>
+          <span className={style.h6}> ID: </span>
+          <span className={style.textF}>
+            {" "}
+            <TextField source="id" style={{ fontSize: "1rem" }} />{" "}
+          </span>
+
+          <span className={style.h6}> MARCA:</span>
+          <span className={style.textF}>
+            <TextField source="brand" style={{ fontSize: "1rem" }} />{" "}
+          </span>
+
+          <span className={style.h6}> NOMBRE: </span>
+          <span className={style.textF}>
+            <TextField source="name" style={{ fontSize: "1rem" }} />{" "}
+          </span>
+
+          <span className={style.h6}> PRECIO: </span>
+          <span className={style.textF}>
+            <TextField source="price" style={{ fontSize: "1rem" }} />{" "}
+          </span>
+
+          <span className={style.h6}> ESTATUS: </span>
+          <span className={style.textF}>
+            <TextField source="available" style={{ fontSize: "1rem" }} />
+          </span>
+
+          <span className={style.h6}> FECHA EXP: </span>
+          <span className={style.textF}>
+            <DateField source="expirationdate" style={{ fontSize: "1rem" }} />
+          </span>
+
+          <span className={style.h6}> DESCRIPCIÓN: </span>
+          <span className={style.textF}>
+            <TextField source="description" />{" "}
+          </span>
+        </div>
+
+        <div className={style.containerI}>
+          <ImageField
+            source="image"
+            className={style.img}
+            sx={{
+              "& img": {
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain",
+              },
+            }}
+          />
+        </div>
+      </div>
+    </SimpleShowLayout>
+  </Show>
+);
+
+const ProductsList = (props) => {
+  return (
+    <List
+      {...props}
+      actions={<ListActions />}
+      filters={productFilters}
+      // pagination={<CustomPagination />}
+    >
+      <DatagridConfigurable>
+        <TextField source="id" />
+        <TextField source="brand" />
+        <TextField source="name" sortByOrder="DESC" />
+        <TextField source="price" />
+        <ToggleAvailableButton source="Disponibilidad" />
+        <ImageField
+          source="image"
+          sx={{
+            "& img": { maxWidth: 40, maxHeight: 40, objectFit: "contain" },
+          }}
+        />
+        <EditButton basepath="/products" />
+        <ShowButton basepath="/products" />
+      </DatagridConfigurable>
+    </List>
+  );
+};
+
+export { ProductsList, DetailShow };

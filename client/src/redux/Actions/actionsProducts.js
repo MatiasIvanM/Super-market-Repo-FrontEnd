@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PRODUCT } from '../../utils/urlLocales'
-import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, GET_PRODUCT_BY_NAME, FILTER_CATEGORY, ORDER_PRECIO, RANGO_PRECIOS, CLEAR_PRODUCT_DETAILS } from '../actionsType'
+import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, GET_PRODUCT_BY_NAME, FILTER_CATEGORY, ORDER_PRECIO, RANGO_PRECIOS, CLEAR_PRODUCT_DETAILS, MOD_QUANTITY_LOCAL } from '../actionsType'
 
 export function getProducts() {
 	return (dispatch) => {
@@ -44,23 +44,33 @@ export function getProductsByName(name) {
 	};
 }
 
-export const addProduct = (product) => {
-	console.log(product)
+export const addProduct = (formData) => {
+	console.log(formData)
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.post(PRODUCT, product)
+			const { data } = await axios.post(PRODUCT, formData,{
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			
+			})
+			console.log("🚀 ~ file: actionsProducts.js:57 ~ return ~ data:", data)
 
 			return dispatch({
 				type: ADD_PRODUCT,
 				payload: data,
 			});
 		} catch (error) {
-			console.error('An error occurred:', error.message);
+			console.error('Error en la solicitud POST:', error);
+			if (error.response) {
+			  // El servidor respondió con un estado de error
+			  console.error('Estado de respuesta del servidor:', error.response);
+			  console.error('Mensaje del servidor:', error.response);
+			}
 			throw error;
-		}
-
-	};
-};
+		  }
+		};
+	  };
 
 export const modProduct = (product) => {
 	return async (dispatch) => {
@@ -101,6 +111,7 @@ export const deleteProduct = (id) => {
 export const filterByCategory = (category) => {
 	return (dispatch) => {
 		try {
+			
 			return dispatch({
 				type: FILTER_CATEGORY,
 				payload: category,
@@ -142,3 +153,16 @@ export const clearProductDetails = () => {
 	  type: CLEAR_PRODUCT_DETAILS,
 	};
   };
+
+  export const modQuantityLocal = (product) => {
+	return (dispatch) => {
+		try {
+			return dispatch({
+				type: MOD_QUANTITY_LOCAL,
+				payload: product,
+			});
+		} catch (error) {
+			console.error('An error occurred:', error.message);
+		}
+	};
+};

@@ -1,0 +1,41 @@
+.container{
+  /* background-color: rgb(16, 17, 17); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0rem 0rem 0.1rem 5rem;
+}
+
+.container2{
+background-color:rgb(41, 41, 41);
+display: flex;
+flex-direction: row;
+}
+
+.customCard {
+  /* background-color: aqua; */
+  filter: grayscale(100%);
+}
+
+.customCard:hover {
+  scale: 1.1;
+}
+
+.customCard:hover {
+  filter: none; /* Aplicar filtro de escala de grises */
+}
+
+/* .img {
+  filter: grayscale(100%);
+}
+
+.card{
+  box-shadow: 10px 10px 10px 0px rgba(30, 40, 68, 0.25);
+  padding: 0%;
+}
+
+.card :hover{
+  scale: 1.1;
+
+} */
