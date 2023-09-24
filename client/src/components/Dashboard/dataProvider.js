@@ -2,14 +2,14 @@ import axios from 'axios';
 import { stringify } from 'query-string';
 import { server } from '../../utils/urlLocales';
 
-const url = server; 
+const url = server;
 
 const httpClient = axios.create({
   baseURL: url,
- /*  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  }, */
+  /*  headers: {
+     Accept: 'application/json',
+     'Content-Type': 'application/json',
+   }, */
 });
 
 const dataProvider = {
@@ -22,13 +22,14 @@ const dataProvider = {
       _sort: field,
       _order: order,
     };
-  
+
     const startIndex = (page - 1) * perPage;
     const endIndex = startIndex + perPage;
-  
+
     const url = `${resource}?${stringify(query)}`;
-  
-    return httpClient.get(url).then(({ data }) => ({
+
+    const token = JSON.parse(localStorage.getItem('token'))
+    return httpClient.get(url, { headers: { 'Authorization': `Bearer ${token}` } }).then(({ data }) => ({
       data: data.slice(startIndex, endIndex), // Obtén solo los datos para la página actual
       total: data.length, // Total de registros en el frontend
     }));
@@ -36,7 +37,8 @@ const dataProvider = {
 
 
   getOne: (resource, params) => {
-    return httpClient.get(`${resource}/${params.id}`).then(({ data }) => ({
+    const token = JSON.parse(localStorage.getItem('token'))
+    return httpClient.get(`${resource}/${params.id}`, { headers: { 'Authorization': `Bearer ${token}` } }).then(({ data }) => ({
       data: data,
     }));
   },
@@ -48,20 +50,21 @@ const dataProvider = {
   },
 
   update: (resource, params) => {
-    if (resource === 'product'){
-    return httpClient
-    .put(`${resource}/${params.id}`, params.data)
-    .then(({ data }) => ({
-      data: data,
-    }))
-    } else{
+    const token = JSON.parse(localStorage.getItem('token'))
+    if (resource === 'product') {
       return httpClient
-     .put(`${resource}`, params.data)
-     .then(({ data }) => ({
-       data: data,
-     }));
+        .put(`${resource}/${params.id}`, params.data, { headers: { 'Authorization': `Bearer ${token}` } })
+        .then(({ data }) => ({
+          data: data,
+        }))
+    } else {
+      return httpClient
+        .put(`${resource}`, params.data, { headers: { 'Authorization': `Bearer ${token}` } })
+        .then(({ data }) => ({
+          data: data,
+        }));
     }
-},
+  },
 
   // update: (resource, params) => {  
   //    console.log("🚀 ~ file: dataProvider.js:55 ~ params.data:", params.data)
@@ -71,7 +74,8 @@ const dataProvider = {
   // },
 
   delete: (resource, params) => {
-    return httpClient.delete(`${resource}/${params.id}`).then(({ data }) => ({
+    const token = JSON.parse(localStorage.getItem('token'))
+    return httpClient.delete(`${resource}/${params.id}`, { headers: { 'Authorization': `Bearer ${token}` } }).then(({ data }) => ({
       data: data,
     }));
   },
@@ -89,7 +93,7 @@ const dataProvider = {
   //   }));
   // },
 
-  
+
 };
 
 export default dataProvider;

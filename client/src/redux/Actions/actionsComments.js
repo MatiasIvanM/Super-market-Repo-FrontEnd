@@ -4,8 +4,9 @@ import{POST_COMMENT,GET_ALL_COMMENTS} from '../actionsType'
 
 
 export function getComment() {
+    const token = JSON.parse(localStorage.getItem('token'))
 	return (dispatch) => {
-		axios.get(COMMENT)
+		axios.get(COMMENT,{headers:{'Authorization': `Bearer ${token}`}})
 		.then((response) => {
 			dispatch({ type: GET_ALL_COMMENTS, payload: response.data });
 		}).catch((error) => {
@@ -16,9 +17,10 @@ export function getComment() {
 }
 
 export const addComment =  (comment) => {
+    const token = JSON.parse(localStorage.getItem('token'))
 	return async (dispatch) => {
 		try {
-			const {data}= await axios.post(COMMENT, comment)
+			const {data}= await axios.post(COMMENT, comment,{headers:{'Authorization': `Bearer ${token}`}})
 		  
 		   return dispatch({
 			 type: POST_COMMENT,
