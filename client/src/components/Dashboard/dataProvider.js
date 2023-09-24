@@ -13,7 +13,7 @@ const httpClient = axios.create({
 });
 
 const dataProvider = {
-    //Trae la lista de registros de un recurso. Falta la paginacion
+
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
@@ -21,18 +21,19 @@ const dataProvider = {
       ...params.filter,
       _sort: field,
       _order: order,
-      _start: ( 1) * 10,
-    //   _start: (page - 1) * perPage,
-      _end: 5 * 10,
-    //   _end: page * perPage,
     };
+  
+    const startIndex = (page - 1) * perPage;
+    const endIndex = startIndex + perPage;
+  
     const url = `${resource}?${stringify(query)}`;
-
+  
     return httpClient.get(url).then(({ data }) => ({
-      data: data,
-      total: parseInt(data.length, 10),
+      data: data.slice(startIndex, endIndex), // Obtén solo los datos para la página actual
+      total: data.length, // Total de registros en el frontend
     }));
   },
+
 
   getOne: (resource, params) => {
     return httpClient.get(`${resource}/${params.id}`).then(({ data }) => ({
