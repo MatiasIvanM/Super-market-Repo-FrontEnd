@@ -1,4 +1,4 @@
-.navBarContainer{
+.navBarContainer {
     position: sticky;
     top: 0;
     left: 0;
@@ -49,13 +49,8 @@
     border-radius: 5px 0 0 5px;
 }
 
-.search-button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    background-color: #666;
-    color: white;
-    cursor: pointer;
+.search_button {
+    margin-right: 2.5rem;
 }
 
 /* Estilos para el ícono de carrito */
@@ -93,18 +88,18 @@
     color: white;
     font-size: small;
     text-decoration: none;
-    
+
 }
 
-.link{
+.link {
     text-decoration: none;
     color: white;
 }
 
-.circulo{
+.circulo {
     /* background-color: blue;
     width: 30px;
     height: 30px;
     border-radius: 50%; */
     font-size: x-small;
-    }
+}

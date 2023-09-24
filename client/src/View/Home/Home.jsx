@@ -171,22 +171,23 @@ export default function Home() {
                         </Nav.Item >
                         <Nav.Item className={styles.filter_container}>
                             <p className={styles.filter}>Rango de Precios </p>
-                            <input
-                                onChange={setPriceRange}
-                                name='min' type="text"
-                                value={filters.priceRange.min > 0 ? filters.priceRange.min : 'min'}
-                                className={styles.input} />
-                            <span className={styles.filter}> - </span>
-                            <input
-                                onChange={setPriceRange}
-                                name='max' type="text"
-                                value={filters.priceRange.max > 0 ? filters.priceRange.max : 'max'}
-                                className={styles.input} />
+                            <div style={{display:'flex', gap:'0.5rem'}}>
+                                <input
+                                    onChange={setPriceRange}
+                                    name='min' type="text"
+                                    value={filters.priceRange.min > 0 ? filters.priceRange.min : 'min'}
+                                    className={styles.input} />
+                                <input
+                                    onChange={setPriceRange}
+                                    name='max' type="text"
+                                    value={filters.priceRange.max > 0 ? filters.priceRange.max : 'max'}
+                                    className={styles.input} />
+                            </div>
                         </Nav.Item>
                     </div>
                     <Nav.Item>
                         {/* <button onClick={clearFilters}>Limpiar Filtros</button> */}
-                        <Button variant="secondary" size='sm' className={styles.clear_button} onClick={clearFilters}> Limpiar Filtros </Button>
+                        <Button size='sm' className={styles.clear_button} onClick={clearFilters}> Limpiar Filtros </Button>
                     </Nav.Item>
                 </Nav>
                 {/*<div className={styles.card_container}>
@@ -210,6 +211,7 @@ export default function Home() {
                             stock={p.stock}
                             discount={p.discount}
                             rating='5'
+                            available={p.available}
                         >
                         </CardProducto>
                     ))}
