@@ -12,6 +12,8 @@ function CardProduct(props) {
 
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [discountPrice, setDiscountPrice] = useState(0);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [buttonColor, setButtonColor] = useState("primary")
   const dispatch = useDispatch();
 
   let { id, name, description, price, rating, stock, image, discount, available } = props;
@@ -33,8 +35,14 @@ function CardProduct(props) {
 
   const handleAddToCart = () => {
     if (stock > 0 && available) {
-      // Verificar que haya stock y disponibilidad
       dispatch(addProductSC({ productDetails: props, quantity: 1, discountPrice }));
+      // Cambia el color del botón a verde y mostrar mensaje de confirmación durante medio segundo
+      setButtonColor("success");
+      setConfirmationMessage("Agregado al Carrito");
+      setTimeout(() => {
+        setButtonColor("primary"); // Volver a establecer el color del botón a su estado original
+        setConfirmationMessage("");
+      }, 1000);
     }
   };
 
@@ -83,19 +91,26 @@ function CardProduct(props) {
         </Card.Body>
       </Card>
       <Button
-        variant="primary"
+        variant={buttonColor} // Controla el color del botón dinámicamente
         style={{
-          width: "98%",
           backgroundColor: available ? "" : "gray",
-          position: "relative", // Establece una posición absoluta para el botón
-          bottom: "2.5em", // Ajusta la posición vertical según tus preferencias
-          left: "0px", // Ajusta la posición horizontal según tus preferencias
-          zIndex: 1 // Asegura que el botón esté sobre la tarjeta
+          width: "98%",
+          position: "relative",
+          bottom: "2.5em",
+          left: "0px",
+          zIndex: 1,
+          color: "black"
         }}
         onClick={handleAddToCart}
-        disabled={!available || stock === 0} // Deshabilitar el botón si !available o stock === 0
+        disabled={!available || stock === 0}
       >
-        {(!available || stock === 0) ? "Agotado" : "Agregar al carrito"}
+        {confirmationMessage ? (
+          <>
+            <span style={{ color: "green" }}>✔</span> {confirmationMessage}
+          </>
+        ) : (
+          (!available || stock === 0) ? "Agotado" : "Agregar al carrito"
+        )}
       </Button>
       <Detail
         id={id}
