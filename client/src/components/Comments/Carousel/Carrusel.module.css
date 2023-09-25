@@ -1,0 +1,58 @@
+/* Estilos para el carrusel */
+.carousel {
+    background-color: #f0f0f0; /* Fondo gris claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra ligera */
+    padding: 10px; /* Espaciado interior */
+  }
+  
+  /* Estilos para las diapositivas de comentarios */
+  .commentSlide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    margin: 0 10px;
+  }
+  
+  /* Estilos para la información del usuario */
+  .userInfo {
+    display: flex;
+    justify-content: space-evenly; /* Espacio entre elementos */
+    margin-bottom: 10px;
+  }
+  
+  .userInfo h4 {
+    color: #333; /* Texto en tono de gris oscuro */
+    padding-right: 1rem;
+  }
+  
+  .reactIcons {
+    display: flex;
+    align-items: center; /* Centrar verticalmente las estrellas */
+  }
+  
+  .reactIcons svg {
+    font-size: 20px; /* Tamaño de las estrellas */
+    color: #e2c313d5; /* Color amarillo dorado */
+    margin-bottom: 15px;
+  }
+  
+  /* Estilos para los detalles del comentario */
+  .commentDetails {
+    text-align: center;
+    margin-left: 5rem;
+  }
+  
+  .commentDetails strong {
+    color: #007bff; /* Texto en azul */
+  }
+  
+  .commentDetails p {
+    color: #1b1b1b; /* Texto en tono de gris medio */
+  }
+  
