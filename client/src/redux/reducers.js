@@ -167,14 +167,14 @@ const rootReducer = (state = initialState, action) => {
       } else if (action.payload === 'MIN-max') {
         // eslint-disable-next-line
         priceFiltered.sort(function (a, b) {
-          if (calcDiscount(a.price, a.discount) > calcDiscount(b.price, a.discount)) { return 1 }
-          if (calcDiscount(a.price, a.discount) < calcDiscount(b.price, a.discount)) { return -1 }
+          if (calcDiscount(a.price, a.discount) > calcDiscount(b.price, b.discount)) { return 1 }
+          if (calcDiscount(a.price, a.discount) < calcDiscount(b.price, b.discount)) { return -1 }
         })
       } else if (action.payload === 'MAX-min') {
         // eslint-disable-next-line
         priceFiltered.sort(function (a, b) {
-          if (calcDiscount(a.price) < calcDiscount(b.price)) { return 1 }
-          if (calcDiscount(a.price) > calcDiscount(b.price)) { return -1 }
+          if (calcDiscount(a.price, a.discount) < calcDiscount(b.price, b.discount)) { return 1 }
+          if (calcDiscount(a.price, a.discount) > calcDiscount(b.price, b.discount)) { return -1 }
         })
       }
       return { ...state, productsFiltered: [...priceFiltered] }
