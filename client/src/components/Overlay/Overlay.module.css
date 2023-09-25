@@ -1,0 +1,8 @@
+.svg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* fill: #0d6efd; */
+    fill: #80b0f7;
+    z-index: -3;
+}

@@ -11,6 +11,7 @@ import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProd
 import { selectCategory } from '../../redux/Actions/actionsCategory';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LoadGif from '../../components/Loading/shopping-cart-shopping.gif'
+import Overlay from '../../components/Overlay/Overlay';
 
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
     const ITEMS_PER_PAGE = 15;
-    const defaultFilters = { category: 'Todas', price: false, priceRange: { min: 0, max: 0 }, }
+    const defaultFilters = { category: 'Todas', price: "None", priceRange: { min: 0, max: 0 }, }
     const [productsMod, setProductsMod] = useState([]);
     const [filters, setFilters] = useState(defaultFilters);
     const [currentPage, setCurrentPage] = useState(0);
@@ -27,10 +28,10 @@ export default function Home() {
     const [showLoader, setShowLoader] = useState(false);
     let customerById = useSelector((state) => state.customerId)
     let categories = useSelector((state) => state.category)
-
     useEffect(() => {
         setCustomer(customerById.id)
     }, [customer]);
+
     // useEffect(() => {
     //     console.log(customer, "Customer22222");
     //   }, [customer]);
@@ -148,42 +149,45 @@ export default function Home() {
             <div className={styles.container}>
 
                 <Nav className={styles.side_bar}>
-                    <Nav.Item>
-                        <h4>Categorías </h4>
-                        <select name='category' onChange={handleChange}>
-                            <option value="Todas">Todas</option>
-                            {categories.map((category, index) => (
-                                <option key={index} value={category.name}>
-                                    {category.name}
-                                </option>
-                            ))}
-                        </select>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <h4>Ordenar por Precio </h4>
-                        <select name='price' id='price' value={filters.price} onChange={handleChange}>
-                            <option value="None"></option>
-                            <option value="MIN-max">min-MAX</option>
-                            <option value="MAX-min">MAX-min</option>
-                        </select>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <h4>Rango de Precios </h4>
-                        <input
-                            onChange={setPriceRange}
-                            name='min' type="number"
-                            value={filters.priceRange.min}
-                            style={{ width: '30%' }} />
-                        <span> Hasta </span>
-                        <input
-                            onChange={setPriceRange}
-                            name='max' type="number"
-                            value={filters.priceRange.max}
-                            style={{ width: '30%' }} />
-                    </Nav.Item>
+                    <div className={styles.filters_group}>
+                        <Nav.Item className={styles.filter_container}>
+                            <p className={styles.filter}>Categorías </p>
+                            <select className={styles.select} name='category' onChange={handleChange}>
+                                <option value="Todas">Todas</option>
+                                {categories.map((category, index) => (
+                                    <option key={index} value={category.name}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </Nav.Item>
+                        <Nav.Item className={styles.filter_container}>
+                            <p className={styles.filter}>Ordenar por Precio </p>
+                            <select className={styles.select} name='price' id='price' value={filters.price} onChange={handleChange}>
+                                <option value="None"></option>
+                                <option value="MIN-max">min-MAX</option>
+                                <option value="MAX-min">MAX-min</option>
+                            </select>
+                        </Nav.Item >
+                        <Nav.Item className={styles.filter_container}>
+                            <p className={styles.filter}>Rango de Precios </p>
+                            <div style={{display:'flex', gap:'0.5rem'}}>
+                                <input
+                                    onChange={setPriceRange}
+                                    name='min' type="text"
+                                    value={filters.priceRange.min > 0 ? filters.priceRange.min : 'min'}
+                                    className={styles.input} />
+                                <input
+                                    onChange={setPriceRange}
+                                    name='max' type="text"
+                                    value={filters.priceRange.max > 0 ? filters.priceRange.max : 'max'}
+                                    className={styles.input} />
+                            </div>
+                        </Nav.Item>
+                    </div>
                     <Nav.Item>
                         {/* <button onClick={clearFilters}>Limpiar Filtros</button> */}
-                        <Button variant="primary" style={{ width: '100px' }} onClick={clearFilters}> Limpiar Filtros </Button>
+                        <Button size='sm' className={styles.clear_button} onClick={clearFilters}> Limpiar Filtros </Button>
                     </Nav.Item>
                 </Nav>
                 {/*<div className={styles.card_container}>
@@ -193,10 +197,10 @@ export default function Home() {
                     dataLength={items.length} // Tamaño actual de la lista de productos
                     next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
                     hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
-                    loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." />: null}
+                    loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." /> : null}
                     className={styles.card_container}
                 >
-                     {items.map(p => (
+                    {items.map(p => (
                         <CardProducto
                             key={p.id}
                             id={p.id}
@@ -207,11 +211,13 @@ export default function Home() {
                             stock={p.stock}
                             discount={p.discount}
                             rating='5'
+                            available={p.available}
                         >
                         </CardProducto>
                     ))}
                 </InfiniteScroll>
-                </div >
+                <Overlay></Overlay>
+            </div >
             <Footer />
         </div>
     )

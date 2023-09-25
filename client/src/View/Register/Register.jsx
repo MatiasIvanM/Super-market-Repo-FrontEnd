@@ -124,7 +124,7 @@ export default function Register() {
                                 }))
 
                                 ////Crea Carrito////
-                                await dispatch(getCustomerById(response.payload.id))
+                                // await dispatch(getCustomerById(response.payload.id))
                                 const carrito = await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0.0, customerId: response.payload.id }))
                                 console.log(carrito);
                                 ///////////////////
@@ -159,7 +159,7 @@ export default function Register() {
                             }))
 
                             ////Crea Carrito////
-                            await dispatch(getCustomerById(dbCustomer.payload[0].id))
+                            // await dispatch(getCustomerById(dbCustomer.payload[0].id))
                             const carrito = await dispatch(addShoppingCart({ ProductName: [], PriceTotal: 0.0, customerId: dbCustomer.payload[0].id }))
                             console.log(carrito)
                             ///////////////////
