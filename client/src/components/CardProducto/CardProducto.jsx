@@ -18,7 +18,6 @@ function CardProduct(props) {
 
   let { id, name, description, price, rating, stock, image, discount, available } = props;
 
-
   const calculateDiscountPrice = () => {
     if (discount > 0) {
       const discountedPrice = Math.floor(price * discount / 100);

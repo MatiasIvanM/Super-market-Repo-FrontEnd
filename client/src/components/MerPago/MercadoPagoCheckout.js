@@ -22,7 +22,6 @@ function MercadoPagoCheckout() {
     return total + priceToUse * product.quantity;
   }, 0);
 
-
   // Mover la función createPreference dentro del componente
   const createPreference = async () => {
     try {
