@@ -154,7 +154,7 @@ function ProductsDetail(props) {
 
               <ViewComments productId={productDetails.id} />
 
-              <AddComments productId={productDetails.id} />
+              {/* <AddComments productId={productDetails.id} /> */}
 
 {/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
             </Modal.Body>
