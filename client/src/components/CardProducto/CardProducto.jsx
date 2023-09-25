@@ -8,23 +8,7 @@ import Detail from "../../View/Detail/Detail";
 function CardProduct(props) {
   const [showDetailModal, setShowDetailModal] = useState(false);
 
-<<<<<<< HEAD
-  let {
-    id,
-    name,
-    description,
-    price,
-    rating,
-    stock,
-    // Existencias,
-    image,
-    // brand,
-    // expirationdate,
-    // categories,
-  } = props;
-=======
   const [discountPrice, setDiscountPrice] = useState(0);
->>>>>>> 31f2d69718a257250885598e10595e6ca7e6f995
 
   let { id, name, description, price, rating, stock, image, discount } = props;
   const test =()=>{

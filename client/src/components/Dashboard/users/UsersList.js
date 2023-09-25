@@ -23,7 +23,7 @@ const ListActions = () => (
 );
 
 const userFilters = [
-    <TextInput label="Search" source="q" alwaysOn />,
+    // <TextInput label="Search" source="q" alwaysOn />,
     <TextInput label="name" source="name" defaultValue="" />,
     <TextInput label="email" source="email" defaultValue="" />,
 ];

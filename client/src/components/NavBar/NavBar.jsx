@@ -1,15 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-import { Container, Nav, Navbar, Modal } from 'react-bootstrap' 
-import { BsCart3 } from 'react-icons/bs'
-import { FiLogIn } from 'react-icons/fi'
-import { BiSolidDashboard } from "react-icons/bi";
-=======
 import { Container, Nav, Navbar, Modal, Alert } from 'react-bootstrap'
 import { BsCart3, BsWrenchAdjustable } from 'react-icons/bs'
 import { FiLogIn, FiUser } from 'react-icons/fi'
->>>>>>> 31f2d69718a257250885598e10595e6ca7e6f995
 import { useState } from 'react';
 import Button from "react-bootstrap/Button";
 // import { useAuth0 } from "@auth0/auth0-react"
@@ -96,15 +89,6 @@ const NavBar = (props) => {
               </Modal>
             </Navbar.Brand>
 
-<<<<<<< HEAD
-              <Navbar.Brand>
-                <FiLogIn className="nav-icon"/>
-                <Link to="/admin"> 
-                  <BiSolidDashboard className="nav-icon"/>
-                </Link>
-              </Navbar.Brand>
-              
-=======
             <Navbar.Brand>
               {JSON.parse(localStorage.getItem('customer'))
                 ?
@@ -118,7 +102,6 @@ const NavBar = (props) => {
                 </Nav.Link>
               }
             </Navbar.Brand>
->>>>>>> 31f2d69718a257250885598e10595e6ca7e6f995
 
              {JSON.parse(localStorage.getItem('customer')) && role==='admin' 
              ? (<Navbar.Brand>

@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 // import CardFooter from 'react-bootstrap/CardFooter'
 
->>>>>>> 0e8c718ede66db3c8253d1065d62213dd9c17007
 import { Nav } from 'react-bootstrap' 
 import style from './Footer.module.css'
 

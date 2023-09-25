@@ -5,12 +5,7 @@ import {
   GET_PRODUCT_BY_NAME,
   ADD_PRODUCT,
   MOD_PRODUCT,
-<<<<<<< HEAD
-  // eslint-disable-next-line
-  DEL_PRODUCT,
-=======
   // DEL_PRODUCT,
->>>>>>> 0e8c718ede66db3c8253d1065d62213dd9c17007
   GET_CUSTOMERS,
   GET_CUSTOMER_BY_ID,
   ADD_CUSTOMER,

@@ -52,7 +52,7 @@ const Dashboard = () => {
         show={DetailShow}
       />
       <Resource
-        name="customer"
+        name="customer/"
         list={UsersList}
         create={UserCreate}
         edit={UserEdit}
