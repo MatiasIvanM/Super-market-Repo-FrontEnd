@@ -5,6 +5,7 @@
     justify-content: space-between;
     align-items: center;
     width: 98%;
+    margin-top: 2rem;
 }
 
 .rating{
@@ -56,4 +57,3 @@
     color: rgba(143, 143, 143, 0.7);
     text-decoration: line-through;
   }
-
