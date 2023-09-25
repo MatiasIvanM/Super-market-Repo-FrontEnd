@@ -7,7 +7,3 @@
     transition: 0.1s ease-in-out;
     border-radius: 80px;
 }
-
-.button:hover{
-    scale: 1.05;
-}
