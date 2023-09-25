@@ -153,7 +153,7 @@ export default function Home() {
                     <div className={styles.filters_group}>
                         <Nav.Item className={styles.filter_container}>
                             <p className={styles.filter}>Categorías </p>
-                            <select className={styles.select} name='category' onChange={handleChange}>
+                            <select className={styles.select} name='category' value={filters.category} onChange={handleChange}>
                                 <option value="Todas">Todas</option>
                                 {categories.map((category, index) => (
                                     <option key={index} value={category.name}>
@@ -176,12 +176,14 @@ export default function Home() {
                                 <input
                                     onChange={setPriceRange}
                                     name='min' type="text"
-                                    value={filters.priceRange.min > 0 ? filters.priceRange.min : 'min'}
+                                    value={filters.priceRange.min > 0 ? filters.priceRange.min : ''}
+                                    placeholder='min'
                                     className={styles.input} />
                                 <input
                                     onChange={setPriceRange}
                                     name='max' type="text"
-                                    value={filters.priceRange.max > 0 ? filters.priceRange.max : 'max'}
+                                    placeholder='max'
+                                    value={filters.priceRange.max > 0 ? filters.priceRange.max : ''}
                                     className={styles.input} />
                             </div>
                         </Nav.Item>
