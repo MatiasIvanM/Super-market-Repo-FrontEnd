@@ -5,7 +5,7 @@
     margin: 1rem 1.4rem 3rem 1rem;
     z-index: 99;
     transition: 0.1s ease-in-out;
-    opacity: 100%;
+    border-radius: 80px;
 }
 
 .button:hover{
