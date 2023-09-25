@@ -12,19 +12,18 @@
     /* height: 80vh; */
     /* padding: 1rem; */
 }
+
 .detailContainer{
     border-radius: 0px ;
 }
 
 .titleContainer{
-    /* border: 1px solid white; */
     margin: 0;
     padding: 0;
 }
 
 .productInfoContainer{
     border-radius: 0px;
-    /* background-color: transparent; */
 }
 
 .productImage {
@@ -34,11 +33,14 @@
     background-color: transparent;
   }
 
-  /* .image{
+  .image{
+    width: 100%; /* Ajusta el valor según lo que necesites */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     border: 1px solid black;
-    height: 100px;
-    width: 100px;
-  } */
+    height: auto; /* Esto asegura que la imagen no se distorsione */
+  }
 
   .productInfo {
     font-weight: bold;

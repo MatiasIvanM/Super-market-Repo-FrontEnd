@@ -64,24 +64,19 @@ const DetailShow = (props) => (
   <Show {...props} title="Detalle de Producto:">
     {console.log(props)}
     <SimpleShowLayout>
-      {/* <h3>  </h3> */}
       <div className={style.titleContainer}> 
               <h1>Detalle del producto</h1>
             </div>
         <div className={style.container}> 
           <Card className={style.detailContainer}>
-          <hr/>
+          
           <Card.Title className={style.productImage}>
-            <ImageField className={style.image}
-              source="image"
-              // sx={{
-              // "& img": { maxWidth: '100%', maxHeight: '100%', objectFit: "contain" },
-              // }}
-            />
+          <div style={{ width: '100%', height: 'auto', border: '1px' }}>
+            <ImageField source="image" />
+          </div>
           </Card.Title>
         </Card>
           <Card className={style.productInfoContainer}>
-          {/* <div > */}
             <Card.Body className={style.productInfo}>
             <ListGroup className="list-group-flush">
               <ListGroup.Item><span>ID: </span><TextField source="id" style={{ fontSize: "1rem" }} /></ListGroup.Item>
@@ -90,11 +85,10 @@ const DetailShow = (props) => (
               <ListGroup.Item><span>PRECIO: </span> <TextField source="price" style={{ fontSize: "1rem" }} /></ListGroup.Item>
               <ListGroup.Item><span>ESTATUS: </span><TextField source="available" style={{ fontSize: "1rem" }} /></ListGroup.Item>
               <ListGroup.Item><span>FECHA EXP: </span> <DateField source="expirationdate" style={{ fontSize: "1rem" }} /></ListGroup.Item>
-              <ListGroup.Item><span>DESCRIPCIÓN: </span><TextField source="description" /></ListGroup.Item>
-              <ListGroup.Item><span>DESCUENTO: </span><TextField source="discount" /></ListGroup.Item>
+              <ListGroup.Item><span>DESCRIPCIÓN: </span><TextField source="description" style={{ fontSize: "1rem" }}/></ListGroup.Item>
+              <ListGroup.Item><span>DESCUENTO: </span><TextField source="discount" style={{ fontSize: "1rem" }}/>%</ListGroup.Item>
             </ListGroup>
             </Card.Body>
-          {/* </div> */}
         </Card> 
       </div>
     </SimpleShowLayout>
