@@ -13,11 +13,12 @@ function MercadoPagoCheckout() {
   // const shoppingCart = useSelector ((state)=>state.shoppingCart)
   console.log('cart:::', cart)
   // console.log('shopping:::',shoppingCart)
-  const logueado = JSON.parse(localStorage.getItem('customer'))
-  console.log("SESION::", logueado);
+  // const logueado = JSON.parse(localStorage.getItem('customer'))
+  // console.log("SESION::", logueado);
 
   const totalCartPrice = cart.reduce((total, product) => {
-    return total + product.productDetails.price * product.quantity;
+    const priceToUse = product.discountPrice !== undefined ? product.discountPrice : product.productDetails.price;
+    return total + priceToUse * product.quantity;
   }, 0);
 
   // Mover la función createPreference dentro del componente
@@ -28,22 +29,31 @@ function MercadoPagoCheckout() {
         id: `${item.productDetails.id}`,
         picture_url: `${item.productDetails.image}`,
         description: `${item.productDetails.description}`,
-        unit_price: item.productDetails.price,
+        unit_price: item.discountPrice !== undefined ? item.discountPrice : item.productDetails.price,
         quantity: item.quantity,
         currency_id: 'COP',
       }));
+
+      const user = JSON.parse(localStorage.getItem('customer'));
+      console.log("USUARRIOFRONT::",user)
+
       const response = await axios.post(
         'https://api.mercadopago.com/checkout/preferences',
         {
           items,
+          payer: {
+            name: user.id,            
+          },
           back_urls: {
             success: "https://supermarket-git-producarrito-matiasivanm.vercel.app/home",
             failure: "https://supermarket-git-producarrito-matiasivanm.vercel.app/home",
             pending: ""
           },
+         
           notification_url: "https://super-market-shop-preview.up.railway.app/mercadoPago/webhook",
           // notification_url: "https://391d-161-10-101-39.ngrok-free.app/mercadoPago/webhook",
           auto_return: "approved",
+          
         },
         {
           headers: {

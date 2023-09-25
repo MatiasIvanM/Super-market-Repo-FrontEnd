@@ -21,8 +21,9 @@ function CardProduct(props) {
 
   const calculateDiscountPrice = () => {
     if (discount > 0) {
-      const discountedPrice = Math.abs(price * discount / 100 - price);
-      return discountedPrice;
+
+      const discountedPrice = Math.floor(price * discount / 100);
+      return price - discountedPrice;
     } else {
       return price;
     }
