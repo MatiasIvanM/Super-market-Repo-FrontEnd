@@ -36,6 +36,7 @@ const CartShopping = () => {
   
   useEffect(() => {
     console.log("EJECUTANDO PUT CART", shoppingCart.id)
+
     dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: cart, PriceTotal: total }));
   }, [total]);
 
