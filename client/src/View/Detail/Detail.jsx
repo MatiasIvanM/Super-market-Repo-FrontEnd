@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
+import { addProductSC, putShoppingCart } from "../../redux/Actions/actionsSC"
+import { getComment } from '../../redux/Actions/actionsComments'
+import AddComments from '../../components/Comments/AddComments'
+import ViewComments from "../../components/Comments/ViewComments";
 import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import style from './Detail.module.css'
 import { AiOutlineStar } from 'react-icons/ai'
-import { addProductSC, putShoppingCart } from "../../redux/Actions/actionsSC"
+
 
 
 function ProductsDetail(props) {
-
-  const { id, discountPrice } = props
+  
   const dispatch = useDispatch();
+  const { id, discountPrice } = props
   const [showMessage, setShowMessage] = useState(false);
   const [showMessageWarning, setShowMessageWarning] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -29,6 +33,7 @@ function ProductsDetail(props) {
 
   useEffect(() => {
     if (id) {
+      dispatch(getComment())
       dispatch(getProductById(id))
         .then((data) => {
           setProductDetails(data);
@@ -145,7 +150,13 @@ function ProductsDetail(props) {
                   </Card>
                 </div>
               </div>
+{/* ///////////////////////////////////////////////////////////////////////////////////////// */}
 
+              <ViewComments productId={productDetails.id} />
+
+              <AddComments productId={productDetails.id} />
+
+{/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
             </Modal.Body>
           ) : (
             <Spinner animation="border" variant="primary" />
