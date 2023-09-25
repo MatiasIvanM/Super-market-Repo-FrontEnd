@@ -21,9 +21,15 @@ function Landing(){
     history.push('/home');
 };
 
+
+  useEffect(() => {
+    dispatch(getProducts());// eslint-disable-next-line
+  }, []);
+// =======
   // useEffect(() => {
   //   dispatch(getProducts());// eslint-disable-next-line
   // }, []);
+// >>>>>>> 31f2d69718a257250885598e10595e6ca7e6f995
 
     return(
     <div className='landing'>

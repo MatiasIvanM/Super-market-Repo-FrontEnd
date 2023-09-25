@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import {
   List,
   CreateButton,
@@ -11,59 +12,34 @@ import {
   SelectColumnsButton,
   SimpleShowLayout,
   TopToolbar,
-  TextField,
+  TextField, TextInput, BooleanInput,
   EditButton,
   SortButton,
   FilterButton,
-  SearchInput,
 } from "react-admin";
-// import { EditDialog } from '@react-admin/ra-form-layout';
+
 import ToggleAvailableButton from "./ToggleAvailableButton";
 import style from "./ProductsList.module.css";
-import { Chip } from "@mui/material";
-import { useTranslate } from "react-admin";
+
 
 const ListActions = () => (
   <TopToolbar>
-    <SelectColumnsButton />
-    <FilterButton />
-    <SortButton fields={["price"]} />
-    <CreateButton />
-    <ExportButton />
+      <SelectColumnsButton />
+      <FilterButton/>
+      <CreateButton/>
+      <ExportButton/>
   </TopToolbar>
 );
 
-const QuickFilter = ({ label }) => {
-  const translate = useTranslate();
-  return <Chip sx={{ marginBottom: 1 }} label={translate(label)} />;
-};
-
 const productFilters = [
-  <SearchInput source="name" alwaysOn />,
-  <QuickFilter
-    source="Disponibilidad"
-    label="Disponibilidad"
-    defaultValue="Disponible"
-  />,
-  <QuickFilter source="Categoria" label="Categoria" defaultValue="Bebidas" />,
-  // <QuickFilter source="tags" label="Tagged Code" defaultValue={[3]} />,
+
+  <TextInput label="name" source="name" defaultValue=""/>,
+  // <TextInput label="categories" source="categories.name" defaultValue=""/>,
 ];
 
-// const productFilters = [
-//   <SearchInput source="name" alwaysOn />,
-//   // <TextInput label="Search" source="name" alwaysOn />,
-//   <TextInput label="categories" source="categories" defaultValue="" />,
-// ];
-
-// const test=()=>{
-//       console.log(props);
-// }
-
 const DetailShow = (props) => (
- 
 
   <Show {...props} title="Detalle de Producto:">
-    {console.log(props)}
     <SimpleShowLayout>
       {/* <h3>  </h3> */}
       <div className={style.container}>
@@ -134,7 +110,7 @@ const ProductsList = (props) => {
       <DatagridConfigurable>
         <TextField source="id" />
         <TextField source="brand" />
-        <TextField source="name" sortByOrder="DESC" />
+        <TextField source="name" />
         <TextField source="price" />
         <ToggleAvailableButton source="Disponibilidad" />
         <ImageField
@@ -149,5 +125,6 @@ const ProductsList = (props) => {
     </List>
   );
 };
+
 
 export { ProductsList, DetailShow };
