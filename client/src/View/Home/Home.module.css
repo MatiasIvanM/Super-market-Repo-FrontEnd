@@ -20,12 +20,12 @@
     gap: 15px;
     justify-content: center;
     width: 80vw;
-    /* height:auto; */
+    min-height:90%;
     border-radius: 5px;
     /* overflow:auto; */
     /* border: 0.1rem rgb(200, 200, 200) solid; */
-    padding-top: 0.9rem;
-    padding-left: 0px;
+    padding: 0.9rem;
+    /* padding-left: 0px; */
 
 }
 
