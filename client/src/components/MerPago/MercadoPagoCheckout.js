@@ -15,10 +15,13 @@ function MercadoPagoCheckout() {
   // console.log('shopping:::',shoppingCart)
   const logueado = JSON.parse(localStorage.getItem('customer'))
   console.log("SESION::", logueado);
+ 
 
   const totalCartPrice = cart.reduce((total, product) => {
-    return total + product.productDetails.price * product.quantity;
+    const priceToUse = product.discountPrice !== undefined ? product.discountPrice : product.productDetails.price;
+    return total + priceToUse * product.quantity;
   }, 0);
+
 
   // Mover la función createPreference dentro del componente
   const createPreference = async () => {
@@ -28,7 +31,7 @@ function MercadoPagoCheckout() {
         id: `${item.productDetails.id}`,
         picture_url: `${item.productDetails.image}`,
         description: `${item.productDetails.description}`,
-        unit_price: item.productDetails.price,
+        unit_price: item.discountPrice !== undefined ? item.discountPrice : item.productDetails.price,
         quantity: item.quantity,
         currency_id: 'COP',
       }));
