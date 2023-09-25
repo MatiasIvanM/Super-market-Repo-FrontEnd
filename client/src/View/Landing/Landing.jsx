@@ -9,6 +9,7 @@ import {getProducts,getProductsByName} from '../../redux/Actions/actionsProducts
 import { useHistory  } from 'react-router-dom';
 import {Footer} from '../../components/Footer/Footer';
 import { selectCategory } from '../../redux/Actions/actionsCategory';
+import CarouselOfertas from '../../components/CarouselOfertas/CarouselOfertas';
 
 
 function Landing(){
@@ -36,8 +37,9 @@ function Landing(){
       <NavBar
       searchByName={searchByName}
       />
+      <CarouselOfertas></CarouselOfertas>
       <Container>
-      <Row className='offer-image'>
+      {/* <Row className='offer-image'>
         <Col xs={6} md={4} lg={4}>
           <Image src="OfertaSMH.jpg" className='image' thumbnail />
         </Col>
@@ -47,7 +49,7 @@ function Landing(){
         <Col xs={6} md={4} lg={4}>
           <Image src="OfertaSMH.jpg" className='image' thumbnail />
         </Col>
-      </Row>
+      </Row> */}
       
       <Row className='offer-image'>
         <Col xs={9} lg={12}>
