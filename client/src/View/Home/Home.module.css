@@ -23,10 +23,10 @@
     /* height:auto; */
     border-radius: 5px;
     /* overflow:auto; */
-
     /* border: 0.1rem rgb(200, 200, 200) solid; */
     padding-top: 0.9rem;
     padding-left: 0px;
+
 }
 
 .side_bar {
@@ -116,7 +116,7 @@
     .side_bar {
         align-self: center;
         position: inherit;
-        width: 60%;
+        width: 280px;
         height: auto;
         max-width: 100%;
     }

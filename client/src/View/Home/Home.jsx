@@ -12,6 +12,7 @@ import { selectCategory } from '../../redux/Actions/actionsCategory';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LoadGif from '../../components/Loading/shopping-cart-shopping.gif'
 import Overlay from '../../components/Overlay/Overlay';
+import ScrollTop from '../../components/ScrollTop/ScrollTop';
 
 
 export default function Home() {
@@ -207,7 +208,7 @@ export default function Home() {
                             name={p.name}
                             image={p.image}
                             description={p.description}
-                            stock= {p.stock}
+                            // stock= {p.stock}
                             price={p.price}
                             stock={p.stock}
                             discount={p.discount}
@@ -217,6 +218,7 @@ export default function Home() {
                         </CardProducto>
                     ))}
                 </InfiniteScroll>
+                <ScrollTop></ScrollTop>
                 <Overlay></Overlay>
             </div >
             <Footer />
