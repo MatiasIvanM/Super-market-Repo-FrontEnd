@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux"; // Importa el hook useSelector
 import Detail from "../../View/Detail/Detail";
 
 function CardProduct(props) {
-  console.log("🚀 ~ file: CardProducto.jsx:201 ~ CardProduct ~ props:", props)
 
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [discountPrice, setDiscountPrice] = useState(0);
