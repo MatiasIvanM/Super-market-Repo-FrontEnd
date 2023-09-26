@@ -20,6 +20,10 @@ import {
 
 import ToggleAvailableButton from "./ToggleAvailableButton";
 import style from "./ProductsList.module.css";
+import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { Card, ListGroup, Button, Modal }from 'react-bootstrap';
+
 
 
 const ListActions = () => (
@@ -37,68 +41,67 @@ const productFilters = [
   // <TextInput label="categories" source="categories.name" defaultValue=""/>,
 ];
 
-const DetailShow = (props) => (
+const DetailShow = (props) => { 
+  
+  const [showModal, setShowModal] = useState(true);
+  const history = useHistory();
 
-  <Show {...props} title="Detalle de Producto:">
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    history.goBack();
+  };
+  return (
+    <>
+  <Modal show={showModal} onHide={handleCloseModal}>
+    <Modal.Body>
+    <Show {...props} title="Detalle de Producto:">
+    {console.log(props)}
     <SimpleShowLayout>
-      {/* <h3>  </h3> */}
-      <div className={style.container}>
-        <div className={style.containerDetalles}>
-          <span className={style.h6}> ID: </span>
-          <span className={style.textF}>
-            {" "}
-            <TextField source="id" style={{ fontSize: "1rem" }} />{" "}
-          </span>
-
-          <span className={style.h6}> MARCA:</span>
-          <span className={style.textF}>
-            <TextField source="brand" style={{ fontSize: "1rem" }} />{" "}
-          </span>
-
-          <span className={style.h6}> NOMBRE: </span>
-          <span className={style.textF}>
-            <TextField source="name" style={{ fontSize: "1rem" }} />{" "}
-          </span>
-
-          <span className={style.h6}> PRECIO: </span>
-          <span className={style.textF}>
-            <TextField source="price" style={{ fontSize: "1rem" }} />{" "}
-          </span>
-
-          <span className={style.h6}> ESTATUS: </span>
-          <span className={style.textF}>
-            <TextField source="available" style={{ fontSize: "1rem" }} />
-          </span>
-
-          <span className={style.h6}> FECHA EXP: </span>
-          <span className={style.textF}>
-            <DateField source="expirationdate" style={{ fontSize: "1rem" }} />
-          </span>
-
-          <span className={style.h6}> DESCRIPCIÓN: </span>
-          <span className={style.textF}>
-            <TextField source="description" />{" "}
-          </span>
-        </div>
-
-        <div className={style.containerI}>
-          <ImageField
-            source="image"
-            className={style.img}
-            sx={{
-              "& img": {
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-              },
-            }}
-          />
-        </div>
+      <div className={style.titleContainer}> 
+              <h1>Detalle del producto</h1>
+            </div>
+        <div className={style.container}> 
+          <Card className={style.detailContainer}>
+          
+          <Card.Title >
+          <div className={style.productImageContainer}>
+            <ImageField source="image" />
+          </div>
+          </Card.Title>
+        </Card>
+          <Card className={style.productInfoContainer}>
+            <Card.Body className={style.productInfo}>
+            <ListGroup className="list-group-flush">
+              <ListGroup.Item><span>ID: </span><TextField source="id" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>MARCA:</span><TextField source="brand" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>NOMBRE: </span><TextField source="name" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>PRECIO: </span> <TextField source="price" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>ESTATUS: </span><TextField source="available" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>FECHA EXP: </span> <DateField source="expirationdate" style={{ fontSize: "1rem" }} /></ListGroup.Item>
+              <ListGroup.Item><span>DESCRIPCIÓN: </span><TextField source="description" style={{ fontSize: "1rem" }}/></ListGroup.Item>
+              <ListGroup.Item><span>DESCUENTO: </span><TextField source="discount" style={{ fontSize: "1rem" }}/>%</ListGroup.Item>
+            </ListGroup>
+            </Card.Body>
+        </Card> 
       </div>
     </SimpleShowLayout>
   </Show>
-);
-
+    </Modal.Body>
+    <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Cerrar
+            </Button>
+          </Modal.Footer>
+  </Modal>
+  
+  </>
+  )
+};
+ 
 const ProductsList = (props) => {
   return (
     <List

@@ -1,0 +1,40 @@
+.cardDetailContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+.details{
+  border: none;
+}
+.userDetails{
+  padding: 15px;
+  background-color:white;
+  border: 1px solid rgb(134, 134, 134);
+  border-radius: 5px;
+}
+
+.modalDetailContainer{
+  height: 100vh;
+}
+
+.cardEditContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+  }
+
+ .inputStyle{
+    height: 25px;
+    border-radius: 15px;
+    color: red;
+ }
+ 
+ .editInput{
+  color: red;
+  border: 1px solid red;
+  place-content: center;
+  align-items: center;
+  text-align: end;
+ }
