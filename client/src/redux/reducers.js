@@ -28,8 +28,6 @@ import {
   POST_COMMENT,
   GET_ALL_COMMENTS,
   MOD_QUANTITY_LOCAL,
-  LOAD_STOCK,
-  MOD_STOCK
 } from "./actionsType";
 
 

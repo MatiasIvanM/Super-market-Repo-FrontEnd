@@ -25,19 +25,9 @@ function ProductsDetail(props) {
   let ProductName = useSelector((state) => state.productsSC)
   let customerById = useSelector((state) => state.customerId)
   const shoppingCart = useSelector((state) => state.shoppingCart)
+  const [flag, setFlag] = useState(true)
   
-  
-  useEffect(() => {
-    if (shoppingCart === undefined || Object.keys(shoppingCart).length === 0) {
-      dispatch(getSC(customerById.id))
-        .then((data) => {
-          console.log('Carrito actualizado:', data); // Coloca el console.log aquí
-        })
-        .catch((error) => {
-          console.error('Error al actualizar el carrito:', error);
-        });
-    }
-  }, [shoppingCart, dispatch, customerById]);
+ 
 
   useEffect(() => {
     setProduct(ProductName)
@@ -59,6 +49,8 @@ function ProductsDetail(props) {
 
 
   function handleAddToCart() {
+    setFlag(false)
+    console.log("🚀 ~ file: Detail.jsx:44 ~ ProductsDetail ~ tercer FLAG:", flag)
       let stockAvalible=0;
       let productExistsInCart =false;
       for (let i = 0; i < shoppingCart.ProductName.length; i++) {
@@ -192,7 +184,7 @@ function ProductsDetail(props) {
                         </>
                       )}
                       <Card.Title>{productDetails && productDetails.rating}<AiOutlineStar /></Card.Title>
-                      <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title>
+                      {/* <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title> */}
                       <Card.Text>{productDetails && productDetails.description}</Card.Text>
                       <Button
                         variant="primary"

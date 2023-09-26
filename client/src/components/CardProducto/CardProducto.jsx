@@ -51,18 +51,18 @@ function CardProduct(props) {
     setDiscountPrice(newDiscountPrice);
   }, [discount]);
 
-  const handleAddToCart = () => {
-    if (stock > 0 && available) {
-      dispatch(addProductSC({ productDetails: props, quantity: 1, discountPrice }));
-      // Cambia el color del botón a verde y mostrar mensaje de confirmación durante medio segundo
-      setButtonColor("success");
-      setConfirmationMessage("Agregado al Carrito");
-      setTimeout(() => {
-        setButtonColor("primary"); // Volver a establecer el color del botón a su estado original
-        setConfirmationMessage("");
-      }, 1000);
-    }
-  };
+  // const handleAddToCart = () => {
+  //   if (stock > 0 && available) {
+  //     dispatch(addProductSC({ productDetails: props, quantity: 1, discountPrice }));
+  //     // Cambia el color del botón a verde y mostrar mensaje de confirmación durante medio segundo
+  //     setButtonColor("success");
+  //     setConfirmationMessage("Agregado al Carrito");
+  //     setTimeout(() => {
+  //       setButtonColor("primary"); // Volver a establecer el color del botón a su estado original
+  //       setConfirmationMessage("");
+  //     }, 1000);
+  //   }
+  // };
 
   const handleCardClick = () => {
     setShowDetailModal(true);
@@ -119,7 +119,7 @@ function CardProduct(props) {
           zIndex: 1,
           color: "black"
         }}
-        onClick={handleAddToCart}
+        onClick={handleCardClick}
         disabled={!available || stock === 0}
       >
         {confirmationMessage ? (
@@ -127,7 +127,7 @@ function CardProduct(props) {
             <span style={{ color: "green" }}>✔</span> {confirmationMessage}
           </>
         ) : (
-          (!available || stock === 0) ? "Agotado" : "Agregar al carrito"
+          (!available || stock === 0) ? "Agotado" : "Disponible"
         )}
       </Button>
       <Detail

@@ -48,6 +48,3 @@ export const GET_CATEGORY = 'GET_CATEGORY';
 export const POST_COMMENT = 'POST_COMMENT';
 export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
 
-//STOCK
-export const LOAD_STOCK='LOAD_STOCK';
-export const MOD_STOCK='MOD_STOCK';

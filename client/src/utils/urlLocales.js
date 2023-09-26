@@ -17,10 +17,10 @@
   const server = 'https://super-market-shop-preview.up.railway.app';
   const PRODUCT=`${server}/product/`;
   const CUSTOMER=`${server}/customer/`;
-  const ORDER_DETAIL=`${server}/orderDetail/`;
+  const ORDER_DETAIL=`${server}/orderDetail/`; 
   const ORDERS=`${server}/orders/`;
   const SHOPPINGCART=`${server}/shoppingCart/`;
   const CATEGORY=`${server}/category/`;
-  const COMMENT=`${server}/comment/`
+  const COMMENT=`${server}/comment/`;
 
 export {PRODUCT,CUSTOMER,ORDER_DETAIL,ORDERS,SHOPPINGCART,CATEGORY, COMMENT, server};
