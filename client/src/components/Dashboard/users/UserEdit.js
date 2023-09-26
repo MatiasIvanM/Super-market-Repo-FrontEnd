@@ -1,4 +1,3 @@
-
 import {
     Edit,
     SimpleForm,
@@ -6,45 +5,64 @@ import {
     SelectInput,
     PasswordInput,
     useShowController,
+    EditButton
 } from 'react-admin';
-
-const UserDetails = ({ record }) => {
-
-    return (
-        <div>
-            <h2>Detalles del Usuario</h2>
-            <p><strong>Nombre:</strong> {record.name}</p>
-            <p><strong>Dirección:</strong> {record.adress}</p>
-            <p><strong>Correo Electrónico:</strong> {record.email}</p>
-            <p><strong>Rol:</strong> {record.role}</p>
-            <p><strong>Télefono:</strong> {record.phone}</p>
-            <p><strong>Cuenta:</strong> {record.provider}</p>
-        </div>
-    );
-};
+import style from './users.module.css'
+import{ Form, InputGroup }from 'react-bootstrap';
+import { Card, ListGroup, Alert, Button, Modal }from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const UserEdit = (props) => {
     const { record } = useShowController(props);
 
+    const [showEditModal, setShowEditModal] = useState(true);
+    const history = useHistory();
+
+    const handleShowModal = () => {
+      setShowEditModal(true);
+    };
+  
+    const handleCloseModal = () => {
+      setShowEditModal(false);
+      history.goBack();
+    };
+
+
     return (
-        <Edit {...props}>
-            <UserDetails record={record} />
-            <SimpleForm>
-                <TextInput source="name" label="Nombre" />
-                <TextInput source="email" label="Correo Electrónico" />
-                <TextInput source="address" label="Dirección" />
-                <PasswordInput source="password" label="Contraseña" />
-                <SelectInput
-                source="role"
-                label="Rol"
-                choices={[
-                    { id : 'BAN', name: 'Restringir Usuario'},
-                    { id: 'user', name: 'Usuario' },
-                    { id: 'admin', name: 'Administrador' },
-                ]}
-                />
-            </SimpleForm>
-        </Edit>
+        <Modal show={showEditModal} onHide={handleCloseModal} className={style.modalDetailContainer}>
+        <Modal.Body>
+    <Edit {...props}>
+        <div className={style.cardEditContainer}>
+            <div >
+            <Alert key='dark' variant='dark' style={{margin:5}}>
+                         <h4>Editar usuario</h4>   
+                      </Alert>
+                <SimpleForm>
+                    <TextInput source="name" label="Nombre" />
+                    <TextInput source="email" label="Correo Electrónico" />
+                    <TextInput source="address" label="Dirección" />
+                    <PasswordInput source="password" label="Contraseña" />
+                    <SelectInput
+                    source="role"
+                    label="Rol"
+                    choices={[
+                        { id : 'BAN', name: 'Restringir Usuario'},
+                        { id: 'user', name: 'Usuario' },
+                        { id: 'admin', name: 'Administrador' },
+                    ]}
+                    />
+                </SimpleForm>
+            </div>
+        </div>
+    </Edit>
+    </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Cancelar
+            </Button>
+          </Modal.Footer>
+        </Modal>
     );
 };
 
