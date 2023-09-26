@@ -9,6 +9,7 @@ import {getProducts,getProductsByName} from '../../redux/Actions/actionsProducts
 import { useHistory  } from 'react-router-dom';
 import {Footer} from '../../components/Footer/Footer';
 import { selectCategory } from '../../redux/Actions/actionsCategory';
+import CarouselOfertas from '../../components/CarouselOfertas/CarouselOfertas';
 
 
 function Landing(){
@@ -32,12 +33,13 @@ function Landing(){
 // >>>>>>> 31f2d69718a257250885598e10595e6ca7e6f995
 
     return(
-    <div className='landing'>
+    <div className='landing' style={{display:'flex',flexDirection:'column'}}>
       <NavBar
       searchByName={searchByName}
       />
+      <CarouselOfertas></CarouselOfertas>
       <Container>
-      <Row className='offer-image'>
+      {/* <Row className='offer-image'>
         <Col xs={6} md={4} lg={4}>
           <Image src="OfertaSMH.jpg" className='image' thumbnail />
         </Col>
@@ -47,13 +49,13 @@ function Landing(){
         <Col xs={6} md={4} lg={4}>
           <Image src="OfertaSMH.jpg" className='image' thumbnail />
         </Col>
-      </Row>
+      </Row> */}
       
-      <Row className='offer-image'>
+      {/* <Row className='offer-image'>
         <Col xs={9} lg={12}>
             <Image src="oferta3.jpg" className='image' thumbnail />
         </Col>
-      </Row>
+      </Row> */}
 
       <Row className='offer-image'>
         <Col xs={6} md={4} lg={4}> 

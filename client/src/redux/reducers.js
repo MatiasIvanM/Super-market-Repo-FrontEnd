@@ -29,6 +29,8 @@ import {
   GET_ALL_COMMENTS,
   MOD_QUANTITY_LOCAL,
   GET_BUY,
+  LOAD_STOCK,
+  MOD_STOCK
 } from "./actionsType";
 
 

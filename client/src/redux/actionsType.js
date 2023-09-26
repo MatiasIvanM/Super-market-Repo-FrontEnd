@@ -6,7 +6,7 @@ export const ADD_PRODUCT='ADD_PRODUCT';
 export const MOD_PRODUCT='MOD_PRODUCT';
 export const DEL_PRODUCT='DEL_PRODUCT';
 export const CLEAR_PRODUCT_DETAILS = 'CLEAR_PRODUCT_DETAILS'
-export const MOD_QUANTITY_LOCAL = 'MOD_QUANTITY_LOCAL'
+export const MOD_QUANTITY_LOCAL = 'MOD_QUANTITY_LOCAL';
 
 
 //Shopping Cart
@@ -48,5 +48,11 @@ export const GET_CATEGORY = 'GET_CATEGORY';
 export const POST_COMMENT = 'POST_COMMENT';
 export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
 
+
 //Buy
 export const GET_BUY = "GET_BUY";
+
+
+export const LOAD_STOCK='LOAD_STOCK';
+export const MOD_STOCK='MOD_STOCK';
+
