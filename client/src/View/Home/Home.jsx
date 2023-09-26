@@ -210,11 +210,9 @@ export default function Home() {
                             name={p.name}
                             image={p.image}
                             description={p.description}
-                            // stock= {p.stock}
                             price={p.price}
                             stock={p.stock}
                             discount={p.discount}
-                            rating='5'
                             available={p.available}
                         >
                         </CardProducto>
