@@ -27,18 +27,31 @@ const dataProvider = {
     const endIndex = startIndex + perPage;
 
     const url = `${resource}?${stringify(query)}`;
-    // console.log(`Get Filter:`);
-    // console.log(params.filter.q);
 
-    if(params.filter.name!==undefined && resource === "product") {
-      const url = `https://super-market-shop-preview.up.railway.app/product/name?name=${params.filter.name}`;
-      
-      // console.log(`Get List:${url}`);
+    // if(params.filter.hasOwnProperty('categories') || (  params.filter.hasOwnProperty('name') && resource===('product'))
+
+    if(params.filter.hasOwnProperty('categories')){  
+      const url = `${server}/${resource}/productByCategory/${params.filter.categories}`;
+
       return axios.get(url).then(({ data }) => ({
         data: data.slice(startIndex, endIndex), // Obtén solo los datos para la página actual
         total: data.length, // Total de registros en el frontend
-      })).catch(({ error }) => (alert("Producto no encontrado")));
+      })).catch(({ error }) => (
+          console.log(error)      // <span> Error</span>
+        ));
+    }
 
+
+    if(params.filter.name!==undefined && resource === "product") {
+      const url = `${server}/${resource}/name?name=${params.filter.name}`;
+      
+      return axios.get(url).then(({ data }) => ({
+        data: data.slice(startIndex, endIndex), // Obtén solo los datos para la página actual
+        total: data.length, // Total de registros en el frontend
+      })).catch(({ error }) => (
+          console.log(error)    
+          // <span> Error</span>
+          ));
     }
 
     const token = JSON.parse(localStorage.getItem("token"));
