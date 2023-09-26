@@ -16,12 +16,17 @@ import FaQuestions from './View/FaQuestions/FaQuestions';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCustomerById } from './redux/Actions/actionsCustomers';
+import {getSC} from "./redux/Actions/actionsSC"
 
 function App() {
   const dispatch = useDispatch()
   async function reloadId() {
     const customer = JSON.parse(localStorage.getItem('customer'))
-    if (customer) await dispatch(getCustomerById(customer.id))
+    if (customer) {
+      const response = await dispatch(getCustomerById(customer.id))
+      const cart = await dispatch(getSC(response.payload.id))
+      console.log(cart);
+    }
   }
   useEffect(() => {
     reloadId()

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch  } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import { getBuy } from '../../redux/Actions/actionsBuy';
 
 function MercadoPagoCheckout() {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -10,11 +11,10 @@ function MercadoPagoCheckout() {
   const history = useHistory();
 
   const cart = useSelector((state) => state.productsSC);
-  // const shoppingCart = useSelector ((state)=>state.shoppingCart)
-  console.log('cart:::', cart)
-  // console.log('shopping:::',shoppingCart)
-  // const logueado = JSON.parse(localStorage.getItem('customer'))
-  // console.log("SESION::", logueado);
+  const buy = useSelector((state) => state.buycart);
+  console.log("Dios::",buy)
+ 
+  const dispatch = useDispatch(); // Obtén la función "dispatch" del store Redux
 
   const totalCartPrice = cart.reduce((total, product) => {
     const priceToUse = product.discountPrice !== undefined ? product.discountPrice : product.productDetails.price;
@@ -75,7 +75,8 @@ function MercadoPagoCheckout() {
   useEffect(() => {
     // Llamar a createPreference solo una vez cuando el componente se monta
     createPreference();// eslint-disable-next-line
-  }, []); // Asegurarse de que esto se ejecute solo una vez
+    dispatch(getBuy());// eslint-disable-next-line
+  }, [dispatch]); // Asegurarse de que esto se ejecute solo una vez
 
   const handlePayment = () => {
     if (preferenceId) {
