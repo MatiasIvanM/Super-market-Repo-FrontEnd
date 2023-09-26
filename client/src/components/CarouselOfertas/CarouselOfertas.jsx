@@ -1,18 +1,21 @@
-import styles from './Carousel.module.css'
-import Carousel from 'react-bootstrap/Carousel';
+import styles from './CarouselOfertas.module.css'
+import { Carousel } from 'react-responsive-carousel';
 
 export default function CarouselOfertas() {
     return (
-        <Carousel indicators={false} variant='dark' className={styles.carousel}>
-            <Carousel.Item>
-                <img src="OfertaSMH.jpg" className={styles.image} alt="offer" />
-            </Carousel.Item>
-            <Carousel.Item>
-                <img src="OfertaSMH.jpg" className={styles.image}  alt="offer" />
-            </Carousel.Item>
-            <Carousel.Item>
-                <img src="OfertaSMH.jpg" className={styles.image}  alt="offer" />
-            </Carousel.Item>
+        <Carousel
+            className={styles.carousel}
+            showStatus={false}
+            showArrows={true}
+            infiniteLoop={true}
+            autoPlay={true}
+            showThumbs={false}
+            interval={6000}
+            transitionTime={2000}
+        >
+            <img src="Ofertas0.png" className={styles.image} alt="offer" />
+            <img src="Ofertas0.png" className={styles.image} alt="offer" />
+            <img src="Ofertas0.png" className={styles.image} alt="offer" />
         </Carousel>
     )
 }
