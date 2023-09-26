@@ -1,0 +1,22 @@
+.carousel {
+    background: linear-gradient(60deg, rgb(200, 200, 200), rgb(255, 255, 255));
+    box-shadow: 2px 2px 4px 1px rgb(161, 161, 161);
+    height: fit-content;
+    overflow: hidden;
+}
+
+.image {
+    /* height:15rem; */
+    object-fit: contain;
+}
+
+@media (min-width:1266px) {
+    .carousel {
+        align-self: center;
+        justify-self: center;
+        width: 1266px;
+        height: 240px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+}
