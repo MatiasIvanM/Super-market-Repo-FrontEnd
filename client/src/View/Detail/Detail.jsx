@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
-import { addProductSC, putShoppingCart } from "../../redux/Actions/actionsSC"
+import { addProductSC, putShoppingCart,getSC } from "../../redux/Actions/actionsSC"
 import { getComment } from '../../redux/Actions/actionsComments'
 import AddComments from '../../components/Comments/AddComments'
 import ViewComments from "../../components/Comments/ViewComments";
@@ -20,12 +20,24 @@ function ProductsDetail(props) {
   const [showMessage, setShowMessage] = useState(false);
   const [showMessageWarning, setShowMessageWarning] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [productDetails, setProductDetails] = useState(null);
+  const [productDetails, setProductDetails] = useState({});
   const [product, setProduct] = useState([])
   let ProductName = useSelector((state) => state.productsSC)
+  let customerById = useSelector((state) => state.customerId)
   const shoppingCart = useSelector((state) => state.shoppingCart)
-
-
+  
+  
+  useEffect(() => {
+    if (shoppingCart === undefined || Object.keys(shoppingCart).length === 0) {
+      dispatch(getSC(customerById.id))
+        .then((data) => {
+          console.log('Carrito actualizado:', data); // Coloca el console.log aquí
+        })
+        .catch((error) => {
+          console.error('Error al actualizar el carrito:', error);
+        });
+    }
+  }, [shoppingCart, dispatch, customerById]);
 
   useEffect(() => {
     setProduct(ProductName)
@@ -47,28 +59,77 @@ function ProductsDetail(props) {
 
 
   function handleAddToCart() {
-    if (productDetails.stock < quantity) {
-      const newStock = productDetails.stock - quantity
-      setShowMessageWarning(true)
+      let stockAvalible=0;
+      let productExistsInCart =false;
+      for (let i = 0; i < shoppingCart.ProductName.length; i++) {
+        const p=shoppingCart.ProductName[i];
+        if(p.productDetails.id===productDetails.id){
+          stockAvalible = Number(productDetails.stock - p.quantity);
+          console.log("🚀 ~ file: Detail.jsx:56 ~ handleAddToCart ~ stockAvalible:", stockAvalible)
+          productExistsInCart=true;
+        }
+      }
+    if(productExistsInCart){
+    if (stockAvalible < quantity) {
+      setShowMessageWarning(true);
       setTimeout(() => {
         setShowMessageWarning(false);
       }, 2000);
     } else {
       setShowMessage(true);
-      dispatch(addProductSC({ productDetails, quantity, discountPrice }))
+     
 
+      const newQuantity = Math.min(quantity, productDetails.stock);
+  
+      dispatch(addProductSC({ productDetails, quantity: quantity, discountPrice }));
+  
+      setProductDetails(prevDetails => ({
+        ...prevDetails,
+        stock: prevDetails.stock - newQuantity
+      }));
+  
       // Verificar si shoppingCart.ProductName existe y es un array
       if (!shoppingCart.ProductName || !Array.isArray(shoppingCart.ProductName)) {
         shoppingCart.ProductName = [];
       } //SE AGREGA PARA QUE NO ROMPA NO SE VERIFICA AUN FUNCIONALIDAD DEL CAMBIO
-
-      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity }];
+  
+      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity: newQuantity }];
       dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);
     }
+  }else {
+    if (productDetails.stock < quantity) {
+      setShowMessageWarning(true);
+      setTimeout(() => {
+        setShowMessageWarning(false);
+      }, 2000);
+    }else{
+      setShowMessage(true);
+     
 
+      const newQuantity = Math.min(quantity, productDetails.stock);
+  
+      dispatch(addProductSC({ productDetails, quantity: quantity, discountPrice }));
+  
+      setProductDetails(prevDetails => ({
+        ...prevDetails,
+        stock: prevDetails.stock - newQuantity
+      }));
+  
+      // Verificar si shoppingCart.ProductName existe y es un array
+      if (!shoppingCart.ProductName || !Array.isArray(shoppingCart.ProductName)) {
+        shoppingCart.ProductName = [];
+      } //SE AGREGA PARA QUE NO ROMPA NO SE VERIFICA AUN FUNCIONALIDAD DEL CAMBIO
+  
+      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity: newQuantity }];
+      dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
+    }
+  }
   }
 
   function handleIncrement() {
@@ -131,7 +192,7 @@ function ProductsDetail(props) {
                         </>
                       )}
                       <Card.Title>{productDetails && productDetails.rating}<AiOutlineStar /></Card.Title>
-                      {/* <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title> */}
+                      <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title>
                       <Card.Text>{productDetails && productDetails.description}</Card.Text>
                       <Button
                         variant="primary"
