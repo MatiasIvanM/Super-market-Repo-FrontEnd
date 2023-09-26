@@ -8,8 +8,8 @@ export default function ScrollTop() {
     return (
         <Button
             onClick={handleButton}
-            size='lg' variant='success'
+            size='lg'
             className={styles.button}
-        >^</Button>
+        >↑</Button>
     )
 }
