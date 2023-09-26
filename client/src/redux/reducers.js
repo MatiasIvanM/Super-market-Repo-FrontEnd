@@ -27,7 +27,8 @@ import {
   UPDATE_PRODUCT_QUANTITY_SC,
   POST_COMMENT,
   GET_ALL_COMMENTS,
-  MOD_QUANTITY_LOCAL
+  MOD_QUANTITY_LOCAL,
+  GET_BUY,
 } from "./actionsType";
 
 
@@ -48,6 +49,7 @@ const initialState = {
   category: [],
   comments: [],
   cartTotal: 0,
+  buycart:[]
 };
 
 const calcDiscount = (price, discount) => { return price - ((price / 100) * discount) }
@@ -190,6 +192,9 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, comments: action.payload };
     case POST_COMMENT:
       return { ...state, comments: action.payload };
+
+      case GET_BUY:
+        return { ...state, buycart: action.payload };
 
     //default
     default:
