@@ -56,3 +56,4 @@ export const GET_BUY = "GET_BUY";
 export const LOAD_STOCK='LOAD_STOCK';
 export const MOD_STOCK='MOD_STOCK';
 
+
