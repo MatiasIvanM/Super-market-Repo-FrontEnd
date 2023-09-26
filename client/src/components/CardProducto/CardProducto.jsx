@@ -13,9 +13,27 @@ function CardProduct(props) {
   const [discountPrice, setDiscountPrice] = useState(0);
   const [confirmationMessage, setConfirmationMessage] = useState("");
   const [buttonColor, setButtonColor] = useState("primary")
+  // const [averageRating, setAverageRating] = useState(0);
   const dispatch = useDispatch();
 
-  let { id, name, description, price, rating, stock, image, discount, available } = props;
+  let { id, name, description, price, stock, image, discount, available } = props;
+  // useEffect(() => {
+  //   const calculateAverageRating = () => {
+  //     if (!props.comments || props.comments.length < 1) {
+  //       return 0;
+  //     }
+
+  //     const totalRating = props.comments.reduce(
+  //       (sum, comment) => sum + comment.Comment.calification,
+  //       0
+  //     );
+  //     return totalRating / props.comments.length;
+  //   };
+
+  //   const newAverageRating = calculateAverageRating();
+  //   setAverageRating(newAverageRating);
+  // }, [props.comments]);
+
 
 
   const calculateDiscountPrice = () => {
@@ -68,7 +86,7 @@ function CardProduct(props) {
             alignSelf: "center"
           }}
         />
-        <Card.Subtitle className={style.rating}>★{rating}</Card.Subtitle>
+        {/* <Card.Subtitle className={style.rating}>★{averageRating}</Card.Subtitle> */}
         <Card.Body style={{ width: "98%" }}>
           <Card.Title style={{ fontSize: "1.12rem" }}>{name}</Card.Title>
           <Card.Text

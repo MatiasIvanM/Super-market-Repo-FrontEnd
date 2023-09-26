@@ -1,5 +1,6 @@
 // LOCAL
 
+
 // const PRODUCT='http://localhost:3001/product/';
 // const CUSTOMER='http://localhost:3001/customer/'
 // const ORDER_DETAIL='http://localhost:3001/orderDetail/'
@@ -10,10 +11,10 @@
 // const server ='http://localhost:3001/'
 
 
-
 // backend
 
- const server = 'https://super-market-shop-preview.up.railway.app';
+
+  const server = 'https://super-market-shop-preview.up.railway.app';
   const PRODUCT=`${server}/product/`;
   const CUSTOMER=`${server}/customer/`;
   const ORDER_DETAIL=`${server}/orderDetail/`;

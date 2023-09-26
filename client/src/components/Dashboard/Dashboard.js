@@ -24,6 +24,7 @@ import dataProvider from "./dataProvider";
 // import UsersList from './users/UsersList';
 import UserEdit from "./users/UserEdit";
 import UserCreate from "./users/UserCreate";
+import UserDetail from "./users/UserDetail"
 
 import formCarrousel from "./carrousel/formCarrousel";
 
@@ -51,9 +52,10 @@ const Dashboard = () => {
         icon={BsBoxSeamFill}
         show={DetailShow}
       />
-      <Resource
-        name="customer/"
+       <Resource
+        name="customer"
         list={UsersList}
+        show={UserDetail}
         create={UserCreate}
         edit={UserEdit}
         icon={BsFillPeopleFill}
