@@ -13,9 +13,9 @@ export default function CarouselOfertas() {
             interval={6000}
             transitionTime={2000}
         >
-            <img src="Ofertas0.png" className={styles.image} alt="offer" />
-            <img src="Ofertas0.png" className={styles.image} alt="offer" />
-            <img src="Ofertas0.png" className={styles.image} alt="offer" />
+            <img src="OfertasCarousel1.png" className={styles.image} alt="offer" />
+            <img src="OfertasCarousel2.png" className={styles.image} alt="offer" />
+            <img src="OfertasCarousel3.png" className={styles.image} alt="offer" />
         </Carousel>
     )
 }
