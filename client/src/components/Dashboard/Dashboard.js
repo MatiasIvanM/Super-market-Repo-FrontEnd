@@ -24,6 +24,7 @@ import dataProvider from "./dataProvider";
 // import UsersList from './users/UsersList';
 import UserEdit from "./users/UserEdit";
 import UserCreate from "./users/UserCreate";
+import UserDetail from "./users/UserDetail"
 
 import formCarrousel from "./carrousel/formCarrousel";
 
@@ -34,6 +35,10 @@ const UsersList = React.lazy(() => import("./users/UsersList"));
 const MyLayout = (props) => <Layout {...props} appBar={Bar} />;
 
 const Dashboard = () => {
+  let usuario = JSON.parse(localStorage.getItem('customer'));
+
+  // console.log("Dashboard", localStorage.customer);
+  console.log(usuario.name);
   return (
     <Admin
       dashboard={PanelAdmin}
@@ -41,6 +46,7 @@ const Dashboard = () => {
       layout={MyLayout}
       darkTheme={{ palette: { mode: "dark" } }}
       // i18nProvider={i18nProvider}
+      title="{usuario.name}"
     >
       <Resource
         name="product"
@@ -51,9 +57,10 @@ const Dashboard = () => {
         icon={BsBoxSeamFill}
         show={DetailShow}
       />
-      <Resource
-        name="customer/"
+       <Resource
+        name="customer"
         list={UsersList}
+        show={UserDetail}
         create={UserCreate}
         edit={UserEdit}
         icon={BsFillPeopleFill}

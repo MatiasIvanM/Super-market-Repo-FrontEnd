@@ -41,6 +41,7 @@ function CommentCarousel({ productComments ,getName }) {
       autoPlay={true}
       interval={3000}
       transitionTime={1000}
+      showThumbs={false}
     >
       {productComments.map((comment) => (
         <div key={comment.id} className={style.commentSlide}>
