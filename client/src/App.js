@@ -46,7 +46,7 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/profile" component={Profile} />
         <Route path="/login" component={Login} />
-        <Route path="/cartshopping" component={CartShopping} />
+        {/* <Route path="/cartshopping" component={CartShopping} /> */}
         <Route path='/FaQ' component={FaQuestions}/>
       </Switch>
     </Router>

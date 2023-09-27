@@ -7,7 +7,7 @@ import { clearSC, removeProductSC, updateProductQuantitySC } from "../../redux/A
 import { useDispatch } from "react-redux";
 import { putShoppingCart,updateTotal} from "../../redux/Actions/actionsSC";
 
-const CartShopping = () => {
+const CartShopping = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const handleClose = () => setShow(false);
@@ -97,7 +97,7 @@ const CartShopping = () => {
 
   return (
     <div>
-      <Modal show={show} onHide={handleClose} centered backdrop="static">
+      <Modal show={props.show} onHide={props.handleClose} centered backdrop="static">
         <Modal.Header>
           <Modal.Title>Detalles del carrito</Modal.Title>
           <Button variant="outline-danger" onClick={clearCart}>
@@ -178,7 +178,7 @@ const CartShopping = () => {
         </Alert>
         </Modal.Body>
         <Modal.Footer>
-          <Button as={Link} to="/home" variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={props.handleShow}>
             Seguir comprando
           </Button>
           <Button variant="primary" onClick={handlePayment}>
