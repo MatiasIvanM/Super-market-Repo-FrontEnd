@@ -45,8 +45,8 @@ function MercadoPagoCheckout() {
             name: user.id,
           },
           back_urls: {
-            success: "https://supermarket-git-producarrito-matiasivanm.vercel.app/home",
-            failure: "https://supermarket-git-producarrito-matiasivanm.vercel.app/home",
+            success: "https://supermarketpreview.vercel.app/home",
+            failure: "https://supermarketpreview.vercel.app/home",
             pending: ""
           },
 
