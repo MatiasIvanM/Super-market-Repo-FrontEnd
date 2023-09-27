@@ -4,7 +4,7 @@ import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import style from "./CardProduct.module.css";
 import { useState, useEffect } from "react";
 import { addProductSC } from "../../redux/Actions/actionsSC";
-import { useDispatch } from "react-redux"; // Importa el hook useSelector
+import { useDispatch } from "react-redux";
 import Detail from "../../View/Detail/Detail";
 
 function CardProduct(props) {
