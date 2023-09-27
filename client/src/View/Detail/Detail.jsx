@@ -28,8 +28,6 @@ function ProductsDetail(props) {
   const shoppingCart = useSelector((state) => state.shoppingCart)
   const [flag, setFlag] = useState(true)
   
- 
-
   useEffect(() => {
     setProduct(ProductName)
   }, [ProductName]);
@@ -49,7 +47,7 @@ function ProductsDetail(props) {
   
   
   
-  function handleAddToCart() {
+ async function handleAddToCart() {
    
       // El usuario no ha iniciado sesión, muestra el alert.
       console.log(customerById)
@@ -62,7 +60,6 @@ function ProductsDetail(props) {
       }
 
     setFlag(false)
-    console.log("🚀 ~ file: Detail.jsx:44 ~ ProductsDetail ~ tercer FLAG:", flag)
       let stockAvalible=0;
       let productExistsInCart =false;
       for (let i = 0; i < shoppingCart.ProductName.length; i++) {
@@ -98,7 +95,8 @@ function ProductsDetail(props) {
       } //SE AGREGA PARA QUE NO ROMPA NO SE VERIFICA AUN FUNCIONALIDAD DEL CAMBIO
   
       const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity: newQuantity }];
-      dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
+      const response = await dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
+      console.log("🚀 ~ file: Detail.jsx:102 ~ handleAddToCart ~ response: PRIMER RESPONSE", response)
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);
@@ -128,7 +126,8 @@ function ProductsDetail(props) {
       } //SE AGREGA PARA QUE NO ROMPA NO SE VERIFICA AUN FUNCIONALIDAD DEL CAMBIO
   
       const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity: newQuantity }];
-      dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
+      const response = await dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
+      console.log("🚀 ~ file: Detail.jsx:132 ~ handleAddToCart ~ response: SEGUNDO DISTPACH", response )
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);

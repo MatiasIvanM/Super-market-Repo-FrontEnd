@@ -17,6 +17,7 @@ const CartShopping = (props) => {
   const [errors, setErrors] = useState([])
   // const [show, setShow] = useState(true);
   const [total, setTotal] = useState(0)
+  const [showTotalWarning,setShowTotalWarning]=useState(false);
   const cart = useSelector((state) => state.productsSC);
   const shoppingCart = useSelector((state) => state.shoppingCart)
 
@@ -31,6 +32,11 @@ const CartShopping = (props) => {
     });
     // Actualiza el estado total con el nuevo valor
     setTotal(newTotalValue);
+    if(newTotalValue<=1000){
+      setShowTotalWarning(true);
+    }else{
+      setShowTotalWarning(false);
+    }
     dispatch(updateTotal(newTotalValue));
   }, [cart]); // Observa cambios en el carrito
 
@@ -81,7 +87,7 @@ const CartShopping = (props) => {
     const errorsL = [];
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].productDetails.stock < cart[i].quantity) {
-        const err = `El producto: ${cart[i].productDetails.name} no tiene suficiennte stock`;
+        const err = `El producto: ${cart[i].productDetails.name} no tiene suficiente stock`;
         errorsL.push(err);
       }
     }
@@ -154,12 +160,17 @@ const CartShopping = (props) => {
               ))}
             </div>
           </Alert>
+          <Alert show={showTotalWarning} variant="warning" >
+            <div>
+              El valor de la compra debe superar los $1000
+            </div>
+          </Alert>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.handleShow}>
             Seguir comprando
           </Button>
-          <Button variant="primary" onClick={handlePayment}>
+          <Button variant="primary" onClick={handlePayment} disabled={!showTotalWarning}>
             Pagar
           </Button>
         </Modal.Footer>
