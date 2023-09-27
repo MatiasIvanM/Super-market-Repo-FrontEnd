@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { getBuy } from '../../redux/Actions/actionsBuy';
+import { putShoppingCart } from '../../redux/Actions/actionsSC';
+
 
 function MercadoPagoCheckout() {
   const [preferenceId, setPreferenceId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [isPreferenceGenerated, setIsPreferenceGenerated] = useState(false);
   const history = useHistory();
+  const shoppingCart = useSelector((state) => state.shoppingCart)
 
   const cart = useSelector((state) => state.productsSC);
   const buy = useSelector((state) => state.buycart);
@@ -46,6 +49,7 @@ function MercadoPagoCheckout() {
           },
           back_urls: {
             success: "https://supermarketpreview.vercel.app/home",
+            // success: "http://localhost:3000/home",
             failure: "https://supermarketpreview.vercel.app/home",
             pending: ""
           },
@@ -62,6 +66,8 @@ function MercadoPagoCheckout() {
           },
         }
       );
+
+        
 
       setPreferenceId(response.data.id);
       setIsPreferenceGenerated(true);
@@ -80,6 +86,7 @@ function MercadoPagoCheckout() {
 
   const handlePayment = () => {
     if (preferenceId) {
+      dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: [] }));
       window.location.href = (`https://www.mercadopago.com/mco/checkout/start?pref_id=${preferenceId}`);
     }
   };
