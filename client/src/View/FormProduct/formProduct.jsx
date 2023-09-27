@@ -26,7 +26,7 @@ export default function FormProduct() {
 
   const onSubmit = (data) => {
     // const isCategoryValid = !!data.category;
-    console.log(errors);
+    console.log(data);
     if (Object.keys(errors).length > 0) {
     } else {
       dispatch(addProduct(data));

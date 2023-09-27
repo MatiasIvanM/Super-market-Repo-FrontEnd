@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
-import { addProductSC, putShoppingCart } from "../../redux/Actions/actionsSC"
+import { addProductSC, putShoppingCart,getSC } from "../../redux/Actions/actionsSC"
 import { getComment } from '../../redux/Actions/actionsComments'
 import AddComments from '../../components/Comments/AddComments'
 import ViewComments from "../../components/Comments/ViewComments";
@@ -19,13 +19,16 @@ function ProductsDetail(props) {
   const { id, discountPrice } = props
   const [showMessage, setShowMessage] = useState(false);
   const [showMessageWarning, setShowMessageWarning] = useState(false);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [productDetails, setProductDetails] = useState(null);
+  const [productDetails, setProductDetails] = useState({});
   const [product, setProduct] = useState([])
   let ProductName = useSelector((state) => state.productsSC)
+  let customerById = useSelector((state) => state.customerId)
   const shoppingCart = useSelector((state) => state.shoppingCart)
-
-
+  const [flag, setFlag] = useState(true)
+  
+ 
 
   useEffect(() => {
     setProduct(ProductName)
@@ -43,32 +46,94 @@ function ProductsDetail(props) {
         });
     }
   }, [dispatch, id]);
-
-
-
+  
+  
+  
   function handleAddToCart() {
-    if (productDetails.stock < quantity) {
-      const newStock = productDetails.stock - quantity
-      setShowMessageWarning(true)
+   
+      // El usuario no ha iniciado sesión, muestra el alert.
+      console.log(customerById)
+      if (Object.keys(customerById).length === 0) {
+        setShowLoginAlert(true);
+        setTimeout(() => {
+          setShowLoginAlert(false);
+        }, 3000);
+        return;
+      }
+
+    setFlag(false)
+    console.log("🚀 ~ file: Detail.jsx:44 ~ ProductsDetail ~ tercer FLAG:", flag)
+      let stockAvalible=0;
+      let productExistsInCart =false;
+      for (let i = 0; i < shoppingCart.ProductName.length; i++) {
+        const p=shoppingCart.ProductName[i];
+        if(p.productDetails.id===productDetails.id){
+          stockAvalible = Number(productDetails.stock - p.quantity);
+          console.log("🚀 ~ file: Detail.jsx:56 ~ handleAddToCart ~ stockAvalible:", stockAvalible)
+          productExistsInCart=true;
+        }
+      }
+    if(productExistsInCart){
+    if (stockAvalible < quantity) {
+      setShowMessageWarning(true);
       setTimeout(() => {
         setShowMessageWarning(false);
       }, 2000);
     } else {
       setShowMessage(true);
-      dispatch(addProductSC({ productDetails, quantity, discountPrice }))
-
+     
+        
+      const newQuantity = Math.min(quantity, productDetails.stock);
+  
+      dispatch(addProductSC({ productDetails, quantity: quantity, discountPrice }));
+  
+      setProductDetails(prevDetails => ({
+        ...prevDetails,
+        stock: prevDetails.stock - newQuantity
+      }));
+  
       // Verificar si shoppingCart.ProductName existe y es un array
       if (!shoppingCart.ProductName || !Array.isArray(shoppingCart.ProductName)) {
         shoppingCart.ProductName = [];
       } //SE AGREGA PARA QUE NO ROMPA NO SE VERIFICA AUN FUNCIONALIDAD DEL CAMBIO
-
-      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity }];
+  
+      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity: newQuantity }];
       dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);
     }
+  }else {
+    if (productDetails.stock < quantity) {
+      setShowMessageWarning(true);
+      setTimeout(() => {
+        setShowMessageWarning(false);
+      }, 2000);
+    }else{
+      setShowMessage(true);
+     
 
+      const newQuantity = Math.min(quantity, productDetails.stock);
+  
+      dispatch(addProductSC({ productDetails, quantity: quantity, discountPrice }));
+  
+      setProductDetails(prevDetails => ({
+        ...prevDetails,
+        stock: prevDetails.stock - newQuantity
+      }));
+  
+      // Verificar si shoppingCart.ProductName existe y es un array
+      if (!shoppingCart.ProductName || !Array.isArray(shoppingCart.ProductName)) {
+        shoppingCart.ProductName = [];
+      } //SE AGREGA PARA QUE NO ROMPA NO SE VERIFICA AUN FUNCIONALIDAD DEL CAMBIO
+  
+      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity: newQuantity }];
+      dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
+    }
+  }
   }
 
   function handleIncrement() {
@@ -154,7 +219,6 @@ function ProductsDetail(props) {
 
               <ViewComments productId={productDetails.id} />
 
-              {/* <AddComments productId={productDetails.id} /> */}
 
 {/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
             </Modal.Body>
@@ -167,6 +231,9 @@ function ProductsDetail(props) {
                 ¡Producto agregado al carrito!
               </div>
             </Alert>
+            <Alert show={showLoginAlert} variant="danger">
+                          Debe iniciar sesión para agregar productos al carrito.
+                      </Alert>
             <Alert show={showMessageWarning} variant="warning" className={style.customAlert}>
               <div className={style.alertContent}>
                 ¡No hay suficiente inventario!

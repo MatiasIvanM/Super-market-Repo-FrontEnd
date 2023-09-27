@@ -13,6 +13,7 @@ import { getCustomerByEmail, getCustomerById, modCustomer } from '../../redux/Ac
 import * as validate from '../Register/validations'
 import { PiWarning } from 'react-icons/pi'
 import styles from './Profile.module.css'
+import {clearSC,clearCustomerId} from "../../redux/Actions/actionsSC"
 
 export default function Profile() {
     const { logout, isAuthenticated } = useAuth0()
@@ -52,6 +53,8 @@ export default function Profile() {
         else {
             history.push('/')
         }
+        dispatch(clearSC())
+        dispatch(clearCustomerId())
     }
 
     function handleChange(event) {

@@ -45,11 +45,13 @@ export function getProductsByName(name) {
 }
 
 export const addProduct = (formData) => {
+	const token = JSON.parse(localStorage.getItem("token"));
 	console.log(formData)
 	return async (dispatch) => {
 		try {
 			const { data } = await axios.post(PRODUCT, formData,{
 				headers: {
+					Authorization: `Bearer ${token}`,
 					'Content-Type': 'multipart/form-data'
 				}
 			
