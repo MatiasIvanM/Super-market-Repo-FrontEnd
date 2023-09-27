@@ -137,7 +137,6 @@ export default function Register() {
                                     body: 'Usuario Registrado',
                                     button: 'success',
                                 })
-                              
                             }
                         }
                     }

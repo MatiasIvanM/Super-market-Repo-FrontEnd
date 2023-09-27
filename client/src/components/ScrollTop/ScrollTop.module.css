@@ -1,9 +1,25 @@
-.button{
+.button {
     position: fixed;
     bottom: 0;
     right: 0;
     margin: 1rem 1.4rem 3rem 1rem;
+    padding: 0rem 1rem 0rem 1rem;
     z-index: 99;
     transition: 0.1s ease-in-out;
-    border-radius: 80px;
+    border-radius: 100px;
+    background-color: white;
+    color: #6c757d;
+    font-weight: bolder;
+    font-size: 2rem;
+    border: 0.15rem #6c757d solid;
+}
+
+.button:hover {
+    background-color: white;
+    color: #494f53;
+    border: 0.15rem #494f53 solid;
+}
+
+.button:active{
+    background-color: #494f53;
 }
