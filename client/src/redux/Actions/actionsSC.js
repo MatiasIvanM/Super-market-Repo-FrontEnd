@@ -1,4 +1,4 @@
-import { GET_SC_BY_ID, PUT_SC, POST_SC,ADD_PRODUCT_SC,CLEAR_SC,REMOVE_PRODUCT_SC,UPDATE_PRODUCT_QUANTITY_SC,UPDATE_TOTAL } from '../actionsType'
+import { GET_SC_BY_ID, PUT_SC, POST_SC,ADD_PRODUCT_SC,CLEAR_SC,REMOVE_PRODUCT_SC,UPDATE_PRODUCT_QUANTITY_SC,UPDATE_TOTAL,CLEAR_CUSTOMER_ID } from '../actionsType'
 import axios from "axios"
 import { SHOPPINGCART } from "../../utils/urlLocales"
 
@@ -70,6 +70,12 @@ export const addProductSC = (product) => {
     return{
       type: CLEAR_SC,
       payload:[]
+    };
+  };
+  export const clearCustomerId = ()=>{
+    return{
+      type: CLEAR_CUSTOMER_ID,
+      payload:{}
     };
   };
 
