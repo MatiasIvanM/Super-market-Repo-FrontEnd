@@ -7,6 +7,7 @@ import { clearSC, removeProductSC, updateProductQuantitySC } from "../../redux/A
 import { useDispatch } from "react-redux";
 import { putShoppingCart, updateTotal } from "../../redux/Actions/actionsSC";
 import styles from './CartShopping.module.css'
+import { BsCart3 } from 'react-icons/bs'
 
 const CartShopping = (props) => {
   const dispatch = useDispatch();
@@ -100,9 +101,9 @@ const CartShopping = (props) => {
     <div>
       <Modal show={props.show} onHide={props.handleClose} centered backdrop="static">
         <Modal.Header>
-          <Modal.Title>Detalles del carrito</Modal.Title>
-          <Button variant="outline-danger" onClick={clearCart}>
-            Limpiar Carrito
+          <Modal.Title style={{ color: '#0d6efd' }}><BsCart3 /> Mi carrito</Modal.Title>
+          <Button size="sm" variant="outline-danger" onClick={clearCart}>
+            Limpiar
           </Button>{" "}
         </Modal.Header>
         <Modal.Body>
@@ -111,71 +112,39 @@ const CartShopping = (props) => {
             return (
               <Card className={styles.producto_container} key={product.id}>
 
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '70%' }}>
                   <Card.Img src={product.productDetails.image} className={styles.image} />
-                  <span style={{ fontSize: '1rem' }}>{product.productDetails.name}</span>
+                  <span style={{ fontSize: '1rem', marginLeft: '0.3rem' }}>{product.productDetails.name}</span>
                   <strong style={{ marginLeft: '5px', fontSize: '1rem' }}> x </strong>
                   <span style={{ fontSize: '1.2rem', fontWeight: 'bolder' }}>{product.quantity}</span>
                   {product.productDetails.discount ? <span style={{ marginLeft: '3px', fontWeight: 'bolder', color: '#198754' }}> {`-${product.productDetails.discount}%`}</span> : <></>}
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                  <Button className={styles.qButton} onClick={() => handleDecrementQuantity(product.productDetails.id, product)}>-</Button>
-                  <Button className={styles.qButton} onClick={() => handleIncrementQuantity(product.productDetails.id)}>+</Button>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '20%', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <Button className={styles.qButton} onClick={() => handleDecrementQuantity(product.productDetails.id, product)}>-</Button>
+                    <Button className={styles.qButton} onClick={() => handleIncrementQuantity(product.productDetails.id)}>+</Button>
+                  </div>
+                  <span style={{ fontWeight: 'bolder', marginLeft: '0.6rem', color: '#6c757d' }}>
+                    {`$${(product.productDetails.price - (product.productDetails.price / 100) * product.productDetails.discount) * product.quantity}`}
+                  </span>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                  <span style={{ fontWeight: 'bolder', marginLeft: '0.6rem', color: '#6c757d' }}>{`$${product.productDetails.price - (product.productDetails.price / 100) * product.productDetails.discount}`}</span>
-                  <Button
-                    key={`remove-button-${product.id}`}
-                    className={styles.closeButton}
-                    onClick={() => handleRemoveProduct(product.productDetails.id)}>
-                    {/* Eliminar {product.productDetails.name} */}
-                    x
-                  </Button>
-                </div>
-
-                {/* <Card.Body> */}
-                {/* <ListGroup variant="flush">
-                    
-                    <ListGroup.Item>
-                      {product.discountPrice !== product.productDetails.price ? (
-                        <>
-                          <strong>Precio:</strong>
-                          <span style={{
-                            marginLeft: '5px',
-                            color: "gray",
-                            textAlign: "left",
-                            textDecoration: "line-through",
-                          }}>
-                            ${product.productDetails.price.toFixed(0)}
-                          </span>
-                          <span style={{
-                            marginLeft: '7px',
-                            textAlign: "left",
-                            fontWeight: 'bold'
-                          }}>
-                            ${product.discountPrice}
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <strong>Precio:</strong> ${product.productDetails.price.toFixed(0)}
-                        </>
-                      )}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <strong>Valor Total Producto:</strong> $ {productTotal.toFixed(0)}
-                    </ListGroup.Item>
-                  </ListGroup> */}
-                {/* </Card.Body> */}
+                <Button
+                  key={`remove-button-${product.id}`}
+                  className={styles.closeButton}
+                  onClick={() => handleRemoveProduct(product.productDetails.id)}>
+                  {/* Eliminar {product.productDetails.name} */}
+                  x
+                </Button>
               </Card>
             );
           })}
-
-          {/* Muestra el valor total general */}
           <p className="mt-4">
-            <strong>Valor Total de la Compra:</strong> $ {total.toFixed(0)}
+            <span>Valor total de la compra:</span>
+            <strong
+              style={{ fontSize: '1.2rem' }}> $ {total.toFixed(0)}
+            </strong>
           </p>
           <Alert show={showMessageWarning} variant="warning" >
             <div>
