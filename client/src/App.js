@@ -16,7 +16,8 @@ import FaQuestions from './View/FaQuestions/FaQuestions';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCustomerById } from './redux/Actions/actionsCustomers';
-import {getSC} from "./redux/Actions/actionsSC"
+import { getSC } from "./redux/Actions/actionsSC"
+import { Footer } from './components/Footer/Footer';
 
 function App() {
   const dispatch = useDispatch()
@@ -24,10 +25,10 @@ function App() {
     try {
       const customer = JSON.parse(localStorage.getItem('customer'));
       console.log("🚀 ~ file: App.js:25 ~ reloadId ~ customer:", customer);
-  
+
       if (customer) {
         const response = await dispatch(getCustomerById(customer.id));
-  
+
         if (response.payload && response.payload.id) {
           const cart = await dispatch(getSC(response.payload.id));
           console.log(cart);
@@ -48,21 +49,22 @@ function App() {
     <div className="App">
 
       <Router>
-      <Switch>
-        <Route path="/" exact component={Landing} />
-        <Route path="/home" component={Home} />
-        <Route path="/mercadopago" component={MercadoPagoCheckout}/>
-        <Route path="/product/:id" component={ProductsDetail} />
-        <Route path="/form" component={FormProduct} />
-        <Route path="/register" component={Register} />
-        <Route path="/admin" component={Dashboard} />
-        <Route path="/about" component={About} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/login" component={Login} />
-        {/* <Route path="/cartshopping" component={CartShopping} /> */}
-        <Route path='/FaQ' component={FaQuestions}/>
-      </Switch>
-    </Router>
+        <Switch>
+          <Route path="/" exact component={Landing} />
+          <Route path="/home" component={Home} />
+          <Route path="/mercadopago" component={MercadoPagoCheckout} />
+          <Route path="/product/:id" component={ProductsDetail} />
+          <Route path="/form" component={FormProduct} />
+          <Route path="/register" component={Register} />
+          <Route path="/admin" component={Dashboard} />
+          <Route path="/about" component={About} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/login" component={Login} />
+          {/* <Route path="/cartshopping" component={CartShopping} /> */}
+          <Route path='/FaQ' component={FaQuestions} />
+        </Switch>
+      </Router>
+      <Footer />
     </div>
   );
 }

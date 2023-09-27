@@ -221,7 +221,7 @@ export default function Home() {
                 <ScrollTop></ScrollTop>
                 <Overlay></Overlay>
             </div >
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }
