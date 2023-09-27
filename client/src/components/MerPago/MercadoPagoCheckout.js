@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch  } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { getBuy } from '../../redux/Actions/actionsBuy';
 
@@ -12,8 +12,8 @@ function MercadoPagoCheckout() {
 
   const cart = useSelector((state) => state.productsSC);
   const buy = useSelector((state) => state.buycart);
-  console.log("Dios::",buy)
- 
+  console.log("Dios::", buy)
+
   const dispatch = useDispatch(); // Obtén la función "dispatch" del store Redux
 
   const totalCartPrice = cart.reduce((total, product) => {
@@ -35,25 +35,25 @@ function MercadoPagoCheckout() {
       }));
 
       const user = JSON.parse(localStorage.getItem('customer'));
-      console.log("USUARRIOFRONT::",user)
+      console.log("USUARRIOFRONT::", user)
 
       const response = await axios.post(
         'https://api.mercadopago.com/checkout/preferences',
         {
           items,
           payer: {
-            name: user.id,            
+            name: user.id,
           },
           back_urls: {
             success: "https://supermarket-git-producarrito-matiasivanm.vercel.app/home",
             failure: "https://supermarket-git-producarrito-matiasivanm.vercel.app/home",
             pending: ""
           },
-         
+
           notification_url: "https://super-market-shop-preview.up.railway.app/mercadoPago/webhook",
           // notification_url: "https://391d-161-10-101-39.ngrok-free.app/mercadoPago/webhook",
           auto_return: "approved",
-          
+
         },
         {
           headers: {
@@ -84,27 +84,87 @@ function MercadoPagoCheckout() {
     }
   };
 
-  const handleCancel = () => {
+  const handleModifyOrder = () => {
+    history.push('/cartshopping');
+  };
+
+  const handleContinueShopping = () => {
     history.push('/home');
   };
 
   return (
     <div className="container mt-5">
-      <h2 className="mb-4">Pagar Productos</h2>
-      <p className="fs-5"><strong>Valor a pagar:</strong> <span className="text-success">$ {totalCartPrice}</span></p>
-      {successMessage && <p className="alert alert-success">{successMessage}</p>}
-      <button className="btn btn-danger" onClick={handleCancel}>Cancelar</button>
-      <button
-        className="btn btn-primary ms-2"
-        onClick={handlePayment}
-        disabled={!isPreferenceGenerated}
-      >
-        Iniciar Pago
-      </button>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="card-title">Resumen de Compra</h2>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Valor</th> {/* Nueva columna de Valor */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {cart.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.productDetails.name}</td>
+                      <td>{item.quantity}</td>
+                      <td>
+                        $
+                        {item.discountPrice !== undefined
+                          ? item.discountPrice
+                          : item.productDetails.price}
+                      </td>
+                      <td> {/* Renderizar el Valor */}
+                        $
+                        {(
+                          (item.discountPrice !== undefined
+                            ? item.discountPrice
+                            : item.productDetails.price) * item.quantity
+                        ).toFixed(2)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="fs-5">
+                <strong>Total a Pagar:</strong>{' '}
+                <span className="text-success">$ {totalCartPrice.toFixed(2)}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="d-flex flex-column">
+            <button
+              className="btn btn-danger btn-block mb-2"
+              onClick={handleModifyOrder}
+            >
+              Modificar Pedido
+            </button>
+            <button
+              className="btn btn-primary btn-block mb-2"
+              onClick={handlePayment}
+              disabled={!isPreferenceGenerated}
+            >
+              Iniciar Pago($$)
+            </button>
+            <button
+              className="btn btn-secondary btn-block"
+              onClick={handleContinueShopping}
+            >
+              Seguir Comprando
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
+
 }
-
-
 
 export default MercadoPagoCheckout;
