@@ -33,17 +33,39 @@ export default function Profile() {
         phone: "",
     })
 
+    // async function getCustomer() {
+    //     const lsCustomer = JSON.parse(localStorage.getItem('customer'))
+    //     const user = await dispatch(getCustomerByEmail(lsCustomer.email))
+    //     localStorage.setItem('customer', JSON.stringify({
+    //         id: user.payload[0].id,
+    //         name: user.payload[0].name,
+    //         email: user.payload[0].email,
+    //         role: user.payload[0].role,
+    //     }))
+    //     setCustomer({ ...user.payload[0] })
+    // }
     async function getCustomer() {
-        const lsCustomer = JSON.parse(localStorage.getItem('customer'))
-        const user = await dispatch(getCustomerByEmail(lsCustomer.email))
-        localStorage.setItem('customer', JSON.stringify({
-            id: user.payload[0].id,
-            name: user.payload[0].name,
-            email: user.payload[0].email,
-            role: user.payload[0].role,
-        }))
-        setCustomer({ ...user.payload[0] })
-    }
+        const lsCustomer = JSON.parse(localStorage.getItem('customer'));
+        
+        if (lsCustomer) {
+          const user = await dispatch(getCustomerByEmail(lsCustomer.email));
+      
+          if (user.payload && user.payload.length > 0) {
+            localStorage.setItem('customer', JSON.stringify({
+              id: user.payload[0].id,
+              name: user.payload[0].name,
+              email: user.payload[0].email,
+              role: user.payload[0].role,
+            }));
+            setCustomer({ ...user.payload[0] });
+          } else {
+            console.error('No se encontró un usuario con el correo electrónico proporcionado');
+          }
+        } else {
+          console.error('No hay un cliente en el almacenamiento local');
+        }
+      }
+      
 
     function handleLogout() {
         localStorage.clear()
