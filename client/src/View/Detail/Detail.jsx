@@ -19,16 +19,15 @@ function ProductsDetail(props) {
   const { id, discountPrice } = props
   const [showMessage, setShowMessage] = useState(false);
   const [showMessageWarning, setShowMessageWarning] = useState(false);
-  const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [productDetails, setProductDetails] = useState({});
   const [product, setProduct] = useState([])
+  const [flag, setFlag] = useState(true);
   let ProductName = useSelector((state) => state.productsSC)
   let customerById = useSelector((state) => state.customerId)
   const shoppingCart = useSelector((state) => state.shoppingCart)
-  const [flag, setFlag] = useState(true)
   
- 
+  
 
   useEffect(() => {
     setProduct(ProductName)
@@ -46,21 +45,10 @@ function ProductsDetail(props) {
         });
     }
   }, [dispatch, id]);
-  
-  
-  
-  function handleAddToCart() {
-   
-      // El usuario no ha iniciado sesión, muestra el alert.
-      console.log(customerById)
-      if (Object.keys(customerById).length === 0) {
-        setShowLoginAlert(true);
-        setTimeout(() => {
-          setShowLoginAlert(false);
-        }, 3000);
-        return;
-      }
 
+
+
+  function handleAddToCart() {
     setFlag(false)
     console.log("🚀 ~ file: Detail.jsx:44 ~ ProductsDetail ~ tercer FLAG:", flag)
       let stockAvalible=0;
@@ -82,7 +70,7 @@ function ProductsDetail(props) {
     } else {
       setShowMessage(true);
      
-        
+
       const newQuantity = Math.min(quantity, productDetails.stock);
   
       dispatch(addProductSC({ productDetails, quantity: quantity, discountPrice }));
@@ -219,6 +207,7 @@ function ProductsDetail(props) {
 
               <ViewComments productId={productDetails.id} />
 
+              {/* <AddComments productId={productDetails.id} /> */}
 
 {/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
             </Modal.Body>
@@ -231,9 +220,6 @@ function ProductsDetail(props) {
                 ¡Producto agregado al carrito!
               </div>
             </Alert>
-            <Alert show={showLoginAlert} variant="danger">
-                          Debe iniciar sesión para agregar productos al carrito.
-                      </Alert>
             <Alert show={showMessageWarning} variant="warning" className={style.customAlert}>
               <div className={style.alertContent}>
                 ¡No hay suficiente inventario!

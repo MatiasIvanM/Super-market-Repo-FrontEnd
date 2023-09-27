@@ -22,7 +22,7 @@ export const getSC = (id) => {
   export const putShoppingCart =  (data) => {
   return async (dispatch) => {
     try {
-      console.log(data,"PUT SHOPPINGCART")
+      
       let response = await axios.put(SHOPPINGCART,data)
             return dispatch({
                 type: PUT_SC,
