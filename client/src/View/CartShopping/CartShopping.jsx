@@ -126,7 +126,7 @@ const CartShopping = (props) => {
                     <Button className={styles.qButton} onClick={() => handleIncrementQuantity(product.productDetails.id)}>+</Button>
                   </div>
                   <span style={{ fontWeight: 'bolder', marginLeft: '0.6rem', color: '#6c757d' }}>
-                    {`$${(product.productDetails.price - (product.productDetails.price / 100) * product.productDetails.discount) * product.quantity}`}
+                    {`$${((product.productDetails.price - (product.productDetails.price / 100) * product.productDetails.discount) * product.quantity).toFixed(2)}`}
                   </span>
                 </div>
 
