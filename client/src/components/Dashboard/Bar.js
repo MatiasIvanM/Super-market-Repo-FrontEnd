@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import { AppBar, ToggleThemeButton, LocalesMenuButton,TitlePortal, 
     RefreshIconButton } from "react-admin";
  
+    let usuario = JSON.parse(localStorage.getItem('customer'));
+
+    // console.log("Dashboard", localStorage.customer);
+    // console.log(usuario.name);
+    
 const Bar = () => (
   <AppBar
     toolbar={
