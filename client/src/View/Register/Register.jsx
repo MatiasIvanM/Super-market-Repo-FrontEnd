@@ -137,12 +137,7 @@ export default function Register() {
                                     body: 'Usuario Registrado',
                                     button: 'success',
                                 })
-                                await dispatch(addShoppingCart({
-                                    ProductName: [],  
-                                    customerId:response.payload.id,
-                                    PriceTotal:0,
-                                    
-                                }))
+                              
                             }
                         }
                     }
