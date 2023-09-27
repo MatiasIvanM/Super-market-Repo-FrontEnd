@@ -29,6 +29,7 @@ import {
   GET_ALL_COMMENTS,
   MOD_QUANTITY_LOCAL,
   GET_BUY,
+  CLEAR_CUSTOMER_ID,
   LOAD_STOCK,
   MOD_STOCK
 } from "./actionsType";
@@ -96,6 +97,7 @@ const rootReducer = (state = initialState, action) => {
         return { ...state, productsSC: [...state.productsSC, action.payload] };
       }
     case CLEAR_SC: return { ...state, productsSC: action.payload }
+    case CLEAR_CUSTOMER_ID: return { ...state, customerId: action.payload }
     case REMOVE_PRODUCT_SC:
       const modifiProducts = state.productsSC.filter(
         (product) => product.productDetails.id !== action.payload
