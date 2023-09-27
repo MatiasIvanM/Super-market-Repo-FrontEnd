@@ -16,8 +16,7 @@ import {
   ShowButton,
   DateInput,
   ArrayField,
-  SingleFieldList,
-  ChipField,
+ 
   FunctionField,
   // EditButton, DeleteButton,
   SortButton,
@@ -175,16 +174,16 @@ const OrderList = (props) => {
       title="Orden de Compra"
     >
       <DatagridConfigurable>
-        <TextField source="id" />
+        <TextField source="id" label="Nº Pedido"/>
         <DateField source="fechapago" label="Fecha Pago" />
         <TextField source="cart.length" label="Cantidad Productos" />
         <TextField source="payer.payer.id" label="Id Pagador" />
-        <TextField source="payer.payer.identification.type" label="DNI" />
-        <TextField source="payer.payer.identification.number" label="#" />
-        <TextField source="CustomerId" />
-        <h7 className={style.h7}>
+        {/* <TextField source="payer.payer.identification.type" label="DNI" />
+        <TextField source="payer.payer.identification.number" label="#" /> */}
+        <TextField source="Customer.name" label="Usuario" />
+        {/* <h7 className={style.h7}> */}
           <TextField source="estado" label ="Estado"/>
-        </h7>
+        {/* </h7> */}
         {/* </Link> */}
         <ShowButton basepath="/buy" />
         
