@@ -109,7 +109,9 @@ const NavBar = (props) => {
                 :
                 <Nav.Link as={Link} to={'/register'}>
                   <FiLogIn className="nav-icon" />
+
                   <p className={style.loginText}> Inicia Sesion o Registrate</p>
+
                 </Nav.Link>
               }
             </Navbar.Brand>
