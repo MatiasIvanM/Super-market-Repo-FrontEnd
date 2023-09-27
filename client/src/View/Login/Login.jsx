@@ -143,6 +143,11 @@ export default function Login() {
                     role: dbCustomer.payload[0].role,
                 }))
                 await dispatch(getCustomerById(dbCustomer.payload[0].id))
+                if(dbCustomer){
+                    console.log(dbCustomer.payload[0].id, "RESPONSE") 
+                    const cart = await dispatch(getSC(dbCustomer.payload[0].id))
+                    console.log(cart,"CARRITOO gugluu")
+                }
                 setModal({
                     show: true,
                     header: 'Bienvenido',
