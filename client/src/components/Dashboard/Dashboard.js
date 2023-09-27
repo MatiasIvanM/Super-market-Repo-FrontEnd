@@ -4,7 +4,7 @@ import {
   BsFillPeopleFill,
   BsReceiptCutoff,
   BsBoxSeamFill,
-  BsFillGearFill
+  BsFillGearFill,
 } from "react-icons/bs";
 import Bar from "./Bar";
 
@@ -15,7 +15,7 @@ import ProductEdit from "./product/ProductEdit";
 import formProduct from "../../View/FormProduct/formProduct";
 
 //? Orders
-import OrderList from "./orders/OrderList";
+import { OrderList, DetailBuy } from "./orders/OrderList";
 
 import dataProvider from "./dataProvider";
 // import i18nProvider from "./i18nProvider";
@@ -24,7 +24,7 @@ import dataProvider from "./dataProvider";
 // import UsersList from './users/UsersList';
 import UserEdit from "./users/UserEdit";
 import UserCreate from "./users/UserCreate";
-import UserDetail from "./users/UserDetail"
+import UserDetail from "./users/UserDetail";
 
 import formCarrousel from "./carrousel/formCarrousel";
 
@@ -35,10 +35,6 @@ const UsersList = React.lazy(() => import("./users/UsersList"));
 const MyLayout = (props) => <Layout {...props} appBar={Bar} />;
 
 const Dashboard = () => {
-  let usuario = JSON.parse(localStorage.getItem('customer'));
-
-  // console.log("Dashboard", localStorage.customer);
-  console.log(usuario.name);
   return (
     <Admin
       dashboard={PanelAdmin}
@@ -57,7 +53,7 @@ const Dashboard = () => {
         icon={BsBoxSeamFill}
         show={DetailShow}
       />
-       <Resource
+      <Resource
         name="customer"
         list={UsersList}
         show={UserDetail}
@@ -66,13 +62,14 @@ const Dashboard = () => {
         icon={BsFillPeopleFill}
       />
 
-      <Resource name="orders" list={OrderList} icon={BsReceiptCutoff} />
-
       <Resource
-        name="settings"
-        list={Setting}
-        icon={BsFillGearFill}
+        name="buy"
+        list={OrderList}
+        show={DetailBuy}
+        icon={BsReceiptCutoff}
       />
+
+      <Resource name="settings" list={Setting} icon={BsFillGearFill} />
     </Admin>
   );
 };
