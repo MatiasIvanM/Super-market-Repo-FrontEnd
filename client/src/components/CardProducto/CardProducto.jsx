@@ -98,12 +98,12 @@ function CardProduct(props) {
             {discount > 0 ? (
               <>
                 <Card.Title style={{ fontSize: "1.3rem", textAlign: "left" }}>
-                  <span className={style.oldPrice}>${price}</span>
-                  <span className={style.newPrice}>${discountPrice}</span>
+                  <span className={style.oldPrice}>${price.toFixed(2)}</span>
+                  <span className={style.newPrice}>${discountPrice.toFixed(2)}</span>
                 </Card.Title>
               </>
             ) : (
-              <Card.Title className={style.priceStyle}>${price}</Card.Title>
+              <Card.Title className={style.priceStyle}>${price.toFixed(2)}</Card.Title>
             )}
           </div>
         </Card.Body>
