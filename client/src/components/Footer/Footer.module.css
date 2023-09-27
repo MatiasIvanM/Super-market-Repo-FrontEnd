@@ -1,4 +1,7 @@
 .custom_footer{
+    position: sticky;
+    bottom: 0;
+    width: 100%;
     margin-top: 1em;
     background-color:rgb(41, 41, 41);
     justify-content: space-evenly !important;
