@@ -7,6 +7,7 @@ export const getSC = (id) => {
     return async (dispatch)=> {
       try {
         let response = await axios.get(`${SHOPPINGCART}${id}`)
+        console.log(response, "get carrito BYID")
             return dispatch({
                 type: GET_SC_BY_ID,
                 payload: response.data,
@@ -22,8 +23,9 @@ export const getSC = (id) => {
   export const putShoppingCart =  (data) => {
   return async (dispatch) => {
     try {
-      console.log(data,"PUT SHOPPINGCART")
+      
       let response = await axios.put(SHOPPINGCART,data)
+            console.log("🚀 ~ file: actionsSC.js:28 ~ return ~ response:", response)
             return dispatch({
                 type: PUT_SC,
                 payload: response.data,
@@ -53,8 +55,7 @@ export const getSC = (id) => {
               });
 		} catch (error) {
 			console.error('An error occurred:', error.message);
-		}
-	   
+		} 
 	};
 };
 

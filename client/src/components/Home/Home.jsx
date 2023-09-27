@@ -21,7 +21,6 @@ export default function Home() {
     const [filters, setFilters] = useState(defaultFilters);
     const [currentPage, setCurrentPage] = useState(0);
     const [items, setItems] = useState([]);
-    const [flag, setFlag] = useState(true)
     
     // useEffect(() s
     // console.log(allProducts);

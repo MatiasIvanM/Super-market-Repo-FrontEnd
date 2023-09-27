@@ -31,7 +31,7 @@ function App() {
 
         if (response.payload && response.payload.id) {
           const cart = await dispatch(getSC(response.payload.id));
-          console.log(cart);
+          console.log(cart, "CARRITO APP");
         } else {
           console.error('No se encontró un cliente con el ID proporcionado');
         }
