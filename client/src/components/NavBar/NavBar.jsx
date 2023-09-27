@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import { useSelector } from 'react-redux'
 import Banned from "../../View/Login/Banned";
 import style from './NavBar.module.css';
+import CartShopping from "../../View/CartShopping/CartShopping";
 
 
 const NavBar = (props) => {
@@ -19,15 +20,25 @@ const NavBar = (props) => {
 
   const cart = useSelector((state) => state.productsSC);
   const [showEmptyCartAlert, setShowEmptyCartAlert] = useState(false);
+  const [showCS, setShowCS] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleChange = (event) => {
     setName(event.target.value);
   }
   const usuario = JSON.parse(localStorage.getItem('customer'));
-  let role=null;
+  let role = null;
 
-  if (usuario){
+  if (usuario) {
     role = usuario.role
+  }
+
+  const handleShow = () => {
+    if(show){
+      setShow(false)
+    } else {
+      setShow(true)
+    }
   }
 
   return (
@@ -57,18 +68,18 @@ const NavBar = (props) => {
             </Navbar.Brand>
 
             <Navbar.Brand
-              as={Link}
-              to={cart.length > 0 ? "/cartshopping" : "#"}
-              onClick={() => {
-                if (cart.length === 0) {
-                  setShowEmptyCartAlert(true);
-                } else {
-                  console.log("Productos: ",cart.length);
-                  setSmShow(true);
-                }
-              }}
+            // as={Link}
+            // to={cart.length > 0 ? "/cartshopping" : "#"}
+            // onClick={() => {
+            //   if (cart.length === 0) {
+            //     setSmShow(true);
+            //   } else {
+            //     console.log("Productos: ",cart.length);
+            //     // setShowEmptyCartAlert(true);
+            //   }
+            // }}
             >
-              <BsCart3 style={{marginRight:'0.5rem'}} onClick={() => setSmShow(true)} />
+              <BsCart3 style={{ marginRight: '0.5rem', cursor: 'pointer' }} onClick={() => cart.length === 0 ? setSmShow(true) : setShow(true)} />
               <span className={style.circulo} >{cart.length}</span>
               <Modal
                 show={smShow}
@@ -103,21 +114,23 @@ const NavBar = (props) => {
               }
             </Navbar.Brand>
 
-             {JSON.parse(localStorage.getItem('customer')) && role==='admin' 
-             ? (<Navbar.Brand>
-              <Link to='/admin'>
-                <BsWrenchAdjustable className="nav-icon" />
-              </Link>
+            {JSON.parse(localStorage.getItem('customer')) && role === 'admin'
+              ? (<Navbar.Brand>
+                <Link to='/admin'>
+                  <BsWrenchAdjustable className="nav-icon" />
+                </Link>
               </Navbar.Brand>)
-             : null}
+              : null}
 
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {JSON.parse(localStorage.getItem('customer')) && role==='BAN' 
-             ? <Banned />
-             : null}
-        
+      {JSON.parse(localStorage.getItem('customer')) && role === 'BAN'
+        ? <Banned />
+        : null}
+
+      <CartShopping show={show} handleShow={handleShow}></CartShopping>
+
     </div>
   );
 };

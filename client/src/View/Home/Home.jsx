@@ -166,8 +166,8 @@ export default function Home() {
                             <p className={styles.filter}>Ordenar por Precio </p>
                             <select className={styles.select} name='price' id='price' value={filters.price} onChange={handleChange}>
                                 <option value="None"></option>
-                                <option value="MIN-max">min-MAX</option>
-                                <option value="MAX-min">MAX-min</option>
+                                <option value="MIN-max">Menor precio</option>
+                                <option value="MAX-min">Mayor pecio</option>
                             </select>
                         </Nav.Item >
                         <Nav.Item className={styles.filter_container}>

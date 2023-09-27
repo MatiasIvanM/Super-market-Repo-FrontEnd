@@ -18,14 +18,16 @@ import {
   ArrayField,
   SingleFieldList,
   ChipField,
+  FunctionField,
   // EditButton, DeleteButton,
   SortButton,
+  ImageField,
 } from "react-admin";
 
 import style from "./OrderList.module.css";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import { Card, ListGroup, Button, Modal } from "react-bootstrap";
+import { Card, ListGroup, Button, Modal, Col, Container, Row, Image  } from "react-bootstrap";
 
 const ListActions = () => (
   <TopToolbar>
@@ -55,92 +57,101 @@ const DetailBuy = (props) => {
     setShowModal(false);
     history.goBack();
   };
+
   return (
     <>
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showModal} onHide={handleCloseModal} size="lg">
         <Modal.Body>
           <Show {...props} title="Detalle de la Compra:">
-            {/* {console.log(props)} */}
             <SimpleShowLayout>
+              <Container>
               <div className={style.containerHead}>
-                <h3>Detalle de la Compra </h3>
                 <Card>
                   <Card.Body className={style.productInfo}>
-                    <ListGroup className="list-group-flush">
-                      <ListGroup.Item> 
-                        <h6>Id Compra: <TextField source="id" style={{ fontSize: "1rem" }} /> </h6>
-                        <h6>Fecha Compra: <TextField source="fechapago" style={{ fontSize: "1rem" }} /></h6>
-                        <h6>Estado de la Compra: <TextField source="estado" style={{ fontSize: "1rem" }} /></h6>
-                      </ListGroup.Item>
-                    </ListGroup>
-                  </Card.Body>
-                </Card>
-              </div>
-              {/* Informacion del Usuario */}
-              <div className={style.containerUser}>
-                <h3>Usuario</h3>
-                <Card>
-                  <Card.Body className={style.productInfo}>
-                    <ListGroup className="list-group-flush">
-                      <ListGroup.Item>
-                        <h6>Nombre de Usuario: <TextField source="Customer.name" style={{ fontSize: "1rem" }} /></h6> 
-                        <h6>Correo de Usuario: <TextField source="Customer.email" style={{ fontSize: "1rem" }} /></h6> 
-                      </ListGroup.Item>
-                    </ListGroup>
-                  </Card.Body>
-                </Card>
-              </div>
-              {/* Informacion de la Compra */}
-              <div className={style.containerDetalleBuy}>
-                <h3>Detalle de la Compra</h3>
-                <Card >
-                  <Card.Body className={style.productInfo}>
-                    <ListGroup className="list-group-flush">
-                      <ListGroup.Item>
-                        {/* <span>Productos Comprados:</span> */}
+                   <Row>
+                     <Col xs={12} md={6}> 
+                      <h3>Detalle</h3>
+                       <hr/>
+                        <h6>ID compra: <TextField source="id" style={{ fontSize: "1rem" }} /> </h6>
+                        <h6> Fecha: 
+                        <DateField
+                          source="fechapago"
+                          options={{
+                            year: 'numeric',
+                            month: 'numeric',
+                            day: 'numeric',
+                          }}
+                          style={{ fontSize: '1rem', marginLeft: "3px", }}
+                        />
+                        </h6>
+                        <h6>Estado: <TextField source="estado" style={{ fontSize: "1rem" }} /></h6>
+                     </Col>
+                     <Col xs={12} md={6}>
+                      <h3>Usuario</h3>
+                        <hr/>
+                      <h6>Nombre : <TextField source="Customer.name" style={{ fontSize: "1rem" }} /></h6> 
+                      <h6>Correo de usuario: <TextField source="Customer.email" style={{ fontSize: "1rem" }} /></h6> 
+                      <h6>ID: <TextField source="payer.payer.id" style={{ fontSize: "1rem" }} /></h6>
+                      <h6>Correo con el que se realizó el pago: <TextField source="payer.payer.email" style={{ fontSize: "1rem" }} /></h6>
+                      <h6>Identificación:
+                        <TextField source="payer.payer.identification.type" style={{ fontSize: "1rem" }} /> - 
+                        <TextField source="payer.payer.identification.number" style={{ fontSize: "1rem" }} /> 
+                      </h6>
+                     </Col>
+                   </Row>
+                   <hr/>
+                   <Row>
+                    <Col>
+                      <h3>Detalle de la compra</h3>
                         <ArrayField source="cart">
                           <Datagrid bulkActionButtons={false}>
-                            <TextField source="title" label="Producto" />
-                            <TextField source="quantity"  label="Cantidad"/>
-                            <TextField source="unit_price" label="P/U" />
+                            <TextField source="quantity"  label="Cantidad" style={{ color: "black" }}/>
+                            <TextField source="title" label="Producto" style={{ color: "black" }}/>
+                            <TextField source="unit_price" label="Precio por unidad" style={{ color: "black" }}/>
+                            <FunctionField
+                              label="Total de la línea"
+                              style={{ color: "black" }}
+                              render={(props) => {
+                                const totalLinePrice = props.quantity * props.unit_price;
+                                return <span>${totalLinePrice}</span>;
+                              }}
+                            />
                           </Datagrid>
                         </ArrayField>
-                      </ListGroup.Item>
-
-                      <ListGroup.Item style={{ display: "flex", alignItems: "left" }}>
-                        <span style={{ flex: "0 0 auto" }}>Total Pagado: $
+                    </Col>
+                   </Row>
+                   <br/>
+                   <Row>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col>
+                    <ListGroup.Item style={{ display: "flex", alignItems: "left" }}>
+                        <span style={{ flex: "0 0 auto",fontSize: "1rem",  fontWeight: "bold" }}>Total Pagado: ${/* <span style={{ fontSize: "1rem",  fontWeight: "bold", }}>$</span> */}
                         <TextField
                           source="total"
                           style={{
                             fontSize: "1rem",
                             fontWeight: "bold",
-                            marginLeft: "10px",
+                            marginLeft: "1px",
                           }}
                         />
                         ,00</span>
                       </ListGroup.Item>
-                    </ListGroup>
+                    </Col>
+                   </Row>
+                   <hr/>
+                   <Row>
+                    <Col> 
+                      <Image src="logo.png" rounded style={{ height: "50px", padding: "0", margin: "0" }}/>
+                    </Col>
+                    <Col>
+                    © 2023 Copyright: PF-SuperMarket-Shop
+                    </Col>
+                   </Row>
                   </Card.Body>
                 </Card>
-                {/* Informacion del Pago */}
-                <div className={style.containerPago}>
-                  <h3>Detalles del Pagador</h3>
-                  <Card>
-                    <Card.Body>
-                      <ListGroup className="list-group-flush">
-                        <ListGroup.Item>
-                          <h6>Id: <TextField source="payer.payer.id" style={{ fontSize: "1rem" }} /></h6>
-                          <h6>Correo E: <TextField source="payer.payer.email" style={{ fontSize: "1rem" }} /></h6>
-                          <h6>Identificacion:
-                             <TextField source="payer.payer.identification.type" style={{ fontSize: "1rem" }} /> - 
-                             <TextField source="payer.payer.identification.number" style={{ fontSize: "1rem" }} /> 
-                          </h6>
-                        </ListGroup.Item>
-                      </ListGroup>
-                    </Card.Body>
-                  </Card>
-                </div>
               </div>
+              </Container>
             </SimpleShowLayout>
           </Show>
         </Modal.Body>

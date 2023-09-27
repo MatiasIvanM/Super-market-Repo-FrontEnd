@@ -1,24 +1,42 @@
-
-
 .custom-nav {
-    display: flex;
-    align-items: center;
-    margin-left: 40px;
-    margin-right: 40px; 
-  }
-  
-  .custom-nav .nav-link {
-    width: auto;
-    padding: 0.5rem 50% !important;
-  }
-
-.offer-image{
-    padding: 1rem;
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  margin-right: 40px;
 }
- .nav-icon {
-  margin-right: 40px; 
+
+.custom-nav .nav-link {
+  width: auto;
+  padding: 0.5rem 50% !important;
+}
+
+.offer-image {
+  padding: 1rem;
+}
+
+.nav-icon {
+  margin-right: 40px;
   margin-left: 40px;
 }
-.custom-footer{
-    background-color:rgb(41, 41, 41);
+
+.custom-footer {
+  background-color: rgb(41, 41, 41);
+}
+
+.button {
+  transition: 0.1s ease-in-out;
+  background: linear-gradient(60deg, #0d6efd, #5091f3);
+  box-shadow: 2px 2px 4px 1px rgb(161, 161, 161);
+  border: none;
+  border-radius: 15px;
+  font-size: larger;
+  font-weight: bolder;
+  width: 10rem;
+  align-self: center;
+  width: 12rem;
+  height: 4rem;
+}
+
+.button:hover {
+  scale: 1.1;
 }

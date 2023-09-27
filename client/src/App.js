@@ -21,11 +21,24 @@ import {getSC} from "./redux/Actions/actionsSC"
 function App() {
   const dispatch = useDispatch()
   async function reloadId() {
-    const customer = JSON.parse(localStorage.getItem('customer'))
-    if (customer) {
-      const response = await dispatch(getCustomerById(customer.id))
-      const cart = await dispatch(getSC(response.payload.id))
-      console.log(cart);
+    try {
+      const customer = JSON.parse(localStorage.getItem('customer'));
+      console.log("🚀 ~ file: App.js:25 ~ reloadId ~ customer:", customer);
+  
+      if (customer) {
+        const response = await dispatch(getCustomerById(customer.id));
+  
+        if (response.payload && response.payload.id) {
+          const cart = await dispatch(getSC(response.payload.id));
+          console.log(cart);
+        } else {
+          console.error('No se encontró un cliente con el ID proporcionado');
+        }
+      } else {
+        console.error('No hay un cliente en el almacenamiento local');
+      }
+    } catch (error) {
+      console.error('Ocurrió un error al recargar el ID:', error);
     }
   }
   useEffect(() => {
@@ -46,7 +59,7 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/profile" component={Profile} />
         <Route path="/login" component={Login} />
-        <Route path="/cartshopping" component={CartShopping} />
+        {/* <Route path="/cartshopping" component={CartShopping} /> */}
         <Route path='/FaQ' component={FaQuestions}/>
       </Switch>
     </Router>
