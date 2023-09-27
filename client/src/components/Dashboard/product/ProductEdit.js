@@ -84,7 +84,7 @@ const ProductEdit = (props) => {
       
             <Col xs={12} md={6}>
               <SelectInput
-                source="categories"
+                source="Categories[0].name"
                 label="Categoria"
                 choices={[
                   { id : "7ef4f7fc-2d60-47a1-bd06-7dcf0b9b1438", name : "Higiene Personal"},

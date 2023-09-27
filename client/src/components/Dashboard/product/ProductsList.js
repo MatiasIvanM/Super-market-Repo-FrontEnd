@@ -131,6 +131,7 @@ const ProductsList = (props) => {
             "& img": { maxWidth: 40, maxHeight: 40, objectFit: "contain" },
           }}
         />
+          <TextField source="Categories[0].name" label="Categoria" />
         <EditButton basepath="/products" />
         <ShowButton basepath="/products" />
       </DatagridConfigurable>
