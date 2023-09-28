@@ -28,7 +28,7 @@ const dataProvider = {
 
     const url = `${resource}?${stringify(query)}`;
 
-    console.log("Getlist")
+    // console.log("Getlist")
     // if(params.filter.hasOwnProperty('categories') || (  params.filter.hasOwnProperty('name') && resource===('product'))
 
     if(params.filter.hasOwnProperty('categories')){  
@@ -59,7 +59,7 @@ const dataProvider = {
     return  httpClient
       .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then(({ data }) => (
-        console.log(data),
+        // console.log(data),
         {
         data: data.slice(startIndex, endIndex), // Obtén solo los datos para la página actual
         total: data.length, // Total de registros en el frontend
@@ -68,7 +68,7 @@ const dataProvider = {
   },
 
   getOne: (resource, params) => {
-    console.log("Get One");
+    // console.log("Get One");
     const token = JSON.parse(localStorage.getItem("token"));
     return httpClient
       .get(`${resource}/${params.id}`, {
@@ -80,14 +80,14 @@ const dataProvider = {
   },
 
   create: (resource, params) => {
-    console.log("create..");
+    // console.log("create..");
     return httpClient.post(`${resource}`, params.data).then(({ data }) => ({
       data: { ...params.data, id: data.id },
     }));
   },
 
   update: (resource, params) => {
-    console.log("update..");
+    // console.log("update..");
     const token = JSON.parse(localStorage.getItem("token"));
     if (resource === "product") {
       return httpClient

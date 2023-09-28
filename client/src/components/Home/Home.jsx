@@ -167,7 +167,7 @@ export default function Home() {
                 </Nav>
 
                 <div className={styles.card_container}>
-                {console.log(allProducts)}
+                {/* {console.log(allProducts)} */}
                     {items.map(p => (
                         <CardProducto
                             key={p.id}

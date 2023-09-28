@@ -22,6 +22,7 @@ import {
   UPDATE_TOTAL,
   ADD_PRODUCT_SC,
   GET_CATEGORY,
+  ADD_CATEGORY,
   CLEAR_SC,
   REMOVE_PRODUCT_SC,
   UPDATE_PRODUCT_QUANTITY_SC,
@@ -157,6 +158,8 @@ const rootReducer = (state = initialState, action) => {
     // CATEGORY 
     case GET_CATEGORY:
       return { ...state, category: action.payload };
+    case ADD_CATEGORY:
+        return { ...state, category: [...state.category, action.payload] }; //
 
     //filters
     case FILTER_CATEGORY:
