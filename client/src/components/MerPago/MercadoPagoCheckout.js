@@ -4,23 +4,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { getBuy } from '../../redux/Actions/actionsBuy';
 import { putShoppingCart } from '../../redux/Actions/actionsSC';
-import {addProduct, modProduct} from '../../redux/Actions/actionsProducts'
-
+import { addProduct, modProduct } from '../../redux/Actions/actionsProducts'
+import logoImage from '../MerPago/cart.png';
+import logoBoton from '../MerPago/mercadopago.png';
+import  Overlay  from '../../components/Overlay/Overlay';
 
 function MercadoPagoCheckout() {
   const [preferenceId, setPreferenceId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [isPreferenceGenerated, setIsPreferenceGenerated] = useState(false);
-  const [productStock,setProductStock]=useState([]);
+  const [productStock, setProductStock] = useState([]);
   const history = useHistory();
   const shoppingCart = useSelector((state) => state.shoppingCart)
-  
+
   const cart = useSelector((state) => state.productsSC);
   const buy = useSelector((state) => state.buycart);
-  console.log("Dios::", buy)
   
+
   console.log("🚀 ~ file: MercadoPagoCheckout.js:17 ~ MercadoPagoCheckout ~ shoppingCart:", shoppingCart)
-  
+
 
   const dispatch = useDispatch(); // Obtén la función "dispatch" del store Redux
 
@@ -29,11 +31,11 @@ function MercadoPagoCheckout() {
     return total + priceToUse * product.quantity;
   }, 0);
 
-  const newProductStock = ()=>{
+  const newProductStock = () => {
     for (let i = 0; i < shoppingCart.ProductName.length; i++) {
-     const product = shoppingCart.ProductName[i].productDetails
-     product.stock = product.stock - shoppingCart.ProductName[i].quantity;
-     setProductStock(...productStock,product);
+      const product = shoppingCart.ProductName[i].productDetails
+      product.stock = product.stock - shoppingCart.ProductName[i].quantity;
+      setProductStock(...productStock, product);
     }
   }
 
@@ -51,7 +53,7 @@ function MercadoPagoCheckout() {
       }));
 
       const user = JSON.parse(localStorage.getItem('customer'));
-      console.log("USUARRIOFRONT::", user)
+      
 
       const response = await axios.post(
         'https://api.mercadopago.com/checkout/preferences',
@@ -80,7 +82,7 @@ function MercadoPagoCheckout() {
         }
       );
 
-        
+
 
       setPreferenceId(response.data.id);
       setIsPreferenceGenerated(true);
@@ -103,7 +105,7 @@ function MercadoPagoCheckout() {
       for (let i = 0; i < productStock.length; i++) {
         dispatch(modProduct(productStock[i]));
         console.log("🚀 ~ file: MercadoPagoCheckout.js:101 ~ handlePayment ~ productStock:", productStock[i])
-        
+
       }
       dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: [] }));
       window.location.href = (`https://www.mercadopago.com/mco/checkout/start?pref_id=${preferenceId}`);
@@ -124,7 +126,10 @@ function MercadoPagoCheckout() {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <h2 className="card-title">Resumen de Compra</h2>
+              <div className="d-flex align-items-center mb-3">
+                <img src={logoImage} alt="Logo" className="mr-2" style={{ width: '40px', height: '40px',marginRight: '10px' }}  />
+                <h2 className="card-title mb-0" >   Resumen de Compra </h2>
+              </div>
               <table className="table">
                 <thead>
                   <tr>
@@ -165,30 +170,30 @@ function MercadoPagoCheckout() {
           </div>
         </div>
         <div className="col-md-6">
-          <div className="d-flex flex-column">
+          <div className="flex-column">
+
             <button
-              className="btn btn-danger btn-block mb-2"
-              onClick={handleModifyOrder}
-            >
-              Modificar Pedido
-            </button>
-            <button
-              className="btn btn-primary btn-block mb-2"
+              className="btn btn-success btn-lg  btn-block mb-2"
               onClick={handlePayment}
               disabled={!isPreferenceGenerated}
             >
-              Iniciar Pago($$)
+              <img src={logoBoton} alt="Ícono de pago" className="mr-2" style={{ width: '70px', height: '60px',marginRight: '10px' }} />
+              Iniciar Pago
             </button>
+            <div>
             <button
-              className="btn btn-secondary btn-block"
+              className="btn btn-secondary btn-lg  btn-block"
               onClick={handleContinueShopping}
             >
               Seguir Comprando
             </button>
+            </div>
           </div>
         </div>
       </div>
+      <Overlay/>
     </div>
+  
   );
 
 }
