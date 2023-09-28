@@ -53,8 +53,12 @@ const initialState = {
   category: [],
   comments: [],
   cartTotal: 0,
+<<<<<<< HEAD
   buycart:[],
   
+=======
+  buycart: []
+>>>>>>> f43e654e0f3ddf81ed60ea0473d3be828ac9f866
 };
 
 const calcDiscount = (price, discount) => { return price - ((price / 100) * discount) }
@@ -173,7 +177,11 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, productsFiltered: [...categoryFiltered] }
     case ORDER_PRECIO:
       let priceFiltered = state.productsFiltered
-      if (action.payload === 'None') {
+      if (action.payload === 'ofertas') {
+        priceFiltered.sort(function (a, b) {
+          if (a.discount > b.discount) { return -1 }
+          if (a.discount < b.discount) { return 1 }
+        })
       } else if (action.payload === 'MIN-max') {
         // eslint-disable-next-line
         priceFiltered.sort(function (a, b) {
@@ -201,8 +209,8 @@ const rootReducer = (state = initialState, action) => {
     case POST_COMMENT:
       return { ...state, comments: action.payload };
 
-      case GET_BUY:
-        return { ...state, buycart: action.payload };
+    case GET_BUY:
+      return { ...state, buycart: action.payload };
 
     //default
     default:
