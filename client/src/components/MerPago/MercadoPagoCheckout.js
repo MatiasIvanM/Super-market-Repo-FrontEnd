@@ -4,18 +4,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { getBuy } from '../../redux/Actions/actionsBuy';
 import { putShoppingCart } from '../../redux/Actions/actionsSC';
+import {addProduct, modProduct} from '../../redux/Actions/actionsProducts'
 
 
 function MercadoPagoCheckout() {
   const [preferenceId, setPreferenceId] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
   const [isPreferenceGenerated, setIsPreferenceGenerated] = useState(false);
+  const [productStock,setProductStock]=useState([]);
   const history = useHistory();
   const shoppingCart = useSelector((state) => state.shoppingCart)
-
+  
   const cart = useSelector((state) => state.productsSC);
   const buy = useSelector((state) => state.buycart);
   console.log("Dios::", buy)
+  
+  console.log("🚀 ~ file: MercadoPagoCheckout.js:17 ~ MercadoPagoCheckout ~ shoppingCart:", shoppingCart)
+  
 
   const dispatch = useDispatch(); // Obtén la función "dispatch" del store Redux
 
@@ -23,6 +28,14 @@ function MercadoPagoCheckout() {
     const priceToUse = product.discountPrice !== undefined ? product.discountPrice : product.productDetails.price;
     return total + priceToUse * product.quantity;
   }, 0);
+
+  const newProductStock = ()=>{
+    for (let i = 0; i < shoppingCart.ProductName.length; i++) {
+     const product = shoppingCart.ProductName[i].productDetails
+     product.stock = product.stock - shoppingCart.ProductName[i].quantity;
+     setProductStock(...productStock,product);
+    }
+  }
 
   // Mover la función createPreference dentro del componente
   const createPreference = async () => {
@@ -86,6 +99,12 @@ function MercadoPagoCheckout() {
 
   const handlePayment = () => {
     if (preferenceId) {
+      newProductStock()
+      for (let i = 0; i < productStock.length; i++) {
+        dispatch(modProduct(productStock[i]));
+        console.log("🚀 ~ file: MercadoPagoCheckout.js:101 ~ handlePayment ~ productStock:", productStock[i])
+        
+      }
       dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: [] }));
       window.location.href = (`https://www.mercadopago.com/mco/checkout/start?pref_id=${preferenceId}`);
     }

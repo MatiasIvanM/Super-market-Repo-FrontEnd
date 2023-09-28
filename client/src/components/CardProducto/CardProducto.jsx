@@ -68,6 +68,10 @@ function CardProduct(props) {
     setShowDetailModal(true);
   };
 
+  if (!available) {
+    return null; 
+  }
+
   return (
     <div className={style.cardContainer}>
       <Card
