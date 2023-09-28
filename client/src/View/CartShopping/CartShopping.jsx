@@ -170,7 +170,7 @@ const CartShopping = (props) => {
           <Button variant="secondary" onClick={props.handleShow}>
             Seguir comprando
           </Button>
-          <Button variant="primary" onClick={handlePayment} disabled={!showTotalWarning}>
+          <Button variant="primary" onClick={handlePayment} disabled={showTotalWarning}>
             Pagar
           </Button>
         </Modal.Footer>
