@@ -60,15 +60,14 @@ function Landing() {
       </Row> */}
 
         <Row className='offer-image'>
-          <Col xs={6} md={4} lg={4}>
-            <Image src="oferta6.jpg" className='image' thumbnail />
+          <Col className='image_container' xs={6} md={4} lg={4}>
+            <Image src="oferta1.png" className='image' thumbnail />
           </Col>
-          <Col xs={6} md={4} lg={4}>
-            <Image src="oferta6.jpg" className='image' thumbnail />
+          <Col className='image_container' xs={6} md={4} lg={4}>
+            <Image src="ofertaPrueba.png" className='image' thumbnail />
           </Col>
-          <Col xs={6} md={4} lg={4}>
-            <Image width="320px" src="oferta5.jpeg" className='image' thumbnail />
-            <Image width="320px" src="oferta4.png" className='image' thumbnail />
+          <Col className='image_container' xs={6} md={4} lg={4}>
+            <Image src="ofertaPrueba.png" className='image' thumbnail />
           </Col>
         </Row>
       </Container>

@@ -90,7 +90,7 @@ function CardProduct(props) {
         <Card.Body style={{ width: "98%" }}>
           <Card.Title style={{ fontSize: "1.12rem" }}>{name}</Card.Title>
           <Card.Text
-            style={{ fontSize: "0.7rem", color: "gray", textAlign: "left" }}
+            style={{ fontSize: "0.7rem", color: "gray", textAlign: "left", height: '1rem', overflow: 'hidden' }}
           >
             {description}{" "}
           </Card.Text>
@@ -138,8 +138,8 @@ function CardProduct(props) {
       />
     </div>
   );
-  
-  
+
+
 }
 
 export default CardProduct;
