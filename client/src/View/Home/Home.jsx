@@ -163,7 +163,7 @@ export default function Home() {
                             </select>
                         </Nav.Item>
                         <Nav.Item className={styles.filter_container}>
-                            <p className={styles.filter}>Ordenar por Precio </p>
+                            <p className={styles.filter}>Ordenar por</p>
                             <select className={styles.select} name='price' id='price' value={filters.price} onChange={handleChange}>
                                 <option selected disabled style={{ fontStyle: 'italic' }} value='seleccionar'>...seleccionar</option>
                                 <option value="ofertas">Mejores ofertas</option>
