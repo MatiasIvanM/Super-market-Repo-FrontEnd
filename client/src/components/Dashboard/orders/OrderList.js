@@ -16,8 +16,7 @@ import {
   ShowButton,
   DateInput,
   ArrayField,
-  SingleFieldList,
-  ChipField,
+ 
   FunctionField,
   // EditButton, DeleteButton,
   SortButton,
@@ -33,7 +32,7 @@ const ListActions = () => (
   <TopToolbar>
     <SelectColumnsButton />
     <FilterButton />
-    {/* <SortButton fields={['price']} />ç */}
+    {/* <SortButton fields={['cart.length']} /> */}
     <CreateButton />
     <ExportButton />
   </TopToolbar>
@@ -41,7 +40,7 @@ const ListActions = () => (
 
 const orderFilters = [
   <TextInput label="Search" source="Id" alwaysOn />,
-  <TextInput label="email" source="email" defaultValue="" />,
+  // <TextInput label="email" source="email" defaultValue="" />,
   <DateInput label="fechapago" source="fechapago" defaultValue="" />,
 ];
 
@@ -175,16 +174,19 @@ const OrderList = (props) => {
       title="Orden de Compra"
     >
       <DatagridConfigurable>
-        <TextField source="id" />
+        <TextField source="id" label="Nº Pedido"/>
         <DateField source="fechapago" label="Fecha Pago" />
         <TextField source="cart.length" label="Cantidad Productos" />
         <TextField source="payer.payer.id" label="Id Pagador" />
-        <TextField source="payer.payer.identification.type" label="DNI" />
-        <TextField source="payer.payer.identification.number" label="#" />
-        <TextField source="CustomerId" />
-        <TextField source="estado" />
+        {/* <TextField source="payer.payer.identification.type" label="DNI" />
+        <TextField source="payer.payer.identification.number" label="#" /> */}
+        <TextField source="Customer.name" label="Usuario" />
+        {/* <h7 className={style.h7}> */}
+          <TextField source="estado" label ="Estado"/>
+        {/* </h7> */}
         {/* </Link> */}
         <ShowButton basepath="/buy" />
+        
         //Carro //Cantidad de Productos //Monto total de la compra //Estado de
         la compra //Cuenta del Usuario
         {/* <EditButton basePath="/orders" />

@@ -8,6 +8,9 @@ import { useDispatch } from "react-redux";
 import { putShoppingCart, updateTotal } from "../../redux/Actions/actionsSC";
 import styles from './CartShopping.module.css'
 import { BsCart3 } from 'react-icons/bs'
+import Swal from 'sweetalert2';
+
+
 
 const CartShopping = (props) => {
   const dispatch = useDispatch();
@@ -47,18 +50,51 @@ const CartShopping = (props) => {
     dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: cart, PriceTotal: total }));
   }, [total]);
 
+  // const clearCart = () => {
+  //   const shouldClear = window.confirm("¿Estás seguro de que deseas limpiar el carrito?");
+  //   if (shouldClear) {
+  //     dispatch(clearSC());
+  //   }
+  // }
+
   const clearCart = () => {
-    const shouldClear = window.confirm("¿Estás seguro de que deseas limpiar el carrito?");
-    if (shouldClear) {
-      dispatch(clearSC());
-    }
-  }
-  const handleRemoveProduct = (productId) => {
-    const shouldRemove = window.confirm("¿Estás seguro de que deseas eliminar este producto del carrito?");
-    if (shouldRemove) {
+    Swal.fire({
+      title: '¿Estás seguro de que deseas limpiar el carrito?',
+      text: 'Esta acción eliminará todos los elementos del carrito.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, limpiar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(clearSC());
+      }
+    });
+  };
+
+
+  // const handleRemoveProduct = (productId) => {
+  //   const shouldRemove = window.confirm("¿Estás seguro de que deseas eliminar este producto del carrito?");
+  //   if (shouldRemove) {
+  //     dispatch(removeProductSC(productId));
+  //   }
+  // };
+  
+const handleRemoveProduct = (productId) => {
+  Swal.fire({
+    title: '¿Estás seguro de que deseas eliminar este producto del carrito?',
+    text: 'Esta acción eliminará el producto del carrito.',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
       dispatch(removeProductSC(productId));
     }
-  };
+  });
+};
+
 
   const handleIncrementQuantity = (productId) => {
     const productFind = cart.find(product => product.productDetails.id === productId);

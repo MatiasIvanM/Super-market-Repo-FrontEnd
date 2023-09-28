@@ -19,8 +19,8 @@ const dataProvider = {
     const { field, order } = params.sort;
     const query = {
       ...params.filter,
-      // _sort: field,
-      // _order: order,
+      _sort: field,
+      _order: order,
     };
     
     const startIndex = (page - 1) * perPage;
@@ -28,6 +28,7 @@ const dataProvider = {
 
     const url = `${resource}?${stringify(query)}`;
 
+    console.log("Getlist")
     // if(params.filter.hasOwnProperty('categories') || (  params.filter.hasOwnProperty('name') && resource===('product'))
 
     if(params.filter.hasOwnProperty('categories')){  
@@ -58,7 +59,7 @@ const dataProvider = {
     return  httpClient
       .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then(({ data }) => (
-        // console.log(data),
+        console.log(data),
         {
         data: data.slice(startIndex, endIndex), // Obtén solo los datos para la página actual
         total: data.length, // Total de registros en el frontend

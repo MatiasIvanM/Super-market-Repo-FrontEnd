@@ -41,18 +41,23 @@ const productFilters = [
   <TextInput label="name" source="name" defaultValue=""/>,
   // <TextInput label="categories" source="categories.name" defaultValue=""/>,
   <SelectInput source="categories" defaultValue="" choices={[
-    { id : "1063e28b-440e-49b1-b9c6-c523c92c9200", name : "Aceites"},
-    { id : "51fbdb20-39f8-4c55-859c-de06b8eb761e", name : "Carnes"},
-    { id : "bd4c3146-4944-440f-852c-2fdb445399fa", name : "Frutas"},
-    { id : "983c1fe2-0e28-472c-9aaf-9924e758a16a", name : "Higiene personal"},
-    { id : "9bdaf277-b913-4bad-a4b7-719e4afc14a8", name : "Latas y Conservas"},
-    { id : "c567da8b-56b4-4e3a-a266-4308c09fa5bb", name : "Verduras" },
+    {id : "ebcfaa8f-f97b-4510-b09e-5da957c3b406", name: "Aceites" },
+    {id : "59a5fffc-e0c4-45a2-8268-1a76ef84d096", name: "Arroz y Legumbres" },
+    {id : "b7003d88-0c21-4530-9c2d-7eee4cb24396", name: "Carnes" },
+    {id : "5ebe2935-7f8b-459f-9e82-49e85ec4eba9", name: "Frutas" },
+    {id : "7ef4f7fc-2d60-47a1-bd06-7dcf0b9b1438", name: "Higiene Personal" },
+    {id : "9706acd7-9b10-49b0-9cb7-68cc86659c9a", name: "Gaseosas" },
+    {id : "54fbd1de-c317-4e5f-bbca-c0810f825c21", name: "Golosinas" },
+    {id : "2a696b61-8e3e-4d3d-bde9-2381c4fa08a5", name: "Latas y Conservas"},
+    {id : "aae85617-55d5-45b8-b653-081d2a383fff", name: "Licores" },
+    {id : "da0b0d58-41ee-46f6-98d0-d7a706b1d02a", name: "Panaderia" },
+    {id : "648686ee-b8b9-4923-86b2-5dce36c7985d", name: "Verduras" },
 ]} />
 ];
 
 const DetailShow = (props) => { 
   
-  const [showModal, setShowModal] = useState(true);
+  const  [showModal, setShowModal] = useState(true);
   const history = useHistory();
 
   const handleShowModal = () => {
@@ -131,6 +136,7 @@ const ProductsList = (props) => {
             "& img": { maxWidth: 40, maxHeight: 40, objectFit: "contain" },
           }}
         />
+          <TextField source="Categories[0].name" label="Categoria" />
         <EditButton basepath="/products" />
         <ShowButton basepath="/products" />
       </DatagridConfigurable>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { PRODUCT } from '../../utils/urlLocales'
 import { GET_PRODUCTS, GET_PRODUCT_BY_ID, ADD_PRODUCT, MOD_PRODUCT, DEL_PRODUCT, GET_PRODUCT_BY_NAME, FILTER_CATEGORY, ORDER_PRECIO, RANGO_PRECIOS, CLEAR_PRODUCT_DETAILS, MOD_QUANTITY_LOCAL } from '../actionsType'
+import Swal from 'sweetalert2';
 
 export function getProducts() {
 	return (dispatch) => {
@@ -29,14 +30,34 @@ export function getProductById(id) {
 	  
 }
 
+// export function getProductsByName(name) {
+// 	return (dispatch) => {
+// 		axios.get(`${PRODUCT}name?name=${name}`)
+// 			.then((response) => {
+// 				dispatch({ type: GET_PRODUCT_BY_NAME, payload: response.data });
+// 			}).catch((error) => {
+// 				if (error.response && error.response.status === 404) {
+// 					alert('Product not found.');
+// 				} else {
+// 					console.error('An error occurred:', error.message);
+// 				}
+// 			});
+// 	};
+// }
+
 export function getProductsByName(name) {
 	return (dispatch) => {
 		axios.get(`${PRODUCT}name?name=${name}`)
 			.then((response) => {
 				dispatch({ type: GET_PRODUCT_BY_NAME, payload: response.data });
-			}).catch((error) => {
+			})
+			.catch((error) => {
 				if (error.response && error.response.status === 404) {
-					alert('Product not found.');
+					Swal.fire({
+						icon: 'warning',
+						title: 'Producto no encontrado',
+						text: 'Parece que el producto que buscas no existe o aun no lo tenemos.',
+					});
 				} else {
 					console.error('An error occurred:', error.message);
 				}
