@@ -186,12 +186,7 @@ const OrderList = (props) => {
         {/* </h7> */}
         {/* </Link> */}
         <ShowButton basepath="/buy" />
-        
-        //Carro //Cantidad de Productos //Monto total de la compra //Estado de
-        la compra //Cuenta del Usuario
-        {/* <EditButton basePath="/orders" />
-          <DeleteButton basePath="/orders" /> 
-          */}
+
       </DatagridConfigurable>
     </List>
   );

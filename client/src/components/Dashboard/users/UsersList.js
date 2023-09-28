@@ -23,17 +23,17 @@ const ListActions = () => (
 );
 
 const userFilters = [
-    <TextInput label="name" source="name" defaultValue="" />,
-    <TextInput label="email" source="email" defaultValue="" />,
+    <TextInput label="Nombre" source="name" defaultValue="" />,
+    <TextInput label="Correo" source="email" defaultValue="" />,
 ];
 
 const UsersList = (props) => (
         <List {...props} actions={<ListActions />} filters={userFilters}>
         <DatagridConfigurable>
-            <TextField source="id" />
-            <TextField source="name" />
-            <EmailField source="email" />
-            <TextField source = "role" />
+            <TextField label="Id" source="id" />
+            <TextField label="Nombre" source="name" />
+            <EmailField label="Correo Electrónico" source="email" />
+            <TextField label="Rol" source = "role" />
             <EditButton label="Editar" />
             <ShowButton record={props.record} label="Ver" basepath="/customer" />
         </DatagridConfigurable>

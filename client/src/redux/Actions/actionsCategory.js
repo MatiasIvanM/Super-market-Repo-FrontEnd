@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import {CATEGORY} from '../../utils/urlLocales'
-import { GET_CATEGORY } from './../actionsType';
+import { GET_CATEGORY, ADD_CATEGORY } from './../actionsType';
 
 
 export function selectCategory() {
@@ -13,3 +13,11 @@ export function selectCategory() {
         });
     }  
 };	
+
+export function addCategory (data) {
+    return function (dispatch) {
+      axios.post(CATEGORY, data)
+      .then(res=> alert("Categoria Created"))
+      .catch(error=> alert(error));
+    }
+  };

@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
 
 const PanelAdmin = () => (
-    <Card>
+    <Card >
         <CardHeader title="Bienvenido al Panel de Administración" />
         <CardContent>Super Market</CardContent>
         {/* <img src="" alt="logo"> */}

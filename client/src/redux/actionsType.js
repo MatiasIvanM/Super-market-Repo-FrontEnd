@@ -44,6 +44,7 @@ export const ORDER_PRECIO = 'ORDER_PRECIO';
 
 // CATEGORY
 export const GET_CATEGORY = 'GET_CATEGORY';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
 
 //COMENT 
 export const POST_COMMENT = 'POST_COMMENT';
