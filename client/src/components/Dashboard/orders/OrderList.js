@@ -32,16 +32,14 @@ const ListActions = () => (
   <TopToolbar>
     <SelectColumnsButton />
     <FilterButton />
-    {/* <SortButton fields={['cart.length']} /> */}
-    <CreateButton />
-    <ExportButton />
+    <ExportButton label="Exportar" />
   </TopToolbar>
 );
 
 const orderFilters = [
   <TextInput label="Search" source="Id" alwaysOn />,
   // <TextInput label="email" source="email" defaultValue="" />,
-  <DateInput label="fechapago" source="fechapago" defaultValue="" />,
+  // <DateInput label="fechapago" source="fechapago" defaultValue="" />,
 ];
 
 const DetailBuy = (props) => {
@@ -165,7 +163,9 @@ const DetailBuy = (props) => {
 };
 
 const OrderList = (props) => {
-  //Este es el que muestra las ciudades
+
+  // {console.log(`ESTAAAAAAAAAA ${props.source}`)}
+  // {console.log(props.source)}
   return (
     <List
       {...props}
@@ -178,14 +178,20 @@ const OrderList = (props) => {
         <DateField source="fechapago" label="Fecha Pago" />
         <TextField source="cart.length" label="Cantidad Productos" />
         <TextField source="payer.payer.id" label="Id Pagador" />
-        {/* <TextField source="payer.payer.identification.type" label="DNI" />
-        <TextField source="payer.payer.identification.number" label="#" /> */}
         <TextField source="Customer.name" label="Usuario" />
-        {/* <h7 className={style.h7}> */}
-          <TextField source="estado" label ="Estado"/>
-        {/* </h7> */}
+        {/* {source="Estado" === "approved" 
+        ? console.log("Fue aprobado")
+        : console.log("Pendiente")} */}
+        <h7 className={style.h7}>
+        <TextField label ="Estado" 
+          source="estado" />
+          {/* { <TextField label ="Estado" 
+          source="estado" /> === "APPROVED" ? console.log("Fue aprobado")
+        : console.log("Pendiente")} */}
+
+        </h7>
         {/* </Link> */}
-        <ShowButton basepath="/buy" />
+        <ShowButton basepath="/buy" label = "Detalle" />
 
       </DatagridConfigurable>
     </List>

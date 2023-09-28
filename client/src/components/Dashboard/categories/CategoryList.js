@@ -5,12 +5,21 @@ import {
   DatagridConfigurable,
   TextField, 
   EditButton,
+  TopToolbar,
+  CreateButton
 } from "react-admin";
+
+const ListActions = () => (
+  <TopToolbar>
+      <CreateButton label="Crear Categoria"/>
+  </TopToolbar>
+);
 
  
 const CategoryList = (props) => {
   return (
-    <List {...props}>
+    <List {...props}
+    actions={<ListActions />}>
       <DatagridConfigurable>
         <TextField source="id" label="Id Categoria"/>
         <TextField source="name" label="Nombre"/>

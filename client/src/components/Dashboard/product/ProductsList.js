@@ -103,37 +103,18 @@ const ProductsList = (props) => {
 
   const dispatch = useDispatch();
   let categories = useSelector((state) => state.category)
-  const [catego, setCatego] = useState([]);
-  const categorias = categories.map(value => ({ id: value.id, name: value.name }));
+  // const [catego, setCatego] = useState([]);
+  let categorias = categories.map(value => ({ id: value.id, name: value.name }));
   
   useEffect(() =>{
     dispatch(selectCategory())
   }, [])
 
-  // setCatego(categorias);
-
-
-  console.log(categorias)
-
+  // console.log(categorias)
 
   const productFilters = [
-  
     <TextInput label="Nombre" source="name" defaultValue=""/>,  
-    <SelectInput label="Categorias" source="categories" defaultValue="" choices={categorias
-    //    [ 
-    //   {id : "ebcfaa8f-f97b-4510-b09e-5da957c3b406", name: "Aceites" },
-    //   {id : "59a5fffc-e0c4-45a2-8268-1a76ef84d096", name: "Arroz y Legumbres" },
-    //   {id : "b7003d88-0c21-4530-9c2d-7eee4cb24396", name: "Carnes" },
-    //   {id : "5ebe2935-7f8b-459f-9e82-49e85ec4eba9", name: "Frutas" },
-    //   {id : "7ef4f7fc-2d60-47a1-bd06-7dcf0b9b1438", name: "Higiene Personal" },
-    //   {id : "9706acd7-9b10-49b0-9cb7-68cc86659c9a", name: "Gaseosas" },
-    //   {id : "54fbd1de-c317-4e5f-bbca-c0810f825c21", name: "Golosinas" },
-    //   {id : "2a696b61-8e3e-4d3d-bde9-2381c4fa08a5", name: "Latas y Conservas"},
-    //   {id : "aae85617-55d5-45b8-b653-081d2a383fff", name: "Licores" },
-    //   {id : "da0b0d58-41ee-46f6-98d0-d7a706b1d02a", name: "Panaderia" },
-    //   {id : "648686ee-b8b9-4923-86b2-5dce36c7985d", name: "Verduras" },
-    // ]
-  } />
+    <SelectInput label="Categorias" source="categories" defaultValue="" choices={categorias} />
   ];
   return (
     <List

@@ -8,12 +8,18 @@ import {
   FileField,
   DateInput,
   SelectInput,
-  ImageField,
+  ImageField,SaveButton, DeleteButton, Toolbar
 } from "react-admin";
 import { useHistory, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Card, ListGroup, Button, Modal, Col, Container, Row }from 'react-bootstrap';
 
+const MyToolbar = () => (
+  <Toolbar>
+      <SaveButton type="button" label="Guardar" />
+      {/* <DeleteButton   label="Borrars"/> */}
+  </Toolbar>
+);
 
 const ProductEdit = (props) => {
     
@@ -33,7 +39,7 @@ const ProductEdit = (props) => {
     <Modal show={showModal} onHide={handleCloseModal}>
       <Modal.Body>
       <Edit {...props} title="Editor de Productos">
-      <SimpleForm>
+      <SimpleForm toolbar={<MyToolbar/>}>
         <Container>
         <TextInput disabled source="id" />
           <Row>
@@ -80,7 +86,7 @@ const ProductEdit = (props) => {
               />
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
       
             <Col xs={12} md={6}>
               <SelectInput
@@ -96,19 +102,10 @@ const ProductEdit = (props) => {
                   { name : "Arroz y Legumbres"},
                   { name : "Panaderia"} 
                  ]}
-                // choices={[
-                //   { id : "7ef4f7fc-2d60-47a1-bd06-7dcf0b9b1438", name : "Higiene Personal"},
-                //   { id : "ebcfaa8f-f97b-4510-b09e-5da957c3b406", name : "Aceites"},
-                //   { id : "b7003d88-0c21-4530-9c2d-7eee4cb24396", name : "Carnes"},
-                //   { id : "5ebe2935-7f8b-459f-9e82-49e85ec4eba9", name : "Frutas"},
-                //   { id : "2a696b61-8e3e-4d3d-bde9-2381c4fa08a5", name : "Latas y Conservas"},
-                //   { id : "648686ee-b8b9-4923-86b2-5dce36c7985d", name : "Verduras"},
-                //   { id : "59a5fffc-e0c4-45a2-8268-1a76ef84d096", name : "Arroz y Legumbres"},
-                //   { id : "da0b0d58-41ee-46f6-98d0-d7a706b1d02a", name : "Panaderia"} 
-                //  ]}
+
               />
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col xs={12} md={6}>
               <ImageField
@@ -119,7 +116,7 @@ const ProductEdit = (props) => {
               />
             </Col>
             <Col xs={12} md={6}>
-              <FileInput source="image" label="Image" accept="image/*">
+              <FileInput source="image" label="Imagen" accept="image/*">
                 <FileField source="src" title="title" />
               </FileInput>
             </Col>

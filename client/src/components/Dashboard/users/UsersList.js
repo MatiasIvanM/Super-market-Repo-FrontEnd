@@ -17,8 +17,8 @@ const ListActions = () => (
     <TopToolbar>
         <SelectColumnsButton />
         <FilterButton/>
-        <CreateButton/>
-        <ExportButton/>
+        <CreateButton label="Crear Usuario"/>
+        <ExportButton label="Exportar"/>
     </TopToolbar>
 );
 
