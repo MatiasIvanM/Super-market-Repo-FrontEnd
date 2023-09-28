@@ -13,6 +13,7 @@ import { getCustomerByEmail, getCustomerById, loginCustomer } from '../../redux/
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
 import { getSC } from "../../redux/Actions/actionsSC"
+import { Footer } from '../../components/Footer/Footer';
 
 
 export default function Login() {
@@ -270,6 +271,8 @@ export default function Login() {
                 </Modal.Body>
             </Modal>
             <Overlay />
+      <Footer></Footer>
+
         </div>
     )
 }

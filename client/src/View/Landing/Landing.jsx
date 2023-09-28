@@ -71,7 +71,7 @@ function Landing() {
           </Col>
         </Row>
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

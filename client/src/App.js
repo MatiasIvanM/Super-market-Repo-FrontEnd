@@ -64,7 +64,7 @@ function App() {
           <Route path='/FaQ' component={FaQuestions} />
         </Switch>
       </Router>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
