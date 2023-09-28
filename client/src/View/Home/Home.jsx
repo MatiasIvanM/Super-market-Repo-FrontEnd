@@ -20,7 +20,7 @@ export default function Home() {
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
     const ITEMS_PER_PAGE = 15;
-    const defaultFilters = { category: 'Todas', price: "None", priceRange: { min: 0, max: 0 }, }
+    const defaultFilters = { category: 'Todas', price: "seleccionar", priceRange: { min: 0, max: 0 }, }
     const [productsMod, setProductsMod] = useState([]);
     const [filters, setFilters] = useState(defaultFilters);
     const [currentPage, setCurrentPage] = useState(0);
@@ -165,14 +165,15 @@ export default function Home() {
                         <Nav.Item className={styles.filter_container}>
                             <p className={styles.filter}>Ordenar por Precio </p>
                             <select className={styles.select} name='price' id='price' value={filters.price} onChange={handleChange}>
-                                <option value="None"></option>
+                                <option selected disabled style={{ fontStyle: 'italic' }} value='seleccionar'>...seleccionar</option>
+                                <option value="ofertas">Mejores ofertas</option>
                                 <option value="MIN-max">Menor precio</option>
                                 <option value="MAX-min">Mayor pecio</option>
                             </select>
                         </Nav.Item >
                         <Nav.Item className={styles.filter_container}>
                             <p className={styles.filter}>Rango de Precios </p>
-                            <div style={{display:'flex', gap:'0.5rem'}}>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
                                 <input
                                     onChange={setPriceRange}
                                     name='min' type="text"
