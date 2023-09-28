@@ -12,14 +12,14 @@ import styles from './Login.module.css'
 import { getCustomerByEmail, getCustomerById, loginCustomer } from '../../redux/Actions/actionsCustomers';
 import { useHistory } from 'react-router-dom'
 import Overlay from '../../components/Overlay/Overlay';
-import {getSC} from "../../redux/Actions/actionsSC"
+import { getSC } from "../../redux/Actions/actionsSC"
 
 
 export default function Login() {
     const { loginWithPopup, isAuthenticated, user, getIdTokenClaims, logout } = useAuth0()
     const dispatch = useDispatch()
     const history = useHistory()
-    let customerById = useSelector((state)=>state.customerId)
+    let customerById = useSelector((state) => state.customerId)
 
     const defaultCustomer = {
         name: "",
@@ -110,10 +110,10 @@ export default function Login() {
                     }))
                     localStorage.setItem('token', JSON.stringify(response.payload.token))
                     await dispatch(getCustomerById(response.payload.id))
-                    if(response){
-                        console.log(response.payload, "RESPONSE") 
+                    if (response) {
+                        console.log(response.payload, "RESPONSE")
                         const cart = await dispatch(getSC(response.payload.id))
-                        console.log(cart,"CARRITOO")
+                        console.log(cart, "CARRITOO")
                     }
                     setModal({
                         show: true,
@@ -143,10 +143,10 @@ export default function Login() {
                     role: dbCustomer.payload[0].role,
                 }))
                 await dispatch(getCustomerById(dbCustomer.payload[0].id))
-                if(dbCustomer){
-                    console.log(dbCustomer.payload[0].id, "RESPONSE") 
+                if (dbCustomer) {
+                    console.log(dbCustomer.payload[0].id, "RESPONSE")
                     const cart = await dispatch(getSC(dbCustomer.payload[0].id))
-                    console.log(cart,"CARRITOO gugluu")
+                    console.log(cart, "CARRITOO gugluu")
                 }
                 setModal({
                     show: true,
@@ -164,7 +164,7 @@ export default function Login() {
             }
         }
         // get del carrito
-      
+
     }
 
     useEffect(() => {
@@ -210,7 +210,16 @@ export default function Login() {
                     backgroundColor: 'white',
                     background: 'linear-gradient(60deg, rgb(200,200,200), rgb(255,255,255))'
                 }}>
-
+                    <div>
+                    <img style={{
+                        width: '10rem',
+                        marginBottom:'0.6rem',
+                        filter: 'drop-shadow(1px 1px 1px grey)'
+                    }}
+                        src="logo.png"
+                        alt="logo"
+                    />
+                    </div>
                     {errors?.email && <span className={styles.errorMessage}><PiWarning /><span>{errors.email}</span></span>}
                     <InputGroup className="mb-3" id="formBasicPassword">
                         <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
@@ -240,17 +249,17 @@ export default function Login() {
                     <Modal.Header>
                         <Modal.Title style={{
                             color: modal.button === 'danger'
-                            ?
-                            '#dc3545'
-                            :
-                            '#198754'
+                                ?
+                                '#dc3545'
+                                :
+                                '#198754'
                             ,
                             fontSize: '4rem',
                             fontStyle: 'italic'
-                            }}
-                            >
+                        }}
+                        >
                             {modal.header}
-                            </Modal.Title>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>{modal.body}</Modal.Body>
                     <Modal.Footer>
@@ -261,6 +270,6 @@ export default function Login() {
                 </Modal.Body>
             </Modal>
             <Overlay />
-        </div>
-    )
+        </div>
+    )
 }
