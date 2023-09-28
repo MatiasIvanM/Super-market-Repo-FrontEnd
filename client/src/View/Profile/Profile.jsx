@@ -14,6 +14,7 @@ import * as validate from '../Register/validations'
 import { PiWarning } from 'react-icons/pi'
 import styles from './Profile.module.css'
 import {clearSC,clearCustomerId} from "../../redux/Actions/actionsSC"
+import { Footer } from '../../components/Footer/Footer';
 
 export default function Profile() {
     const { logout, isAuthenticated } = useAuth0()
@@ -231,6 +232,7 @@ export default function Profile() {
                 </Modal.Body>
             </Modal>
             <Overlay />
+            <Footer></Footer>
         </div >
     )
 }

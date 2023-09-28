@@ -14,6 +14,7 @@ import styles from './Register.module.css'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import Overlay from '../../components/Overlay/Overlay';
+import { Footer } from '../../components/Footer/Footer';
 
 
 export default function Register() {
@@ -305,6 +306,7 @@ export default function Register() {
                 </Modal.Body>
             </Modal>
             <Overlay />
+            <Footer></Footer>
         </div>
     )
 }
