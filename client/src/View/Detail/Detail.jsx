@@ -26,7 +26,6 @@ function ProductsDetail(props) {
   let ProductName = useSelector((state) => state.productsSC)
   let customerById = useSelector((state) => state.customerId)
   const shoppingCart = useSelector((state) => state.shoppingCart)
-  const [flag, setFlag] = useState(true)
   
   useEffect(() => {
     setProduct(ProductName)
@@ -59,7 +58,6 @@ function ProductsDetail(props) {
         return;
       }
 
-    setFlag(false)
       let stockAvalible=0;
       let productExistsInCart =false;
       for (let i = 0; i < shoppingCart.ProductName.length; i++) {
@@ -75,6 +73,7 @@ function ProductsDetail(props) {
       setShowMessageWarning(true);
       setTimeout(() => {
         setShowMessageWarning(false);
+        props.onHide();
       }, 2000);
     } else {
       setShowMessage(true);
@@ -99,6 +98,7 @@ function ProductsDetail(props) {
       console.log("🚀 ~ file: Detail.jsx:102 ~ handleAddToCart ~ response: PRIMER RESPONSE", response)
       setTimeout(() => {
         setShowMessage(false);
+        props.onHide();
       }, 2000);
     }
   }else {
@@ -106,6 +106,7 @@ function ProductsDetail(props) {
       setShowMessageWarning(true);
       setTimeout(() => {
         setShowMessageWarning(false);
+        props.onHide();
       }, 2000);
     }else{
       setShowMessage(true);
@@ -130,6 +131,7 @@ function ProductsDetail(props) {
       console.log("🚀 ~ file: Detail.jsx:132 ~ handleAddToCart ~ response: SEGUNDO DISTPACH", response )
       setTimeout(() => {
         setShowMessage(false);
+        props.onHide();
       }, 2000);
     }
   }
