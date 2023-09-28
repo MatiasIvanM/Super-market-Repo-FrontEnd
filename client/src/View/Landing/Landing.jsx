@@ -64,10 +64,10 @@ function Landing() {
             <Image src="oferta1.png" className='image' thumbnail />
           </Col>
           <Col className='image_container' xs={6} md={4} lg={4}>
-            <Image src="ofertaPrueba.png" className='image' thumbnail />
+            <Image src="oferta2.png" className='image' thumbnail />
           </Col>
           <Col className='image_container' xs={6} md={4} lg={4}>
-            <Image src="ofertaPrueba.png" className='image' thumbnail />
+            <Image src="oferta3.png" className='image' thumbnail />
           </Col>
         </Row>
       </Container>
