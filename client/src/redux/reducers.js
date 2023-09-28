@@ -53,12 +53,7 @@ const initialState = {
   category: [],
   comments: [],
   cartTotal: 0,
-<<<<<<< HEAD
-  buycart:[],
-  
-=======
   buycart: []
->>>>>>> f43e654e0f3ddf81ed60ea0473d3be828ac9f866
 };
 
 const calcDiscount = (price, discount) => { return price - ((price / 100) * discount) }
