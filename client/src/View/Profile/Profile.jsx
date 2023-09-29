@@ -27,7 +27,6 @@ export default function Profile() {
 
     const handleClose = () => setBuyShow(false);
 
-
     const [modal, setModal] = useState({
         show: false,
         header: "",
@@ -278,12 +277,11 @@ export default function Profile() {
                 <Modal.Body>
                 {profilePurchase.length > 0 ? (
                     profilePurchase.map((purchase) => (
-                        <Accordion defaultActiveKey="0" flush>
-
+                     <Accordion defaultActiveKey="0" flush>
                           <Accordion.Item >
                           <Accordion.Header key={purchase.id}> Compra realizada el {formatDate(purchase.fechapago)}</Accordion.Header>
                           <Accordion.Body>
-                            { purchase.cart.map((product) => (
+                        {purchase.cart.map((product) => (
                             <div key={product.id} className={styles.productItem}>
                             <div className={styles.productContainer}>
                               <img src={product.picture_url} alt={product.title} className={styles.productImage} />

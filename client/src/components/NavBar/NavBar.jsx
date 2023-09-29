@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Container, Nav, Navbar, Modal, Alert } from 'react-bootstrap'
 import { BsCart3, BsWrenchAdjustable } from 'react-icons/bs'
 import { FiLogIn, FiUser } from 'react-icons/fi'
@@ -17,7 +17,10 @@ const NavBar = (props) => {
   const [smShow, setSmShow] = useState(false);
   const [name, setName] = useState("");
   // const { logout, isAuthenticated } = useAuth0()
+  const location = useLocation();
+  const isHomePage = location.pathname === "/home";
 
+  
   const cart = useSelector((state) => state.productsSC);
   const [showEmptyCartAlert, setShowEmptyCartAlert] = useState(false);
   const [showCS, setShowCS] = useState(false);
@@ -41,6 +44,7 @@ const NavBar = (props) => {
     }
   }
 
+
   return (
     <div className={style.navBarContainer}>
       <Navbar bg="dark" expand="lg" variant="dark" className={style.contentWithMargin}>
@@ -55,17 +59,26 @@ const NavBar = (props) => {
 
             </Nav>
 
-
-
+            {isHomePage && (
             <Navbar.Brand>
+                <div className="d-flex">
+                  <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" onChange={handleChange} value={name} />
+                  <Button variant="primary" className={style.search_button} onClick={() => { props.searchByName(name) }}>
+                    Buscar
+                  </Button>
+                </div>
+              </Navbar.Brand>
+            )}
+
+            {/* <Navbar.Brand>
               <div className="d-flex">
                 <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" onChange={handleChange} value={name} />
-                {/* <button className="btn btn-outline-success" onClick={()=>{props.searchByName(name)}} >Buscar</button> */}
+              
                 <Button variant="primary" className={style.search_button} onClick={() => { props.searchByName(name) }} >
                   Buscar
                 </Button>
               </div>
-            </Navbar.Brand>
+            </Navbar.Brand> */}
 
             <Navbar.Brand
             // as={Link}

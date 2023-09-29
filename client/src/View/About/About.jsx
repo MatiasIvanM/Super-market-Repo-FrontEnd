@@ -4,60 +4,62 @@ import style from "./About.module.css";
 import { Card, Button, Modal, Col, Row } from "react-bootstrap";
 import {Footer} from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
+import Overlay from "../../components/Overlay/Overlay";
+
 
 const discipulosHenry = [
   {
     id: 1,
     name: "Juan M. Aguirre",
     cohorte: "PT-12A",
-    email: "juanMA@henry.com",
+    email: "https://github.com/JuanManuelA12",
     gitHub: "juan@github",
-    portfolio: "URL://juanma",
+    portfolio: "Sitio en construcción",
     foto: "https://avatars.githubusercontent.com/u/111154948?v=4",
   },
   {
     id: 2,
-    name: "Matías Martín",
+    name: "Matías Ivan Martín",
     cohorte: "PT-13A",
-    email: "matiasM@henry.com",
-    gitHub: "matias@github",
-    portfolio: "URL://mati",
+    email: "matiasivan.sd@gmail.com",
+    gitHub: "https://github.com/MatiasIvanM",
+    portfolio: "Sitio en construcción",
     foto: "https://avatars.githubusercontent.com/u/105732530?v=4",
   },
   {
     id: 3,
     name: "Nicólas Castellano",
     cohorte: "PT-12A",
-    email: "nicolasC@henry.com",
-    gitHub: "nicolas@github",
-    portfolio: "URL://nico",
-    foto: "https://avatars.githubusercontent.com/u/97761599?v=4",
+    email: "felipenicolas115@gmail.com",
+    gitHub: "https://github.com/alemannc",
+    portfolio: "Sitio en construcción",
+    foto: require("./images/Nico.jpg"),
   },
   {
     id: 4,
     name: "Carlos Polo",
     cohorte: "PT-13A",
-    email: "carlosP@henry.com",
-    gitHub: "carlos@github",
-    portfolio: "URL://carlos",
-    foto: "https://avatars.githubusercontent.com/u/97761599?v=4",
+    email: "ing.sistema.cepa@gmail.com",
+    gitHub: "https://github.com/cepa387",
+    portfolio: "Sitio en construcción",
+    foto: require("./images/Carlos.jpg"),
   },
   {
     id: 5,
     name: "Bautsta Zitelli",
     cohorte: "PT-13A",
-    email: "bautistaZ@henry.com",
-    gitHub: "bautista@github",
-    portfolio: "URL://bauti",
-    foto: "https://avatars.githubusercontent.com/u/97761599?v=4",
+    email: "bautista.zitelli11@gmail.com",
+    gitHub: "https://github.com/Bautizitelli",
+    portfolio: "Sitio en construcción",
+    foto: require("./images/Bauti.jpg"),
   },
   {
     id: 6,
     name: "Gabriel Lossada",
     cohorte: "PT-13A",
     email: "gabrielL@henry.com",
-    gitHub: "gabriel@github",
-    portfolio: "URL://gabriel",
+    gitHub: "https://github.com/glossada",
+    portfolio: "Sitio en construcción",
     foto: "https://avatars.githubusercontent.com/u/125376427?v=4",
   },
   {
@@ -65,17 +67,17 @@ const discipulosHenry = [
     name: "Santiago Solavaggione",
     cohorte: "PT-13A",
     email: "santiagoS@henry.com",
-    gitHub: "santiago@github",
-    portfolio: "URL://santi",
-    foto: "https://avatars.githubusercontent.com/u/108992013?v=4",
+    gitHub: "https://github.com/Santjagor",
+    portfolio: "Sitio en construcción",
+    foto: require("./images/Santi.jpg"),
   },
   {
     id: 8,
     name: "Ana M. Loyo",
     cohorte: "PT-13A",
-    email: "anaML@henry.com",
-    gitHub: "ana@github",
-    portfolio: "URL://ana",
+    email: "anitamlv@gmail.com",
+    gitHub:"https://github.com/ALoyoVasquez",
+    portfolio: "Sitio en construcción",
     foto: "https://avatars.githubusercontent.com/u/123335176?v=4",
   },
 ];
@@ -144,14 +146,14 @@ const About = () => {
             <Modal.Body>
               <div>
                 <div >
-                <Card.Img variant="top" src={estudian[0]?.foto}   className={style.img}/>
+                <Card.Img variant="top" src={estudian[0]?.foto} className={style.imgModal}/>
                 </div>
                 <div>
                 <Card>
                   <Card.Body>
                     <h6>Cohorte: {estudian[0]?.cohorte}</h6>
                     <h6>Correo: <a href={`mailto:${estudian[0]?.email}`}>{estudian[0]?.email}</a></h6>
-                    <h6>Git-Hub: {estudian[0]?.gitHub} </h6>
+                    <h6>Git-Hub: <a href={estudian[0]?.gitHub} target="_blank" rel="noopener noreferrer">{estudian[0]?.gitHub}</a></h6>
                     <h6>Portafolio: {estudian[0]?.portfolio} </h6>
                   </Card.Body>
                 </Card>
@@ -166,6 +168,7 @@ const About = () => {
           </Modal.Footer>
         </Modal>
       </div>
+      <Overlay></Overlay>
       <Footer />
     </>
   );

@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { Footer } from '../../components/Footer/Footer';
 import { selectCategory } from '../../redux/Actions/actionsCategory';
 import CarouselOfertas from '../../components/CarouselOfertas/CarouselOfertas';
-
+import Overlay from '../../components/Overlay/Overlay';
 
 function Landing() {
   const dispatch = useDispatch();
@@ -71,6 +71,7 @@ function Landing() {
           </Col>
         </Row>
       </Container>
+      <Overlay />
       <Footer />
     </div>
   )
