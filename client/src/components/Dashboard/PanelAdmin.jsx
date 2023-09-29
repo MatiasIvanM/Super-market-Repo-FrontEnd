@@ -127,8 +127,12 @@ const PanelAdmin = () => {
             <strong> Total: </strong> {productos.length}
           </Typography>
         </Card>
-        {/* //Ordenes */}
         {/* Productos */}
+        {/* //Ordenes 
+        EXISTEN 8 ESTADOS DE ORDENES, 
+        Pending	  Approved	 Inprocess  Inmediation 
+        Rejected	Cancelled	 Refunded	  Chargedback
+        */}
         <Card sx={{ minWidth: 275 }}>
           <CardContent>
             <Typography

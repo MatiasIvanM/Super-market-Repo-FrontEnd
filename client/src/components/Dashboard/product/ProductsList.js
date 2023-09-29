@@ -128,6 +128,7 @@ const ProductsList = (props) => {
         <TextField label="Marca" source="brand" />
         <TextField label="Nombre" source="name" />
         <TextField label="Precio" source="price" />
+        <TextField label="Descuento" source="discount" />
         <ToggleAvailableButton source="Disponibilidad" />
         <ImageField label="Imagen"
           source="image"
