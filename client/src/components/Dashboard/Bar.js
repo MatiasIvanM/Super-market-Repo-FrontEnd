@@ -1,21 +1,27 @@
 import { Link } from "react-router-dom";
-import { AppBar, ToggleThemeButton, LocalesMenuButton,TitlePortal, 
-    RefreshIconButton } from "react-admin";
- 
-    let usuario = JSON.parse(localStorage.getItem('customer'));
+import {
+  AppBar,
+  ToggleThemeButton,
+  ImageField,
+  TitlePortal,
+  RefreshIconButton,
+} from "react-admin";
 
-    // console.log("Dashboard", localStorage.customer);
-    // console.log(usuario.name);
-    
+let usuario = JSON.parse(localStorage.getItem("customer"));
+
+// console.log("Dashboard", localStorage.customer);
+// console.log(usuario.name);
+
 const Bar = () => (
   <AppBar
     toolbar={
       <>
+        {/* F:\HENRY\PF\Super-market-Repo-FrontEnd\client\public\cart.png */}
         {/* <LocalesMenuButton /> */}
         <TitlePortal variant="body2" component="h3" />
         {/* <Search /> */}
         <Link to="/">
-            <button> Vista de Usuario </button> 
+          <button> Vista de Usuario </button>
         </Link>
         <ToggleThemeButton />
         <RefreshIconButton />
