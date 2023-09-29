@@ -1,40 +1,67 @@
-.containerPrice{
-    /* background-color: aqua; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 98%;
+.containerPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 98%;
+  margin-top: 2rem;
 }
 
-.rating{
-    color: rgb(211, 181, 11);
-    position: absolute;
-    top: 2%;
-    right: 2%;
+.rating {
+  color: rgb(211, 181, 11);
+  position: absolute;
+  top: 2%;
+  right: 2%;
 }
 
-.img{
-    width: 90%;
-    height: 50%;  
+.img {
+  width: 90%;
+  height: 50%;
 }
 
-.modoDark{
-    display: flex;
+.modoDark {
+  display: flex;
 }
 
-.link{
-    text-decoration: none;
+.link {
+  text-decoration: none;
 }
 
-.container{
-    box-shadow: 40px 34px 94px 0px rgba(30, 40, 68, 0.25);
-    padding: 0%;
-  
+.container {
+
+  box-shadow: 5px 5px 9px rgba(30, 40, 68, 0.25);
+  padding: 0%;
+  transition: transform 0.1s ease
 }
 
 .container:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
-  
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.priceStyle {
+  font-size: 1.3rem;
+  color: blue;
+  text-align: left;
+}
+
+.newPrice {
+  font-size: 1.3rem;
+  color: rgb(13, 170, 39);
+  margin-left: 5px;
+}
+
+.oldPrice {
+  font-size: 1.3rem;
+  color: rgba(143, 143, 143, 0.7);
+  text-decoration: line-through;
+}
+
+.cardContainer {
+  transition: 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.cardContainer:hover {
+  transform: scale(1.05);
+}

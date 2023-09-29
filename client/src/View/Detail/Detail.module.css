@@ -1,0 +1,42 @@
+.productDetails {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .productImage {
+    flex: 1;
+    padding: 10px; 
+    
+  }
+  
+.productInfo {
+    flex: 1; 
+    padding: 10px; 
+  }
+
+ .buttonStyle{
+    margin:10px;
+ } 
+
+ .customAlert {
+  height: 35px; 
+  display: flex;
+  align-items: center;
+}
+
+.alertContent {
+  margin: 0 auto;
+}
+
+.newPrice{
+  font-size: 1.3rem;
+  color: rgb(13, 170, 39);
+  margin-left: 5px;
+}
+
+.oldPrice{
+  font-size: 1.3rem;
+  color: rgba(143, 143, 143, 0.7);
+  text-decoration: line-through;
+  margin-left: 5px;
+}

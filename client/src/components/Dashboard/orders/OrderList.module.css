@@ -1,0 +1,24 @@
+.containerHead{
+    background-color: aquamarine;
+    border: 1px solid black;
+}
+
+.containerUser{
+    background-color: cadetblue;
+    border: 1px solid black;
+}
+
+.containerDetalleBuy{
+    background-color: cornflowerblue;
+    border: 1px solid black;
+    
+}
+
+.containerPago{
+    background-color: darkslateblue;
+    border: 1px solid black;
+}
+
+.h7{
+    text-transform: uppercase;
+}

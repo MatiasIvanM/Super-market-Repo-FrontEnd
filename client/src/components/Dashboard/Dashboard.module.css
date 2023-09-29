@@ -1,0 +1,51 @@
+.container{
+    background-color: aqua;
+}
+
+.panelAdmin{
+    background-color: white;
+    margin: 0.5rem;
+}
+
+.panelAContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0.5rem;
+}
+
+.contenido1{
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    width: 6.5rem;
+    border: 1px solid gray;
+}
+
+.contenido{
+    /* background-color: rgb(255, 0, 0); */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.cardHeader {
+    display: flex;
+    align-items:center;
+    /* margin-left: 20px; */
+  }
+  
+  .icon {
+    font-size: 40px; /* Tamaño del ícono personalizado */
+    /* margin-right: auto; */
+  }
+  
+  .cardTitle {
+    font-size: 25px;
+    margin: auto;
+    font-weight: bold; /* Tamaño del título personalizado */
+  }
+
+  .listGroup {
+    text-align: left; /* Alinea el texto a la izquierda */
+  }

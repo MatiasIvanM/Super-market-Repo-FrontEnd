@@ -7,39 +7,62 @@ import NavBar from '../../components/NavBar/NavBar';
 import { Footer } from '../../components/Footer/Footer';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios } from '../../redux/Actions/actionsProducts';
+import { filterByCategory, orderPrecio, getProductsByName, rangoPrecios, getProducts } from '../../redux/Actions/actionsProducts';
+import { selectCategory } from '../../redux/Actions/actionsCategory';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import LoadGif from '../../components/Loading/shopping-cart-shopping.gif'
+import Overlay from '../../components/Overlay/Overlay';
+import ScrollTop from '../../components/ScrollTop/ScrollTop';
 
 
 export default function Home() {
     const dispatch = useDispatch();
     let products = useSelector((state) => state.productsFiltered);
     let productsByName = useSelector((state) => state.productsByName);
-    const ITEMS_PER_PAGE=10;
-    const defaultFilters = { category: 'Todas', price: false, priceRange: { min: 0, max: 0 }, }
+    const ITEMS_PER_PAGE = 15;
+    const defaultFilters = { category: 'Todas', price: "seleccionar", priceRange: { min: 0, max: 0 }, }
     const [productsMod, setProductsMod] = useState([]);
     const [filters, setFilters] = useState(defaultFilters);
     const [currentPage, setCurrentPage] = useState(0);
     const [items, setItems] = useState([]);
+    const [customer, setCustomer] = useState({});
+    const [showLoader, setShowLoader] = useState(false);
+    let customerById = useSelector((state) => state.customerId)
+    let categories = useSelector((state) => state.category)
+    useEffect(() => {
+        setCustomer(customerById.id)
+    }, [customer]);
 
-      const nextHandler = () => {
-    const totalElements = productsMod.length;
-    const nextPage = currentPage + 1;
-    const firstIndex = nextPage * ITEMS_PER_PAGE;
+    // useEffect(() => {
+    //     console.log(customer, "Customer22222");
+    //   }, [customer]);
+    const nextHandler = () => {
+        setShowLoader(true);
 
-    if (firstIndex >= totalElements) return;
+        setTimeout(() => {
+            const totalElements = productsMod.length;
+            const nextPage = currentPage + 1;
+            const firstIndex = nextPage * ITEMS_PER_PAGE;
 
-    setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
-    setCurrentPage(nextPage);
-  };
+            if (firstIndex >= totalElements) {
+                setShowLoader(false);
+                return;
+            }
 
-  const prevHandler = () => {
-    const prevPage = currentPage - 1;
-    if (prevPage < 0) return;
-    const firstIndex = prevPage * ITEMS_PER_PAGE;
+            setItems(items.concat([...productsMod].splice(firstIndex, ITEMS_PER_PAGE)));
+            setCurrentPage(nextPage);
+            setShowLoader(false);
+        }, 2000);
+    };
 
-    setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
-    setCurrentPage(prevPage);
-  };
+    // const prevHandler = () => {
+    //     const prevPage = currentPage - 1;
+    //     if (prevPage < 0) return;
+    //     const firstIndex = prevPage * ITEMS_PER_PAGE;
+
+    //     setItems([...productsMod].splice(firstIndex, ITEMS_PER_PAGE));
+    //     setCurrentPage(prevPage);
+    // };
 
 
     const searchByName = (name) => {
@@ -77,9 +100,10 @@ export default function Home() {
         setCurrentPage(0)
     }
 
+
     useEffect(() => {
-    setItems([...productsMod].splice(0, ITEMS_PER_PAGE));
-  }, [productsMod]);
+        setItems([...productsMod].splice(0, ITEMS_PER_PAGE));
+    }, [productsMod]);
 
 
     useEffect(() => {
@@ -93,8 +117,16 @@ export default function Home() {
     }, [productsByName]);
 
     useEffect(() => {
-        applyFilters()
+        applyFilters()// eslint-disable-next-line
     }, [filters]);
+
+    useEffect(() => {
+        dispatch(getProducts());// eslint-disable-next-line
+    }, []);
+
+    useEffect(() => {
+        dispatch(selectCategory());// eslint-disable-next-line
+    }, []);
 
     // if (products.length === 0) {
     //     return <div>
@@ -108,63 +140,70 @@ export default function Home() {
             <NavBar
                 searchByName={searchByName}
             />
-            <div className={styles.pageButton}>
-            <Button variant="primary" style={{ width: '110px' }} onClick={prevHandler}> {"< Anterior"} </Button>
-            {/* <button  onClick={prevHandler}>
-            {"<-Prev"}
-        </button> */}
-        <br />
-          &nbsp;&nbsp;&nbsp;&nbsp;<h5>{currentPage+1}</h5> &nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant="primary" style={{ width: '110px' }} onClick={nextHandler}> {"Siguiente >"} </Button>
-          {/* <button  onClick={nextHandler}>
-            {"Next->"}
-          </button> */}
-          </div>
+            {/* <div className={styles.pageButton}>
+                <Button variant="primary" style={{ width: '110px' }} onClick={prevHandler}> {"< Anterior"} </Button>
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<h5>{currentPage + 1}</h5> &nbsp;&nbsp;&nbsp;&nbsp;
+                <Button variant="primary" style={{ width: '110px' }} onClick={nextHandler}> {"Siguiente >"} </Button>
+            </div> */}
 
-            <div className={styles.container}>             
+            <div className={styles.container}>
 
                 <Nav className={styles.side_bar}>
-                    <Nav.Item>
-                        <h4>Categorías </h4>
-                        <select name='category' id='category' value={filters.category} onChange={handleChange}>
-                            <option value="Todas">Todas</option>
-                            <option value="Bebidas">Bebidas</option>
-                            <option value="Aceites y Aderezos">Aceites y Aderezos</option>
-                            <option value="Arroz y Legumbres">Arroz y Legumbres</option>
-                            <option value="Frutas y Verduras">Frutas y Verduras</option>
-                            <option value="Panadería">Panadería</option>
-                        </select>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <h4>Ordenar por Precio </h4>
-                        <select name='price' id='price' value={filters.price} onChange={handleChange}>
-                            <option value="None"></option>
-                            <option value="MIN-max">min-MAX</option>
-                            <option value="MAX-min">MAX-min</option>
-                        </select>
-                    </Nav.Item>
-                    <Nav.Item>
-                       <h4>Rango de Precios </h4> 
-                        <input
-                            onChange={setPriceRange}
-                            name='min' type="number"
-                            value={filters.priceRange.min}
-                            style={{ width: '30%' }} />
-                        <span> Hasta </span>
-                        <input
-                            onChange={setPriceRange}
-                            name='max' type="number"
-                            value={filters.priceRange.max}
-                            style={{ width: '30%' }} />
-                    </Nav.Item>
+                    <div className={styles.filters_group}>
+                        <Nav.Item className={styles.filter_container}>
+                            <p className={styles.filter}>Categorías </p>
+                            <select className={styles.select} name='category' value={filters.category} onChange={handleChange}>
+                                <option value="Todas">Todas</option>
+                                {categories.map((category, index) => (
+                                    <option key={index} value={category.name}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </Nav.Item>
+                        <Nav.Item className={styles.filter_container}>
+                            <p className={styles.filter}>Ordenar por</p>
+                            <select className={styles.select} name='price' id='price' value={filters.price} onChange={handleChange}>
+                                <option selected disabled style={{ fontStyle: 'italic' }} value='seleccionar'>...seleccionar</option>
+                                <option value="ofertas">Mejores ofertas</option>
+                                <option value="MIN-max">Menor precio</option>
+                                <option value="MAX-min">Mayor pecio</option>
+                            </select>
+                        </Nav.Item >
+                        <Nav.Item className={styles.filter_container}>
+                            <p className={styles.filter}>Rango de Precios </p>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                <input
+                                    onChange={setPriceRange}
+                                    name='min' type="text"
+                                    value={filters.priceRange.min > 0 ? filters.priceRange.min : ''}
+                                    placeholder='min'
+                                    className={styles.input} />
+                                <input
+                                    onChange={setPriceRange}
+                                    name='max' type="text"
+                                    placeholder='max'
+                                    value={filters.priceRange.max > 0 ? filters.priceRange.max : ''}
+                                    className={styles.input} />
+                            </div>
+                        </Nav.Item>
+                    </div>
                     <Nav.Item>
                         {/* <button onClick={clearFilters}>Limpiar Filtros</button> */}
-                        <Button variant="primary" style={{ width: '100px' }} onClick={clearFilters}> Limpiar Filtros </Button>
+                        <Button size='sm' className={styles.clear_button} onClick={clearFilters}> Limpiar Filtros </Button>
                     </Nav.Item>
                 </Nav>
+                {/*<div className={styles.card_container}>
+</div >*/}
 
-                <div className={styles.card_container}>
-
+                <InfiniteScroll
+                    dataLength={items.length} // Tamaño actual de la lista de productos
+                    next={nextHandler} // Función a ejecutar cuando se necesita cargar más productos
+                    hasMore={true} // Indica si hay más productos por cargar (puede cambiarlo según tu lógica)
+                    loader={showLoader ? <img className={styles.load_gif} src={LoadGif} alt="Cargando..." /> : null}
+                    className={styles.card_container}
+                >
                     {items.map(p => (
                         <CardProducto
                             key={p.id}
@@ -173,11 +212,15 @@ export default function Home() {
                             image={p.image}
                             description={p.description}
                             price={p.price}
-                            rating='5'
+                            stock={p.stock}
+                            discount={p.discount}
+                            available={p.available}
                         >
                         </CardProducto>
                     ))}
-                </div >
+                </InfiniteScroll>
+                <ScrollTop></ScrollTop>
+                <Overlay></Overlay>
             </div >
             <Footer />
         </div>

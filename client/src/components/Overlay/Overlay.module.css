@@ -1,0 +1,18 @@
+.svg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* fill: #0d6efd; */
+    fill: #80b0f7;
+    z-index: -3;
+}
+.cart {
+    z-index: -3;
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    position: fixed;
+    top: 17rem;
+    right: 10rem;
+    margin: 0; /* Elimina el margen predeterminado del body */
+    padding: 0; /* Elimina el relleno predeterminado del body */
+    min-height: 50vh; /* Asegura que el fondo cubra al menos el alto de la pantalla */
+  }

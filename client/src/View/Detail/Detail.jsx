@@ -1,101 +1,251 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductById } from "../../redux/Actions/actionsProducts";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { getProductById, clearProductDetails } from "../../redux/Actions/actionsProducts";
+import { addProductSC, putShoppingCart,getSC } from "../../redux/Actions/actionsSC"
+import { getComment } from '../../redux/Actions/actionsComments'
+import AddComments from '../../components/Comments/AddComments'
+import ViewComments from "../../components/Comments/ViewComments";
+import { Button, Modal, Card, Alert, Spinner } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
-import { useHistory } from "react-router-dom";
-import { Alert } from 'react-bootstrap';
-import NavBar from "../../components/NavBar/NavBar";
-import {Footer} from '../../components/Footer/Footer'
+import style from './Detail.module.css'
+import { AiOutlineStar } from 'react-icons/ai'
 
-function ProductsDetail() {
-    const { id } = useParams();
-    const navigate = useHistory();
-    const dispatch = useDispatch();
-    const products = useSelector((state) => state.productsId);
-    const [showMessage, setShowMessage] = useState(false); // Estado para mostrar/ocultar el mensaje
-    const [quantity, setQuantity] = useState(1); // Estado para controlar la cantidad
 
-    useEffect(() => {
-        dispatch(getProductById(id));
-    }, [dispatch, id]);
 
-    function handleClick() {
-        navigate.push("/home");
+function ProductsDetail(props) {
+  
+  const dispatch = useDispatch();
+  const { id, discountPrice } = props
+  const [showMessage, setShowMessage] = useState(false);
+  const [showMessageWarning, setShowMessageWarning] = useState(false);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [productDetails, setProductDetails] = useState({});
+  const [product, setProduct] = useState([])
+  let ProductName = useSelector((state) => state.productsSC)
+  let customerById = useSelector((state) => state.customerId)
+  const shoppingCart = useSelector((state) => state.shoppingCart)
+  
+  useEffect(() => {
+    setProduct(ProductName)
+  }, [ProductName]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getComment())
+      dispatch(getProductById(id))
+        .then((data) => {
+          setProductDetails(data);
+        })
+        .catch((error) => {
+          console.error('An error occurred:', error.message);
+        });
     }
-
-    function handleAddToCart() {
-        // Una vez que el producto se ha agregado al carrito, mostramos la alerta
-        setShowMessage(true);
-        // Ocultamos la alerta después de un cierto tiempo (por ejemplo, 3 segundos)
+  }, [dispatch, id]);
+  
+  
+  
+ async function handleAddToCart() {
+   
+      // El usuario no ha iniciado sesión, muestra el alert.
+      console.log(customerById)
+      if (Object.keys(customerById).length === 0) {
+        setShowLoginAlert(true);
         setTimeout(() => {
-            setShowMessage(false);
-        }, 3000); // 3000 milisegundos = 3 segundos
-    }
+          setShowLoginAlert(false);
+        }, 3000);
+        return;
+      }
 
-    function handleIncrement() {
-        // Incrementar la cantidad
-        setQuantity(quantity + 1);
-    }
-
-    function handleDecrement() {
-        // Decrementar la cantidad, asegurándonos de que nunca sea menor que 1
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
+      let stockAvalible=0;
+      let productExistsInCart =false;
+      for (let i = 0; i < shoppingCart.ProductName.length; i++) {
+        const p=shoppingCart.ProductName[i];
+        if(p.productDetails.id===productDetails.id){
+          stockAvalible = Number(productDetails.stock - p.quantity);
+          console.log("🚀 ~ file: Detail.jsx:56 ~ handleAddToCart ~ stockAvalible:", stockAvalible)
+          productExistsInCart=true;
         }
+      }
+    if(productExistsInCart){
+    if (stockAvalible < quantity) {
+      setShowMessageWarning(true);
+      setTimeout(() => {
+        setShowMessageWarning(false);
+        props.onHide();
+      }, 2000);
+    } else {
+      setShowMessage(true);
+     
+        
+      const newQuantity = Math.min(quantity, productDetails.stock);
+  
+      dispatch(addProductSC({ productDetails, quantity: quantity, discountPrice }));
+  
+      setProductDetails(prevDetails => ({
+        ...prevDetails,
+        stock: prevDetails.stock - newQuantity
+      }));
+  
+      // Verificar si shoppingCart.ProductName existe y es un array
+      if (!shoppingCart.ProductName || !Array.isArray(shoppingCart.ProductName)) {
+        shoppingCart.ProductName = [];
+      } //SE AGREGA PARA QUE NO ROMPA NO SE VERIFICA AUN FUNCIONALIDAD DEL CAMBIO
+  
+      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity: newQuantity }];
+      const response = await dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
+      console.log("🚀 ~ file: Detail.jsx:102 ~ handleAddToCart ~ response: PRIMER RESPONSE", response)
+      setTimeout(() => {
+        setShowMessage(false);
+        props.onHide();
+      }, 2000);
     }
+  }else {
+    if (productDetails.stock < quantity) {
+      setShowMessageWarning(true);
+      setTimeout(() => {
+        setShowMessageWarning(false);
+        props.onHide();
+      }, 2000);
+    }else{
+      setShowMessage(true);
+     
 
-    return (
-        <div>
-        <NavBar/>
-        <div
-            className="modal show"
-            style={{ display: 'block', position: 'initial', width: "80%" }}
+      const newQuantity = Math.min(quantity, productDetails.stock);
+  
+      dispatch(addProductSC({ productDetails, quantity: quantity, discountPrice }));
+  
+      setProductDetails(prevDetails => ({
+        ...prevDetails,
+        stock: prevDetails.stock - newQuantity
+      }));
+  
+      // Verificar si shoppingCart.ProductName existe y es un array
+      if (!shoppingCart.ProductName || !Array.isArray(shoppingCart.ProductName)) {
+        shoppingCart.ProductName = [];
+      } //SE AGREGA PARA QUE NO ROMPA NO SE VERIFICA AUN FUNCIONALIDAD DEL CAMBIO
+  
+      const combinedProducts = [...shoppingCart.ProductName, { productDetails, quantity: newQuantity }];
+      const response = await dispatch(putShoppingCart({ shoppinId: shoppingCart.id, ProductName: combinedProducts }));
+      console.log("🚀 ~ file: Detail.jsx:132 ~ handleAddToCart ~ response: SEGUNDO DISTPACH", response )
+      setTimeout(() => {
+        setShowMessage(false);
+        props.onHide();
+      }, 2000);
+    }
+  }
+  }
+
+  function handleIncrement() {
+    setQuantity(quantity + 1);
+  }
+
+  function handleDecrement() {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  }
+
+  function handleModalClose() {
+    dispatch(clearProductDetails());
+    props.onHide();
+  }
+
+  return (
+    <>
+      {props.show && (
+        <Modal
+          show={props.show}
+          onHide={props.onHide}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
         >
-            <Modal.Dialog>
-                <div className="row">
-                    <div className="col-4">
-                        {/* Columna izquierda para la imagen */}
-                        <Image style={{ width: "100%" }} src={products.image} rounded />
-                    </div>
-                    <div className="col-8">
-                        {/* Columna central para el contenido */}
-                        <Modal.Header style={{ alignSelf: "center" }}>
-                            <Modal.Title >{products.name}</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <p>{products.description}</p>
-                            Precio Normal
-                            <Modal.Title>$ {products.price}</Modal.Title>
-                            <p><strong>Marca:</strong> {products.brand}</p>
-                            <Modal.Title>Disponible: {products.stock}</Modal.Title>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClick}>Back</Button>
-                            <Button variant="primary" onClick={handleAddToCart}>Agregar al carrito</Button>
-                        </Modal.Footer>
-                    </div>
-                    <div className="col-12 col-md-4">
-                        {/* Columna derecha para los botones de cantidad */}
-                        <div className="d-flex flex-column align-items-center">
-                            <p>Cantidad: {quantity}</p>
-                            <div className="d-inline"> {/* Esta div envuelve los botones */}
-                                <Button variant="outline-primary" onClick={handleIncrement}>+</Button>
-                                <Button variant="outline-primary" onClick={handleDecrement}>-</Button>
-                            </div>
-                        </div>
-                    </div>
+          <Modal.Header>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Detalle del producto
+            </Modal.Title>
+          </Modal.Header>
+          {productDetails ? (
+            <Modal.Body>
+              <div className={style.productDetails}>
+                <div className={style.productImage}>
+                  <Image src={productDetails && productDetails.image} thumbnail />
                 </div>
-                <Alert show={showMessage} variant="success">
-                    ¡Producto agregado al carrito!
-                </Alert>
-            </Modal.Dialog>
-        </div>
-        <Footer/>
-        </div>
-    )
+                <div className={style.productInfo}>
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>{productDetails && productDetails.brand}</Card.Title>
+                      <Card.Title>{productDetails && productDetails.name}</Card.Title>
+                      {discountPrice !== productDetails.price ? (
+                        <>
+                          <Card.Title>Antes:
+                            <span className={style.oldPrice}>
+                              ${productDetails && productDetails.price}
+                            </span>
+                          </Card.Title>
+                          <Card.Title>Ahora:
+                            <span className={style.newPrice}>
+                              ${discountPrice}
+                            </span>
+                          </Card.Title>
+                        </>
+                      ) : (
+                        <>
+                          <Card.Title>Precio: ${productDetails && productDetails.price}</Card.Title>
+                        </>
+                      )}
+                      <Card.Title>{productDetails && productDetails.rating}<AiOutlineStar /></Card.Title>
+                      {/* <Card.Title>stock: {productDetails && productDetails.stock}</Card.Title> */}
+                      <Card.Text>{productDetails && productDetails.description}</Card.Text>
+                      <Button
+                        variant="primary"
+                        onClick={handleAddToCart}
+                        disabled={!productDetails || !productDetails.available} // Deshabilitar el botón si available es false
+                        style={{ backgroundColor: !productDetails || !productDetails.available ? 'gray' : '' }}
+                      >
+                        {productDetails && productDetails.available ? 'Agregar al carrito' : 'Agotado'}
+                      </Button>
+                      <div className="d-inline">
+                        <Button className={style.buttonStyle} variant="outline-primary" onClick={handleDecrement}>-</Button>
+                        <Button className={style.buttonStyle} variant="outline-primary" onClick={handleIncrement}>+</Button>
+                        <Card.Text>Cantidad: {quantity}</Card.Text>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </div>
+{/* ///////////////////////////////////////////////////////////////////////////////////////// */}
+
+              <ViewComments productId={productDetails.id} />
+
+
+{/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
+            </Modal.Body>
+          ) : (
+            <Spinner animation="border" variant="primary" />
+          )}
+          <Modal.Footer>
+            <Alert show={showMessage} variant="success" className={style.customAlert}>
+              <div className={style.alertContent}>
+                ¡Producto agregado al carrito!
+              </div>
+            </Alert>
+            <Alert show={showLoginAlert} variant="danger">
+                          Debe iniciar sesión para agregar productos al carrito.
+                      </Alert>
+            <Alert show={showMessageWarning} variant="warning" className={style.customAlert}>
+              <div className={style.alertContent}>
+                ¡No hay suficiente inventario!
+              </div>
+            </Alert>
+            <Button onClick={handleModalClose}>Cerrar</Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+    </>
+  )
 }
 
 export default ProductsDetail;

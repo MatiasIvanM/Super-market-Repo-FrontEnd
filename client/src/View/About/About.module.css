@@ -1,0 +1,61 @@
+.container{
+  /* background-color: rgb(16, 17, 17); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+  
+  margin: 0rem 0rem 0.1rem 5rem;
+}
+
+.container2{
+background-color:rgb(41, 41, 41);
+display: flex;
+flex-direction: row;
+}
+
+.customCard {
+  margin-top: 3rem;
+   background-color: rgb(226, 226, 226);
+  
+}
+
+.customCard:hover {
+  scale: 1.1;
+}
+
+.customCard:hover {
+  filter: none; /* Aplicar filtro de escala de grises */
+}
+
+.img {
+  margin-top: 3px !important;
+  border-radius: 3px;
+  width: auto !important;
+  height: 100% !important;
+  object-fit: cover;
+  align-self: center;
+}
+/*
+.card{
+  box-shadow: 10px 10px 10px 0px rgba(30, 40, 68, 0.25);
+  padding: 0%;
+}
+
+.card :hover{
+  scale: 1.1;
+
+} */
+/* About.module.css */
+
+/* ... (otros estilos) */
+
+/* Estilo para las imágenes dentro del modal */
+.imgModal {
+  width: auto !important; 
+  height: 463px !important; 
+  display: block; 
+  margin: 0 auto; 
+  border-radius: 3px;
+}
