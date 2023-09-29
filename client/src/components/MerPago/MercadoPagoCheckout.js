@@ -69,7 +69,7 @@ function MercadoPagoCheckout() {
             pending: ""
           },
 
-          notification_url: "https://super-market-shop-preview.up.railway.app/mercadoPago/webhook",
+          notification_url: "super-market-shop-production.up.railway.app/mercadoPago/webhook",
           // notification_url: "https://391d-161-10-101-39.ngrok-free.app/mercadoPago/webhook",
           auto_return: "approved",
 
