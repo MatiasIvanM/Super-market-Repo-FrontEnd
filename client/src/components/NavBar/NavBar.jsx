@@ -55,7 +55,7 @@ const NavBar = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto custom-nav">
-              <Nav.Link as={Link} to="/home">INICIO</Nav.Link>
+              <Nav.Link as={Link} to="/home">Ir a comprar</Nav.Link>
 
             </Nav>
 

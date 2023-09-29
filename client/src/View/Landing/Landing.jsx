@@ -39,7 +39,7 @@ function Landing() {
       />
       <CarouselOfertas></CarouselOfertas>
       <br />
-      <Button onClick={() => history.push('/Home')} className='button'>{`Ir a comprar ➔`}</Button>
+      <Button onClick={() => history.push('/home')} className='button'>{`Ir a comprar ➔`}</Button>
       <Container>
         {/* <Row className='offer-image'>
         <Col xs={6} md={4} lg={4}>
