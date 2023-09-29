@@ -4,10 +4,10 @@
 import React, { useState, useEffect } from "react";
 // import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {
-  Card,
+  // Card,
   CardContent,
   CardHeader,
   CardActions,
@@ -17,6 +17,16 @@ import style from "./Dashboard.module.css";
 import { getProducts } from "../../redux/Actions/actionsProducts";
 import { getCustomers } from "../../redux/Actions/actionsCustomers";
 import { getBuy } from "../../redux/Actions/actionsBuy";
+import { FaTasks, FaCheck, FaList, FaRegIdCard, FaUserCircle } from 'react-icons/fa'
+import { CgProfile, CgUnavailable } from 'react-icons/cg'
+import { MdPendingActions } from 'react-icons/md'
+import { TiDelete } from 'react-icons/ti'
+import { RiAdminFill } from 'react-icons/ri'
+import { AiFillSignal } from 'react-icons/ai'
+import { MdDeliveryDining } from 'react-icons/md'
+import { BiBox } from 'react-icons/bi'
+
+import { Card, Button, ListGroup } from 'react-bootstrap'
 
 const PanelAdmin = () => {
   const dispatch = useDispatch();
@@ -39,139 +49,88 @@ const PanelAdmin = () => {
   const ordenesAprobadas = ordenes.filter(
     (order) => order.estado === "approved"
   );
+  const ordenesRechazadas = ordenes.filter(
+    (order) => order.estado === "rejected"
+  );
+  const ordenesEntregadas = ordenes.filter(
+    (order) => order.estado === "delivered"
+  );
 
   return (
     <div className={style.panelAdmin}>
       <Card>
         <CardHeader title="Bienvenido al Panel de Administración" />
         <CardContent>Super Market</CardContent>
-        {/* <img src="" alt="logo"> */}
       </Card>
       <div className={style.panelAContainer}>
-        <Card sx={{ minWidth: 275 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              RESUMEN
-            </Typography>
-            <Typography variant="h5" component="div">
-              CLIENTES
-            </Typography>
-            <br />
-            <div className={style.contenido}>
-              <div className={style.contenido1}>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Usuarios:
-                </Typography>
-                <Typography variant="body2">
-                  {usuarios.length -
-                    (usuariosBan.length + usuariosAdmin.length)}
-                </Typography>
-              </div>
-              <div className={style.contenido1}>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Administador:
-                </Typography>
-                <Typography variant="body2">{usuariosAdmin.length}</Typography>
-              </div>
-              <div className={style.contenido1}>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Baneados:
-                </Typography>
-                <Typography variant="body2">{usuariosBan.length}</Typography>
-              </div>
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+            <div className={style.cardHeader}>
+              <span className={style.icon}>
+                <CgProfile />
+              </span>
+              <span className={style.cardTitle}>
+                Clientes
+              </span>
             </div>
-          </CardContent>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            <strong> Total: </strong> {usuarios.length}
-          </Typography>
+          </Card.Body>
+          <ListGroup className={`list-group-flush ${style.listGroup}`}>
+            <ListGroup.Item><FaUserCircle/> - Activos: {usuarios.length}</ListGroup.Item>
+            <ListGroup.Item><RiAdminFill/> - Administradores:  {usuariosAdmin.length}</ListGroup.Item>
+            <ListGroup.Item><TiDelete/> - Baneados: {usuariosBan.length}</ListGroup.Item>
+            <ListGroup.Item>
+              <FaRegIdCard/> - Registrados: {usuarios.length -
+                    (usuariosBan.length + usuariosAdmin.length)}
+              </ListGroup.Item>
+          </ListGroup>
         </Card>
 
-        {/* Productos */}
-        <Card sx={{ minWidth: 275 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              RESUMEN
-            </Typography>
-            <Typography variant="h5" component="div">
-              PRODUCTOS
-            </Typography>
-            <br />
-            <div className={style.contenido}>
-              <div className={style.contenido1}>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Disponibles:
-                </Typography>
-                <Typography variant="body2">
-                  {productosDisponibles.length}
-                </Typography>
-              </div>
-              <div className={style.contenido1}>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Agotados:
-                </Typography>
-                <Typography variant="body2">
-                  {productos.length - productosDisponibles.length}
-                </Typography>
-              </div>
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+            <div className={style.cardHeader}>
+              <span className={style.icon}>
+                <BiBox />
+              </span>
+              <span className={style.cardTitle}>
+                Productos
+              </span>
             </div>
-          </CardContent>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            <strong> Total: </strong> {productos.length}
-          </Typography>
+          </Card.Body>
+          <ListGroup className={`list-group-flush ${style.listGroup}`}>
+            <ListGroup.Item><FaCheck/> - Disponibles: {productosDisponibles.length}</ListGroup.Item>
+            <ListGroup.Item><CgUnavailable/> - Agotados:  {productos.length - productosDisponibles.length}</ListGroup.Item>
+            <ListGroup.Item><FaList/> - Total: {productos.length}</ListGroup.Item>
+          </ListGroup>
         </Card>
-        {/* Productos */}
-        {/* //Ordenes 
-        EXISTEN 8 ESTADOS DE ORDENES, 
-        Pending	  Approved	 Inprocess  Inmediation 
-        Rejected	Cancelled	 Refunded	  Chargedback
-        */}
-        <Card sx={{ minWidth: 275 }}>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              RESUMEN
-            </Typography>
-            <Typography variant="h5" component="div">
-              ORDENES
-            </Typography>
-            <br />
-            <div className={style.contenido}>
-              <div className={style.contenido1}>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Aprobadas:
-                </Typography>
-                <Typography variant="body2">
-                  {ordenesAprobadas.length}
-                </Typography>
-              </div>
-              <div className={style.contenido1}>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Pendientes:
-                </Typography>
-                <Typography variant="body2">
-                  {ordenes.length - ordenesAprobadas.length}
-                </Typography>
-              </div>
+ 
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+            <div className={style.cardHeader}>
+              <span className={style.icon}>
+                <AiFillSignal />
+              </span>
+              <span className={style.cardTitle}>
+                Ordenes
+              </span>
+
             </div>
-          </CardContent>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            <strong> Total: </strong> {ordenes.length}
-          </Typography>
+          </Card.Body>
+          <ListGroup className={`list-group-flush ${style.listGroup}`}>
+            <ListGroup.Item><FaList/> - Ordenes totales: {ordenes.length}</ListGroup.Item>
+            <ListGroup.Item><FaCheck/> - Ordenes aprobadas:  {ordenesAprobadas.length}</ListGroup.Item>
+            <ListGroup.Item><CgUnavailable/> - Ordenes rechazadas:  {ordenesRechazadas.length}</ListGroup.Item>
+            <ListGroup.Item><MdDeliveryDining/> - Ordenes entregadas:  {ordenesEntregadas.length}</ListGroup.Item>
+            <ListGroup.Item>
+              <MdPendingActions/> - Ordenes pendientes: {ordenes.length - (ordenesAprobadas.length + ordenesRechazadas.length + ordenesEntregadas.length)}
+              </ListGroup.Item>
+          </ListGroup>
         </Card>
+
       </div>
     </div>
   );
 };
 
 export default PanelAdmin;
+
+ 
