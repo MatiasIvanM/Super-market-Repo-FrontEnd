@@ -176,10 +176,8 @@ export default function FormProduct() {
               )}
             </span>
           )}
-          <InputGroup
-            className={`mb-3 ${errors.expirationdate && style.error}`}
-          >
-            <InputGroup.Text>Fecha de vencimiento</InputGroup.Text>
+          <InputGroup className={`mb-3 ${errors.expirationdate && style.error}`}>
+            <InputGroup.Text>Ingreso a Deposito</InputGroup.Text>
             <Form.Control
               aria-label="expirationdate"
               placeholder="Fecha de expiracíon del producto"
@@ -291,4 +289,3 @@ export default function FormProduct() {
   );
 }
 
-// ´${PRODUCT}/:${id}´

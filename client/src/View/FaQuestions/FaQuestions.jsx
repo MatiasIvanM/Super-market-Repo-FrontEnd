@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import { Accordion, Button, Form } from 'react-bootstrap/';
 import style from './FaQuestions.module.css'
 import { Link } from "react-router-dom";
+import Overlay from "../../components/Overlay/Overlay";
 
 const FaQuestions =()=>{
 
@@ -143,6 +144,7 @@ const FaQuestions =()=>{
             <div className={style.footerContainer}>
               <Footer/>
             </div>
+            <Overlay />
         </div>
     )
 }
