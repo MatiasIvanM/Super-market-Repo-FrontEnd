@@ -116,9 +116,9 @@ const ProductEdit = (props) => {
               />
             </Col>
             <Col xs={12} md={6}>
-              <FileInput source="image" label="Imagen" accept="image/*">
-                <FileField source="src" title="title" />
-              </FileInput>
+              <TextInput source="image" label="Imagen" accept="image/*">
+                <TextInput source="src" title="title" />
+              </TextInput>
             </Col>
           </Row>
     </Container>

@@ -45,25 +45,60 @@ export function getProductById(id) {
 // 	};
 // }
 
+// export function getProductsByName(name) {
+// 	return (dispatch) => {
+// 		axios.get(`${PRODUCT}name?name=${name}`)
+// 			.then((response) => {
+// 				dispatch({ type: GET_PRODUCT_BY_NAME, payload: response.data });
+// 			})
+// 			.catch((error) => {
+// 				if (error.response && error.response.status === 404) {
+// 					Swal.fire({
+// 						icon: 'warning',
+// 						title: 'Producto no encontrado',
+// 						text: 'Parece que el producto que buscas no existe o aun no lo tenemos.',
+// 					});
+// 				} else {
+// 					console.error('An error occurred:', error.message);
+// 				}
+// 			});
+// 	};
+// }
 export function getProductsByName(name) {
 	return (dispatch) => {
-		axios.get(`${PRODUCT}name?name=${name}`)
-			.then((response) => {
-				dispatch({ type: GET_PRODUCT_BY_NAME, payload: response.data });
-			})
-			.catch((error) => {
-				if (error.response && error.response.status === 404) {
-					Swal.fire({
-						icon: 'warning',
-						title: 'Producto no encontrado',
-						text: 'Parece que el producto que buscas no existe o aun no lo tenemos.',
-					});
-				} else {
-					console.error('An error occurred:', error.message);
-				}
+	  axios
+		.get(`${PRODUCT}name?name=${name}`)
+		.then((response) => {
+		  const products = response.data;
+  
+		  // Verificar si algún producto tiene available === false
+		  const hasUnavailableProducts = products.some((product) => !product.available);
+  
+		  if (hasUnavailableProducts) {
+			// Mostrar el SweetAlert de error
+			Swal.fire({
+			  icon: 'warning',
+			  title: 'Producto no encontrado',
+			  text: 'Parece que el producto que buscas no existe o aún no lo tenemos.',
 			});
+		  } else {
+			// Despachar la acción normalmente si no hay productos no disponibles
+			dispatch({ type: GET_PRODUCT_BY_NAME, payload: products });
+		  }
+		})
+		.catch((error) => {
+		  if (error.response && error.response.status === 404) {
+			Swal.fire({
+			  icon: 'warning',
+			  title: 'Producto no encontrado',
+			  text: 'Parece que el producto que buscas no existe o aún no lo tenemos.',
+			});
+		  } else {
+			console.error('An error occurred:', error.message);
+		  }
+		});
 	};
-}
+  }
 
 export const addProduct = (formData) => {
 	const token = JSON.parse(localStorage.getItem("token"));

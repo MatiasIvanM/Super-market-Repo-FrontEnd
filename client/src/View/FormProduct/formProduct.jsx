@@ -145,7 +145,7 @@ export default function FormProduct() {
             <span className={style.errorMessage}><PiWarning />  {errors.expirationdate?.type === 'required' && <span>El campo fecha de expiración es requerido</span>}</span>
           )}
           <InputGroup className={`mb-3 ${errors.expirationdate && style.error}`}>
-            <InputGroup.Text>Fecha de vencimiento</InputGroup.Text>
+            <InputGroup.Text>Ingreso a Deposito</InputGroup.Text>
             <Form.Control
               aria-label="expirationdate"
               placeholder='Fecha de expiracíon del producto'
