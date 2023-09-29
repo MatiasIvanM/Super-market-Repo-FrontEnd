@@ -27,7 +27,6 @@ export default function Profile() {
 
     const handleClose = () => setBuyShow(false);
 
-
     const [modal, setModal] = useState({
         show: false,
         header: "",
@@ -277,8 +276,8 @@ export default function Profile() {
                 </Modal.Header>
                 <Modal.Body>
                 {profilePurchase.length > 0 ? (
+                    profilePurchase.map((purchase) => (
                      <Accordion defaultActiveKey="0" flush>
-                    {profilePurchase.map((purchase) => (
                           <Accordion.Item >
                           <Accordion.Header key={purchase.id}> Compra realizada el {formatDate(purchase.fechapago)}</Accordion.Header>
                           <Accordion.Body>
@@ -323,8 +322,8 @@ export default function Profile() {
                         </Accordion.Body>
                         
                          </Accordion.Item>
-                    ))}
                    </Accordion>
+                    ))
                 ):(
                     <p>Todavia no hay compras asociadas a esta cuenta.</p>
                 )}
