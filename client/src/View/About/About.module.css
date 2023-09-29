@@ -4,6 +4,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  object-fit: contain;
+  
   margin: 0rem 0rem 0.1rem 5rem;
 }
 
@@ -14,8 +16,9 @@ flex-direction: row;
 }
 
 .customCard {
-  /* background-color: aqua; */
-  filter: grayscale(100%);
+  margin-top: 3rem;
+   background-color: rgb(226, 226, 226);
+  
 }
 
 .customCard:hover {
@@ -26,10 +29,15 @@ flex-direction: row;
   filter: none; /* Aplicar filtro de escala de grises */
 }
 
-/* .img {
-  filter: grayscale(100%);
+.img {
+  margin-top: 3px !important;
+  border-radius: 3px;
+  width: auto !important;
+  height: 100% !important;
+  object-fit: cover;
+  align-self: center;
 }
-
+/*
 .card{
   box-shadow: 10px 10px 10px 0px rgba(30, 40, 68, 0.25);
   padding: 0%;
@@ -39,3 +47,15 @@ flex-direction: row;
   scale: 1.1;
 
 } */
+/* About.module.css */
+
+/* ... (otros estilos) */
+
+/* Estilo para las imágenes dentro del modal */
+.imgModal {
+  width: auto !important; 
+  height: 463px !important; 
+  display: block; 
+  margin: 0 auto; 
+  border-radius: 3px;
+}

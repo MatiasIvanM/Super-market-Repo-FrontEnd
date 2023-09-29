@@ -31,7 +31,7 @@ import { Card, ListGroup, Button, Modal, Col, Container, Row, Image  } from "rea
 const ListActions = () => (
   <TopToolbar>
     <SelectColumnsButton />
-    <FilterButton />
+    {/* <FilterButton /> */}
     <ExportButton label="Exportar" />
   </TopToolbar>
 );
