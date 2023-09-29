@@ -4,6 +4,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  object-fit: contain;
+  
   margin: 0rem 0rem 0.1rem 5rem;
 }
 
@@ -45,3 +47,15 @@ flex-direction: row;
   scale: 1.1;
 
 } */
+/* About.module.css */
+
+/* ... (otros estilos) */
+
+/* Estilo para las imágenes dentro del modal */
+.imgModal {
+  width: auto !important; 
+  height: 463px !important; 
+  display: block; 
+  margin: 0 auto; 
+  border-radius: 3px;
+}

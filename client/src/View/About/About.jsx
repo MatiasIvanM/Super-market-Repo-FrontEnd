@@ -146,7 +146,7 @@ const About = () => {
             <Modal.Body>
               <div>
                 <div >
-                <Card.Img variant="top" src={estudian[0]?.foto} className={style.img}/>
+                <Card.Img variant="top" src={estudian[0]?.foto} className={style.imgModal}/>
                 </div>
                 <div>
                 <Card>
