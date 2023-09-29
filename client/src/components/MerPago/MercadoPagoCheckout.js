@@ -65,7 +65,7 @@ function MercadoPagoCheckout() {
           back_urls: {
             success: "https://supermarketshop.vercel.app/home",
             // success: "http://localhost:3000/home",
-            failure: "https://supermarketshop.vercel.app.app/home",
+            failure: "https://supermarketshop.vercel.app/home",
             pending: ""
           },
 
