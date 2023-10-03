@@ -1,7 +1,7 @@
 import React from "react";
 import {
   List,
-  CreateButton,
+  EditButton,
   DateField,
   DatagridConfigurable,
   ExportButton,
@@ -22,7 +22,6 @@ import {
   SortButton,
   ImageField,
 } from "react-admin";
-
 import style from "./OrderList.module.css";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
@@ -179,18 +178,10 @@ const OrderList = (props) => {
         <TextField source="cart.length" label="Cantidad Productos" />
         <TextField source="payer.payer.id" label="Id Pagador" />
         <TextField source="Customer.name" label="Usuario" />
-        {/* {source="Estado" === "approved" 
-        ? console.log("Fue aprobado")
-        : console.log("Pendiente")} */}
-        <h7 className={style.h7}>
-        <TextField label ="Estado" 
-          source="estado" />
-          {/* { <TextField label ="Estado" 
-          source="estado" /> === "APPROVED" ? console.log("Fue aprobado")
-        : console.log("Pendiente")} */}
 
-        </h7>
-        {/* </Link> */}
+        <h7 className={style.h7}>
+        <TextField label ="Estado" source="estado" /> </h7>
+        <EditButton basepath="/buy" label = "Editar" />
         <ShowButton basepath="/buy" label = "Detalle" />
 
       </DatagridConfigurable>

@@ -19,6 +19,7 @@ import formProduct from "../../View/FormProduct/formProduct";
 
 //? Orders
 import { OrderList, DetailBuy } from "./orders/OrderList";
+import  OrderEdit from "./orders/OrderEdit";
 
 // //? Users
 // import UsersList from './users/UsersList';
@@ -73,6 +74,7 @@ const Dashboard = () => {
         options={{ label: "Compras" }}
         name="buy"
         list={OrderList}
+        edit={OrderEdit}
         show={DetailBuy}
         icon={BsReceiptCutoff}
         />

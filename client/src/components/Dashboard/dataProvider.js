@@ -88,6 +88,7 @@ const dataProvider = {
 
   update: (resource, params) => {
     // console.log("update..");
+    // console.log("buyyyyyyyyyyyyy  ");
     const token = JSON.parse(localStorage.getItem("token"));
     if (resource === "product") {
       return httpClient
@@ -97,7 +98,26 @@ const dataProvider = {
         .then(({ data }) => ({
           data: data,
         }));
-    } else {
+    } 
+    if (resource === "buy") {
+      // console.log("buyyyyyyyyyyyyy  ");
+      // console.log(params.id)
+      // console.log(params.data.estado)
+      // console.log(params.estado)
+      // console.log("🚀 ~ file: dataProvider.js:106  ");
+      return  (axios.put(`http://localhost:3001/buy/${params.id}`, {
+        estado: params.data.estado,
+        // status: 'published'
+    }));
+      // axios
+      //   .put(`${resource}/${params.id}`, params.estado, {
+      //     headers: { Authorization: `Bearer ${token}` },
+      //   })
+      //   .then(({ estado }) => ({
+      //     data: estado,
+      //   }));
+    }
+    else {
       return httpClient
         .put(`${resource}`, params.data, {
           headers: { Authorization: `Bearer ${token}` },
