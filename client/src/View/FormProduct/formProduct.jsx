@@ -176,10 +176,6 @@ export default function FormProduct() {
               )}
             </span>
           )}
-<<<<<<< HEAD
-=======
-
->>>>>>> e30282808681dee88167533a0a0767f24efe6484
           <InputGroup className={`mb-3 ${errors.expirationdate && style.error}`}>
             <InputGroup.Text>Ingreso a Deposito</InputGroup.Text>
             <Form.Control
