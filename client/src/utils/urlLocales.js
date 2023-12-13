@@ -17,7 +17,8 @@
 
 
 
-const server = 'https://super-market-shop-preview.up.railway.app';
+//const server = 'https://super-market-shop-preview.up.railway.app';
+const server = 'https://supermarket-4wel.onrender.com'
 const PRODUCT = `${server}/product/`;
 const CUSTOMER = `${server}/customer/`;
 const ORDER_DETAIL = `${server}/orderDetail/`;
